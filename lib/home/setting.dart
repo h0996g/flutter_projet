@@ -18,7 +18,7 @@ class Setting extends StatelessWidget {
           appBar: AppBar(
             elevation: 5,
             title: Text(
-              'lyom ymot baha w hamza',
+              'kkkkk',
               style: Theme.of(context).textTheme.headline4,
             ),
           ),
