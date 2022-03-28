@@ -18,7 +18,7 @@ class Setting extends StatelessWidget {
           appBar: AppBar(
             elevation: 5,
             title: Text(
-              'Settings',
+              'gg',
               style: Theme.of(context).textTheme.headline4,
             ),
           ),
