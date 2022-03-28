@@ -35,3 +35,6 @@ Widget defaultForm(
       keyboardType: type,
       obscureText: obscureText,
     );
+
+
+void Changepage(context ,Widget ala )=> Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ala), (route) => false) ;

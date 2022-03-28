@@ -12,6 +12,7 @@ class Offers extends StatelessWidget {
     return BlocConsumer<CupitHome, ShopeHomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
+
           appBar: AppBar(
             elevation: 10,
             title: Text(
@@ -29,6 +30,7 @@ class Offers extends StatelessWidget {
           ),
           body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0),
+
               child: ListView.separated(
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: ((context, index) => ListItembuilder(context)),
@@ -64,30 +66,53 @@ class Offers extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-              color: CupitHome.get(context).dartSwitch
-                  ? Colors.black
-                  : Colors.white,
+              // color:  CupitHome.get(context).dartSwitch
+              //     ? Colors.blueGrey
+              //     : Colors.white,
+                gradient: CupitHome.get(context).dartSwitch ? LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    Colors.blueGrey,
+                    Colors.blueGrey,
+                  ],
+                ) :LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      Colors.blue,
+                      Color(0xffCFD9E2FF),
+                    ]) ,
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
             ),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                "\$245.00",
-                style: Theme.of(context).textTheme.headline4?.copyWith(
-                      fontSize: 32,
-                    ),
+              Row(
+                children:[
+                  SizedBox(width: 8,),Text(
+                  "\$245.00",
+                  style: Theme.of(context).textTheme.headline4?.copyWith(
+                        fontSize: 32,
+                      ),
+                )]
               ),
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                '730 Columbus Ave, Manhattan, \n Ny 10025',
-                style: Theme.of(context).textTheme.bodyText2,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              )
+              Row(
+                children:[  SizedBox(
+                  width: 8,
+                ),
+                  Text(
+                  '730 Columbus Ave, Manhattan, \n Ny 10025',
+                  style: Theme.of(context).textTheme.bodyText2,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                )
+              ])
             ]),
             height: 100,
             width: double.infinity,

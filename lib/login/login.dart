@@ -2,6 +2,7 @@ import 'package:agence/home/home.dart';
 import 'package:agence/login/cupitlogin/cupitl.dart';
 import 'package:agence/login/cupitlogin/statesh.dart';
 import 'package:agence/login/other/cachhelper.dart';
+import 'package:agence/login/registerlogin.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,15 +29,26 @@ class LoginScreen extends StatelessWidget {
                 child: Form(
                   key: formKey,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'Login',
+                        'LOGIN',
                         style: TextStyle(
                             fontSize: 40, fontWeight: FontWeight.bold),
                       ),
-                      const SizedBox(
-                        height: 40,
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Text(
+                        'login now to browse our hot offers',
+                        style: TextStyle(
+                          color: Colors.blueGrey,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 26,
                       ),
                       defaultForm(
                           context: context,
@@ -62,8 +74,8 @@ class LoginScreen extends StatelessWidget {
                                 : Colors.grey,
                           ),
                           textInputAction: TextInputAction.next),
-                      const SizedBox(
-                        height: 30,
+                      SizedBox(
+                        height: 18,
                       ),
                       defaultForm(
                           context: context,
@@ -105,41 +117,55 @@ class LoginScreen extends StatelessWidget {
                                 ? Colors.white
                                 : Colors.grey,
                           )),
-                      const SizedBox(
-                        height: 20,
+                      SizedBox(
+                        height: 18,
+                      ),
+                      ConditionalBuilder(
+                        condition: state is! ConditionalLodinState,
+                        builder:(BuildContext context){ return Container(
+
+                           color:  CupitHome.get(context).dartSwitch
+                               ? Colors.blueGrey
+                               : Colors.blue,
+                          width: double.infinity,
+                          child: MaterialButton(
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                LoginCubit.get(context).login(
+                                    pass: passController.text,
+                                    email: emailController.text);
+                              }
+                            },
+                            child: Text(
+                              'LOGIN',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        );}, fallback: (BuildContext context) { return const Center(
+                        child: CircularProgressIndicator(),
+                      ); },
+                      ),
+                      SizedBox(
+                        height: 18,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('forget password ?'),
-                          const Spacer(),
-                          ConditionalBuilder(
-                            builder: (BuildContext context) {
-                              return FloatingActionButton(
-                                onPressed: () {
-                                  if (formKey.currentState!.validate()) {
-                                    LoginCubit.get(context).login(
-                                        pass: passController.text,
-                                        email: emailController.text);
-                                  }
-                                },
-                                child: const Icon(Icons.arrow_forward_ios),
-                              );
-                            },
-                            condition: state is! ConditionalLodinState,
-                            fallback: (BuildContext context) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            },
-                          )
+                          const Text(
+                            'dont have account?',
+                            style: TextStyle(
+
+                              fontSize: 15,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          TextButton(onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) =>  Chooseregister()));
+                          }, child: Text('Register'))
                         ],
-                      ),
-                      Center(
-                        child: TextButton(
-                          child: const Text('Register Now '),
-                          onPressed: () {},
-                        ),
-                      ),
+                      )
                     ],
                   ),
                 ),
@@ -156,7 +182,7 @@ class LoginScreen extends StatelessWidget {
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const Home()),
-                  (route) => false);
+                      (route) => false);
             }).then((value) {
               Fluttertoast.showToast(
                   msg: state.mod.message,

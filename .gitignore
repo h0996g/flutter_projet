@@ -30,7 +30,7 @@
 .pub-cache/
 .pub/
 /build/
-/android/gradle/gradle-wrapper.properties
+/android/gradle/wrapper/gradle-wrapper.properties
 /android/build.gradle
 
 # Web related

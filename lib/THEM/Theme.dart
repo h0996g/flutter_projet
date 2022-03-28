@@ -12,7 +12,7 @@ ThemeData light_theme() => ThemeData(
           headline6: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 18)),
       scaffoldBackgroundColor: Colors.white,
-      primarySwatch: Colors.deepOrange,
+      primarySwatch: Colors.blue,
       appBarTheme: const AppBarTheme(
         iconTheme: IconThemeData(color: Colors.black),
         systemOverlayStyle: SystemUiOverlayStyle(
@@ -36,7 +36,7 @@ ThemeData dark_theme() => ThemeData(
           headline6: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 18)),
       scaffoldBackgroundColor: Colors.black,
-      primarySwatch: Colors.deepOrange,
+      primarySwatch: Colors.blueGrey,
       appBarTheme: AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: HexColor('#121212'),
