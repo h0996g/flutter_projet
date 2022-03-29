@@ -1,3 +1,4 @@
+import 'package:agence/clienthome/cubitclient/cubitclient.dart';
 import 'package:agence/diohelper/dio_helper.dart';
 import 'package:agence/home/home.dart';
 import 'package:agence/login/cupitlogin/cupitl.dart';
@@ -45,7 +46,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => CupitMain()),
         BlocProvider(
             create: (context) =>
-                CupitHome()..changeSwitch(darkswitchmain: darkswitchmain))
+                CupitHome()..changeSwitch(darkswitchmain: darkswitchmain)),
+        BlocProvider(
+            create: (context) =>
+            Cubitclient()..changeSwitch(darkswitchmain: darkswitchmain))
       ],
       child: BlocConsumer<CupitHome, ShopeHomeStates>(
         builder: (BuildContext context, state) {

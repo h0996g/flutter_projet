@@ -1,14 +1,14 @@
-import 'package:agence/login/other/cachhelper.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
+import '../home/cubitHome/cupit_home.dart';
+import '../home/cubitHome/homeStates.dart';
 import '../login/login.dart';
-import 'cubitHome/cupit_home.dart';
-import 'cubitHome/homeStates.dart';
+import '../login/other/cachhelper.dart';
 
-class Setting extends StatelessWidget {
-  const Setting({Key? key}) : super(key: key);
+class Settingsclient extends StatelessWidget {
+   Settingsclient({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class Setting extends StatelessWidget {
           body: Padding(
             padding: const EdgeInsets.all(20.0),
             child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const SizedBox(
                 height: 40,
               ),
@@ -134,7 +134,7 @@ class Setting extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => LoginScreen()),
-                          (route) => false);
+                              (route) => false);
                     });
                   },
                   style: TextButton.styleFrom(),

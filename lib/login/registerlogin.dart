@@ -1,8 +1,10 @@
 
 // import 'package:atelier/share/component/shared_components.dart';
+import 'package:agence/login/clientregister.dart';
 import 'package:flutter/material.dart';
 
 import '../home/cubitHome/cupit_home.dart';
+import 'agencelogin.dart';
 
 class Chooseregister extends StatelessWidget {
 
@@ -21,9 +23,22 @@ class Chooseregister extends StatelessWidget {
               child: Column(
                 children:  [
 
-                  Text('Who are you?',style: TextStyle( color: Colors.blueGrey,
+                  Text('Who are you?',style: TextStyle( color: CupitHome.get(context).dartSwitch
+                      ? Colors.white
+                      : Colors.black,
                     fontSize: 22,
                     fontWeight: FontWeight.w600,),),
+                  SizedBox(height: 12,),
+                   Divider(
+                    color: CupitHome.get(context).dartSwitch
+                        ? Colors.white
+                        : Colors.black,
+                    height: 15,
+                    thickness: 2,
+                    indent: 80,
+                    endIndent: 80,
+
+                  ),
                   SizedBox(height: 20,),
                   Container(
                     color:  CupitHome.get(context).dartSwitch
@@ -32,9 +47,10 @@ class Chooseregister extends StatelessWidget {
                     width: double.infinity,
                     child: MaterialButton(
                       onPressed: () {
-                        // if (formkey.currentState!.validate()) {
-                        //   print('alae ay tb3tet');
-                        // Changepage(context, Navbar());
+
+
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>  Agenceregister()));
+
                       }
                       ,
                       child: Text(
@@ -55,6 +71,7 @@ class Chooseregister extends StatelessWidget {
                         // if (formkey.currentState!.validate()) {
                         //   print('alae ay tb3tet');
                         // Changepage(context, Navbar());
+                        Navigator.push(context, MaterialPageRoute(builder: (context) =>  Clientregister()));
                       }
                       ,
                       child: Text(

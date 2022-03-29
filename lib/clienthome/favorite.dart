@@ -1,9 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'cubitHome/cupit_home.dart';
+import '../home/cubitHome/cupit_home.dart';
 
-class AddPost extends StatelessWidget {
-  const AddPost({Key? key}) : super(key: key);
+class Favorite extends StatelessWidget {
+   Favorite({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,16 +12,16 @@ class AddPost extends StatelessWidget {
       appBar: AppBar(
         elevation: 15,
         title: Text(
-          'Add Offer',
+          'Favorite',
           style: TextStyle(color:  CupitHome.get(context).dartSwitch
               ? Colors.white
               : Colors.black,
-          fontSize: 34),
+              fontSize: 34),
         ),
       ),
       body: const Center(
         child: Icon(
-          Icons.add_business,
+          Icons.favorite_sharp,
           size: 100,
           color: Colors.grey,
         ),

@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
           bottomNavigationBar: BottomNavigationBar(
             items: const [
               BottomNavigationBarItem(
-                  icon: Icon(Icons.local_offer), label: 'Offer'),
+                  icon: Icon(Icons.home), label: 'Offer'),
               BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Add'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.settings), label: 'Setting')
@@ -34,3 +34,14 @@ class Home extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
