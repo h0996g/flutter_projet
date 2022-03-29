@@ -85,8 +85,8 @@ class Offersclient extends StatelessWidget {
              begin: Alignment.topRight,
              end: Alignment.bottomLeft,
              colors: [
-               Color(0xff303030),
-               Color(0xff303030),
+               Color(0xff131313),
+               Color(0xff131313),
              ],
            ) :LinearGradient(
                begin: Alignment.topRight,

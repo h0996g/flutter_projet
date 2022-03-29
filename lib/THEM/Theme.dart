@@ -31,9 +31,9 @@ ThemeData dark_theme() => ThemeData(
           unselectedItemColor: Colors.white),
       textTheme: const TextTheme(
           headline4:
-              TextStyle(color: Color(0xff868686), fontWeight: FontWeight.w500),
+              TextStyle(color: Color(0xffb3b2b2), fontWeight: FontWeight.w500),
           bodyText2: TextStyle(
-            color: Color(0xff868686),
+            color: Color(0xffb3b2b2),
           ),
           headline6: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 18)),
