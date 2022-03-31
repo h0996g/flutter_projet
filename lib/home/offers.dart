@@ -1,4 +1,6 @@
+import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/home/cubitHome/cupit_home.dart';
+import 'package:agence/shared/components/components.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -12,12 +14,22 @@ class Offers extends StatelessWidget {
     return BlocConsumer<CupitHome, ShopeHomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
+          floatingActionButton: FloatingActionButton(onPressed: (){
+            // Navigator.push(context, MaterialPageRoute(builder: (context) =>  Navbar()));
+            Changepage(context, Navbar());
+          },child: Icon(Icons.place,
+            color:  CupitHome.get(context).dartSwitch
+              ? Colors.white
+              : Colors.blue,),),
 
           appBar: AppBar(
             elevation: 10,
             title: Text(
               'Offers',
-              style: Theme.of(context).textTheme.headline4,
+              style: TextStyle(color:  CupitHome.get(context).dartSwitch
+                  ? Colors.white
+                  : Colors.black,
+              fontSize: 34),
             ),
             actions: [
               IconButton(
@@ -73,8 +85,8 @@ class Offers extends StatelessWidget {
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                   colors: [
-                    Colors.blueGrey,
-                    Colors.blueGrey,
+                    Color(0xff131313),
+                    Color(0xff131313),
                   ],
                 ) :LinearGradient(
                     begin: Alignment.topRight,
