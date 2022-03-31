@@ -1,5 +1,6 @@
 import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/home/cubitHome/cupit_home.dart';
+import 'package:agence/offersdetails/offerdetailclient.dart';
 import 'package:agence/shared/components/components.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -64,7 +65,9 @@ class Offers extends StatelessWidget {
             color:
                 CupitHome.get(context).dartSwitch ? Colors.black : Colors.white,
             depth: 0),
-        onPressed: () {},
+        onPressed: () {
+          Changepage(context, Offerdetailclient());
+        },
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           Container(
             height: 150,
