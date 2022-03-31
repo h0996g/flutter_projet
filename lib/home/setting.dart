@@ -16,9 +16,9 @@ class Setting extends StatelessWidget {
       builder: (BuildContext context, state) {
         return Scaffold(
           appBar: AppBar(
-            elevation: 5,
+            elevation: 10,
             title: Text(
-              'gg',
+              'Settings',
               style: Theme.of(context).textTheme.headline4,
             ),
           ),
