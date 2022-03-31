@@ -29,7 +29,7 @@ class Chooseregister extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   Divider(
@@ -41,7 +41,7 @@ class Chooseregister extends StatelessWidget {
                     indent: 80,
                     endIndent: 80,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
@@ -56,13 +56,13 @@ class Chooseregister extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => Agenceregister()));
                       },
-                      child: Text(
+                      child: const Text(
                         'AGENCE',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
@@ -80,7 +80,7 @@ class Chooseregister extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => Clientregister()));
                       },
-                      child: Text(
+                      child: const Text(
                         'CLIENT',
                         style: TextStyle(color: Colors.white),
                       ),

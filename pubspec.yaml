@@ -45,6 +45,7 @@ dependencies:
   flutter_hex_color: ^2.0.0
   http: ^0.13.4
   image_picker: ^0.8.4+11
+  intl_phone_field: ^3.1.0
   
 
 dev_dependencies:

@@ -25,7 +25,6 @@ class Agenceregister extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocConsumer<LoginCubit, LoginStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
@@ -54,7 +53,7 @@ class Agenceregister extends StatelessWidget {
                       //     fontWeight: FontWeight.w600,
                       //   ),
                       // ),
-                      SizedBox(
+                      const SizedBox(
                         height: 26,
                       ),
                       defaultForm(
@@ -212,30 +211,33 @@ class Agenceregister extends StatelessWidget {
                       ),
                       ConditionalBuilder(
                         condition: state is! ConditionalLodinState,
-                        builder:(BuildContext context){ return Container(
-
-                          color:  CupitHome.get(context).dartSwitch
-                              ? Colors.blueGrey
-                              : Colors.blue,
-                          width: double.infinity,
-                          child: MaterialButton(
-                            onPressed: () {
-                              if (formKeyyy.currentState!.validate()) {
-                                // LoginCubit.get(context).login(
-                                //     pass: passController.text,
-                                //     email: emailController.text);
-                                Changepage(context, Home());
-                              }
-
-                            },
-                            child: Text(
-                              'SIGN UP',
-                              style: TextStyle(color: Colors.white),
+                        builder: (BuildContext context) {
+                          return Container(
+                            color: CupitHome.get(context).dartSwitch
+                                ? Colors.blueGrey
+                                : Colors.blue,
+                            width: double.infinity,
+                            child: MaterialButton(
+                              onPressed: () {
+                                if (formKeyyy.currentState!.validate()) {
+                                  // LoginCubit.get(context).login(
+                                  //     pass: passController.text,
+                                  //     email: emailController.text);
+                                  Changepage(context, Home());
+                                }
+                              },
+                              child: Text(
+                                'SIGN UP',
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
-                          ),
-                        );}, fallback: (BuildContext context) { return const Center(
-                        child: CircularProgressIndicator(),
-                      ); },
+                          );
+                        },
+                        fallback: (BuildContext context) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                       ),
                       SizedBox(
                         height: 18,
@@ -246,16 +248,17 @@ class Agenceregister extends StatelessWidget {
                           const Text(
                             'You already have account ?',
                             style: TextStyle(
-
                               fontSize: 15,
                             ),
                           ),
                           SizedBox(
                             width: 8,
                           ),
-                          TextButton(onPressed: () {
-                            Changepage(context, LoginScreen());
-                          }, child: Text('Login'))
+                          TextButton(
+                              onPressed: () {
+                                Changepage(context, LoginScreen());
+                              },
+                              child: Text('Login'))
                         ],
                       )
                     ],
@@ -274,7 +277,7 @@ class Agenceregister extends StatelessWidget {
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const Home()),
-                      (route) => false);
+                  (route) => false);
             }).then((value) {
               Fluttertoast.showToast(
                   msg: state.mod.message,
@@ -297,5 +300,6 @@ class Agenceregister extends StatelessWidget {
           }
         }
       },
-    );}
+    );
+  }
 }
