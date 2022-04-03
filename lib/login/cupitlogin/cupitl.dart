@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class LoginCubit extends Cubit<LoginStates> {
   LoginCubit() : super(InitialState());
   static LoginCubit get(context) => BlocProvider.of(context);
-  Icon iconhidden = Icon(Icons.visibility);
+  Icon iconhidden = const Icon(Icons.visibility);
   late LoginModel json;
 
   void login({required String pass, required String email}) {
@@ -30,10 +30,10 @@ class LoginCubit extends Cubit<LoginStates> {
   bool ishidden = true;
   void showpass() {
     if (ishidden) {
-      iconhidden = Icon(Icons.visibility_off);
+      iconhidden = const Icon(Icons.visibility_off);
       ishidden = !ishidden;
     } else {
-      iconhidden = Icon(Icons.visibility);
+      iconhidden = const Icon(Icons.visibility);
       ishidden = !ishidden;
     }
     emit(HiddenPasswordState());

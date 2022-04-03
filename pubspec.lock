@@ -132,15 +132,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.2.0"
-
   flutter_phone_direct_caller:
     dependency: "direct main"
     description:
       name: flutter_phone_direct_caller
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.5"
-
+    version: "2.1.0"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.5"
   flutter_test:
     dependency: "direct dev"
     description: flutter

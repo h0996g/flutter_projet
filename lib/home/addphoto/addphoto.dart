@@ -161,23 +161,25 @@ class Addphoto extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Home()),
-                            (route) => false);
-                      },
-                      child: const Text('RETOUR')),
-                  const Spacer(),
-                  ElevatedButton(
-                      onPressed: () {}, child: const Text('CONFIRMER'))
-                ],
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Home()),
+                              (route) => false);
+                        },
+                        child: const Text('RETOUR')),
+                    const Spacer(),
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('CONFIRMER'))
+                  ],
+                ),
               ),
             )
           ]),
