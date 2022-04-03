@@ -6,7 +6,6 @@ import 'package:agence/home/cubitHome/homeStates.dart';
 import 'package:agence/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 
 class Addphoto extends StatelessWidget {
   const Addphoto({Key? key}) : super(key: key);
@@ -18,7 +17,7 @@ class Addphoto extends StatelessWidget {
         return Scaffold(
           body: Column(children: [
             const SizedBox(
-              height: 100,
+              height: 80,
             ),
             Padding(
               padding: const EdgeInsets.all(30),
@@ -93,7 +92,7 @@ class Addphoto extends StatelessWidget {
                     ],
                     color: Colors.grey[200],
                   ),
-                  height: 500,
+                  height: 450,
                   width: 350,
                   child: Column(children: [
                     const SizedBox(
@@ -161,25 +160,23 @@ class Addphoto extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  children: [
-                    ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Home()),
-                              (route) => false);
-                        },
-                        child: const Text('RETOUR')),
-                    const Spacer(),
-                    ElevatedButton(
-                        onPressed: () {}, child: const Text('CONFIRMER'))
-                  ],
-                ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
+                children: [
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Home()),
+                            (route) => false);
+                      },
+                      child: const Text('RETOUR')),
+                  const Spacer(),
+                  ElevatedButton(
+                      onPressed: () {}, child: const Text('CONFIRMER'))
+                ],
               ),
             )
           ]),
