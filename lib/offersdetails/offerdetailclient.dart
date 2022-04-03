@@ -74,11 +74,24 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
 
                 child: MaterialButton(
                   onPressed: () {Changepage(context, Home());},
-shape: const CircleBorder(),
+                  shape: const CircleBorder(),
                   color: CupitHome.get(context).dartSwitch ? Colors.black : Colors.blue,
                   child: Icon(Icons.arrow_back_ios_outlined,color:CupitHome.get(context).dartSwitch ? Colors.white : Colors.white, ),
 
                 ),
+              ),
+              Positioned(
+                  top: 46,
+                  right: -5,
+
+
+                  child:     MaterialButton(
+                    onPressed: () {},
+                    shape: const CircleBorder(),
+                    color: CupitHome.get(context).dartSwitch ? Color(0xff8d8d8d): Colors.blue,
+                    child: Icon(Icons.favorite_sharp,color:CupitHome.get(context).dartSwitch ? Colors.white : Colors.white, ),
+
+                  )
               ),
               Positioned(bottom:20,left:140,child: SmoothPageIndicator(
                   controller: onbordingController, // PageController
@@ -107,7 +120,7 @@ shape: const CircleBorder(),
             height: 1,
             thickness: 2,
           ),
-          SizedBox(height: 5,),
+
           Row(children: [
             SizedBox(width: 20,),
             Text(
@@ -121,11 +134,19 @@ shape: const CircleBorder(),
               onPressed: () {},
               shape: const CircleBorder(),
               color: CupitHome.get(context).dartSwitch ? Color(0xff8d8d8d): Colors.blue,
-              child: Icon(Icons.favorite_sharp,color:CupitHome.get(context).dartSwitch ? Colors.white : Colors.white, ),
+              child: Icon(Icons.place,color:CupitHome.get(context).dartSwitch ? Colors.white : Colors.white, ),
 
-            )
+            ),
+
+            // MaterialButton(
+            //   onPressed: () {},
+            //   shape: const CircleBorder(),
+            //   color: CupitHome.get(context).dartSwitch ? Color(0xff8d8d8d): Colors.blue,
+            //   child: Icon(Icons.favorite_sharp,color:CupitHome.get(context).dartSwitch ? Colors.white : Colors.white, ),
+            //
+            // )
           ],),
-          SizedBox(height: 6,),
+
           Row(children: [
             SizedBox(width: 20,),
             Expanded(
@@ -137,11 +158,14 @@ shape: const CircleBorder(),
               ),
             ),
             SizedBox(width: 20,),
-            Text('Se Loger',style: TextStyle(fontWeight: FontWeight.bold),),
+
+
+            TextButton(onPressed: () {  },
+                child: Text('Se Loger',style: TextStyle(fontWeight: FontWeight.bold),)),
             SizedBox(width: 20,),
 
           ],),
-          SizedBox(height: 12,),
+
           Divider(
             color: CupitHome.get(context).dartSwitch
                 ? Colors.blueGrey
@@ -161,7 +185,7 @@ shape: const CircleBorder(),
                   child: Column(children: [
                     SizedBox(height: 5,),
                     Icon(Icons.description_outlined,color:a == 0 ? Colors.red: Colors.blue,),
-                    Text('Description',style:TextStyle(color:a == 0 ? Colors.red: Colors.blue,fontSize: 14)),
+                    Text('Information',style:TextStyle(color:a == 0 ? Colors.red: Colors.blue,fontSize: 14)),
                     SizedBox(height: 7,)
                   ],),
 
@@ -170,13 +194,13 @@ shape: const CircleBorder(),
               ),
             ),
 
-    //         VerticalDivider(
-    //           thickness: 2,
-    //            width: 2,
-    //            color: CupitHome.get(context).dartSwitch
-    // ? Color(0xff131313)
-    //     : Color(0xffF3F3F3FF),
-    //         ),
+            //         VerticalDivider(
+            //           thickness: 2,
+            //            width: 2,
+            //            color: CupitHome.get(context).dartSwitch
+            // ? Color(0xff131313)
+            //     : Color(0xffF3F3F3FF),
+            //         ),
 
             Expanded(
               child: Container(
@@ -187,15 +211,15 @@ shape: const CircleBorder(),
                 child: MaterialButton(padding: EdgeInsets.all(0),onPressed: () { setState(() {
                   a=1;
                 }); },
-                child: Column(children: [
-                  SizedBox(height: 5,),
-    Icon(Icons.menu_sharp,color:a == 1 ? Colors.red: Colors.blue,),
-    Text('Details',style:TextStyle(color:a == 1 ? Colors.red: Colors.blue,fontSize: 14)),
-                  SizedBox(height: 7,)
-                ],),
+                  child: Column(children: [
+                    SizedBox(height: 5,),
+                    Icon(Icons.menu_sharp,color:a == 1 ? Colors.red: Colors.blue,),
+                    Text('Details',style:TextStyle(color:a == 1 ? Colors.red: Colors.blue,fontSize: 14)),
+                    SizedBox(height: 7,)
+                  ],),
 
-              ),
-            ),),
+                ),
+              ),),
             // VerticalDivider(
             //     thickness: 2,
             //   width: 2,
@@ -257,7 +281,7 @@ shape: const CircleBorder(),
           ),
 
           Container(
-            child: a==0 ? Text('ala') : (a==1 ?Text('baba'): Text('sousou')),
+            child: a==0 ? Information(): (a==1 ?Details(): Text('sousou')),
           ),
 
         ],
@@ -267,6 +291,54 @@ shape: const CircleBorder(),
 }
 
 Widget Ala(String k) => Image(
-image: AssetImage('${k}'),fit: BoxFit.cover,);
+  image: AssetImage('${k}'),fit: BoxFit.cover,);
 
 
+Widget Information() => Padding(
+  padding: const EdgeInsets.all(16.0),
+  child:   SingleChildScrollView(
+
+    child:   Column(children: [
+
+      SizedBox(height: 10,),
+
+      Text('Description ',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,),),
+
+      SizedBox(height: 16,),
+
+      Text('  aaaaaaaaaa sssssssssss ddddddd ffffff eeeeeee qqqqqq sdrhfejf wlc lwcw wlehcwfelhf weeee eeeeeeeeeeeeee eeeeeeeeeee eeeeeeeeeeeeee eeeeeeeeeeeeee eeeeeeeeeee eeeeeeeeee e'
+        ,style: TextStyle(fontSize: 16),),
+
+    ],),
+
+  ),
+);
+
+
+Widget Details() => Padding(
+  padding: const EdgeInsets.all(18.0),
+  child:   Card(
+    child:
+    Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(children: [
+        SizedBox(height: 10,),
+
+        Row(children: [ SizedBox(width: 8,) , Text('Wilaya :',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),),SizedBox(width: 10,),Text('Constantine',style: TextStyle(fontSize: 22),)],),
+
+        SizedBox(height: 12,),
+
+        Row(children: [ SizedBox(width: 8,) , Text('Superficie :',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),),SizedBox(width: 10,),Text('140 m2',style: TextStyle(fontSize: 22),)],),
+
+        SizedBox(height: 12,),
+
+        Row(children: [ SizedBox(width: 8,) , Text('Etages :',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),),SizedBox(width: 10,),Text('4 ',style: TextStyle(fontSize: 22),)],),
+
+        SizedBox(height: 12,),
+
+        Row(children: [ SizedBox(width: 8,) , Text('Chambres :',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),),SizedBox(width: 10,),Text('5 chambre(s)',style: TextStyle(fontSize: 22),)],),
+
+      ],),
+    ),
+  ),
+);
