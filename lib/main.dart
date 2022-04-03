@@ -14,6 +14,7 @@ import 'home/cubitHome/cupit_home.dart';
 import 'home/cubitHome/homeStates.dart';
 
 main() {
+  // hamza fruiti
   BlocOverrides.runZoned(
     () async {
       // Use cubits...
