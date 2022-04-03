@@ -15,6 +15,7 @@ import 'home/cubitHome/homeStates.dart';
 
 main() {
   BlocOverrides.runZoned(
+    // alllaaaa
     () async {
       // Use cubits...
       WidgetsFlutterBinding.ensureInitialized();
