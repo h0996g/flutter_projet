@@ -36,18 +36,18 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 40, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
-                      Text(
+                      const Text(
                         'login now to browse our hot offers',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.blueGrey,
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 26,
                       ),
                       defaultForm(
@@ -74,7 +74,7 @@ class LoginScreen extends StatelessWidget {
                                 : Colors.grey,
                           ),
                           textInputAction: TextInputAction.next),
-                      SizedBox(
+                      const SizedBox(
                         height: 18,
                       ),
                       defaultForm(
@@ -117,35 +117,39 @@ class LoginScreen extends StatelessWidget {
                                 ? Colors.white
                                 : Colors.grey,
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 18,
                       ),
                       ConditionalBuilder(
                         condition: state is! ConditionalLodinState,
-                        builder:(BuildContext context){ return Container(
-
-                           color:  CupitHome.get(context).dartSwitch
-                               ? Colors.blueGrey
-                               : Colors.blue,
-                          width: double.infinity,
-                          child: MaterialButton(
-                            onPressed: () {
-                              if (formKey.currentState!.validate()) {
-                                LoginCubit.get(context).login(
-                                    pass: passController.text,
-                                    email: emailController.text);
-                              }
-                            },
-                            child: Text(
-                              'LOGIN',
-                              style: TextStyle(color: Colors.white),
+                        builder: (BuildContext context) {
+                          return Container(
+                            color: CupitHome.get(context).dartSwitch
+                                ? Colors.blueGrey
+                                : Colors.blue,
+                            width: double.infinity,
+                            child: MaterialButton(
+                              onPressed: () {
+                                if (formKey.currentState!.validate()) {
+                                  LoginCubit.get(context).login(
+                                      pass: passController.text,
+                                      email: emailController.text);
+                                }
+                              },
+                              child: const Text(
+                                'LOGIN',
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
-                          ),
-                        );}, fallback: (BuildContext context) { return const Center(
-                        child: CircularProgressIndicator(),
-                      ); },
+                          );
+                        },
+                        fallback: (BuildContext context) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 18,
                       ),
                       Row(
@@ -154,16 +158,21 @@ class LoginScreen extends StatelessWidget {
                           const Text(
                             'dont have account?',
                             style: TextStyle(
-
                               fontSize: 15,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 8,
                           ),
-                          TextButton(onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) =>  Chooseregister()));
-                          }, child: Text('Register'))
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Chooseregister()));
+                              },
+                              child: const Text('Register'))
                         ],
                       )
                     ],
@@ -182,7 +191,7 @@ class LoginScreen extends StatelessWidget {
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const Home()),
-                      (route) => false);
+                  (route) => false);
             }).then((value) {
               Fluttertoast.showToast(
                   msg: state.mod.message,
