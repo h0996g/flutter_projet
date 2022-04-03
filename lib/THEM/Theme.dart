@@ -3,10 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 
 ThemeData light_theme() => ThemeData(
-  floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: Colors.white,),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: Colors.white,
+      ),
       textTheme: const TextTheme(
           headline4:
-              TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+              TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           bodyText2: TextStyle(
             color: Colors.black,
           ),
@@ -25,13 +27,15 @@ ThemeData light_theme() => ThemeData(
     );
 
 ThemeData dark_theme() => ThemeData(
-  floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: Colors.black,),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: Colors.black,
+      ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: HexColor('#121212'),
           unselectedItemColor: Colors.white),
       textTheme: const TextTheme(
           headline4:
-              TextStyle(color: Color(0xffb3b2b2), fontWeight: FontWeight.w500),
+              TextStyle(color: Color(0xffb3b2b2), fontWeight: FontWeight.bold),
           bodyText2: TextStyle(
             color: Color(0xffb3b2b2),
           ),

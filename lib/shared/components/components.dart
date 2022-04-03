@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 
 Widget defaultForm(
         {required controller,
+        int maxline = 1,
+        Widget? suffix,
         required context,
+        String? sufixText,
         required TextInputType type,
         required Function valid,
-        required Text lable,
+        Text? lable,
         Icon? prefixIcon,
         IconButton? sufixIcon,
-         TextInputAction? textInputAction,
+        TextInputAction? textInputAction,
         bool obscureText = false,
         Function? onFieldSubmitted}) =>
     TextFormField(
@@ -30,11 +33,14 @@ Widget defaultForm(
           label: lable,
           border: const OutlineInputBorder(borderSide: BorderSide()),
           prefixIcon: prefixIcon,
-          suffixIcon: sufixIcon),
+          suffixIcon: sufixIcon,
+          suffix: suffix,
+          suffixText: sufixText),
       controller: controller,
+      maxLines: maxline,
       keyboardType: type,
       obscureText: obscureText,
     );
 
-
-void Changepage(context ,Widget ala )=> Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ala), (route) => false) ;
+void Changepage(context, Widget ala) => Navigator.pushAndRemoveUntil(
+    context, MaterialPageRoute(builder: (context) => ala), (route) => false);

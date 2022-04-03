@@ -16,12 +16,10 @@ class Setting extends StatelessWidget {
       builder: (BuildContext context, state) {
         return Scaffold(
           appBar: AppBar(
-            elevation: 5,
+            elevation: 10,
             title: Text(
               'Settings',
-              style: TextStyle(color:  CupitHome.get(context).dartSwitch
-                  ? Colors.white
-                  : Colors.black,fontSize: 34),
+              style: Theme.of(context).textTheme.headline4,
             ),
           ),
           body: Padding(

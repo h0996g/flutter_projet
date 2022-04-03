@@ -15,23 +15,21 @@ class Offers extends StatelessWidget {
     return BlocConsumer<CupitHome, ShopeHomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
-          floatingActionButton: FloatingActionButton(onPressed: (){
-            // Navigator.push(context, MaterialPageRoute(builder: (context) =>  Navbar()));
-            Changepage(context, Navbar());
-          },child: Icon(Icons.place,
-            color:  CupitHome.get(context).dartSwitch
-              ? Colors.white
-              : Colors.blue,),),
-
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              // Navigator.push(context, MaterialPageRoute(builder: (context) =>  Navbar()));
+              Changepage(context, Navbar());
+            },
+            child: Icon(
+              Icons.place,
+              color: CupitHome.get(context).dartSwitch
+                  ? Colors.white
+                  : Colors.blue,
+            ),
+          ),
           appBar: AppBar(
             elevation: 10,
-            title: Text(
-              'Offers',
-              style: TextStyle(color:  CupitHome.get(context).dartSwitch
-                  ? Colors.white
-                  : Colors.black,
-              fontSize: 34),
-            ),
+            title: Text('Offers', style: Theme.of(context).textTheme.headline4),
             actions: [
               IconButton(
                   onPressed: () {},
@@ -43,7 +41,6 @@ class Offers extends StatelessWidget {
           ),
           body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0),
-
               child: ListView.separated(
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: ((context, index) => ListItembuilder(context)),
@@ -84,20 +81,22 @@ class Offers extends StatelessWidget {
               // color:  CupitHome.get(context).dartSwitch
               //     ? Colors.blueGrey
               //     : Colors.white,
-                gradient: CupitHome.get(context).dartSwitch ? LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [
-                    Color(0xff131313),
-                    Color(0xff131313),
-                  ],
-                ) :LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    colors: [
-                      Colors.blue,
-                      Color(0xffCFD9E2FF),
-                    ]) ,
+              gradient: CupitHome.get(context).dartSwitch
+                  ? LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        Color(0xff131313),
+                        Color(0xff131313),
+                      ],
+                    )
+                  : LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                          Colors.blue,
+                          Color(0xffCFD9E2FF),
+                        ]),
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
             ),
             child:
@@ -105,23 +104,25 @@ class Offers extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Row(
-                children:[
-                  SizedBox(width: 8,),Text(
+              Row(children: [
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
                   "\$245.00",
                   style: Theme.of(context).textTheme.headline4?.copyWith(
                         fontSize: 32,
                       ),
-                )]
-              ),
+                )
+              ]),
               const SizedBox(
                 height: 10,
               ),
-              Row(
-                children:[  SizedBox(
+              Row(children: [
+                SizedBox(
                   width: 8,
                 ),
-                  Text(
+                Text(
                   '730 Columbus Ave, Manhattan, \n Ny 10025',
                   style: Theme.of(context).textTheme.bodyText2,
                   maxLines: 2,
