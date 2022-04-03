@@ -10,6 +10,8 @@ class ChangeSwitchStates extends ShopeHomeStates {}
 
 class ChangevalueDropdownState extends ShopeHomeStates {}
 
-class ImagePickerGood extends ShopeHomeStates {}
+class AddImageGoodState extends ShopeHomeStates {}
 
-class ImagePickerBad extends ShopeHomeStates {}
+class RemovePhotoState extends ShopeHomeStates {}
+
+class AddImageCameraGoodState extends ShopeHomeStates {}

@@ -1,3 +1,4 @@
+import 'package:agence/home/addphoto/addphoto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -179,7 +180,13 @@ class AddPost extends StatelessWidget {
                         children: [
                           const Spacer(),
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const Addphoto()));
+                              },
                               icon: const Icon(Icons.arrow_forward_ios))
                         ],
                       )
