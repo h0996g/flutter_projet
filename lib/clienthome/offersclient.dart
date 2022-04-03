@@ -1,3 +1,4 @@
+import 'package:agence/offersdetails/offerdetailclient.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,7 +65,12 @@ class Offersclient extends StatelessWidget {
          color:
          CupitHome.get(context).dartSwitch ? Colors.black : Colors.white,
          depth: 0),
-     onPressed: () {},
+     onPressed: () {
+       Navigator.push(
+           context,
+           MaterialPageRoute(
+               builder: (context) => Offerdetailclient()));
+     },
      child: Column(mainAxisSize: MainAxisSize.min, children: [
        Container(
          height: 150,
