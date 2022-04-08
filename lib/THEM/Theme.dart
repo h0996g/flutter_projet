@@ -5,7 +5,7 @@ import 'package:flutter_hex_color/flutter_hex_color.dart';
 ThemeData light_theme() => ThemeData(
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
 
-        backgroundColor: Colors.pink,
+        backgroundColor: Colors.blue,
 
        
       ),

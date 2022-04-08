@@ -26,7 +26,7 @@ class Offers extends StatelessWidget {
               Icons.place,
               color: CupitHome.get(context).dartSwitch
                   ? Colors.white
-                  : Colors.blue,
+                  : Colors.white,
             ),
           ),
           appBar: AppBar(
