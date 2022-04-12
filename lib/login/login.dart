@@ -50,6 +50,17 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(
                         height: 26,
                       ),
+                      // Center(
+                      //   child: Container(
+                      //
+                      //     width: double.infinity,
+                      //     height: 50,
+                      //     color: Colors.pink,
+                      //   ),
+                      // ),
+                      // const SizedBox(
+                      //   height: 22,
+                      // ),
                       defaultForm(
                           context: context,
                           controller: emailController,
@@ -124,21 +135,40 @@ class LoginScreen extends StatelessWidget {
                         condition: state is! ConditionalLodinState,
                         builder: (BuildContext context) {
                           return Container(
-                            color: CupitHome.get(context).dartSwitch
-                                ? Colors.blueGrey
-                                : Colors.blue,
+
                             width: double.infinity,
-                            child: MaterialButton(
-                              onPressed: () {
-                                if (formKey.currentState!.validate()) {
-                                  LoginCubit.get(context).login(
-                                      pass: passController.text,
-                                      email: emailController.text);
-                                }
-                              },
-                              child: const Text(
-                                'LOGIN',
-                                style: TextStyle(color: Colors.white),
+                            decoration: BoxDecoration(
+
+                              color: CupitHome.get(context).dartSwitch
+                                  ? Colors.blueGrey
+                                  : Colors.blue,
+                              borderRadius: BorderRadius.only(topLeft:Radius.circular(15),topRight:Radius.circular(5),bottomLeft:Radius.circular(5),bottomRight: Radius.circular(15)  ),
+
+                            ),
+                            child: Center(
+                              child: Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                width: double.infinity,
+
+                                child: MaterialButton(
+
+
+                                 highlightColor:CupitHome.get(context).dartSwitch
+                                    ? Colors.blueGrey
+                                    : Colors.blue,
+
+                                  onPressed: () {
+                                    if (formKey.currentState!.validate()) {
+                                      LoginCubit.get(context).login(
+                                          pass: passController.text,
+                                          email: emailController.text);
+                                    }
+                                  },
+                                  child: const Text(
+                                    'LOGIN',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
                               ),
                             ),
                           );

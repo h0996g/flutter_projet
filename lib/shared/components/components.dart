@@ -27,11 +27,18 @@ Widget defaultForm(
         return valid(value);
       },
       decoration: InputDecoration(
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey),
-          ),
+        border:OutlineInputBorder(
+              borderRadius: BorderRadius.circular(50),
+             ),
+        // disabledBorder:  OutlineInputBorder(
+        //     borderRadius: BorderRadius.circular(50),
+        //     ),
+        //   enabledBorder:  OutlineInputBorder(
+        //     borderRadius: BorderRadius.circular(50),
+        //     borderSide: BorderSide(color: Colors.grey),
+        //   ),
           label: lable,
-          border: const OutlineInputBorder(borderSide: BorderSide()),
+          // border: const OutlineInputBorder(borderSide: BorderSide()),
           prefixIcon: prefixIcon,
           suffixIcon: sufixIcon,
           suffix: suffix,

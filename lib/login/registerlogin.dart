@@ -44,12 +44,26 @@ class Chooseregister extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    color: CupitHome.get(context).dartSwitch
-                        ? Colors.blueGrey
-                        : Colors.blue,
+              Container(
+
+                width: double.infinity,
+                decoration: BoxDecoration(
+
+                  color: CupitHome.get(context).dartSwitch
+                      ? Colors.blueGrey
+                      : Colors.blue,
+                  borderRadius: BorderRadius.only(topLeft:Radius.circular(15),topRight:Radius.circular(5),bottomLeft:Radius.circular(5),bottomRight: Radius.circular(15)  ),
+
+                ),
+                child: Center(
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                     width: double.infinity,
+
                     child: MaterialButton(
+                      highlightColor:CupitHome.get(context).dartSwitch
+                          ? Colors.blueGrey
+                          : Colors.blue,
                       onPressed: () {
                         Navigator.push(
                             context,
@@ -62,27 +76,44 @@ class Chooseregister extends StatelessWidget {
                       ),
                     ),
                   ),
+                ),
+              ),
                   const SizedBox(
                     height: 20,
                   ),
                   Container(
-                    color: CupitHome.get(context).dartSwitch
-                        ? Colors.blueGrey
-                        : Colors.blue,
+
                     width: double.infinity,
-                    child: MaterialButton(
-                      onPressed: () {
-                        // if (formkey.currentState!.validate()) {
-                        //   print('alae ay tb3tet');
-                        // Changepage(context, Navbar());
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Clientregister()));
-                      },
-                      child: const Text(
-                        'CLIENT',
-                        style: TextStyle(color: Colors.white),
+                    decoration: BoxDecoration(
+
+                      color: CupitHome.get(context).dartSwitch
+                          ? Colors.blueGrey
+                          : Colors.blue,
+                      borderRadius: BorderRadius.only(topLeft:Radius.circular(15),topRight:Radius.circular(5),bottomLeft:Radius.circular(5),bottomRight: Radius.circular(15)  ),
+
+                    ),
+                    child: Center(
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        width: double.infinity,
+
+                        child:
+                        MaterialButton(
+                          highlightColor:CupitHome.get(context).dartSwitch
+                              ? Colors.blueGrey
+                              : Colors.blue,
+                          onPressed: () {
+
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Clientregister()));
+                          },
+                          child: const Text(
+                            'CLIENT',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
                       ),
                     ),
                   ),
