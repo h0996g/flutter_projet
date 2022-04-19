@@ -6,21 +6,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../home/cubitHome/cupit_home.dart';
-import '../home/home.dart';
 import '../shared/components/components.dart';
 import 'cupitlogin/cupitl.dart';
 import 'cupitlogin/statesh.dart';
-import 'other/cachhelper.dart';
 
 class Agenceregister extends StatelessWidget {
   Agenceregister({Key? key}) : super(key: key);
 
   var nameController = TextEditingController();
   var addresseController = TextEditingController();
+  var prenomController = TextEditingController();
 
   var emailController = TextEditingController();
   var passController = TextEditingController();
   var numberController = TextEditingController();
+  Map<String, dynamic> sendinfoagence = {};
   var formKeyyy = GlobalKey<FormState>();
 
   @override
@@ -80,7 +80,7 @@ class Agenceregister extends StatelessWidget {
                                 : Colors.grey,
                           ),
                           textInputAction: TextInputAction.next),
-                      SizedBox(
+                      const SizedBox(
                         height: 18,
                       ),
 
@@ -108,7 +108,7 @@ class Agenceregister extends StatelessWidget {
                                 : Colors.grey,
                           ),
                           textInputAction: TextInputAction.next),
-                      SizedBox(
+                      const SizedBox(
                         height: 18,
                       ),
                       defaultForm(
@@ -135,7 +135,7 @@ class Agenceregister extends StatelessWidget {
                                 : Colors.grey,
                           ),
                           textInputAction: TextInputAction.next),
-                      SizedBox(
+                      const SizedBox(
                         height: 18,
                       ),
                       defaultForm(
@@ -178,7 +178,7 @@ class Agenceregister extends StatelessWidget {
                                 ? Colors.white
                                 : Colors.grey,
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 18,
                       ),
                       defaultForm(
@@ -206,7 +206,7 @@ class Agenceregister extends StatelessWidget {
                         ),
                         //      textInputAction: TextInputAction.next,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 18,
                       ),
                       ConditionalBuilder(
@@ -223,10 +223,18 @@ class Agenceregister extends StatelessWidget {
                                   // LoginCubit.get(context).login(
                                   //     pass: passController.text,
                                   //     email: emailController.text);
-                                  Changepage(context, Home());
+                                  sendinfoagence = {
+                                    'name': nameController.text,
+                                    'email': emailController.text,
+                                    'password': passController.text,
+                                    'phone': numberController.text,
+                                    'address': addresseController.text
+                                  };
+                                  LoginCubit.get(context)
+                                      .registerAgence(data: sendinfoagence);
                                 }
                               },
-                              child: Text(
+                              child: const Text(
                                 'SIGN UP',
                                 style: TextStyle(color: Colors.white),
                               ),
@@ -239,7 +247,7 @@ class Agenceregister extends StatelessWidget {
                           );
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 18,
                       ),
                       Row(
@@ -251,14 +259,14 @@ class Agenceregister extends StatelessWidget {
                               fontSize: 15,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 8,
                           ),
                           TextButton(
                               onPressed: () {
                                 Changepage(context, LoginScreen());
                               },
-                              child: Text('Login'))
+                              child: const Text('Login'))
                         ],
                       )
                     ],
@@ -269,34 +277,50 @@ class Agenceregister extends StatelessWidget {
           ),
         );
       },
-      listener: (BuildContext context, Object? state) {
-        if (state is GoodLoginState) {
-          if (state.mod.status) {
-            CachHelper.putcache(key: 'islogin', value: state.mod.data?.token)
-                .then((value) {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Home()),
-                  (route) => false);
-            }).then((value) {
-              Fluttertoast.showToast(
-                  msg: state.mod.message,
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.green,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
-            });
-          } else {
-            Fluttertoast.showToast(
-                msg: state.mod.message,
+      listener: (BuildContext context, Object? state) async {
+        // if (state is GoodLoginState) {
+        //   if (state.mod.status) {
+        //     CachHelper.putcache(key: 'islogin', value: state.mod.data?.token)
+        //         .then((value) {
+        //       Navigator.pushAndRemoveUntil(
+        //           context,
+        //           MaterialPageRoute(builder: (context) => const Home()),
+        //           (route) => false);
+        //     }).then((value) {
+        //       Fluttertoast.showToast(
+        //           msg: state.mod.message,
+        //           toastLength: Toast.LENGTH_SHORT,
+        //           gravity: ToastGravity.BOTTOM,
+        //           timeInSecForIosWeb: 1,
+        //           backgroundColor: Colors.green,
+        //           textColor: Colors.white,
+        //           fontSize: 16.0);
+        //     });
+        //   } else {
+        //     Fluttertoast.showToast(
+        //         msg: state.mod.message,
+        //         toastLength: Toast.LENGTH_SHORT,
+        //         gravity: ToastGravity.BOTTOM,
+        //         timeInSecForIosWeb: 1,
+        //         backgroundColor: Colors.red,
+        //         textColor: Colors.white,
+        //         fontSize: 16.0);
+        //   }
+        // }
+        if (state is RegisterAgenceSuccesState) {
+          if (state.model is RegisterAgenceSuccesState) {
+            await Fluttertoast.showToast(
+                msg: 'Successfully Registered',
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIosWeb: 1,
-                backgroundColor: Colors.red,
+                backgroundColor: Colors.green,
                 textColor: Colors.white,
                 fontSize: 16.0);
+            await Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => LoginScreen()),
+                (route) => false);
           }
         }
       },

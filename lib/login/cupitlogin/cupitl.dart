@@ -1,9 +1,13 @@
+import 'package:agence/Api/constApi.dart';
+import 'package:agence/Model/RegisterAgenceModel.dart';
+import 'dart:convert' as convert;
 import 'package:agence/diohelper/dio_helper.dart';
 import 'package:agence/login/cupitlogin/statesh.dart';
 import 'package:agence/modeles.dart';
-import 'package:agence/shared/components/constante.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../Api/httplaravel.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
   LoginCubit() : super(InitialState());
@@ -24,6 +28,20 @@ class LoginCubit extends Cubit<LoginStates> {
     }).catchError((error) {
       print(error.toString());
       emit(BadLoginState(error));
+    });
+  }
+
+  RegisterAgenceModel? registerAgenceModel;
+  void registerAgence({required Map<String, dynamic> data}) {
+    emit(ConditionalLodinState());
+    Httplar.httpPost(path: REGISTERAGENCE, data: data).then((value) {
+      var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
+      registerAgenceModel = RegisterAgenceModel.fromJson(jsonResponse);
+      print(registerAgenceModel!.user!.email);
+      emit(RegisterAgenceSuccesState(registerAgenceModel));
+    }).catchError((e) {
+      print(e.toString());
+      emit(RegisterAgenceBadState());
     });
   }
 
