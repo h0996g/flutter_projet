@@ -6,14 +6,13 @@ import 'package:agence/home/cubitHome/homeStates.dart';
 import 'package:agence/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 
 class Addphoto extends StatelessWidget {
   const Addphoto({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CupitHome, ShopeHomeStates>(
+    return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
           body: Column(children: [

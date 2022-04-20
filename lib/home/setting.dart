@@ -1,7 +1,11 @@
+import 'package:agence/Api/constApi.dart';
+
 import 'package:agence/login/other/cachhelper.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../login/login.dart';
 import 'cubitHome/cupit_home.dart';
@@ -12,7 +16,7 @@ class Setting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CupitHome, ShopeHomeStates>(
+    return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
           appBar: AppBar(
@@ -125,21 +129,25 @@ class Setting extends StatelessWidget {
               ),
               const Spacer(),
               Center(
-                child: TextButton(
-                  onPressed: () {
-                    CachHelper.removdata(key: 'islogin').then((value) {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginScreen()),
-                          (route) => false);
-                    });
+                child: ConditionalBuilder(
+                  builder: (BuildContext context) {
+                    return TextButton(
+                      onPressed: () {
+                        CupitHome.get(context).logOut();
+                      },
+                      style: TextButton.styleFrom(),
+                      child: Text(
+                        'SING OUT',
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                    );
                   },
-                  style: TextButton.styleFrom(),
-                  child: Text(
-                    'SING OUT',
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
+                  condition: state is! ConditionalLodinState,
+                  fallback: (BuildContext context) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
                 ),
               ),
               const SizedBox(
@@ -149,7 +157,35 @@ class Setting extends StatelessWidget {
           ),
         );
       },
-      listener: (BuildContext context, Object? state) {},
+      listener: (BuildContext context, Object? state) {
+        if (state is LougOutSuccesState) {
+          CachHelper.removdata(key: 'token').then((value) {
+            print(TOKEN);
+            TOKEN = '';
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => LoginScreen()),
+                (route) => false);
+          });
+          Fluttertoast.showToast(
+              msg: 'Good By  ',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        } else if (state is LougOutBadState) {
+          Fluttertoast.showToast(
+              msg: 'There\'s a problem',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      },
     );
   }
 }

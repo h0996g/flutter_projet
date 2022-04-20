@@ -3,12 +3,11 @@ import 'package:agence/home/cubitHome/cupit_home.dart';
 import 'package:agence/home/cubitHome/homeStates.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 
 class EditPhoto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CupitHome, ShopeHomeStates>(
+    return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
         return SafeArea(
           child: Scaffold(
@@ -49,7 +48,7 @@ class EditPhoto extends StatelessWidget {
                                 radius: 12,
                                 backgroundColor: Colors.transparent,
                                 child: IconButton(
-                                  padding: EdgeInsets.all(0),
+                                  padding: const EdgeInsets.all(0),
                                   splashColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onPressed: () {

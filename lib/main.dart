@@ -1,4 +1,4 @@
-import 'package:agence/diohelper/dio_helper.dart';
+import 'package:agence/Api/constApi.dart';
 import 'package:agence/home/home.dart';
 import 'package:agence/login/cupitlogin/cupitl.dart';
 import 'package:agence/login/cupitlogin/cupitmain.dart';
@@ -13,20 +13,17 @@ import 'home/cubitHome/cupit_home.dart';
 import 'home/cubitHome/homeStates.dart';
 
 main() {
-  // hamza fruiti
   BlocOverrides.runZoned(
     () async {
-      // Use cubits...
       WidgetsFlutterBinding.ensureInitialized();
-      DioHelper.init();
+
       await CachHelper.init();
       bool onbordingmain = CachHelper.getData(key: 'onbording') ?? false;
 
       bool darkswitchmain = CachHelper.getData(key: 'dartswitch') ?? false;
-      String isloginmain = CachHelper.getData(key: 'islogin') ?? '';
+      TOKEN = CachHelper.getData(key: 'token') ?? '';
 
-      // print(onbordingmain);
-      runApp(MyApp(onbordingmain, darkswitchmain, isloginmain));
+      runApp(MyApp(onbordingmain, darkswitchmain));
     },
     blocObserver: MyBlocObserver(),
   );
@@ -35,28 +32,25 @@ main() {
 class MyApp extends StatelessWidget {
   final bool onbordingmain;
   final bool darkswitchmain;
-  final String isloginmain;
-  MyApp(this.onbordingmain, this.darkswitchmain, this.isloginmain);
+
+  MyApp(this.onbordingmain, this.darkswitchmain);
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => LoginCubit()),
-        BlocProvider(create: (context) => CupitMain()),
+        // BlocProvider(create: (context) => CupitMain()),
         BlocProvider(
             create: (context) =>
                 CupitHome()..changeSwitch(darkswitchmain: darkswitchmain)),
-        // BlocProvider(
-        //     create: (context) =>
-        //     Cubitclient()..changeSwitch(darkswitchmain: darkswitchmain))
       ],
-      child: BlocConsumer<CupitHome, ShopeHomeStates>(
+      child: BlocConsumer<CupitHome, HomeStates>(
         builder: (BuildContext context, state) {
           return MaterialApp(
               debugShowCheckedModeBanner: false,
               home: onbordingmain
-                  ? (isloginmain != '' ? const Home() : LoginScreen())
+                  ? (TOKEN != '' ? const Home() : LoginScreen())
                   : const Onbording(),
               themeMode: CupitHome.get(context).dartSwitch
                   ? ThemeMode.dark

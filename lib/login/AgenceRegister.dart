@@ -1,6 +1,8 @@
+import 'package:agence/Api/constApi.dart';
+import 'package:agence/Model/ErrorRegisterModel.dart';
+import 'package:agence/Model/RegisterAgenceModel.dart';
 import 'package:agence/login/login.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -8,7 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../home/cubitHome/cupit_home.dart';
 import '../shared/components/components.dart';
 import 'cupitlogin/cupitl.dart';
-import 'cupitlogin/statesh.dart';
+import 'cupitlogin/loginStates.dart';
 
 class Agenceregister extends StatelessWidget {
   Agenceregister({Key? key}) : super(key: key);
@@ -230,8 +232,9 @@ class Agenceregister extends StatelessWidget {
                                     'phone': numberController.text,
                                     'address': addresseController.text
                                   };
-                                  LoginCubit.get(context)
-                                      .registerAgence(data: sendinfoagence);
+                                  LoginCubit.get(context).registerAgence(
+                                      data: sendinfoagence,
+                                      path: REGISTERAGENCE);
                                 }
                               },
                               child: const Text(
@@ -277,7 +280,7 @@ class Agenceregister extends StatelessWidget {
           ),
         );
       },
-      listener: (BuildContext context, Object? state) async {
+      listener: (BuildContext context, Object? state) {
         // if (state is GoodLoginState) {
         //   if (state.mod.status) {
         //     CachHelper.putcache(key: 'islogin', value: state.mod.data?.token)
@@ -307,9 +310,9 @@ class Agenceregister extends StatelessWidget {
         //         fontSize: 16.0);
         //   }
         // }
-        if (state is RegisterAgenceSuccesState) {
-          if (state.model is RegisterAgenceSuccesState) {
-            await Fluttertoast.showToast(
+        if (state is RegisterSuccesState) {
+          if (state.model is RegisterModel) {
+            Fluttertoast.showToast(
                 msg: 'Successfully Registered',
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
@@ -317,11 +320,30 @@ class Agenceregister extends StatelessWidget {
                 backgroundColor: Colors.green,
                 textColor: Colors.white,
                 fontSize: 16.0);
-            await Navigator.pushAndRemoveUntil(
+
+            Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => LoginScreen()),
                 (route) => false);
+          } else if (state.model is ErrorRegisterModel) {
+            Fluttertoast.showToast(
+                msg: state.model!.message,
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0);
           }
+        } else if (state is RegisterBadState) {
+          Fluttertoast.showToast(
+              msg: "Unable to connect",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
         }
       },
     );

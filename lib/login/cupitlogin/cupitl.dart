@@ -1,9 +1,10 @@
 import 'package:agence/Api/constApi.dart';
+import 'package:agence/Model/ErrorRegisterModel.dart';
+import 'package:agence/Model/LoginModel.dart';
 import 'package:agence/Model/RegisterAgenceModel.dart';
 import 'dart:convert' as convert;
-import 'package:agence/diohelper/dio_helper.dart';
-import 'package:agence/login/cupitlogin/statesh.dart';
-import 'package:agence/modeles.dart';
+import 'package:agence/login/cupitlogin/loginStates.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,35 +14,57 @@ class LoginCubit extends Cubit<LoginStates> {
   LoginCubit() : super(InitialState());
   static LoginCubit get(context) => BlocProvider.of(context);
   Icon iconhidden = const Icon(Icons.visibility);
-  late LoginModel json;
 
-  void login({required String pass, required String email}) {
+  LoginModel? loginModel;
+  ErrorRegisterModel? loginModelError;
+
+  login({required Map<String, dynamic> data, required String path}) {
     emit(ConditionalLodinState());
-    DioHelper.postData(url: LOGIN, data: {'email': email, 'password': pass})
-        .then((value) {
-      // print(value.data);
-      json = LoginModel.fromjson(value.data);
-      print(json.status);
-      print(json.data?.token);
-      print(json.data?.email);
-      emit(GoodLoginState(json));
+
+    Httplar.httpPost(path: path, data: data).then((value) {
+      if (value.statusCode == 200) {
+        var jsonResponse =
+            convert.jsonDecode(value.body) as Map<String, dynamic>;
+
+        loginModel = LoginModel.fromJson(jsonResponse);
+        print(loginModel!.token);
+        TOKEN = loginModel!.token!;
+
+        emit(GoodLoginState(loginModel));
+      } else if (value.statusCode == 422) {
+        var jsonResponse =
+            convert.jsonDecode(value.body) as Map<String, dynamic>;
+
+        loginModelError = ErrorRegisterModel.fromJson(jsonResponse);
+        print(loginModelError!.message);
+        emit(GoodLoginState(loginModelError));
+      }
     }).catchError((error) {
       print(error.toString());
-      emit(BadLoginState(error));
+      emit(BadLoginState());
     });
   }
 
-  RegisterAgenceModel? registerAgenceModel;
-  void registerAgence({required Map<String, dynamic> data}) {
+  RegisterModel? registerModel;
+  ErrorRegisterModel? errorRegisterModel;
+  void registerAgence(
+      {required Map<String, dynamic> data, required String path}) {
     emit(ConditionalLodinState());
-    Httplar.httpPost(path: REGISTERAGENCE, data: data).then((value) {
-      var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
-      registerAgenceModel = RegisterAgenceModel.fromJson(jsonResponse);
-      print(registerAgenceModel!.user!.email);
-      emit(RegisterAgenceSuccesState(registerAgenceModel));
+    Httplar.httpPost(path: path, data: data).then((value) {
+      if (value.statusCode == 201) {
+        var jsonResponse =
+            convert.jsonDecode(value.body) as Map<String, dynamic>;
+        registerModel = RegisterModel.fromJson(jsonResponse);
+        emit(RegisterSuccesState(registerModel));
+      } else if (value.statusCode == 422) {
+        var jsonResponse =
+            convert.jsonDecode(value.body) as Map<String, dynamic>;
+        errorRegisterModel = ErrorRegisterModel.fromJson(jsonResponse);
+        emit(RegisterSuccesState(errorRegisterModel));
+      }
     }).catchError((e) {
       print(e.toString());
-      emit(RegisterAgenceBadState());
+      emit(RegisterBadState());
     });
   }
 
@@ -55,5 +78,14 @@ class LoginCubit extends Cubit<LoginStates> {
       ishidden = !ishidden;
     }
     emit(HiddenPasswordState());
+  }
+
+  bool ischeckclient = true;
+  String pathLogin = LOGINCLIENT;
+
+  void checkList(value) {
+    ischeckclient = !ischeckclient;
+
+    emit(ChangeChackState());
   }
 }

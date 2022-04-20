@@ -1,14 +1,17 @@
-import 'package:agence/home/home.dart';
+import 'package:agence/Model/ErrorRegisterModel.dart';
+import 'package:agence/Model/LoginModel.dart';
 import 'package:agence/login/cupitlogin/cupitl.dart';
-import 'package:agence/login/cupitlogin/statesh.dart';
+import 'package:agence/login/cupitlogin/loginStates.dart';
+import 'package:agence/login/ChooseRegister.dart';
 import 'package:agence/login/other/cachhelper.dart';
-import 'package:agence/login/registerlogin.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../Api/constApi.dart';
 import '../home/cubitHome/cupit_home.dart';
+import '../home/home.dart';
 import '../shared/components/components.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -16,11 +19,15 @@ class LoginScreen extends StatelessWidget {
 
   var emailController = TextEditingController();
   var passController = TextEditingController();
+
+  Map<String, dynamic> sendinfologin = {};
   var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginStates>(
       builder: (BuildContext context, state) {
+        String path =
+            LoginCubit.get(context).ischeckclient ? LOGINCLIENT : LOGINAGENCE;
         return Scaffold(
           body: Center(
             child: SingleChildScrollView(
@@ -41,7 +48,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       const Text(
                         'login now to browse our hot offers',
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.blueGrey,
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -50,6 +57,7 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(
                         height: 26,
                       ),
+
                       // Center(
                       //   child: Container(
                       //
@@ -61,6 +69,34 @@ class LoginScreen extends StatelessWidget {
                       // const SizedBox(
                       //   height: 22,
                       // ),
+
+                      //----------------------------------------- hada wch bdlt f design----------------
+
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CheckboxListTile(
+                                title: const Text('Client'),
+                                value: LoginCubit.get(context).ischeckclient,
+                                onChanged: (value) {
+                                  LoginCubit.get(context).checkList(value);
+                                  path = LOGINCLIENT;
+                                  print(path);
+                                }),
+                          ),
+                          Expanded(
+                            child: CheckboxListTile(
+                                title: const Text('Agence'),
+                                value: !LoginCubit.get(context).ischeckclient,
+                                onChanged: (value) {
+                                  LoginCubit.get(context).checkList(value);
+                                  path = LOGINAGENCE;
+                                  print(path);
+                                }),
+                          ),
+                        ],
+                      ),
+//--------------------------------------------------------------------------------------------------
                       defaultForm(
                           context: context,
                           controller: emailController,
@@ -95,9 +131,12 @@ class LoginScreen extends StatelessWidget {
                           type: TextInputType.visiblePassword,
                           onFieldSubmitted: () {
                             if (formKey.currentState!.validate()) {
-                              LoginCubit.get(context).login(
-                                  pass: passController.text,
-                                  email: emailController.text);
+                              sendinfologin = {
+                                'email': emailController.text,
+                                'password': passController.text
+                              };
+                              LoginCubit.get(context)
+                                  .login(data: sendinfologin, path: path);
                             }
                           },
                           obscureText: LoginCubit.get(context).ishidden,
@@ -135,34 +174,37 @@ class LoginScreen extends StatelessWidget {
                         condition: state is! ConditionalLodinState,
                         builder: (BuildContext context) {
                           return Container(
-
                             width: double.infinity,
                             decoration: BoxDecoration(
-
                               color: CupitHome.get(context).dartSwitch
                                   ? Colors.blueGrey
                                   : Colors.blue,
-                              borderRadius: BorderRadius.only(topLeft:Radius.circular(15),topRight:Radius.circular(5),bottomLeft:Radius.circular(5),bottomRight: Radius.circular(15)  ),
-
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(5),
+                                  bottomLeft: Radius.circular(5),
+                                  bottomRight: Radius.circular(15)),
                             ),
                             child: Center(
                               child: Container(
-                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                padding:
+                                    const EdgeInsets.fromLTRB(10, 0, 10, 0),
                                 width: double.infinity,
-
                                 child: MaterialButton(
-
-
-                                 highlightColor:CupitHome.get(context).dartSwitch
-                                    ? Colors.blueGrey
-                                    : Colors.blue,
-
+                                  highlightColor:
+                                      CupitHome.get(context).dartSwitch
+                                          ? Colors.blueGrey
+                                          : Colors.blue,
                                   onPressed: () {
                                     if (formKey.currentState!.validate()) {
+                                      sendinfologin = {
+                                        'email': emailController.text,
+                                        'password': passController.text
+                                      };
                                       LoginCubit.get(context).login(
-                                          pass: passController.text,
-                                          email: emailController.text);
+                                          data: sendinfologin, path: path);
                                     }
+                                    print(path);
                                   },
                                   child: const Text(
                                     'LOGIN',
@@ -214,9 +256,48 @@ class LoginScreen extends StatelessWidget {
         );
       },
       listener: (BuildContext context, Object? state) {
+        // if (state is GoodLoginState) {
+        //   if (state.mod.status) {
+        //     CachHelper.putcache(key: 'islogin', value: state.mod.data?.token)
+        //         .then((value) {
+        //       Navigator.pushAndRemoveUntil(
+        //           context,
+        //           MaterialPageRoute(builder: (context) => const Home()),
+        //           (route) => false);
+        //     }).then((value) {
+        //       Fluttertoast.showToast(
+        //           msg: state.mod.message,
+        //           toastLength: Toast.LENGTH_SHORT,
+        //           gravity: ToastGravity.BOTTOM,
+        //           timeInSecForIosWeb: 1,
+        //           backgroundColor: Colors.green,
+        //           textColor: Colors.white,
+        //           fontSize: 16.0);
+        //     });
+        //   } else {
+        //     Fluttertoast.showToast(
+        //         msg: state.mod.message,
+        //         toastLength: Toast.LENGTH_SHORT,
+        //         gravity: ToastGravity.BOTTOM,
+        //         timeInSecForIosWeb: 1,
+        //         backgroundColor: Colors.red,
+        //         textColor: Colors.white,
+        //         fontSize: 16.0);
+        //   }
+        // }
+
         if (state is GoodLoginState) {
-          if (state.mod.status) {
-            CachHelper.putcache(key: 'islogin', value: state.mod.data?.token)
+          if (state.model is ErrorRegisterModel) {
+            Fluttertoast.showToast(
+                msg: state.model!.message,
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0);
+          } else if (state.model is LoginModel) {
+            CachHelper.putcache(key: 'token', value: state.model!.token)
                 .then((value) {
               Navigator.pushAndRemoveUntil(
                   context,
@@ -224,7 +305,7 @@ class LoginScreen extends StatelessWidget {
                   (route) => false);
             }).then((value) {
               Fluttertoast.showToast(
-                  msg: state.mod.message,
+                  msg: 'Welcom ${state.model!.name}',
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.BOTTOM,
                   timeInSecForIosWeb: 1,
@@ -232,16 +313,16 @@ class LoginScreen extends StatelessWidget {
                   textColor: Colors.white,
                   fontSize: 16.0);
             });
-          } else {
-            Fluttertoast.showToast(
-                msg: state.mod.message,
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Colors.red,
-                textColor: Colors.white,
-                fontSize: 16.0);
           }
+        } else if (state is BadLoginState) {
+          Fluttertoast.showToast(
+              msg: 'Some Error',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
         }
       },
     );

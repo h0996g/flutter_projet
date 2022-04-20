@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../home/cubitHome/cupit_home.dart';
 
 class Favorite extends StatelessWidget {
-   Favorite({Key? key}) : super(key: key);
+  Favorite({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +12,10 @@ class Favorite extends StatelessWidget {
         elevation: 15,
         title: Text(
           'Favorite',
-          style: TextStyle(color:  CupitHome.get(context).dartSwitch
-              ? Colors.white
-              : Colors.black,
+          style: TextStyle(
+              color: CupitHome.get(context).dartSwitch
+                  ? Colors.white
+                  : Colors.black,
               fontSize: 34),
         ),
       ),

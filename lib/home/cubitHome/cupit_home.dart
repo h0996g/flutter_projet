@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:image_picker/image_picker.dart';
 
+import '../../Api/constApi.dart';
+import '../../Api/httplaravel.dart';
 import '../../clienthome/favorite.dart';
 import '../../clienthome/offersclient.dart';
 import '../../clienthome/settingsclient.dart';
@@ -14,7 +16,7 @@ import '../offers.dart';
 import '../setting.dart';
 import 'homeStates.dart';
 
-class CupitHome extends Cubit<ShopeHomeStates> {
+class CupitHome extends Cubit<HomeStates> {
   CupitHome() : super(InitialHomeState());
   List<Widget> body = [const Offers(), AddPost(), const Setting()];
   List<Widget> bodyy = [Offersclient(), Favorite(), Settingsclient()];
@@ -132,4 +134,16 @@ class CupitHome extends Cubit<ShopeHomeStates> {
   }
 
   // ----------------------------------------------------------------------//
+  void logOut() {
+    emit(ConditionalLodinState());
+    Httplar.httpget(path: LOGOUT).then((value) {
+      TOKEN = '';
+
+      emit(LougOutSuccesState());
+    }).catchError((e) {
+      print(e.toString());
+
+      emit(LougOutBadState());
+    });
+  }
 }

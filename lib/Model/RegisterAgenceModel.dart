@@ -1,11 +1,16 @@
-class RegisterAgenceModel {
+class RegisterModel {
   String? token;
   UserModel? user;
   AgenceModel? agence;
-  RegisterAgenceModel.fromJson(Map<String, dynamic> json) {
+  ClientModel? client;
+
+  RegisterModel.fromJson(Map<String, dynamic> json) {
     token = json['token'];
     user = UserModel.fromJson(json['user']);
-    agence = AgenceModel.fromJson(json['agence']);
+    agence =
+        json['agence'] != null ? AgenceModel.fromJson(json['agence']) : null;
+    client =
+        json['client'] != null ? ClientModel.fromJson(json['client']) : null;
   }
 }
 
@@ -30,6 +35,17 @@ class AgenceModel {
 
   AgenceModel.fromJson(Map<String, dynamic> json) {
     address = json['address'];
+    user_id = json['user_id'];
+    id = json['id'];
+  }
+}
+
+class ClientModel {
+  String? prenom;
+  int? user_id;
+  int? id;
+  ClientModel.fromJson(Map<String, dynamic> json) {
+    prenom = json['prenom'];
     user_id = json['user_id'];
     id = json['id'];
   }

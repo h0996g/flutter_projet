@@ -1,17 +1,23 @@
-abstract class ShopeHomeStates {}
+abstract class HomeStates {}
 
-class InitialHomeState extends ShopeHomeStates {}
+class InitialHomeState extends HomeStates {}
 
-class ChangeNaveIndex extends ShopeHomeStates {}
+class ChangeNaveIndex extends HomeStates {}
 
-class ChangeNavebarIndex extends ShopeHomeStates {}
+class ChangeNavebarIndex extends HomeStates {}
 
-class ChangeSwitchStates extends ShopeHomeStates {}
+class ChangeSwitchStates extends HomeStates {}
 
-class ChangevalueDropdownState extends ShopeHomeStates {}
+class ChangevalueDropdownState extends HomeStates {}
 
-class AddImageGoodState extends ShopeHomeStates {}
+class AddImageGoodState extends HomeStates {}
 
-class RemovePhotoState extends ShopeHomeStates {}
+class RemovePhotoState extends HomeStates {}
 
-class AddImageCameraGoodState extends ShopeHomeStates {}
+class AddImageCameraGoodState extends HomeStates {}
+
+class LougOutSuccesState extends HomeStates {}
+
+class LougOutBadState extends HomeStates {}
+
+class ConditionalLodinState extends HomeStates {}

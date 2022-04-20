@@ -1,3 +1,3 @@
-abstract class MainStates {}
+// abstract class MainStates {}
 
-class InitialState extends MainStates {}
+// class InitialState extends MainStates {}

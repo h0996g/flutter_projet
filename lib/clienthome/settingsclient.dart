@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,26 +7,28 @@ import '../login/login.dart';
 import '../login/other/cachhelper.dart';
 
 class Settingsclient extends StatelessWidget {
-   Settingsclient({Key? key}) : super(key: key);
+  Settingsclient({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CupitHome, ShopeHomeStates>(
+    return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
           appBar: AppBar(
             elevation: 5,
             title: Text(
               'Settings',
-              style: TextStyle(color:  CupitHome.get(context).dartSwitch
-                  ? Colors.white
-                  : Colors.black,fontSize: 34),
+              style: TextStyle(
+                  color: CupitHome.get(context).dartSwitch
+                      ? Colors.white
+                      : Colors.black,
+                  fontSize: 34),
             ),
           ),
           body: Padding(
             padding: const EdgeInsets.all(20.0),
             child:
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const SizedBox(
                 height: 40,
               ),
@@ -134,7 +135,7 @@ class Settingsclient extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => LoginScreen()),
-                              (route) => false);
+                          (route) => false);
                     });
                   },
                   style: TextButton.styleFrom(),

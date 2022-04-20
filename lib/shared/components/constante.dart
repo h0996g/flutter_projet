@@ -1,1 +1,1 @@
-var LOGIN = 'login';
+var TOKEN = '';

@@ -13,14 +13,13 @@ class Offers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CupitHome, ShopeHomeStates>(
+    return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               // Navigator.push(context, MaterialPageRoute(builder: (context) =>  Navbar()));
-              Changepage(context, Navbar());
-
+              Changepage(context, const Navbar());
             },
             child: Icon(
               Icons.place,
@@ -65,10 +64,8 @@ class Offers extends StatelessWidget {
                 CupitHome.get(context).dartSwitch ? Colors.black : Colors.white,
             depth: 0),
         onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Offerdetailagence()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => Offerdetailagence()));
         },
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           Container(
@@ -87,7 +84,7 @@ class Offers extends StatelessWidget {
               //     ? Colors.blueGrey
               //     : Colors.white,
               gradient: CupitHome.get(context).dartSwitch
-                  ? LinearGradient(
+                  ? const LinearGradient(
                       begin: Alignment.topRight,
                       end: Alignment.bottomLeft,
                       colors: [
@@ -95,14 +92,15 @@ class Offers extends StatelessWidget {
                         Color(0xff131313),
                       ],
                     )
-                  : LinearGradient(
+                  : const LinearGradient(
                       begin: Alignment.topRight,
                       end: Alignment.bottomLeft,
                       colors: [
                           Colors.blue,
-                          Color(0xffCFD9E2FF),
+                          const Color(0xffCFD9E2FF),
                         ]),
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+              borderRadius:
+                  const BorderRadius.vertical(bottom: Radius.circular(20)),
             ),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -110,7 +108,7 @@ class Offers extends StatelessWidget {
                 height: 10,
               ),
               Row(children: [
-                SizedBox(
+                const SizedBox(
                   width: 8,
                 ),
                 Text(
@@ -124,7 +122,7 @@ class Offers extends StatelessWidget {
                 height: 10,
               ),
               Row(children: [
-                SizedBox(
+                const SizedBox(
                   width: 8,
                 ),
                 Text(

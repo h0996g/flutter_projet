@@ -11,14 +11,13 @@ class Home extends StatelessWidget {
   // commmmmmm
   Widget build(BuildContext context) {
     CupitHome obj = BlocProvider.of(context);
-    return BlocConsumer<CupitHome, ShopeHomeStates>(
+    return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
           body: obj.body[obj.currentindex],
           bottomNavigationBar: BottomNavigationBar(
             items: const [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.home), label: 'Offer'),
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Offer'),
               BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Add'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.settings), label: 'Setting')
@@ -34,14 +33,3 @@ class Home extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-

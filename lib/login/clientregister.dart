@@ -1,15 +1,18 @@
 import 'package:agence/login/login.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../Api/constApi.dart';
+import '../Model/ErrorRegisterModel.dart';
+import '../Model/RegisterAgenceModel.dart';
 import '../home/cubitHome/cupit_home.dart';
 import '../home/home.dart';
 import '../shared/components/components.dart';
 import 'cupitlogin/cupitl.dart';
-import 'cupitlogin/statesh.dart';
+import 'cupitlogin/loginStates.dart';
 import 'other/cachhelper.dart';
 
 class Clientregister extends StatelessWidget {
@@ -20,11 +23,11 @@ class Clientregister extends StatelessWidget {
   var emailController = TextEditingController();
   var passController = TextEditingController();
   var numberController = TextEditingController();
+  Map<String, dynamic> sendinfoclient = {};
   var formKeyy = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-
     return BlocConsumer<LoginCubit, LoginStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
@@ -53,7 +56,7 @@ class Clientregister extends StatelessWidget {
                       //     fontWeight: FontWeight.w600,
                       //   ),
                       // ),
-                      SizedBox(
+                      const SizedBox(
                         height: 26,
                       ),
                       defaultForm(
@@ -80,7 +83,7 @@ class Clientregister extends StatelessWidget {
                                 : Colors.grey,
                           ),
                           textInputAction: TextInputAction.next),
-                      SizedBox(
+                      const SizedBox(
                         height: 18,
                       ),
 
@@ -108,7 +111,7 @@ class Clientregister extends StatelessWidget {
                                 : Colors.grey,
                           ),
                           textInputAction: TextInputAction.next),
-                      SizedBox(
+                      const SizedBox(
                         height: 18,
                       ),
                       defaultForm(
@@ -135,7 +138,7 @@ class Clientregister extends StatelessWidget {
                                 : Colors.grey,
                           ),
                           textInputAction: TextInputAction.next),
-                      SizedBox(
+                      const SizedBox(
                         height: 18,
                       ),
                       defaultForm(
@@ -178,65 +181,78 @@ class Clientregister extends StatelessWidget {
                                 ? Colors.white
                                 : Colors.grey,
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 18,
                       ),
                       defaultForm(
-                          context: context,
-                          controller: numberController,
-                          type: TextInputType.number,
-                          lable: Text(
-                            'number',
-                            style: TextStyle(
-                                color: CupitHome.get(context).dartSwitch
-                                    ? Colors.white
-                                    : Colors.grey),
-                          ),
-                          valid: (String value) {
-                            if (value.isEmpty) {
-                              return 'name Must Not Be Empty';
-                            }
-                          },
-                          onFieldSubmitted: () {},
-                          prefixIcon: Icon(
-                            Icons.phone,
-                            color: CupitHome.get(context).dartSwitch
-                                ? Colors.white
-                                : Colors.grey,
-                          ),
-                      //      textInputAction: TextInputAction.next,
+                        context: context,
+                        controller: numberController,
+                        type: TextInputType.number,
+                        lable: Text(
+                          'number',
+                          style: TextStyle(
+                              color: CupitHome.get(context).dartSwitch
+                                  ? Colors.white
+                                  : Colors.grey),
+                        ),
+                        valid: (String value) {
+                          if (value.isEmpty) {
+                            return 'name Must Not Be Empty';
+                          }
+                        },
+                        onFieldSubmitted: () {},
+                        prefixIcon: Icon(
+                          Icons.phone,
+                          color: CupitHome.get(context).dartSwitch
+                              ? Colors.white
+                              : Colors.grey,
+                        ),
+                        //      textInputAction: TextInputAction.next,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 18,
                       ),
                       ConditionalBuilder(
                         condition: state is! ConditionalLodinState,
-                        builder:(BuildContext context){ return Container(
-
-                          color:  CupitHome.get(context).dartSwitch
-                              ? Colors.blueGrey
-                              : Colors.blue,
-                          width: double.infinity,
-                          child: MaterialButton(
-                            onPressed: () {
-                              if (formKeyy.currentState!.validate()) {
-                                // LoginCubit.get(context).login(
-                                //     pass: passController.text,
-                                //     email: emailController.text);
-                                Changepage(context, Home());
-                              }
-
-                            },
-                            child: Text(
-                              'SIGN UP',
-                              style: TextStyle(color: Colors.white),
+                        builder: (BuildContext context) {
+                          return Container(
+                            color: CupitHome.get(context).dartSwitch
+                                ? Colors.blueGrey
+                                : Colors.blue,
+                            width: double.infinity,
+                            child: MaterialButton(
+                              onPressed: () {
+                                if (formKeyy.currentState!.validate()) {
+                                  // LoginCubit.get(context).login(
+                                  //     pass: passController.text,
+                                  //     email: emailController.text);
+                                  // Changepage(context, const Home());
+                                  sendinfoclient = {
+                                    'name': nameController.text,
+                                    'prenom': prenomController.text,
+                                    'email': emailController.text,
+                                    'password': passController.text,
+                                    'phone': numberController.text
+                                  };
+                                  LoginCubit.get(context).registerAgence(
+                                      data: sendinfoclient,
+                                      path: REGISTERCLIENT);
+                                }
+                              },
+                              child: const Text(
+                                'SIGN UP',
+                                style: const TextStyle(color: Colors.white),
+                              ),
                             ),
-                          ),
-                        );}, fallback: (BuildContext context) { return const Center(
-                        child: CircularProgressIndicator(),
-                      ); },
+                          );
+                        },
+                        fallback: (BuildContext context) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 18,
                       ),
                       Row(
@@ -245,16 +261,17 @@ class Clientregister extends StatelessWidget {
                           const Text(
                             'You already have account ?',
                             style: TextStyle(
-
                               fontSize: 15,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 8,
                           ),
-                          TextButton(onPressed: () {
-                            Changepage(context, LoginScreen());
-                          }, child: Text('Login'))
+                          TextButton(
+                              onPressed: () {
+                                Changepage(context, LoginScreen());
+                              },
+                              child: const Text('Login'))
                         ],
                       )
                     ],
@@ -266,27 +283,24 @@ class Clientregister extends StatelessWidget {
         );
       },
       listener: (BuildContext context, Object? state) {
-        if (state is GoodLoginState) {
-          if (state.mod.status) {
-            CachHelper.putcache(key: 'islogin', value: state.mod.data?.token)
-                .then((value) {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Home()),
-                      (route) => false);
-            }).then((value) {
-              Fluttertoast.showToast(
-                  msg: state.mod.message,
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.green,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
-            });
-          } else {
+        if (state is RegisterSuccesState) {
+          if (state.model is RegisterModel) {
             Fluttertoast.showToast(
-                msg: state.mod.message,
+                msg: 'Successfully Registered',
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.green,
+                textColor: Colors.white,
+                fontSize: 16.0);
+
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => LoginScreen()),
+                (route) => false);
+          } else if (state.model is ErrorRegisterModel) {
+            Fluttertoast.showToast(
+                msg: state.model!.message,
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIosWeb: 1,
@@ -294,7 +308,17 @@ class Clientregister extends StatelessWidget {
                 textColor: Colors.white,
                 fontSize: 16.0);
           }
+        } else if (state is RegisterBadState) {
+          Fluttertoast.showToast(
+              msg: "Unable to connect",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
         }
       },
-  );}
+    );
   }
+}

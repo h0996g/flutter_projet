@@ -15,7 +15,7 @@ class AddPost extends StatelessWidget {
   var phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CupitHome, ShopeHomeStates>(
+    return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
             appBar: AppBar(
