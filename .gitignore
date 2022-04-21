@@ -32,6 +32,7 @@
 /build/
 /android/gradle/wrapper/gradle-wrapper.properties
 /android/build.gradle
+lib/Api/constApi.dart
 
 # Web related
 lib/generated_plugin_registrant.dart
