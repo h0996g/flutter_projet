@@ -2,6 +2,7 @@ import 'package:agence/home/addphoto/addphoto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
 
 import '../shared/components/components.dart';
 import 'cubitHome/cupit_home.dart';
@@ -114,34 +115,125 @@ class AddPost extends StatelessWidget {
                       const SizedBox(
                         height: 26,
                       ),
-                      defaultForm(
-                        context: context,
-                        type: TextInputType.text,
-                        lable: Text(
-                          'Etage(s)',
-                          style: TextStyle(
-                              color: CupitHome.get(context).dartSwitch
-                                  ? Colors.white
-                                  : Colors.grey),
+                      Visibility(
+                        visible: CupitHome.get(context).isvisibility['etages']!,
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 26),
+                          child: defaultForm(
+                            context: context,
+                            type: TextInputType.text,
+                            lable: Text(
+                              'Etage(s)',
+                              style: TextStyle(
+                                  color: CupitHome.get(context).dartSwitch
+                                      ? Colors.white
+                                      : Colors.grey),
+                            ),
+                            valid: () {},
+                            controller: etageController,
+                          ),
                         ),
-                        valid: () {},
-                        controller: etageController,
+                      ),
+                      // const SizedBox(
+                      //   height: 26,
+                      // ),
+                      Visibility(
+                        visible:
+                            CupitHome.get(context).isvisibility['N-champre']!,
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 26),
+                          child: defaultForm(
+                            context: context,
+                            type: TextInputType.text,
+                            lable: Text(
+                              '\u2116chambres',
+                              style: TextStyle(
+                                  color: CupitHome.get(context).dartSwitch
+                                      ? Colors.white
+                                      : Colors.grey),
+                            ),
+                            valid: () {},
+                            controller: nChambres,
+                          ),
+                        ),
+                      ),
+                      // const SizedBox(
+                      //   height: 26,
+                      // ),
+                      MultiSelectDialogField(
+                        dialogHeight: 150,
+                        items: CupitHome.get(context).paymentVar,
+                        // title: Text("Conditions de paiment"),
+                        selectedColor: Colors.blue,
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(50)),
+                          border: Border.all(),
+                        ),
+                        buttonText: Text(
+                          "Conditions de paiment",
+                          style: TextStyle(
+                            color: CupitHome.get(context).dartSwitch
+                                ? Colors.white
+                                : Colors.grey,
+                            fontSize: 16,
+                          ),
+                        ),
+                        onConfirm: (results) {
+                          print(results);
+                        },
                       ),
                       const SizedBox(
                         height: 26,
                       ),
-                      defaultForm(
-                        context: context,
-                        type: TextInputType.text,
-                        lable: Text(
-                          '\u2116chambres',
-                          style: TextStyle(
-                              color: CupitHome.get(context).dartSwitch
-                                  ? Colors.white
-                                  : Colors.grey),
+                      MultiSelectDialogField(
+                        dialogHeight: 150,
+                        items: CupitHome.get(context).speceficationVar,
+                        // title: Text("Conditions de paiment"),
+                        selectedColor: Colors.blue,
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(50)),
+                          border: Border.all(),
                         ),
-                        valid: () {},
-                        controller: nChambres,
+                        buttonText: Text(
+                          "Specification",
+                          style: TextStyle(
+                            color: CupitHome.get(context).dartSwitch
+                                ? Colors.white
+                                : Colors.grey,
+                            fontSize: 16,
+                          ),
+                        ),
+                        onConfirm: (results) {
+                          print(results);
+                        },
+                      ),
+                      const SizedBox(
+                        height: 26,
+                      ),
+                      MultiSelectDialogField(
+                        dialogHeight: 150,
+                        items: CupitHome.get(context).papiersVar,
+                        // title: Text("Conditions de paiment"),
+                        selectedColor: Colors.blue,
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(50)),
+                          border: Border.all(),
+                        ),
+                        buttonText: Text(
+                          "Papiers",
+                          style: TextStyle(
+                            color: CupitHome.get(context).dartSwitch
+                                ? Colors.white
+                                : Colors.grey,
+                            fontSize: 16,
+                          ),
+                        ),
+                        onConfirm: (results) {
+                          print(results);
+                        },
                       ),
                       const SizedBox(
                         height: 26,

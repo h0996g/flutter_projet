@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
 
 import '../../Api/constApi.dart';
 import '../../Api/httplaravel.dart';
@@ -21,7 +22,42 @@ class CupitHome extends Cubit<HomeStates> {
   List<Widget> body = [const Offers(), AddPost(), const Setting()];
   List<Widget> bodyy = [Offersclient(), Favorite(), Settingsclient()];
 
+  // --------------------hadi  rahi t3 add photo fl offer----------------------
+
+  final ImagePicker imagePicker = ImagePicker();
+  List<XFile>? imageFileList = [];
+
+  void selectImagesGalery() async {
+    final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
+    if (selectedImages!.isNotEmpty) {
+      imageFileList!.addAll(selectedImages);
+    }
+    print("Image List Length:" + imageFileList!.length.toString());
+    emit(AddImageGoodState());
+  }
+
+  void removephoto(int index) {
+    imageFileList?.removeAt(index);
+    emit(RemovePhotoState());
+  }
+
+  File? imagecamera;
+
+  Future<void> selectimagecamera() async {
+    final imagecamera =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+    if (imagecamera == null) return;
+    final imageTemporary = File(imagecamera.path);
+    this.imagecamera = imageTemporary;
+    imageFileList!.add(imagecamera);
+    emit(AddImageCameraGoodState());
+  }
+
+  // --------------------hadi  rahi t3 add photo fl offer    END----------------------
+
   //-----------------------DropDown---------------------------------------------------------------//
+
+  Map<String, bool> isvisibility = {'N-champre': true, 'etages': true};
 
   final items = [
     'Alger',
@@ -81,14 +117,28 @@ class CupitHome extends Cubit<HomeStates> {
 
   appartementDropDown(value) {
     appartementvalueDrop = value;
-    print(appartement.indexOf(value));
+    // print(appartement.indexOf(value));
+    if (appartementvalueDrop == 'Appartement') {
+      isvisibility['N-champre'] = true;
+      isvisibility['etages'] = true;
+    } else if (appartementvalueDrop == 'Terrain') {
+      isvisibility['N-champre'] = false;
+      isvisibility['etages'] = false;
+    } else if (appartementvalueDrop == 'Villa') {
+      isvisibility['N-champre'] = true;
+      isvisibility['etages'] = true;
+    } else if (appartementvalueDrop == 'Studio') {
+      isvisibility['N-champre'] = true;
+      isvisibility['etages'] = false;
+    }
 
     emit(ChangevalueDropdownState());
   }
 
   vendeDropDown(value) {
     vendevalueDrop = value;
-    print(vende.indexOf(value));
+
+    // print(vende.indexOf(value));
 
     emit(ChangevalueDropdownState());
   }
@@ -101,6 +151,47 @@ class CupitHome extends Cubit<HomeStates> {
   }
 
 //------------------------------End DropDown-------------------------
+
+  // --------------------hadi  rahi t3 MultiDropDown----------------------
+
+  static List<Conditions_paiment> paiment = [
+    Conditions_paiment(id: 1, name: "Promesse de vente possible"),
+    Conditions_paiment(id: 2, name: "Paiment par tranches possible"),
+    Conditions_paiment(id: 3, name: "Credit bancaire possible"),
+  ];
+  final paymentVar = paiment
+      .map((payment) =>
+          MultiSelectItem<Conditions_paiment>(payment, payment.name))
+      .toList();
+
+  static List<Specefication> specefication = [
+    Specefication(id: 1, name: "Jardin"),
+    Specefication(id: 2, name: "Electricite"),
+    Specefication(id: 3, name: "Gaz"),
+    Specefication(id: 4, name: "Eau"),
+    Specefication(id: 5, name: "Meuble"),
+    Specefication(id: 6, name: "Garage"),
+  ];
+  final speceficationVar = specefication
+      .map((specefication) =>
+          MultiSelectItem<Specefication>(specefication, specefication.name))
+      .toList();
+
+  static List<Papiers> papiers = [
+    Papiers(id: 1, name: "Promotion immobiliere"),
+    Papiers(id: 2, name: "Acte notarie"),
+    Papiers(id: 3, name: "Acte dans l'indivision"),
+    Papiers(id: 4, name: "Papier timbre"),
+    Papiers(id: 5, name: "Decision"),
+    Papiers(id: 6, name: "Livret foncier"),
+    Papiers(id: 7, name: "Parmis de construire"),
+  ];
+  final papiersVar = papiers
+      .map((papiers) => MultiSelectItem<Papiers>(papiers, papiers.name))
+      .toList();
+
+// --------------------hadi  rahi t3 MultiDropDown    END  ---------------------
+
   static CupitHome get(context) => BlocProvider.of(context);
   int currentindex = 0;
   void changenav(value) {
@@ -126,38 +217,6 @@ class CupitHome extends Cubit<HomeStates> {
     });
   }
 
-  // --------------------hadi  rahi t3 add photo fl offer----------------------
-
-  final ImagePicker imagePicker = ImagePicker();
-  List<XFile>? imageFileList = [];
-
-  void selectImagesGalery() async {
-    final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
-    if (selectedImages!.isNotEmpty) {
-      imageFileList!.addAll(selectedImages);
-    }
-    print("Image List Length:" + imageFileList!.length.toString());
-    emit(AddImageGoodState());
-  }
-
-  void removephoto(int index) {
-    imageFileList?.removeAt(index);
-    emit(RemovePhotoState());
-  }
-
-  File? imagecamera;
-
-  Future<void> selectimagecamera() async {
-    final imagecamera =
-        await ImagePicker().pickImage(source: ImageSource.camera);
-    if (imagecamera == null) return;
-    final imageTemporary = File(imagecamera.path);
-    this.imagecamera = imageTemporary;
-    imageFileList!.add(imagecamera);
-    emit(AddImageCameraGoodState());
-  }
-
-  // ----------------------------------------------------------------------//
   void logOut() {
     emit(ConditionalLodinState());
     Httplar.httpget(path: LOGOUT).then((value) {
@@ -170,4 +229,34 @@ class CupitHome extends Cubit<HomeStates> {
       emit(LougOutBadState());
     });
   }
+}
+
+class Conditions_paiment {
+  final int id;
+  final String name;
+
+  Conditions_paiment({
+    required this.id,
+    required this.name,
+  });
+}
+
+class Specefication {
+  final int id;
+  final String name;
+
+  Specefication({
+    required this.id,
+    required this.name,
+  });
+}
+
+class Papiers {
+  final int id;
+  final String name;
+
+  Papiers({
+    required this.id,
+    required this.name,
+  });
 }
