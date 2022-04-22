@@ -20,6 +20,9 @@ class CupitHome extends Cubit<HomeStates> {
   CupitHome() : super(InitialHomeState());
   List<Widget> body = [const Offers(), AddPost(), const Setting()];
   List<Widget> bodyy = [Offersclient(), Favorite(), Settingsclient()];
+
+  //-----------------------DropDown---------------------------------------------------------------//
+
   final items = [
     'Alger',
     'Blida',
@@ -70,13 +73,34 @@ class CupitHome extends Cubit<HomeStates> {
     'Ghardaia',
     'Relizane'
   ];
+  final vende = ['Vente', 'Echange', 'Vacances'];
+  final appartement = ['Appartement', 'Terrain', 'Villa', 'Studio'];
   String? valueDropdown;
+  String? vendevalueDrop;
+  String? appartementvalueDrop;
 
-  changevalueDropdown(value) {
-    valueDropdown = value;
+  appartementDropDown(value) {
+    appartementvalueDrop = value;
+    print(appartement.indexOf(value));
+
     emit(ChangevalueDropdownState());
   }
 
+  vendeDropDown(value) {
+    vendevalueDrop = value;
+    print(vende.indexOf(value));
+
+    emit(ChangevalueDropdownState());
+  }
+
+  wilaraDropdown(value) {
+    valueDropdown = value;
+    print(items.indexOf(value));
+
+    emit(ChangevalueDropdownState());
+  }
+
+//------------------------------End DropDown-------------------------
   static CupitHome get(context) => BlocProvider.of(context);
   int currentindex = 0;
   void changenav(value) {

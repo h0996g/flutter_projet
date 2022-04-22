@@ -33,11 +33,71 @@ class AddPost extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   child: Form(
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(0),
+                            border: Border.all(
+                              color: Colors.grey,
+                            )),
+                        child: DropdownButtonHideUnderline(
+                          child: ButtonTheme(
+                            alignedDropdown: true,
+                            child: DropdownButton<String>(
+                              isExpanded: true,
+                              hint: const Text(
+                                'Vente',
+                              ),
+                              items: CupitHome.get(context)
+                                  .vende
+                                  .map(buildMenuItem)
+                                  .toList(),
+                              onChanged: (value) {
+                                CupitHome.get(context).vendeDropDown(value);
+                              },
+                              value: CupitHome.get(context).vendevalueDrop,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 26,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(0),
+                            border: Border.all(
+                              color: Colors.grey,
+                            )),
+                        child: DropdownButtonHideUnderline(
+                          child: ButtonTheme(
+                            alignedDropdown: true,
+                            child: DropdownButton<String>(
+                              isExpanded: true,
+                              hint: const Text(
+                                'Appartement',
+                              ),
+                              items: CupitHome.get(context)
+                                  .appartement
+                                  .map(buildMenuItem)
+                                  .toList(),
+                              onChanged: (value) {
+                                CupitHome.get(context)
+                                    .appartementDropDown(value);
+                              },
+                              value:
+                                  CupitHome.get(context).appartementvalueDrop,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 26,
+                      ),
                       defaultForm(
                           context: context,
                           type: TextInputType.text,
@@ -105,8 +165,7 @@ class AddPost extends StatelessWidget {
                                   .map(buildMenuItem)
                                   .toList(),
                               onChanged: (value) {
-                                CupitHome.get(context)
-                                    .changevalueDropdown(value);
+                                CupitHome.get(context).wilaraDropdown(value);
                               },
                               value: CupitHome.get(context).valueDropdown,
                             ),
@@ -148,7 +207,7 @@ class AddPost extends StatelessWidget {
                           context: context,
                           type: TextInputType.emailAddress,
                           lable: Text(
-                            'Adresse',
+                            'E-Adresse',
                             style: TextStyle(
                                 color: CupitHome.get(context).dartSwitch
                                     ? Colors.white
@@ -156,7 +215,7 @@ class AddPost extends StatelessWidget {
                           ),
                           valid: () {},
                           controller: superficieController,
-                          sufixText: 'm2'),
+                          sufixText: '@'),
                       const SizedBox(
                         height: 26,
                       ),
@@ -201,6 +260,7 @@ class AddPost extends StatelessWidget {
   }
 
   DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+        onTap: () {},
         child: Text(
           item,
         ),
