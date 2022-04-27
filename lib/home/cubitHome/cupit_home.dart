@@ -16,6 +16,7 @@ import '../addpost.dart';
 import '../offers.dart';
 import '../setting.dart';
 import 'homeStates.dart';
+//aaa
 
 class CupitHome extends Cubit<HomeStates> {
   CupitHome() : super(InitialHomeState());

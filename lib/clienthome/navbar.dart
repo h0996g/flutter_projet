@@ -1,8 +1,10 @@
-import 'package:agence/home/cubitHome/cupit_home.dart';
+
 import 'package:agence/home/cubitHome/homeStates.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../home/cubitHome/cupit_home.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({Key? key}) : super(key: key);
