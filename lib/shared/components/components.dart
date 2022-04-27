@@ -27,16 +27,20 @@ Widget defaultForm(
         return valid(value);
       },
       decoration: InputDecoration(
-        border:OutlineInputBorder(
-              borderRadius: BorderRadius.circular(50),
-             ),
-        // disabledBorder:  OutlineInputBorder(
-        //     borderRadius: BorderRadius.circular(50),
-        //     ),
-        //   enabledBorder:  OutlineInputBorder(
-        //     borderRadius: BorderRadius.circular(50),
-        //     borderSide: BorderSide(color: Colors.grey),
-        //   ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.grey),
+            borderRadius: BorderRadius.circular(50),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
+          // disabledBorder:  OutlineInputBorder(
+          //     borderRadius: BorderRadius.circular(50),
+          //     ),
+          //   enabledBorder:  OutlineInputBorder(
+          //     borderRadius: BorderRadius.circular(50),
+          //     borderSide: BorderSide(color: Colors.grey),
+          //   ),
           label: lable,
           // border: const OutlineInputBorder(borderSide: BorderSide()),
           prefixIcon: prefixIcon,

@@ -50,8 +50,12 @@ class AddPost extends StatelessWidget {
                             alignedDropdown: true,
                             child: DropdownButton<String>(
                               isExpanded: true,
-                              hint: const Text(
+                              hint: Text(
                                 'Vente',
+                                style: TextStyle(
+                                    color: CupitHome.get(context).dartSwitch
+                                        ? Colors.white
+                                        : Colors.grey),
                               ),
                               items: CupitHome.get(context)
                                   .vende
@@ -79,8 +83,12 @@ class AddPost extends StatelessWidget {
                             alignedDropdown: true,
                             child: DropdownButton<String>(
                               isExpanded: true,
-                              hint: const Text(
+                              hint: Text(
                                 'Appartement',
+                                style: TextStyle(
+                                    color: CupitHome.get(context).dartSwitch
+                                        ? Colors.white
+                                        : Colors.grey),
                               ),
                               items: CupitHome.get(context)
                                   .appartement
@@ -168,7 +176,9 @@ class AddPost extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius:
                               const BorderRadius.all(Radius.circular(50)),
-                          border: Border.all(),
+                          border: Border.all(
+                            color: Colors.grey,
+                          ),
                         ),
                         buttonText: Text(
                           "Conditions de paiment",
@@ -194,7 +204,7 @@ class AddPost extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius:
                               const BorderRadius.all(Radius.circular(50)),
-                          border: Border.all(),
+                          border: Border.all(color: Colors.grey),
                         ),
                         buttonText: Text(
                           "Specification",
@@ -220,7 +230,7 @@ class AddPost extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius:
                               const BorderRadius.all(Radius.circular(50)),
-                          border: Border.all(),
+                          border: Border.all(color: Colors.grey),
                         ),
                         buttonText: Text(
                           "Papiers",
@@ -248,9 +258,20 @@ class AddPost extends StatelessWidget {
                           child: ButtonTheme(
                             alignedDropdown: true,
                             child: DropdownButton<String>(
+                              style: TextStyle(
+                                  color: CupitHome.get(context).dartSwitch
+                                      ? Colors.white
+                                      : Colors.black),
+                              dropdownColor: CupitHome.get(context).dartSwitch
+                                  ? Colors.black
+                                  : Colors.white,
                               isExpanded: true,
-                              hint: const Text(
+                              hint: Text(
                                 'Wilaya',
+                                style: TextStyle(
+                                    color: CupitHome.get(context).dartSwitch
+                                        ? Colors.white
+                                        : Colors.grey),
                               ),
                               items: CupitHome.get(context)
                                   .items
@@ -331,14 +352,17 @@ class AddPost extends StatelessWidget {
                         children: [
                           const Spacer(),
                           IconButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const Addphoto()));
-                              },
-                              icon: const Icon(Icons.arrow_forward_ios))
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Addphoto()));
+                            },
+                            icon: Icon(Icons.arrow_forward_ios,
+                                color: CupitHome.get(context).dartSwitch
+                                    ? Colors.white
+                                    : Colors.grey),
+                          )
                         ],
                       )
                     ],

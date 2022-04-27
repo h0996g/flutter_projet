@@ -109,6 +109,7 @@ class CupitHome extends Cubit<HomeStates> {
     'Ghardaia',
     'Relizane'
   ];
+
   final vende = ['Vente', 'Echange', 'Vacances'];
   final appartement = ['Appartement', 'Terrain', 'Villa', 'Studio'];
   String? valueDropdown;
