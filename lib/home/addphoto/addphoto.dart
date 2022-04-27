@@ -86,13 +86,17 @@ class Addphoto extends StatelessWidget {
                   },
                   child: Ink(
                     decoration: BoxDecoration(
-                      boxShadow: const [
+                      boxShadow: [
                         BoxShadow(
-                            color: Colors.grey,
+                            color: CupitHome.get(context).dartSwitch
+                                ? Colors.black
+                                : Colors.grey,
                             blurRadius: 10,
                             offset: Offset(0, 10))
                       ],
-                      color: Colors.grey[200],
+                      color: CupitHome.get(context).dartSwitch
+                          ? Color(0xff131313)
+                          : Colors.grey[200],
                     ),
                     height: 500,
                     width: 350,
@@ -103,6 +107,7 @@ class Addphoto extends StatelessWidget {
                       const Icon(
                         Icons.add_to_drive,
                         size: 90,
+                        color: Colors.white,
                       ),
                       const SizedBox(
                         height: 10,
@@ -152,8 +157,10 @@ class Addphoto extends StatelessWidget {
                                 MaterialPageRoute(
                                     builder: (context) => EditPhoto()));
                           },
-                          icon: const Icon(Icons.edit),
-                          color: Colors.red,
+                          icon: Icon(Icons.edit),
+                          color: CupitHome.get(context).dartSwitch
+                              ? Colors.white
+                              : Colors.red,
                         ),
                       ])
                     ]),

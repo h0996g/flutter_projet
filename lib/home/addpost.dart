@@ -332,22 +332,7 @@ class AddPost extends StatelessWidget {
                       const SizedBox(
                         height: 26,
                       ),
-                      IntlPhoneField(
-                        controller: phoneController,
-                        decoration: const InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          labelText: 'Phone Number',
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(),
-                          ),
-                        ),
-                        initialCountryCode: 'DZ',
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+
                       Row(
                         children: [
                           const Spacer(),
