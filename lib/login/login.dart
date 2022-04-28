@@ -58,44 +58,118 @@ class LoginScreen extends StatelessWidget {
                         height: 26,
                       ),
 
-                      // Center(
-                      //   child: Container(
-                      //
-                      //     width: double.infinity,
-                      //     height: 50,
-                      //     color: Colors.pink,
-                      //   ),
-                      // ),
-                      // const SizedBox(
-                      //   height: 22,
-                      // ),
+                      Center(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(30),
+                                topRight: Radius.circular(30),
+                                bottomLeft: Radius.circular(30),
+                                bottomRight: Radius.circular(30)),
+                          ),
+                          width: double.infinity,
+                          height: 50,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: 3,
+                                      color: Colors.blue,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(30),
+                                        bottomLeft: Radius.circular(30)),
+                                    // color: Colors.blue,
+                                    color:LoginCubit.get(context).typenumber ? Colors.blue
+                                        : Colors.white70,
+                                  ),
+                                  child: MaterialButton(
+                                    splashColor: Colors.transparent,
+                                    highlightColor:
+                                        CupitHome.get(context).dartSwitch
+                                            ? Colors.blueGrey
+                                            : Colors.transparent,
+                                    child: Text(
+                                      'CLIENT',
+                                      style: TextStyle(color:LoginCubit.get(context).typenumber ? Colors.white
+                                          : Colors.blue,),
+                                    ),
+                                    onPressed: () {
+                                      LoginCubit.get(context).changetype(true);
+                                      path = LOGINCLIENT;
+                                      print(path);
+                                    },
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: 3,
+                                      color: Colors.blue,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                        topRight: Radius.circular(30),
+                                        bottomRight: Radius.circular(30)),
+                                    color:!LoginCubit.get(context).typenumber ? Colors.blue
+                                        : Colors.white70,
+                                  ),
+                                  child: MaterialButton(
+                                    highlightColor:
+                                        CupitHome.get(context).dartSwitch
+                                            ? Colors.blueGrey
+                                            : Colors.blue,
+                                    splashColor: Colors.transparent,
+                                    child: Text(
+                                      'AGENCE',
+                                      style: TextStyle( color:!LoginCubit.get(context).typenumber ? Colors.white
+                                          : Colors.blue,),
+                                    ),
+                                    onPressed: () {
+                                      LoginCubit.get(context).changetype(false);
+                                      path = LOGINAGENCE;
+                                      print(path);
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 22,
+                      ),
 
                       //----------------------------------------- hada wch bdlt f design----------------
 
-                      Row(
-                        children: [
-                          Expanded(
-                            child: CheckboxListTile(
-                                title: const Text('Client'),
-                                value: LoginCubit.get(context).ischeckclient,
-                                onChanged: (value) {
-                                  LoginCubit.get(context).checkList(value);
-                                  path = LOGINCLIENT;
-                                  print(path);
-                                }),
-                          ),
-                          Expanded(
-                            child: CheckboxListTile(
-                                title: const Text('Agence'),
-                                value: !LoginCubit.get(context).ischeckclient,
-                                onChanged: (value) {
-                                  LoginCubit.get(context).checkList(value);
-                                  path = LOGINAGENCE;
-                                  print(path);
-                                }),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   children: [
+                      //     Expanded(
+                      //       child: CheckboxListTile(
+                      //           title: const Text('Client'),
+                      //           value: LoginCubit.get(context).ischeckclient,
+                      //           onChanged: (value) {
+                      //             LoginCubit.get(context).checkList(value);
+                      //             path = LOGINCLIENT;
+                      //             print(path);
+                      //           }),
+                      //     ),
+                      //     Expanded(
+                      //       child: CheckboxListTile(
+                      //           title: const Text('Agence'),
+                      //           value: !LoginCubit.get(context).ischeckclient,
+                      //           onChanged: (value) {
+                      //             LoginCubit.get(context).checkList(value);
+                      //             path = LOGINAGENCE;
+                      //             print(path);
+                      //           }),
+                      //     ),
+                      //   ],
+                      // ),
 //--------------------------------------------------------------------------------------------------
                       defaultForm(
                           context: context,
@@ -195,6 +269,7 @@ class LoginScreen extends StatelessWidget {
                                       CupitHome.get(context).dartSwitch
                                           ? Colors.blueGrey
                                           : Colors.blue,
+                                  splashColor: Colors.transparent,
                                   onPressed: () {
                                     if (formKey.currentState!.validate()) {
                                       sendinfologin = {

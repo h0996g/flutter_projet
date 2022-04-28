@@ -215,33 +215,50 @@ class Clientregister extends StatelessWidget {
                       ConditionalBuilder(
                         condition: state is! ConditionalLodinState,
                         builder: (BuildContext context) {
-                          return Container(
-                            color: CupitHome.get(context).dartSwitch
-                                ? Colors.blueGrey
-                                : Colors.blue,
+                          return  Container(
                             width: double.infinity,
-                            child: MaterialButton(
-                              onPressed: () {
-                                if (formKeyy.currentState!.validate()) {
-                                  // LoginCubit.get(context).login(
-                                  //     pass: passController.text,
-                                  //     email: emailController.text);
-                                  // Changepage(context, const Home());
-                                  sendinfoclient = {
-                                    'name': nameController.text,
-                                    'prenom': prenomController.text,
-                                    'email': emailController.text,
-                                    'password': passController.text,
-                                    'phone': numberController.text
-                                  };
-                                  LoginCubit.get(context).registerAgence(
-                                      data: sendinfoclient,
-                                      path: REGISTERCLIENT);
-                                }
-                              },
-                              child: const Text(
-                                'SIGN UP',
-                                style: const TextStyle(color: Colors.white),
+                            decoration: BoxDecoration(
+                              color: CupitHome.get(context).dartSwitch
+                                  ? Colors.blueGrey
+                                  : Colors.blue,
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(5),
+                                  bottomLeft: Radius.circular(5),
+                                  bottomRight: Radius.circular(15)),
+                            ),
+                            child: Center(
+                              child: Container(
+                                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                width: double.infinity,
+                                child: MaterialButton(
+                                  highlightColor: CupitHome.get(context).dartSwitch
+                                      ? Colors.blueGrey
+                                      : Colors.blue,
+                                  splashColor: Colors.transparent,
+                                  onPressed: () {
+                                    if (formKeyy.currentState!.validate()) {
+// LoginCubit.get(context).login(
+//     pass: passController.text,
+//     email: emailController.text);
+// Changepage(context, const Home());
+                                      sendinfoclient = {
+                                        'name': nameController.text,
+                                        'prenom': prenomController.text,
+                                        'email': emailController.text,
+                                        'password': passController.text,
+                                        'phone': numberController.text
+                                      };
+                                      LoginCubit.get(context).registerAgence(
+                                          data: sendinfoclient,
+                                          path: REGISTERCLIENT);
+                                    }
+                                  },
+                                  child: const Text(
+                                    'SIGN UP',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
                               ),
                             ),
                           );

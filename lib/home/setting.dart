@@ -168,7 +168,7 @@ class Setting extends StatelessWidget {
                 (route) => false);
           });
           Fluttertoast.showToast(
-              msg: 'Good By  ',
+              msg: 'déconnexion réussie',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,

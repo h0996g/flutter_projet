@@ -88,4 +88,10 @@ class LoginCubit extends Cubit<LoginStates> {
 
     emit(ChangeChackState());
   }
+  bool typenumber=true;
+  void changetype(value){
+    typenumber=value;
+    emit(ChangetypeState());
+  }
+
 }

@@ -64,6 +64,7 @@ class Chooseregister extends StatelessWidget {
                           highlightColor: CupitHome.get(context).dartSwitch
                               ? Colors.blueGrey
                               : Colors.blue,
+                          splashColor: Colors.transparent,
                           onPressed: () {
                             Navigator.push(
                                 context,
