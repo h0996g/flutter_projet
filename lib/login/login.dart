@@ -89,7 +89,7 @@ class LoginScreen extends StatelessWidget {
                                     splashColor: Colors.transparent,
                                     highlightColor:
                                         CupitHome.get(context).dartSwitch
-                                            ? Colors.blueGrey
+                                            ? Colors.transparent
                                             : Colors.transparent,
                                     child: Text(
                                       'CLIENT',
@@ -121,7 +121,7 @@ class LoginScreen extends StatelessWidget {
                                     highlightColor:
                                         CupitHome.get(context).dartSwitch
                                             ? Colors.blueGrey
-                                            : Colors.blue,
+                                            : Colors.transparent,
                                     splashColor: Colors.transparent,
                                     child: Text(
                                       'AGENCE',
