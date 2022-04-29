@@ -1,11 +1,13 @@
 class RegisterModel {
   String? token;
+
   UserModel? user;
   AgenceModel? agence;
   ClientModel? client;
 
   RegisterModel.fromJson(Map<String, dynamic> json) {
     token = json['token'];
+
     user = UserModel.fromJson(json['user']);
     agence =
         json['agence'] != null ? AgenceModel.fromJson(json['agence']) : null;

@@ -47,7 +47,7 @@ class LoginCubit extends Cubit<LoginStates> {
 
   RegisterModel? registerModel;
   ErrorRegisterModel? errorRegisterModel;
-  void registerAgence(
+  void registerUser(
       {required Map<String, dynamic> data, required String path}) {
     emit(ConditionalLodinState());
     Httplar.httpPost(path: path, data: data).then((value) {
@@ -55,6 +55,10 @@ class LoginCubit extends Cubit<LoginStates> {
         var jsonResponse =
             convert.jsonDecode(value.body) as Map<String, dynamic>;
         registerModel = RegisterModel.fromJson(jsonResponse);
+        TOKEN = registerModel!.token!;
+        print(TOKEN);
+        print(registerModel!.user!.name);
+
         emit(RegisterSuccesState(registerModel));
       } else if (value.statusCode == 422) {
         var jsonResponse =
@@ -89,10 +93,9 @@ class LoginCubit extends Cubit<LoginStates> {
   //   emit(ChangeChackState());
   // }
 
-  bool typenumber=true;
-  void changetype(value){
-    typenumber=value;
+  bool typenumber = true;
+  void changetype(value) {
+    typenumber = value;
     emit(ChangetypeState());
   }
-
 }
