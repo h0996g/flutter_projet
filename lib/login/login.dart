@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginStates>(
       builder: (BuildContext context, state) {
         String path =
-            LoginCubit.get(context).ischeckclient ? LOGINCLIENT : LOGINAGENCE;
+            LoginCubit.get(context).typenumber ? LOGINCLIENT : LOGINAGENCE;
         return Scaffold(
           body: Center(
             child: SingleChildScrollView(

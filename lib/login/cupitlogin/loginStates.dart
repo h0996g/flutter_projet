@@ -30,5 +30,5 @@ class RegisterSuccesState extends LoginStates {
 
 class RegisterBadState extends LoginStates {}
 
-class ChangeChackState extends LoginStates {}
+// class ChangeChackState extends LoginStates {}
 class ChangetypeState extends LoginStates {}

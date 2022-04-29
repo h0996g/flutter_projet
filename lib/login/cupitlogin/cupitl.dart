@@ -80,14 +80,15 @@ class LoginCubit extends Cubit<LoginStates> {
     emit(HiddenPasswordState());
   }
 
-  bool ischeckclient = true;
-  String pathLogin = LOGINCLIENT;
+  // bool ischeckclient = true;
+  // String pathLogin = LOGINCLIENT;
+  //
+  // void checkList(value) {
+  //   ischeckclient = !ischeckclient;
+  //
+  //   emit(ChangeChackState());
+  // }
 
-  void checkList(value) {
-    ischeckclient = !ischeckclient;
-
-    emit(ChangeChackState());
-  }
   bool typenumber=true;
   void changetype(value){
     typenumber=value;
