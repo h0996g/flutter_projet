@@ -36,93 +36,171 @@ class _OfferdetailagenceState extends State<Offerdetailagence> {
     return Scaffold(
       body: Column(
         children: [
-          Stack(
-            children: [
-              Container(
-                width: double.infinity,
-                height: 295,
+          Expanded(
+            flex: 35,
+            child: Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 295,
 
-                color: Colors.white54,
-                // child: Image(image:AssetImage('assets/images/building.jpg'),fit: BoxFit.cover,),
-                child: PageView.builder(
-                  onPageChanged: (int index) {
-                    // if (index == models.length - 1) {
-                    //   islast = true;
-                    //
-                    //   setState(() {
-                    //     nextIcon = const Icon(Icons.done);
-                    //   });
-                    // } else {
-                    //   islast = false;
-                    //
-                    //   setState(() {
-                    //     nextIcon = const Icon(Icons.arrow_forward_ios);
-                    //   });
-                    // }
-                  },
-                  controller: onbordingController,
-                  physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context, index) => Ala(models[index]),
-                  itemCount: 3,
+                  color: Colors.white54,
+                  // child: Image(image:AssetImage('assets/images/building.jpg'),fit: BoxFit.cover,),
+                  child: PageView.builder(
+                    onPageChanged: (int index) {
+                      // if (index == models.length - 1) {
+                      //   islast = true;
+                      //
+                      //   setState(() {
+                      //     nextIcon = const Icon(Icons.done);
+                      //   });
+                      // } else {
+                      //   islast = false;
+                      //
+                      //   setState(() {
+                      //     nextIcon = const Icon(Icons.arrow_forward_ios);
+                      //   });
+                      // }
+                    },
+                    controller: onbordingController,
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) => Ala(models[index]),
+                    itemCount: 3,
+                  ),
                 ),
-              ),
-              Positioned(
-                top: 45,
-                left: -5,
-                child: MaterialButton(
-                  onPressed: () {
-                    Changepage(context, const Home());
-                  },
+                Positioned(
+                  top: 45,
+                  left: -5,
+                  child: MaterialButton(
+                    onPressed: () {
+                      Changepage(context, const Home());
+                    },
+                    shape: const CircleBorder(),
+                    color: CupitHome.get(context).dartSwitch
+                        ? Colors.black
+                        : Colors.blue,
+                    child: Icon(
+                      Icons.arrow_back_ios_outlined,
+                      color: CupitHome.get(context).dartSwitch
+                          ? Colors.white
+                          : Colors.white,
+                    ),
+                  ),
+                ),
+                // Positioned(
+                //     top: 46,
+                //     right: -5,
+                //
+                //
+                //     child:     MaterialButton(
+                //       onPressed: () {},
+                //       shape: const CircleBorder(),
+                //       color: CupitHome.get(context).dartSwitch ? Color(0xff8d8d8d): Colors.blue,
+                //       child: Icon(Icons.favorite_sharp,color:CupitHome.get(context).dartSwitch ? Colors.white : Colors.white, ),
+                //
+                //     )
+                // ),
+                Positioned(
+                  bottom: 20,
+                  left: 140,
+                  child: SmoothPageIndicator(
+                      controller: onbordingController, // PageController
+                      count: models.length,
+                      effect: ScrollingDotsEffect(
+                        dotColor: CupitHome.get(context).dartSwitch
+                            ? const Color(0xffb3b2b2)
+                            : Colors.white,
+                        activeDotColor: CupitHome.get(context).dartSwitch
+                            ? const Color(0xff131313)
+                            : Colors.blue,
+                      ),
+
+                      // effect: const ExpandingDotsEffect(
+                      //
+                      //     dotWidth: 20,
+                      //     dotHeight: 15,
+                      //     dotColor: Colors.black26,
+                      //     activeDotColor:
+                      //     Colors.deepOrange), // your preferred effect
+                      onDotClicked: (index) {}),
+                )
+              ],
+            ),
+          ),
+          Divider(
+            color: CupitHome.get(context).dartSwitch
+                ? Colors.blueGrey
+                : const Color(0xffF3F3F3FF),
+            height: 1,
+            thickness: 2,
+          ),
+          Expanded(
+            flex: 7,
+            child: Row(
+              children: [
+                const SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  "\$245.00",
+                  style: Theme.of(context).textTheme.headline4?.copyWith(
+                        fontSize: 32,
+                      ),
+                ),
+                const Spacer(),
+                MaterialButton(
+                  onPressed: () {},
                   shape: const CircleBorder(),
                   color: CupitHome.get(context).dartSwitch
-                      ? Colors.black
+                      ? const Color(0xff8d8d8d)
                       : Colors.blue,
                   child: Icon(
-                    Icons.arrow_back_ios_outlined,
+                    Icons.settings,
                     color: CupitHome.get(context).dartSwitch
                         ? Colors.white
                         : Colors.white,
                   ),
                 ),
-              ),
-              // Positioned(
-              //     top: 46,
-              //     right: -5,
-              //
-              //
-              //     child:     MaterialButton(
-              //       onPressed: () {},
-              //       shape: const CircleBorder(),
-              //       color: CupitHome.get(context).dartSwitch ? Color(0xff8d8d8d): Colors.blue,
-              //       child: Icon(Icons.favorite_sharp,color:CupitHome.get(context).dartSwitch ? Colors.white : Colors.white, ),
-              //
-              //     )
-              // ),
-              Positioned(
-                bottom: 20,
-                left: 140,
-                child: SmoothPageIndicator(
-                    controller: onbordingController, // PageController
-                    count: models.length,
-                    effect: ScrollingDotsEffect(
-                      dotColor: CupitHome.get(context).dartSwitch
-                          ? const Color(0xffb3b2b2)
-                          : Colors.white,
-                      activeDotColor: CupitHome.get(context).dartSwitch
-                          ? const Color(0xff131313)
-                          : Colors.blue,
-                    ),
 
-                    // effect: const ExpandingDotsEffect(
-                    //
-                    //     dotWidth: 20,
-                    //     dotHeight: 15,
-                    //     dotColor: Colors.black26,
-                    //     activeDotColor:
-                    //     Colors.deepOrange), // your preferred effect
-                    onDotClicked: (index) {}),
-              )
-            ],
+                // MaterialButton(
+                //   onPressed: () {},
+                //   shape: const CircleBorder(),
+                //   color: CupitHome.get(context).dartSwitch ? Color(0xff8d8d8d): Colors.blue,
+                //   child: Icon(Icons.favorite_sharp,color:CupitHome.get(context).dartSwitch ? Colors.white : Colors.white, ),
+                //
+                // )
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 7,
+            child: Row(
+              children: [
+                const SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: Text(
+                    '730 Columbus Ave, Manhattan, Ny 10025',
+                    style: Theme.of(context).textTheme.bodyText2,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Se Loger',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    )),
+                const SizedBox(
+                  width: 20,
+                ),
+              ],
+            ),
           ),
           Divider(
             color: CupitHome.get(context).dartSwitch
@@ -131,67 +209,175 @@ class _OfferdetailagenceState extends State<Offerdetailagence> {
             height: 1,
             thickness: 2,
           ),
-          Row(
-            children: [
-              const SizedBox(
-                width: 20,
-              ),
-              Text(
-                "\$245.00",
-                style: Theme.of(context).textTheme.headline4?.copyWith(
-                      fontSize: 32,
+          Expanded(
+            flex: 8,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 54,
+                    child: MaterialButton(
+                      padding: const EdgeInsets.all(0),
+                      onPressed: () {
+                        setState(() {
+                          a = 0;
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Icon(
+                            Icons.description_outlined,
+                            color: a == 0 ? Colors.red : Colors.blue,
+                          ),
+                          Text('Information',
+                              style: TextStyle(
+                                  color: a == 0 ? Colors.red : Colors.blue,
+                                  fontSize: 14)),
+                          const SizedBox(
+                            height: 7,
+                          )
+                        ],
+                      ),
                     ),
-              ),
-              const Spacer(),
-              MaterialButton(
-                onPressed: () {},
-                shape: const CircleBorder(),
-                color: CupitHome.get(context).dartSwitch
-                    ? const Color(0xff8d8d8d)
-                    : Colors.blue,
-                child: Icon(
-                  Icons.settings,
-                  color: CupitHome.get(context).dartSwitch
-                      ? Colors.white
-                      : Colors.white,
+                  ),
                 ),
-              ),
 
-              // MaterialButton(
-              //   onPressed: () {},
-              //   shape: const CircleBorder(),
-              //   color: CupitHome.get(context).dartSwitch ? Color(0xff8d8d8d): Colors.blue,
-              //   child: Icon(Icons.favorite_sharp,color:CupitHome.get(context).dartSwitch ? Colors.white : Colors.white, ),
-              //
-              // )
-            ],
-          ),
-          Row(
-            children: [
-              const SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                child: Text(
-                  '730 Columbus Ave, Manhattan, Ny 10025',
-                  style: Theme.of(context).textTheme.bodyText2,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                //         VerticalDivider(
+                //           thickness: 2,
+                //            width: 2,
+                //            color: CupitHome.get(context).dartSwitch
+                // ? Color(0xff131313)
+                //     : Color(0xffF3F3F3FF),
+                //         ),
+
+                Expanded(
+                  child: Container(
+                    color: CupitHome.get(context).dartSwitch
+                        ? const Color(0xff131313)
+                        : Colors.white,
+                    height: 54,
+                    child: MaterialButton(
+                      padding: const EdgeInsets.all(0),
+                      onPressed: () {
+                        setState(() {
+                          a = 1;
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Icon(
+                            Icons.menu_sharp,
+                            color: a == 1 ? Colors.red : Colors.blue,
+                          ),
+                          Text('Details',
+                              style: TextStyle(
+                                  color: a == 1 ? Colors.red : Colors.blue,
+                                  fontSize: 14)),
+                          const SizedBox(
+                            height: 7,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'Se Loger',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )),
-              const SizedBox(
-                width: 20,
-              ),
-            ],
+                // VerticalDivider(
+                //     thickness: 2,
+                //   width: 2,
+                //     color: CupitHome.get(context).dartSwitch
+                //         ? Color(0xff131313)
+                //         : Color(0xffF3F3F3FF),
+                // ),
+                Expanded(
+                  child: Container(
+                    height: 54,
+                    child: MaterialButton(
+                      padding: const EdgeInsets.all(0),
+                      onPressed: () {
+                        setState(() {
+                          a = 2;
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Icon(
+                            Icons.message_outlined,
+                            color: a == 2 ? Colors.red : Colors.blue,
+                          ),
+                          Text('Commentaire',
+                              style: TextStyle(
+                                  color: a == 2 ? Colors.red : Colors.blue,
+                                  fontSize: 14)),
+                          const SizedBox(
+                            height: 7,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                // VerticalDivider(
+                //     thickness: 2,
+                //   width: 2,
+                //     color: CupitHome.get(context).dartSwitch
+                //         ? Color(0xff131313)
+                //         : Color(0xffF3F3F3FF),
+                // ),
+                Expanded(
+                  child: Container(
+                    height: 54,
+                    child: MaterialButton(
+                      padding: const EdgeInsets.all(0),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text(
+                                  'you want to delete this offer?',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {}, child: const Text('yes')),
+                                  TextButton(
+                                      onPressed: () {}, child: const Text('no'))
+                                ],
+                              );
+                            });
+                        // FlutterPhoneDirectCaller.callNumber(number);
+                      },
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          const Icon(
+                            Icons.delete,
+                            color: Colors.blue,
+                          ),
+                          const Text('delete',
+                              style: const TextStyle(
+                                  color: Colors.blue, fontSize: 14)),
+                          const SizedBox(
+                            height: 7,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           Divider(
             color: CupitHome.get(context).dartSwitch
@@ -200,184 +386,13 @@ class _OfferdetailagenceState extends State<Offerdetailagence> {
             height: 1,
             thickness: 2,
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  height: 54,
-                  child: MaterialButton(
-                    padding: const EdgeInsets.all(0),
-                    onPressed: () {
-                      setState(() {
-                        a = 0;
-                      });
-                    },
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Icon(
-                          Icons.description_outlined,
-                          color: a == 0 ? Colors.red : Colors.blue,
-                        ),
-                        Text('Information',
-                            style: TextStyle(
-                                color: a == 0 ? Colors.red : Colors.blue,
-                                fontSize: 14)),
-                        const SizedBox(
-                          height: 7,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-
-              //         VerticalDivider(
-              //           thickness: 2,
-              //            width: 2,
-              //            color: CupitHome.get(context).dartSwitch
-              // ? Color(0xff131313)
-              //     : Color(0xffF3F3F3FF),
-              //         ),
-
-              Expanded(
-                child: Container(
-                  color: CupitHome.get(context).dartSwitch
-                      ? const Color(0xff131313)
-                      : Colors.white,
-                  height: 54,
-                  child: MaterialButton(
-                    padding: const EdgeInsets.all(0),
-                    onPressed: () {
-                      setState(() {
-                        a = 1;
-                      });
-                    },
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Icon(
-                          Icons.menu_sharp,
-                          color: a == 1 ? Colors.red : Colors.blue,
-                        ),
-                        Text('Details',
-                            style: TextStyle(
-                                color: a == 1 ? Colors.red : Colors.blue,
-                                fontSize: 14)),
-                        const SizedBox(
-                          height: 7,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              // VerticalDivider(
-              //     thickness: 2,
-              //   width: 2,
-              //     color: CupitHome.get(context).dartSwitch
-              //         ? Color(0xff131313)
-              //         : Color(0xffF3F3F3FF),
-              // ),
-              Expanded(
-                child: Container(
-                  height: 54,
-                  child: MaterialButton(
-                    padding: const EdgeInsets.all(0),
-                    onPressed: () {
-                      setState(() {
-                        a = 2;
-                      });
-                    },
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Icon(
-                          Icons.message_outlined,
-                          color: a == 2 ? Colors.red : Colors.blue,
-                        ),
-                        Text('Commentaire',
-                            style: TextStyle(
-                                color: a == 2 ? Colors.red : Colors.blue,
-                                fontSize: 14)),
-                        const SizedBox(
-                          height: 7,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              // VerticalDivider(
-              //     thickness: 2,
-              //   width: 2,
-              //     color: CupitHome.get(context).dartSwitch
-              //         ? Color(0xff131313)
-              //         : Color(0xffF3F3F3FF),
-              // ),
-              Expanded(
-                child: Container(
-                  height: 54,
-                  child: MaterialButton(
-                    padding: const EdgeInsets.all(0),
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text(
-                                'you want to delete this offer?',
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              actions: [
-                                TextButton(
-                                    onPressed: () {}, child: const Text('yes')),
-                                TextButton(
-                                    onPressed: () {}, child: const Text('no'))
-                              ],
-                            );
-                          });
-                      // FlutterPhoneDirectCaller.callNumber(number);
-                    },
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        const Icon(
-                          Icons.delete,
-                          color: Colors.blue,
-                        ),
-                        const Text('delete',
-                            style: const TextStyle(
-                                color: Colors.blue, fontSize: 14)),
-                        const SizedBox(
-                          height: 7,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Divider(
-            color: CupitHome.get(context).dartSwitch
-                ? Colors.blueGrey
-                : const Color(0xffF3F3F3FF),
-            height: 1,
-            thickness: 2,
-          ),
-          Container(
-            child: a == 0
-                ? Information()
-                : (a == 1 ? Details() : const Text('sousou')),
+          Expanded(
+            flex: 43,
+            child: Container(
+              child: a == 0
+                  ? Information()
+                  : (a == 1 ? Details() : const Text('sousou')),
+            ),
           ),
         ],
       ),
