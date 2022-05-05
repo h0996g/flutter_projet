@@ -1,7 +1,7 @@
 import 'package:agence/Api/constApi.dart';
+import 'package:agence/clienthome/cupitSearch/cupitsearch_cubit.dart';
 import 'package:agence/home/home.dart';
 import 'package:agence/login/cupitlogin/cupitl.dart';
-import 'package:agence/login/cupitlogin/cupitmain.dart';
 import 'package:agence/login/cupitlogin/observer.dart';
 import 'package:agence/login/login.dart';
 import 'package:agence/login/onbording.dart';
@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => LoginCubit()),
+        BlocProvider(create: (context) => CupitsearchCubit()),
         // BlocProvider(create: (context) => CupitMain()),
         BlocProvider(
             create: (context) =>
