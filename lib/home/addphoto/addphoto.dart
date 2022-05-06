@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:agence/home/addphoto/editphoto.dart';
@@ -8,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Addphoto extends StatelessWidget {
-  const Addphoto({Key? key}) : super(key: key);
+  Addphoto({Key? key}) : super(key: key);
+  Map<String, dynamic> sendinfoOffer = {};
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +187,39 @@ class Addphoto extends StatelessWidget {
                         child: const Text('RETOUR')),
                     const Spacer(),
                     ElevatedButton(
-                        onPressed: () {}, child: const Text('CONFIRMER'))
+                        onPressed: () async {
+                          sendinfoOffer = {
+                            'type_vente': 'Appartement',
+                            'address':
+                                CupitHome.get(context).addressController.text,
+                            'description': CupitHome.get(context)
+                                .descriptionController
+                                .text,
+                            'price':
+                                CupitHome.get(context).priceController.text,
+                            'space': CupitHome.get(context)
+                                .superficieController
+                                .text,
+                            'n_etage':
+                                CupitHome.get(context).nEtageController.text,
+                            'n_chambre': CupitHome.get(context).nChambres.text,
+                            'wilaya':
+                                CupitHome.get(context).wilayavalueDropdown,
+                            'photo':
+                                jsonEncode(CupitHome.get(context).base64List),
+                            'type_offer': CupitHome.get(context).vendevalueDrop,
+                            'condition_de_paiment': jsonEncode(
+                                CupitHome.get(context).conditionsListhttp),
+                            'specification': jsonEncode(
+                                CupitHome.get(context).specificationListhttp),
+                            'papiers': jsonEncode(
+                                CupitHome.get(context).papiersListhttp)
+                          };
+                          await CupitHome.get(context)
+                              .savePhotoBd(data: sendinfoOffer);
+                          print('done');
+                        },
+                        child: const Text('CONFIRMER'))
                   ],
                 ),
               ),

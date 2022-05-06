@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:agence/login/other/cachhelper.dart';
 import 'package:flutter/material.dart';
@@ -27,11 +29,16 @@ class CupitHome extends Cubit<HomeStates> {
 
   final ImagePicker imagePicker = ImagePicker();
   List<XFile>? imageFileList = [];
+  List<String> base64List = [];
 
   void selectImagesGalery() async {
     final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
     if (selectedImages!.isNotEmpty) {
       imageFileList!.addAll(selectedImages);
+      selectedImages.forEach((element) async {
+        Uint8List aa = await element.readAsBytes();
+        base64List.add(base64.encode(aa));
+      });
     }
     print("Image List Length:" + imageFileList!.length.toString());
     emit(AddImageGoodState());
@@ -39,6 +46,7 @@ class CupitHome extends Cubit<HomeStates> {
 
   void removephoto(int index) {
     imageFileList?.removeAt(index);
+    base64List.removeAt(index);
     emit(RemovePhotoState());
   }
 
@@ -50,6 +58,8 @@ class CupitHome extends Cubit<HomeStates> {
     if (imagecamera == null) return;
     final imageTemporary = File(imagecamera.path);
     this.imagecamera = imageTemporary;
+    Uint8List imageBytes = await imagecamera.readAsBytes(); //convert to bytes
+    base64List.add(base64.encode(imageBytes));
     imageFileList!.add(imagecamera);
     emit(AddImageCameraGoodState());
   }
@@ -59,6 +69,16 @@ class CupitHome extends Cubit<HomeStates> {
   //-----------------------DropDown---------------------------------------------------------------//
 
   Map<String, bool> isvisibility = {'N-champre': true, 'etages': true};
+
+  List papiersListhttp = [];
+  List specificationListhttp = [];
+  List conditionsListhttp = [];
+  var superficieController = TextEditingController();
+  var nEtageController = TextEditingController();
+  var nChambres = TextEditingController();
+  var descriptionController = TextEditingController();
+  var addressController = TextEditingController();
+  var priceController = TextEditingController();
 
   final items = [
     'Alger',
@@ -113,7 +133,7 @@ class CupitHome extends Cubit<HomeStates> {
 
   final vende = ['Vente', 'Echange', 'Vacances'];
   final appartement = ['Appartement', 'Terrain', 'Villa', 'Studio'];
-  String? valueDropdown;
+  String? wilayavalueDropdown;
   String? vendevalueDrop;
   String? appartementvalueDrop;
 
@@ -133,12 +153,14 @@ class CupitHome extends Cubit<HomeStates> {
       isvisibility['N-champre'] = true;
       isvisibility['etages'] = false;
     }
+    print(appartementvalueDrop);
 
     emit(ChangevalueDropdownState());
   }
 
   vendeDropDown(value) {
     vendevalueDrop = value;
+    print(vendevalueDrop);
 
     // print(vende.indexOf(value));
 
@@ -146,8 +168,8 @@ class CupitHome extends Cubit<HomeStates> {
   }
 
   wilaraDropdown(value) {
-    valueDropdown = value;
-    print(items.indexOf(value));
+    wilayavalueDropdown = value;
+    print(wilayavalueDropdown);
 
     emit(ChangevalueDropdownState());
   }
@@ -230,6 +252,42 @@ class CupitHome extends Cubit<HomeStates> {
 
       emit(LougOutBadState());
     });
+  }
+
+  Future<void> savePhotoBd({required Map<String, dynamic> data}) async {
+    // var jsonphoto = jsonEncode(base64List);
+    // var conditionsjson = jsonEncode(conditionsListhttp);
+    // var specificationjson = jsonEncode(specificationListhttp);
+    // var papiersjson = jsonEncode(papiersListhttp);
+    // var l = jsonEncode(test);
+    await Httplar.httpPost(data: data, path: ADDOFFER).then((value) {
+      // var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
+      // photoModels = PhotoModels.fromJson(jsonResponse);
+      // print(jsonResponse);
+
+      // print(jsonDecode(photoModels!.url)[1]);
+      // jsondecodephoto = jsonDecode(photoModels!.url);
+      print('succes send');
+      print(value.body);
+      emit(CreateOfferSuccessState());
+    }).catchError((e) {
+      print(e.toString());
+      emit(CreateOfferBadState());
+    });
+  }
+
+  void resetValueoffer() {
+    papiersListhttp = [];
+    specificationListhttp = [];
+    conditionsListhttp = [];
+    superficieController = TextEditingController();
+    nEtageController = TextEditingController();
+    nChambres = TextEditingController();
+    descriptionController = TextEditingController();
+    addressController = TextEditingController();
+    priceController = TextEditingController();
+    imageFileList = [];
+    base64List = [];
   }
 }
 

@@ -4,5 +4,7 @@ const LOGOUT = '/api/remove';
 const USERINFOTOKEN = '/api/user';
 const REGISTERCLIENT = '/api/registerclient';
 const REGISTERAGENCE = '/api/registeragence';
-const URLHTTP = '172.20.10.3:8000';
+const ADDOFFER = '/api/createoffer';
+const URLHTTP = '192.168.1.8:8000';
+
 var TOKEN = '';

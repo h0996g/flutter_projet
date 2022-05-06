@@ -11,8 +11,10 @@ class Httplar {
       path,
       query,
     );
-    return await http
-        .post(url, body: data, headers: {'Accept': 'application/json'});
+    return await http.post(url, body: data, headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $TOKEN'
+    });
   }
 
   static Future<http.Response> httpget({

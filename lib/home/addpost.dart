@@ -9,11 +9,6 @@ import 'cubitHome/cupit_home.dart';
 import 'cubitHome/homeStates.dart';
 
 class AddPost extends StatelessWidget {
-  var superficieController = TextEditingController();
-  var etageController = TextEditingController();
-  var descriptionController = TextEditingController();
-  var nChambres = TextEditingController();
-  var phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CupitHome, HomeStates>(
@@ -118,8 +113,25 @@ class AddPost extends StatelessWidget {
                                     : Colors.grey),
                           ),
                           valid: () {},
-                          controller: superficieController,
+                          controller:
+                              CupitHome.get(context).superficieController,
                           sufixText: 'm2'),
+                      const SizedBox(
+                        height: 26,
+                      ),
+                      defaultForm(
+                        context: context,
+                        type: TextInputType.number,
+                        lable: Text(
+                          'price',
+                          style: TextStyle(
+                              color: CupitHome.get(context).dartSwitch
+                                  ? Colors.white
+                                  : Colors.grey),
+                        ),
+                        valid: () {},
+                        controller: CupitHome.get(context).priceController,
+                      ),
                       const SizedBox(
                         height: 26,
                       ),
@@ -138,7 +150,7 @@ class AddPost extends StatelessWidget {
                                       : Colors.grey),
                             ),
                             valid: () {},
-                            controller: etageController,
+                            controller: CupitHome.get(context).nEtageController,
                           ),
                         ),
                       ),
@@ -161,7 +173,7 @@ class AddPost extends StatelessWidget {
                                       : Colors.grey),
                             ),
                             valid: () {},
-                            controller: nChambres,
+                            controller: CupitHome.get(context).nChambres,
                           ),
                         ),
                       ),
@@ -189,8 +201,14 @@ class AddPost extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
-                        onConfirm: (results) {
-                          print(results);
+                        onConfirm: (List results) {
+                          CupitHome.get(context).conditionsListhttp = [];
+                          results.forEach((element) {
+                            CupitHome.get(context)
+                                .conditionsListhttp
+                                .add(element.name);
+                          });
+                          print(CupitHome.get(context).conditionsListhttp);
                         },
                       ),
                       const SizedBox(
@@ -215,8 +233,14 @@ class AddPost extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
-                        onConfirm: (results) {
-                          print(results);
+                        onConfirm: (List results) {
+                          CupitHome.get(context).specificationListhttp = [];
+                          results.forEach((element) {
+                            CupitHome.get(context)
+                                .specificationListhttp
+                                .add(element.name);
+                          });
+                          print(CupitHome.get(context).specificationListhttp);
                         },
                       ),
                       const SizedBox(
@@ -241,8 +265,14 @@ class AddPost extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
-                        onConfirm: (results) {
-                          print(results);
+                        onConfirm: (List results) {
+                          CupitHome.get(context).papiersListhttp = [];
+                          results.forEach((element) {
+                            CupitHome.get(context)
+                                .papiersListhttp
+                                .add(element.name);
+                          });
+                          print(CupitHome.get(context).papiersListhttp);
                         },
                       ),
                       const SizedBox(
@@ -280,7 +310,7 @@ class AddPost extends StatelessWidget {
                               onChanged: (value) {
                                 CupitHome.get(context).wilaraDropdown(value);
                               },
-                              value: CupitHome.get(context).valueDropdown,
+                              value: CupitHome.get(context).wilayavalueDropdown,
                             ),
                           ),
                         ),
@@ -310,7 +340,8 @@ class AddPost extends StatelessWidget {
                         context: context,
                         type: TextInputType.text,
                         valid: () {},
-                        controller: descriptionController,
+                        controller:
+                            CupitHome.get(context).descriptionController,
                         maxline: 6,
                       ),
                       const SizedBox(
@@ -320,14 +351,14 @@ class AddPost extends StatelessWidget {
                           context: context,
                           type: TextInputType.emailAddress,
                           lable: Text(
-                            'E-Adresse',
+                            'Adresse',
                             style: TextStyle(
                                 color: CupitHome.get(context).dartSwitch
                                     ? Colors.white
                                     : Colors.grey),
                           ),
                           valid: () {},
-                          controller: superficieController,
+                          controller: CupitHome.get(context).addressController,
                           sufixText: '@'),
                       const SizedBox(
                         height: 26,
@@ -341,7 +372,7 @@ class AddPost extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const Addphoto()));
+                                      builder: (context) => Addphoto()));
                             },
                             icon: Icon(Icons.arrow_forward_ios,
                                 color: CupitHome.get(context).dartSwitch

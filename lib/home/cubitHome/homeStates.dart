@@ -21,3 +21,7 @@ class LougOutSuccesState extends HomeStates {}
 class LougOutBadState extends HomeStates {}
 
 class ConditionalLodinState extends HomeStates {}
+
+class CreateOfferSuccessState extends HomeStates {}
+
+class CreateOfferBadState extends HomeStates {}
