@@ -86,11 +86,11 @@ class LoginScreen extends StatelessWidget {
                                     // color: Colors.blue,
                                     color: LoginCubit.get(context).typenumber
                                         ? CupitHome.get(context).dartSwitch
-                                        ? Color(0xff131313)
-                                        : Colors.blue
+                                            ? Color(0xff131313)
+                                            : Colors.blue
                                         : CupitHome.get(context).dartSwitch
-                                        ? Colors.blueGrey
-                                        : Colors.white70,
+                                            ? Colors.blueGrey
+                                            : Colors.white70,
                                   ),
                                   child: MaterialButton(
                                     splashColor: Colors.transparent,
@@ -101,14 +101,14 @@ class LoginScreen extends StatelessWidget {
                                     child: Text(
                                       'CLIENT',
                                       style: TextStyle(
-                                        color:
-                                            LoginCubit.get(context).typenumber
-                                                ?  CupitHome.get(context).dartSwitch
-                                                  ? Colors.white
-                                                   : Colors.white
-                                                :  CupitHome.get(context).dartSwitch
-                                          ? Colors.white
-                                          : Colors.blue,
+                                        color: LoginCubit.get(context)
+                                                .typenumber
+                                            ? CupitHome.get(context).dartSwitch
+                                                ? Colors.white
+                                                : Colors.white
+                                            : CupitHome.get(context).dartSwitch
+                                                ? Colors.white
+                                                : Colors.blue,
                                       ),
                                     ),
                                     onPressed: () {
@@ -133,11 +133,11 @@ class LoginScreen extends StatelessWidget {
                                         bottomRight: Radius.circular(30)),
                                     color: !LoginCubit.get(context).typenumber
                                         ? CupitHome.get(context).dartSwitch
-                                        ? Color(0xff131313)
-                                        : Colors.blue
+                                            ? Color(0xff131313)
+                                            : Colors.blue
                                         : CupitHome.get(context).dartSwitch
-                                        ? Colors.blueGrey
-                                        : Colors.white70,
+                                            ? Colors.blueGrey
+                                            : Colors.white70,
                                   ),
                                   child: MaterialButton(
                                     highlightColor:
@@ -148,12 +148,12 @@ class LoginScreen extends StatelessWidget {
                                     child: Text(
                                       'AGENCE',
                                       style: TextStyle(
-                                        color:
-                                            !LoginCubit.get(context).typenumber
-                                                ? CupitHome.get(context).dartSwitch
+                                        color: !LoginCubit.get(context)
+                                                .typenumber
+                                            ? CupitHome.get(context).dartSwitch
                                                 ? Colors.white
                                                 : Colors.white
-                                                : CupitHome.get(context).dartSwitch
+                                            : CupitHome.get(context).dartSwitch
                                                 ? Colors.white
                                                 : Colors.blue,
                                       ),
@@ -217,6 +217,9 @@ class LoginScreen extends StatelessWidget {
                               return 'Email Must Not Be Empty';
                             }
                           },
+                          // valid: () {
+                          //   return null;
+                          // },
                           onFieldSubmitted: () {},
                           prefixIcon: Icon(
                             Icons.email,
