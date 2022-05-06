@@ -17,13 +17,24 @@ class Settingsclient extends StatelessWidget {
           appBar: AppBar(
             elevation: 5,
             title: Text(
-              'Settings',
+              'Profile',
               style: TextStyle(
                   color: CupitHome.get(context).dartSwitch
                       ? Colors.white
                       : Colors.black,
                   fontSize: 34),
             ),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    CupitHome.get(context).changeSwitch(value: !CupitHome.get(context).dartSwitch);
+                  },
+                  icon: const Icon(
+                    Icons.dark_mode_outlined,
+                    size: 30,
+                  )),
+
+            ],
           ),
           body: Padding(
             padding: const EdgeInsets.all(20.0),

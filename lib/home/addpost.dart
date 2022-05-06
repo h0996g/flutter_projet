@@ -24,6 +24,17 @@ class AddPost extends StatelessWidget {
                       //         : Colors.black,
                       //     fontSize: 34),
                       Theme.of(context).textTheme.headline4),
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      CupitHome.get(context).changeSwitch(value: !CupitHome.get(context).dartSwitch);
+                    },
+                    icon: const Icon(
+                      Icons.dark_mode_outlined,
+                      size: 30,
+                    )),
+
+              ],
             ),
             body: Center(
               child: Padding(

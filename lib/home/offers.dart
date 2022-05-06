@@ -34,6 +34,14 @@ class Offers extends StatelessWidget {
             actions: [
               IconButton(
                   onPressed: () {
+                    CupitHome.get(context).changeSwitch(value: !CupitHome.get(context).dartSwitch);
+                  },
+                  icon: const Icon(
+                    Icons.dark_mode_outlined,
+                    size: 30,
+                  )),
+              IconButton(
+                  onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(

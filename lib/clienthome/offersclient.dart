@@ -1,3 +1,4 @@
+import 'package:agence/clienthome/search.dart';
 import 'package:agence/offersdetails/offerdetailclient.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,7 +38,20 @@ class Offersclient extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    CupitHome.get(context).changeSwitch(value: !CupitHome.get(context).dartSwitch);
+                  },
+                  icon: const Icon(
+                    Icons.dark_mode_outlined,
+                    size: 30,
+                  )),
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Search()));
+                  },
                   icon: const Icon(
                     Icons.search,
                     size: 30,

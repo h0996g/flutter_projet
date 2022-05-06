@@ -22,9 +22,20 @@ class Setting extends StatelessWidget {
           appBar: AppBar(
             elevation: 10,
             title: Text(
-              'Settings',
+              'Profile',
               style: Theme.of(context).textTheme.headline4,
             ),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    CupitHome.get(context).changeSwitch(value: !CupitHome.get(context).dartSwitch);
+                  },
+                  icon: const Icon(
+                    Icons.dark_mode_outlined,
+                    size: 30,
+                  )),
+
+            ],
           ),
           body: Padding(
             padding: const EdgeInsets.all(20.0),

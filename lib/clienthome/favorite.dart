@@ -18,6 +18,17 @@ class Favorite extends StatelessWidget {
                   : Colors.black,
               fontSize: 34),
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                CupitHome.get(context).changeSwitch(value: !CupitHome.get(context).dartSwitch);
+              },
+              icon: const Icon(
+                Icons.dark_mode_outlined,
+                size: 30,
+              )),
+
+        ],
       ),
       body: const Center(
         child: Icon(
