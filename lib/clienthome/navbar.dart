@@ -37,7 +37,7 @@ class _NavbarState extends State<Navbar> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.favorite), label: 'Favorite'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.settings), label: 'Settings'),
+                  icon: Icon(Icons.account_circle), label: 'Profile'),
             ],
             type: BottomNavigationBarType.fixed,
             elevation: 10,

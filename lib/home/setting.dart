@@ -2,6 +2,7 @@ import 'package:agence/Api/constApi.dart';
 
 import 'package:agence/login/other/cachhelper.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -40,116 +41,231 @@ class Setting extends StatelessWidget {
           body: Padding(
             padding: const EdgeInsets.all(20.0),
             child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
               const SizedBox(
-                height: 40,
+                height: 5,
               ),
-              Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: CupitHome.get(context).dartSwitch
-                        ? Colors.white
-                        : Colors.black,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'Account',
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                ],
-              ),
-              const Divider(
-                color: Colors.grey,
-                height: 15,
-                thickness: 2,
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: const [
-                  Text(
-                    'Change Password',
-                    style: TextStyle(color: Colors.grey, fontSize: 18),
-                  ),
-                  Spacer(),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 15,
-                    color: Colors.grey,
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: const [
-                  Text(
-                    'Notifications',
-                    style: TextStyle(color: Colors.grey, fontSize: 18),
-                  ),
-                  Spacer(),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 15,
-                    color: Colors.grey,
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: const [
-                  Text(
-                    'Language',
-                    style: TextStyle(color: Colors.grey, fontSize: 18),
-                  ),
-                  Spacer(),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 15,
-                    color: Colors.grey,
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  const Text(
-                    'Dark Mode',
-                    style: TextStyle(color: Colors.grey, fontSize: 18),
-                  ),
-                  const Spacer(),
-                  Expanded(
-                    child: SwitchListTile.adaptive(
-                      onChanged: (value) {
-                        CupitHome.get(context).changeSwitch(value: value);
-                      },
-                      value: CupitHome.get(context).dartSwitch,
-                      activeColor: Colors.black26,
+
+                  Stack(
+                    alignment: AlignmentDirectional.bottomEnd,
+                    children:[ CircleAvatar(
+                      radius: 70,
+                      backgroundImage: AssetImage('assets/images/design.png'),
                     ),
-                  )
-                ],
+                      // ButtonTheme(
+                      //   minWidth: 10,
+                      //   height: 10,
+                      //   child: MaterialButton(
+                      //     minWidth: 2,
+                      //
+                      //     onPressed: () {},
+                      //     shape: const CircleBorder(),
+                      //     color: CupitHome.get(context).dartSwitch
+                      //         ? Color(0xff8d8d8d)
+                      //         : Colors.blue,
+                      //     child: Icon(
+                      //
+                      //       Icons.favorite_sharp,
+                      //
+                      //       color: CupitHome.get(context).dartSwitch
+                      //           ? Colors.white
+                      //           : Colors.white,
+                      //     ),
+                      //   ),
+                      // )
+                          ]
+                  ),
+              // const Divider(
+              //   color: Colors.grey,
+              //   height: 15,
+              //   thickness: 2,
+              // ),
+              const SizedBox(
+                height: 9,
               ),
+              TextButton(onPressed: (){}, child: Text('Modifier profile',style: TextStyle(
+                decoration: TextDecoration.underline,
+              ),)),
+                  const SizedBox(
+                    height: 6,
+                  ),
+
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.home,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Constantine Nouvelle Ville, Alger wali",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+
+                          style:
+                          TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                        // SizedBox(width: 10,)
+                      ],
+                    ),
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color:  CupitHome.get(context).dartSwitch
+                          ? Colors.blueGrey
+                          : Colors.blue,
+                    ),
+                  ),
+              const SizedBox(
+                height: 15,
+              ),
+
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.real_estate_agent_outlined,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Constantine Issm agence",
+                          maxLines: 1,
+                          style:
+                          TextStyle(color: Colors.white, fontSize: 16),
+                        )
+                      ],
+                    ),
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color:  CupitHome.get(context).dartSwitch
+                          ? Colors.blueGrey
+                          : Colors.blue,
+                    ),
+                  ),
+              const SizedBox(
+                height: 15,
+              ),
+
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.phone,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "077640169",
+                          maxLines: 1,
+                          style:
+                          TextStyle(color: Colors.white, fontSize: 18),
+                        )
+                      ],
+                    ),
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color:  CupitHome.get(context).dartSwitch
+                          ? Colors.blueGrey
+                          : Colors.blue,
+                    ),
+                  ),
+              const SizedBox(
+                height: 15,
+              ),
+              // Row(
+              //   children: [
+              //     const Text(
+              //       'Dark Mode',
+              //       style: TextStyle(color: Colors.grey, fontSize: 18),
+              //     ),
+              //     const Spacer(),
+              //     Expanded(
+              //       child: SwitchListTile.adaptive(
+              //         onChanged: (value) {
+              //           CupitHome.get(context).changeSwitch(value: value);
+              //         },
+              //         value: CupitHome.get(context).dartSwitch,
+              //         activeColor: Colors.black26,
+              //       ),
+              //     )
+              //   ],
+              // ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.alternate_email,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "alaeddine1305@gmail.com",
+                          maxLines: 1,
+                          style:
+                          TextStyle(color: Colors.white, fontSize: 16),
+                        )
+                      ],
+                    ),
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color:  CupitHome.get(context).dartSwitch
+                          ? Colors.blueGrey
+                          : Colors.blue,
+                    ),
+                  ),
               const Spacer(),
               Center(
                 child: ConditionalBuilder(
                   builder: (BuildContext context) {
-                    return TextButton(
-                      onPressed: () {
-                        CupitHome.get(context).logOut();
-                      },
-                      style: TextButton.styleFrom(),
-                      child: Text(
-                        'SING OUT',
-                        style: Theme.of(context).textTheme.headline4,
+                    return Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: CupitHome.get(context).dartSwitch
+                            ? Colors.blueGrey
+                            : Colors.blue,
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(5),
+                            bottomLeft: Radius.circular(5),
+                            bottomRight: Radius.circular(15)),
+                      ),
+                      child: Center(
+                        child: Container(
+                          padding:
+                          const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          width: double.infinity,
+                          child: MaterialButton(
+                            highlightColor:
+                            CupitHome.get(context).dartSwitch
+                                ? Colors.blueGrey
+                                : Colors.blue,
+                            splashColor: Colors.transparent,
+                            onPressed: () {
+                              CupitHome.get(context).logOut();
+                            },
+                            child: const Text(
+                          'DÉCONNEXION',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
                       ),
                     );
                   },
@@ -162,7 +278,7 @@ class Setting extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 50,
+                height: 10,
               )
             ]),
           ),
@@ -200,3 +316,5 @@ class Setting extends StatelessWidget {
     );
   }
 }
+
+
