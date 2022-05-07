@@ -20,7 +20,7 @@ class Home extends StatelessWidget {
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Offre'),
               BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Add'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.person_sharp), label: 'Profile')
+                  icon: Icon(Icons.account_circle), label: 'Profile')
             ],
             currentIndex: obj.currentindex,
             onTap: (value) {
