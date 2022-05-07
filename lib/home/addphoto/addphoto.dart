@@ -5,8 +5,10 @@ import 'package:agence/home/addphoto/editphoto.dart';
 import 'package:agence/home/cubitHome/cupit_home.dart';
 import 'package:agence/home/cubitHome/homeStates.dart';
 import 'package:agence/home/home.dart';
+import 'package:agence/home/offers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Addphoto extends StatelessWidget {
   Addphoto({Key? key}) : super(key: key);
@@ -215,9 +217,11 @@ class Addphoto extends StatelessWidget {
                             'papiers': jsonEncode(
                                 CupitHome.get(context).papiersListhttp)
                           };
-                          await CupitHome.get(context)
-                              .savePhotoBd(data: sendinfoOffer);
-                          print('done');
+                          CupitHome.get(context)
+                              .savePhotoBd(data: sendinfoOffer)
+                              .then((value) {
+                            CupitHome.get(context).resetValueoffer();
+                          });
                         },
                         child: const Text('CONFIRMER'))
                   ],
@@ -227,7 +231,31 @@ class Addphoto extends StatelessWidget {
           ]),
         );
       },
-      listener: (BuildContext context, Object? state) {},
+      listener: (BuildContext context, Object? state) {
+        if (state is CreateOfferSuccessState) {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const Home()),
+              (route) => false);
+          Fluttertoast.showToast(
+              msg: 'add offer success',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        } else if (state is CreateOfferBadState) {
+          Fluttertoast.showToast(
+              msg: 'error',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      },
     );
   }
 }

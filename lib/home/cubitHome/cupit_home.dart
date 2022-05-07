@@ -288,6 +288,7 @@ class CupitHome extends Cubit<HomeStates> {
     priceController = TextEditingController();
     imageFileList = [];
     base64List = [];
+    emit(InitialHomeState());
   }
 }
 
