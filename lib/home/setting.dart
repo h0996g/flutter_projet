@@ -1,4 +1,5 @@
 import 'package:agence/Api/constApi.dart';
+import 'package:agence/home/cubitHome/modifierprofileagence.dart';
 
 import 'package:agence/login/other/cachhelper.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -83,7 +84,12 @@ class Setting extends StatelessWidget {
               const SizedBox(
                 height: 9,
               ),
-              TextButton(onPressed: (){}, child: Text('Modifier profile',style: TextStyle(
+              TextButton(onPressed: (){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Modifierprofile()));
+              }, child: Text('Modifier profile',style: TextStyle(
                 decoration: TextDecoration.underline,
               ),)),
                   const SizedBox(

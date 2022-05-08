@@ -25,3 +25,6 @@ class ConditionalLodinState extends HomeStates {}
 class CreateOfferSuccessState extends HomeStates {}
 
 class CreateOfferBadState extends HomeStates {}
+
+
+class HiddenPasswordModifierState extends HomeStates {}

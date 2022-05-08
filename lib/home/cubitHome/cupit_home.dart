@@ -290,6 +290,22 @@ class CupitHome extends Cubit<HomeStates> {
     base64List = [];
     emit(InitialHomeState());
   }
+
+  //------------------------- te3 l3yn te3 password f modifier profile------------------------------------------
+  Icon iconhiddens =  Icon(Icons.visibility);
+
+  bool ishiddens = true;
+  void showpasse() {
+    if (ishiddens) {
+      iconhiddens =  Icon(Icons.visibility_off);
+      ishiddens = !ishiddens;
+    } else {
+      iconhiddens =  Icon(Icons.visibility);
+      ishiddens = !ishiddens;
+    }
+    emit(HiddenPasswordModifierState());
+  }
+
 }
 
 class Conditions_paiment {
@@ -321,3 +337,4 @@ class Papiers {
     required this.name,
   });
 }
+

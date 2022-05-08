@@ -2,7 +2,7 @@ import 'package:agence/home/cubitHome/cupit_home.dart';
 import 'package:flutter/material.dart';
 
 Widget defaultForm(
-        {required controller,
+        { controller,
         int maxline = 1,
         Widget? suffix,
         required context,
@@ -14,8 +14,10 @@ Widget defaultForm(
         IconButton? sufixIcon,
         TextInputAction? textInputAction,
         bool obscureText = false,
+            String? valeurinitial,
         Function? onFieldSubmitted}) =>
     TextFormField(
+      initialValue: valeurinitial,
       textInputAction: textInputAction,
       style: TextStyle(
           color:

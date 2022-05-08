@@ -51,6 +51,7 @@ class Settingsclient extends StatelessWidget {
                   alignment: AlignmentDirectional.bottomEnd,
                   children:[ CircleAvatar(
                     radius: 70,
+
                     backgroundImage: AssetImage('assets/images/design.png'),
                   ),
                     // ButtonTheme(
