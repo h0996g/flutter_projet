@@ -12,6 +12,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../login/login.dart';
 import 'cubitHome/cupit_home.dart';
 import 'cubitHome/homeStates.dart';
+import 'modifierprofile/modifierpasswordagence.dart';
 
 class Setting extends StatelessWidget {
   const Setting({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class Setting extends StatelessWidget {
     return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             elevation: 10,
             title: Text(
@@ -40,59 +42,57 @@ class Setting extends StatelessWidget {
             ],
           ),
           body: Padding(
+
             padding: const EdgeInsets.all(20.0),
             child:
-                Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-              const SizedBox(
+                Column(crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+              SizedBox(
+
                 height: 5,
               ),
 
-                  Stack(
-                    alignment: AlignmentDirectional.bottomEnd,
-                    children:[ CircleAvatar(
-                      radius: 70,
-                      backgroundImage: AssetImage('assets/images/design.png'),
-                    ),
-                      // ButtonTheme(
-                      //   minWidth: 10,
-                      //   height: 10,
-                      //   child: MaterialButton(
-                      //     minWidth: 2,
-                      //
-                      //     onPressed: () {},
-                      //     shape: const CircleBorder(),
-                      //     color: CupitHome.get(context).dartSwitch
-                      //         ? Color(0xff8d8d8d)
-                      //         : Colors.blue,
-                      //     child: Icon(
-                      //
-                      //       Icons.favorite_sharp,
-                      //
-                      //       color: CupitHome.get(context).dartSwitch
-                      //           ? Colors.white
-                      //           : Colors.white,
-                      //     ),
-                      //   ),
-                      // )
-                          ]
+                  CircleAvatar(
+                    radius: 70,
+                    backgroundImage: AssetImage('assets/images/design.png'),
                   ),
-              // const Divider(
-              //   color: Colors.grey,
-              //   height: 15,
-              //   thickness: 2,
-              // ),
-              const SizedBox(
+
+               SizedBox(
+
                 height: 9,
               ),
-              TextButton(onPressed: (){
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Modifierprofile()));
-              }, child: Text('Modifier profile',style: TextStyle(
-                decoration: TextDecoration.underline,
-              ),)),
-                  const SizedBox(
+              Center(
+                child: Row(
+                  mainAxisAlignment:MainAxisAlignment.center ,
+                  children:[ TextButton(onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Modifierprofile()));
+                  }, child: Text('Modifier profile',style: TextStyle(
+                    decoration: TextDecoration.underline,
+                  ),)),
+                    const SizedBox(
+                    width: 1,
+                  ),
+                    Text('/',style: TextStyle(color: CupitHome.get(context).dartSwitch
+                        ? Colors.blueGrey
+                        : Colors.blue,),),
+                    SizedBox(
+                      width: 1,
+                    ),
+                    TextButton(onPressed: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Modifierpassword()));
+                    }, child: Text('Modifier password',style: TextStyle(
+                      decoration: TextDecoration.underline,
+                    ),)),
+                  ]
+                ),
+              ),
+                   SizedBox(
                     height: 6,
                   ),
 
@@ -126,7 +126,7 @@ class Setting extends StatelessWidget {
                           : Colors.blue,
                     ),
                   ),
-              const SizedBox(
+              SizedBox(
                 height: 15,
               ),
 
@@ -157,7 +157,7 @@ class Setting extends StatelessWidget {
                           : Colors.blue,
                     ),
                   ),
-              const SizedBox(
+              SizedBox(
                 height: 15,
               ),
 
@@ -188,27 +188,10 @@ class Setting extends StatelessWidget {
                           : Colors.blue,
                     ),
                   ),
-              const SizedBox(
+            SizedBox(
                 height: 15,
               ),
-              // Row(
-              //   children: [
-              //     const Text(
-              //       'Dark Mode',
-              //       style: TextStyle(color: Colors.grey, fontSize: 18),
-              //     ),
-              //     const Spacer(),
-              //     Expanded(
-              //       child: SwitchListTile.adaptive(
-              //         onChanged: (value) {
-              //           CupitHome.get(context).changeSwitch(value: value);
-              //         },
-              //         value: CupitHome.get(context).dartSwitch,
-              //         activeColor: Colors.black26,
-              //       ),
-              //     )
-              //   ],
-              // ),
+
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
@@ -236,11 +219,12 @@ class Setting extends StatelessWidget {
                           : Colors.blue,
                     ),
                   ),
-              const Spacer(),
+               Spacer(),
               Center(
                 child: ConditionalBuilder(
                   builder: (BuildContext context) {
                     return Container(
+                      height: 46,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: CupitHome.get(context).dartSwitch
@@ -283,7 +267,7 @@ class Setting extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(
+              SizedBox(
                 height: 10,
               )
             ]),

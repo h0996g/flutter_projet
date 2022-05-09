@@ -35,12 +35,15 @@ class CubitModifier extends Cubit<ModifierStates> {
   List<XFile>? imageFileList = [];
   List<String> base64List = [];
 
-  XFile? oo ;
+   File? selectedImages ;
 
-  void selectImagesGalerymodifier() async {
-    final XFile? selectedImages = await imagePicker.pickImage(source: ImageSource.gallery);
+  Future<void>selectImagesGalerymodifier() async {
+    final  selectedImages = await imagePicker.pickImage(source: ImageSource.gallery);
     if (selectedImages==null) return;
-      imageFileList!.add(selectedImages);
+   final imagetemporaire=File(selectedImages.path);
+   this.selectedImages=imagetemporaire;
+
+      // imageFileList!.add(selectedImages);
 
       // selectedImages.forEach((element) async {
         Uint8List aa = await selectedImages.readAsBytes();

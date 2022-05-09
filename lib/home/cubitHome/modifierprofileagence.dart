@@ -28,26 +28,26 @@ class Modifierprofile extends StatelessWidget {
     return BlocConsumer<CubitModifier, ModifierStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
+
             elevation: 10,
             title: Text('Modifier Profile', style: Theme.of(context).textTheme.headline4),
           ),
-          body: Padding(padding: const EdgeInsets.all(16),
-            child:SingleChildScrollView(
-              child: Form(
+          body: SingleChildScrollView(
+            child: Padding(padding: const EdgeInsets.all(16),
+              child:Form(
                 key: formKeyyyy,
                 child: Column(crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(width: double.infinity,),
                     const SizedBox(
-                      height: 5,
+                      height: 10,
                     ),
                     CircleAvatar(
                       radius: 70,
-                      backgroundImage: CubitModifier.get(context).imagecamera==null ? AssetImage('assets/images/design.png') : Image.file(File(CubitModifier.get(context).imagecamera!.path)).image ,
-// backgroundImage: AssetImage('assets/images/design.png'),
-//                     child:  CubitModifier.get(context).imagecamera==null ? Image(image: AssetImage('assets/images/design.png') ) : Image.file
-//                       (File(CubitModifier.get(context).imagecamera!.path)),
+                      // backgroundImage: CubitModifier.get(context).imagecamera==null ? AssetImage('assets/images/design.png') : Image.file(File(CubitModifier.get(context).imagecamera!.path)).image ,
+                      backgroundImage: CubitModifier.get(context).selectedImages==null ? AssetImage('assets/images/design.png') : Image.file(File(CubitModifier.get(context).selectedImages!.path)).image ,
                     ),
                     const SizedBox(
                       height: 9,
@@ -87,7 +87,7 @@ class Modifierprofile extends StatelessWidget {
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      CupitHome.get(context).selectImagesGalery();
+                                      CubitModifier.get(context).selectImagesGalerymodifier();
                                       Navigator.pop(context);
                                     },
                                     child: Row(
@@ -110,7 +110,7 @@ class Modifierprofile extends StatelessWidget {
                               ),
                             );
                           });
-                    }, child: Text('Modifier profile',style: TextStyle(
+                    }, child: Text('Ajouter photo',style: TextStyle(
                       decoration: TextDecoration.underline,
                     ),)),
 
@@ -142,7 +142,7 @@ class Modifierprofile extends StatelessWidget {
                         ),
                         textInputAction: TextInputAction.next),
                     const SizedBox(
-                      height: 20,
+                      height: 22,
                     ),
 
                     defaultForm(
@@ -175,48 +175,48 @@ class Modifierprofile extends StatelessWidget {
 
 
                     const SizedBox(
-                      height: 20,
+                      height: 22,
                     ),
-                    defaultForm(
-
-                        context: context,
-                        textInputAction: TextInputAction.done,
-                        controller: passmodController,
-                        type: TextInputType.visiblePassword,
-                        onFieldSubmitted: () {
-
-                        },
-                        obscureText: CubitModifier.get(context).ishiddens,
-                        valid: (value) {
-                          if (value.isEmpty) {
-                            return 'Password Must Be Not Empty';
-                          }
-                        },
-                        lable: Text(
-                          'Password',
-                          style: TextStyle(
-                              color: CupitHome.get(context).dartSwitch
-                                  ? Colors.white
-                                  : Colors.grey),
-                        ),
-                        prefixIcon: Icon(
-                          Icons.password,
-                          color: CupitHome.get(context).dartSwitch
-                              ? Colors.white
-                              : Colors.grey,
-                        ),
-                        sufixIcon: IconButton(
-                          onPressed: () {
-                            CubitModifier.get(context).showpasse();
-                          },
-                          icon: CubitModifier.get(context).iconhiddens,
-                          color: CupitHome.get(context).dartSwitch
-                              ? Colors.white
-                              : Colors.grey,
-                        )),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    // defaultForm(
+                    //
+                    //     context: context,
+                    //     textInputAction: TextInputAction.done,
+                    //     controller: passmodController,
+                    //     type: TextInputType.visiblePassword,
+                    //     onFieldSubmitted: () {
+                    //
+                    //     },
+                    //     obscureText: CubitModifier.get(context).ishiddens,
+                    //     valid: (value) {
+                    //       if (value.isEmpty) {
+                    //         return 'Password Must Be Not Empty';
+                    //       }
+                    //     },
+                    //     lable: Text(
+                    //       'Password',
+                    //       style: TextStyle(
+                    //           color: CupitHome.get(context).dartSwitch
+                    //               ? Colors.white
+                    //               : Colors.grey),
+                    //     ),
+                    //     prefixIcon: Icon(
+                    //       Icons.password,
+                    //       color: CupitHome.get(context).dartSwitch
+                    //           ? Colors.white
+                    //           : Colors.grey,
+                    //     ),
+                    //     sufixIcon: IconButton(
+                    //       onPressed: () {
+                    //         CubitModifier.get(context).showpasse();
+                    //       },
+                    //       icon: CubitModifier.get(context).iconhiddens,
+                    //       color: CupitHome.get(context).dartSwitch
+                    //           ? Colors.white
+                    //           : Colors.grey,
+                    //     )),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
                     defaultForm(
                       context: context,
                       controller: numbermodController,
@@ -243,7 +243,7 @@ class Modifierprofile extends StatelessWidget {
 //      textInputAction: TextInputAction.next,
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 26,
                     ),
                     ConditionalBuilder(
                       condition: state is! ConditionalLodinState,
@@ -276,7 +276,7 @@ class Modifierprofile extends StatelessWidget {
                                     sendinfoagencemodifier = {
                                       'name': namemodController.text,
 
-                                      'password': passmodController.text,
+                                      // 'password': passmodController.text,
                                       'phone': numbermodController.text,
                                       'address': addressemodController.text
                                     };
@@ -299,9 +299,9 @@ class Modifierprofile extends StatelessWidget {
                       },
                     ),
                   ],),
-              ),
-            )
-            ,),
+              )
+              ,),
+          ),
         );
 
       },
