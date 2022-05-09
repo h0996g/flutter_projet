@@ -2,6 +2,7 @@ import 'package:agence/Api/constApi.dart';
 import 'package:agence/home/cubitHome/modifierprofileagence.dart';
 
 import 'package:agence/login/other/cachhelper.dart';
+import 'package:agence/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -65,10 +66,11 @@ class Setting extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment:MainAxisAlignment.center ,
                   children:[ TextButton(onPressed: (){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Modifierprofile()));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => Modifierprofile()));
+                    Changepage(context, Modifierprofile());
                   }, child: Text('Modifier profile',style: TextStyle(
                     decoration: TextDecoration.underline,
                   ),)),

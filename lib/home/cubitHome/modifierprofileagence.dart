@@ -1,13 +1,14 @@
 import 'dart:io';
 
+import 'package:agence/home/home.dart';
 import 'package:agence/home/modifierprofile/cubitmodifier.dart';
 import 'package:agence/home/modifierprofile/modifierstate.dart';
+import 'package:agence/home/setting.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 
 import '../../login/other/cachhelper.dart';
 import '../../shared/components/components.dart';
@@ -15,7 +16,7 @@ import 'cupit_home.dart';
 import 'homeStates.dart';
 
 class Modifierprofile extends StatelessWidget {
-   Modifierprofile({Key? key}) : super(key: key);
+  Modifierprofile({Key? key}) : super(key: key);
 
   var namemodController = TextEditingController(text: 'boulrens');
   var addressemodController = new TextEditingController(text: 'constantine');
@@ -28,91 +29,118 @@ class Modifierprofile extends StatelessWidget {
     return BlocConsumer<CubitModifier, ModifierStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           appBar: AppBar(
-
+            leading: IconButton(
+              onPressed: () {
+                FocusScope.of(context).unfocus();
+                CupitHome.get(context).currentindex=2;
+               Changepage(context, const Home());
+              },
+              icon: Icon(Icons.arrow_back),
+            ),
             elevation: 10,
-            title: Text('Modifier Profile', style: Theme.of(context).textTheme.headline4),
+            title: Text('Modifier Profile',
+                style: Theme.of(context).textTheme.headline4),
           ),
           body: SingleChildScrollView(
-            child: Padding(padding: const EdgeInsets.all(16),
-              child:Form(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Form(
                 key: formKeyyyy,
-                child: Column(crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(width: double.infinity,),
+                    Container(
+                      width: double.infinity,
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
                     CircleAvatar(
                       radius: 70,
                       // backgroundImage: CubitModifier.get(context).imagecamera==null ? AssetImage('assets/images/design.png') : Image.file(File(CubitModifier.get(context).imagecamera!.path)).image ,
-                      backgroundImage: CubitModifier.get(context).selectedImages==null ? AssetImage('assets/images/design.png') : Image.file(File(CubitModifier.get(context).selectedImages!.path)).image ,
+                      backgroundImage:
+                          CubitModifier.get(context).selectedImages == null
+                              ? AssetImage('assets/images/design.png')
+                              : Image.file(File(CubitModifier.get(context)
+                                      .selectedImages!
+                                      .path))
+                                  .image,
                     ),
                     const SizedBox(
                       height: 9,
                     ),
-                    TextButton(onPressed: (){
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text(
-                                'veuillez choisir une option',
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              content: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  TextButton(
-                                    onPressed: () {
-                                      CubitModifier.get(context).selectimagecameramodifier();
-                                      Navigator.pop(context);
-                                    },
-                                    child: Row(
-                                      children: const [
-                                        Icon(
-                                          Icons.camera_alt,
-                                          color: Colors.grey,
-                                        ),
-                                        SizedBox(
-                                          width: 8,
-                                        ),
-                                        Text(
-                                          'Camera',
-                                          style: TextStyle(color: Colors.grey),
-                                        ),
-                                      ],
-                                    ),
+                    TextButton(
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text(
+                                    'veuillez choisir une option',
+                                    style: TextStyle(color: Colors.black),
                                   ),
-                                  TextButton(
-                                    onPressed: () {
-                                      CubitModifier.get(context).selectImagesGalerymodifier();
-                                      Navigator.pop(context);
-                                    },
-                                    child: Row(
-                                      children: const [
-                                        Icon(
-                                          Icons.image,
-                                          color: Colors.grey,
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          CubitModifier.get(context)
+                                              .selectimagecameramodifier();
+                                          Navigator.pop(context);
+                                        },
+                                        child: Row(
+                                          children: const [
+                                            Icon(
+                                              Icons.camera_alt,
+                                              color: Colors.grey,
+                                            ),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Text(
+                                              'Camera',
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            ),
+                                          ],
                                         ),
-                                        SizedBox(
-                                          width: 8,
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          CubitModifier.get(context)
+                                              .selectImagesGalerymodifier();
+                                          Navigator.pop(context);
+                                        },
+                                        child: Row(
+                                          children: const [
+                                            Icon(
+                                              Icons.image,
+                                              color: Colors.grey,
+                                            ),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Text(
+                                              'Galery',
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          'Galery',
-                                          style: TextStyle(color: Colors.grey),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            );
-                          });
-                    }, child: Text('Ajouter photo',style: TextStyle(
-                      decoration: TextDecoration.underline,
-                    ),)),
+                                );
+                              });
+                        },
+                        child: Text(
+                          'Ajouter photo',
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                          ),
+                        )),
 
                     const SizedBox(
                       height: 14,
@@ -146,8 +174,7 @@ class Modifierprofile extends StatelessWidget {
                     ),
 
                     defaultForm(
-
-                         context: context,
+                        context: context,
                         // valeurinitial: ala,
                         controller: addressemodController,
                         type: TextInputType.text,
@@ -170,9 +197,7 @@ class Modifierprofile extends StatelessWidget {
                               ? Colors.white
                               : Colors.grey,
                         ),
-
                         textInputAction: TextInputAction.next),
-
 
                     const SizedBox(
                       height: 22,
@@ -262,14 +287,13 @@ class Modifierprofile extends StatelessWidget {
                           ),
                           child: Center(
                             child: Container(
-                              padding:
-                              const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                               width: double.infinity,
                               child: MaterialButton(
                                 highlightColor:
-                                CupitHome.get(context).dartSwitch
-                                    ? Colors.blueGrey
-                                    : Colors.blue,
+                                    CupitHome.get(context).dartSwitch
+                                        ? Colors.blueGrey
+                                        : Colors.blue,
                                 splashColor: Colors.transparent,
                                 onPressed: () {
                                   if (formKeyyyy.currentState!.validate()) {
@@ -280,7 +304,6 @@ class Modifierprofile extends StatelessWidget {
                                       'phone': numbermodController.text,
                                       'address': addressemodController.text
                                     };
-
                                   }
                                 },
                                 child: const Text(
@@ -298,15 +321,15 @@ class Modifierprofile extends StatelessWidget {
                         );
                       },
                     ),
-                  ],),
-              )
-              ,),
+                  ],
+                ),
+              ),
+            ),
           ),
         );
-
       },
-       listener: (BuildContext context, Object? state) {
-      //   if (state is LougOutSuccesState) {
+      listener: (BuildContext context, Object? state) {
+        //   if (state is LougOutSuccesState) {
         //   var then = CachHelper.removdata(key: 'token').then((value) {
         //     print(TOKEN);
         //     TOKEN = '';
@@ -337,5 +360,3 @@ class Modifierprofile extends StatelessWidget {
     );
   }
 }
-
-

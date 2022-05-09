@@ -30,6 +30,36 @@ class CubitModifier extends Cubit<ModifierStates> {
   }
 
 
+  Icon iconhiddenss =  Icon(Icons.visibility);
+
+  bool ishiddenss = true;
+  void showpasses() {
+    if (ishiddenss) {
+      iconhiddenss =  Icon(Icons.visibility_off);
+      ishiddenss = !ishiddenss;
+    } else {
+      iconhiddenss =  Icon(Icons.visibility);
+      ishiddenss = !ishiddenss;
+    }
+    emit(HiddenPasswordModifierrState());
+  }
+
+
+  Icon iconhiddensss =  Icon(Icons.visibility);
+
+  bool ishiddensss = true;
+  void showpassess() {
+    if (ishiddensss) {
+      iconhiddensss =  Icon(Icons.visibility_off);
+      ishiddensss = !ishiddensss;
+    } else {
+      iconhiddensss =  Icon(Icons.visibility);
+      ishiddensss = !ishiddensss;
+    }
+    emit(HiddenPasswordModifierrrState());
+  }
+
+
 //---------------------------image profile--------------------------------
   final ImagePicker imagePicker = ImagePicker();
   List<XFile>? imageFileList = [];

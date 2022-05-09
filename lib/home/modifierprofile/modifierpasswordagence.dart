@@ -79,7 +79,7 @@ body: SingleChildScrollView(
             onFieldSubmitted: () {
 
             },
-            obscureText: CubitModifier.get(context).ishiddens,
+            obscureText: CubitModifier.get(context).ishiddenss,
             valid: (value) {
               if (value.isEmpty) {
                 return 'Password Must Be Not Empty';
@@ -100,9 +100,9 @@ body: SingleChildScrollView(
             ),
             sufixIcon: IconButton(
               onPressed: () {
-                CubitModifier.get(context).showpasse();
+                CubitModifier.get(context).showpasses();
               },
-              icon: CubitModifier.get(context).iconhiddens,
+              icon: CubitModifier.get(context).iconhiddenss,
               color: CupitHome.get(context).dartSwitch
                   ? Colors.white
                   : Colors.grey,
@@ -119,7 +119,7 @@ body: SingleChildScrollView(
             onFieldSubmitted: () {
 
             },
-            obscureText: CubitModifier.get(context).ishiddens,
+            obscureText: CubitModifier.get(context).ishiddensss,
             valid: (value) {
               if (value.isEmpty) {
                 return 'Password Must Be Not Empty';
@@ -140,9 +140,9 @@ body: SingleChildScrollView(
             ),
             sufixIcon: IconButton(
               onPressed: () {
-                CubitModifier.get(context).showpasse();
+                CubitModifier.get(context).showpassess();
               },
-              icon: CubitModifier.get(context).iconhiddens,
+              icon: CubitModifier.get(context).iconhiddensss,
               color: CupitHome.get(context).dartSwitch
                   ? Colors.white
                   : Colors.grey,
