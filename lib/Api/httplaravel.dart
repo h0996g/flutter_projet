@@ -21,7 +21,7 @@ class Httplar {
     required path,
     Map<String, dynamic>? query,
   }) async {
-    var url = Uri.http(URLHTTP, LOGOUT, query);
+    var url = Uri.http(URLHTTP, path, query);
     return await http.get(url, headers: {
       'Accept': 'application/json',
       'Authorization': 'Bearer $TOKEN'

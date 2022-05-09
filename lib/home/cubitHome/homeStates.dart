@@ -26,5 +26,8 @@ class CreateOfferSuccessState extends HomeStates {}
 
 class CreateOfferBadState extends HomeStates {}
 
-
 class HiddenPasswordModifierState extends HomeStates {}
+
+class GoodGetOffersAgence extends HomeStates {}
+
+class BadGetOffersAgence extends HomeStates {}
