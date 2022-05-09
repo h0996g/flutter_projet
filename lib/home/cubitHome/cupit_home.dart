@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'dart:convert' as convert;
 
 import 'package:agence/Model/AfficheOffer.dart';
+import 'package:agence/Model/RegisterModel.dart';
 
 import 'package:agence/login/other/cachhelper.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import 'package:multi_select_flutter/util/multi_select_item.dart';
 
 import '../../Api/constApi.dart';
 import '../../Api/httplaravel.dart';
+import '../../Model/GetInfoUserModel.dart';
 import '../../clienthome/favorite.dart';
 import '../../clienthome/offersclient.dart';
 import '../../clienthome/settingsclient.dart';
@@ -295,21 +297,21 @@ class CupitHome extends Cubit<HomeStates> {
   }
 
   //------------------------- te3 l3yn te3 password f modifier profile------------------------------------------
-  Icon iconhiddens = Icon(Icons.visibility);
+  Icon iconhiddens = const Icon(Icons.visibility);
 
   bool ishiddens = true;
   void showpasse() {
     if (ishiddens) {
-      iconhiddens = Icon(Icons.visibility_off);
+      iconhiddens = const Icon(Icons.visibility_off);
       ishiddens = !ishiddens;
     } else {
-      iconhiddens = Icon(Icons.visibility);
+      iconhiddens = const Icon(Icons.visibility);
       ishiddens = !ishiddens;
     }
     emit(HiddenPasswordModifierState());
   }
 
-  DataOffer? dataOffer;
+  DataOffer? dataOfferModel;
   Future<void> getOfferAgence() async {
     emit(ConditionalLodinState());
     Httplar.httpget(path: GETOFFERSAGENCE).then((value) {
@@ -317,9 +319,9 @@ class CupitHome extends Cubit<HomeStates> {
         var jsonResponse =
             convert.jsonDecode(value.body) as Map<String, dynamic>;
 
-        dataOffer = DataOffer.fromJson(jsonResponse);
+        dataOfferModel = DataOffer.fromJson(jsonResponse);
         print('ook');
-        print(dataOffer!.data!.offers[0].papiers);
+        print(dataOfferModel!.data!.offers[0].papiers);
         emit(GoodGetOffersAgence());
       }
     }).catchError((e) {
@@ -327,6 +329,29 @@ class CupitHome extends Cubit<HomeStates> {
       emit(BadGetOffersAgence());
     });
   }
+
+//------------------------hadi t3 get information-----------------------------
+  GetInfoUser? getinfouserModel;
+  Future<void> getinformationAgence() async {
+    emit(ConditionalLodinState());
+    Httplar.httpget(path: GETINFOUSER).then((value) {
+      if (value.statusCode == 200) {
+        var jsonResponse =
+            convert.jsonDecode(value.body) as Map<String, dynamic>;
+
+        getinfouserModel = GetInfoUser.fromJson(jsonResponse);
+        print('ook user info');
+        // print(getinfouserModel!.agence!.address);
+        print(value.body);
+
+        emit(GoodGetOffersAgence());
+      }
+    }).catchError((e) {
+      print(e.toString());
+      emit(BaadGetInfoUserState());
+    });
+  }
+  // -----------------------------------------------------------------
 }
 
 class Conditions_paiment {

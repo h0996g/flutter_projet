@@ -1,7 +1,7 @@
 import 'package:agence/Api/constApi.dart';
 import 'package:agence/Model/ErrorRegisterModel.dart';
 import 'package:agence/Model/LoginModel.dart';
-import 'package:agence/Model/RegisterAgenceModel.dart';
+import 'package:agence/Model/RegisterModel.dart';
 import 'dart:convert' as convert;
 import 'package:agence/login/cupitlogin/loginStates.dart';
 

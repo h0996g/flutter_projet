@@ -1,5 +1,3 @@
-import 'package:image_picker/image_picker.dart';
-
 class DataOffer {
   DataOfferModel? data;
   DataOffer.fromJson(Map<String, dynamic> json) {

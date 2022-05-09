@@ -7,7 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../Api/constApi.dart';
 import '../Model/ErrorRegisterModel.dart';
-import '../Model/RegisterAgenceModel.dart';
+import '../Model/RegisterModel.dart';
 import '../home/cubitHome/cupit_home.dart';
 import '../home/home.dart';
 import '../shared/components/components.dart';

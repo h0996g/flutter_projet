@@ -1,12 +1,9 @@
-
-
 import 'package:agence/home/home.dart';
 import 'package:agence/shared/components/components.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 
 import '../home/cubitHome/cupit_home.dart';
 
@@ -242,12 +239,13 @@ class _OfferdetailagenceState extends State<Offerdetailagence> {
                           ),
                           Text('Information',
                               style: TextStyle(
-                                  color: a == 0 ? CupitHome.get(context).dartSwitch
-                                      ? Colors.white
-                                      : Colors.redAccent
+                                  color: a == 0
+                                      ? CupitHome.get(context).dartSwitch
+                                          ? Colors.white
+                                          : Colors.redAccent
                                       : CupitHome.get(context).dartSwitch
-                                      ? Colors.blueGrey
-                                      : Colors.blue,
+                                          ? Colors.blueGrey
+                                          : Colors.blue,
                                   fontSize: 14)),
                           const SizedBox(
                             height: 7,
@@ -288,20 +286,21 @@ class _OfferdetailagenceState extends State<Offerdetailagence> {
                             Icons.menu_sharp,
                             color: a == 1
                                 ? CupitHome.get(context).dartSwitch
-                                ? Colors.white
-                                : Colors.redAccent
+                                    ? Colors.white
+                                    : Colors.redAccent
                                 : CupitHome.get(context).dartSwitch
-                                ? Colors.blueGrey
-                                : Colors.blue,
+                                    ? Colors.blueGrey
+                                    : Colors.blue,
                           ),
                           Text('Details',
                               style: TextStyle(
-                                  color: a == 1 ? CupitHome.get(context).dartSwitch
-                                      ? Colors.white
-                                      : Colors.redAccent
+                                  color: a == 1
+                                      ? CupitHome.get(context).dartSwitch
+                                          ? Colors.white
+                                          : Colors.redAccent
                                       : CupitHome.get(context).dartSwitch
-                                      ? Colors.blueGrey
-                                      : Colors.blue,
+                                          ? Colors.blueGrey
+                                          : Colors.blue,
                                   fontSize: 14)),
                           const SizedBox(
                             height: 7,
@@ -337,20 +336,21 @@ class _OfferdetailagenceState extends State<Offerdetailagence> {
                             Icons.message_outlined,
                             color: a == 2
                                 ? CupitHome.get(context).dartSwitch
-                                ? Colors.white
-                                : Colors.redAccent
+                                    ? Colors.white
+                                    : Colors.redAccent
                                 : CupitHome.get(context).dartSwitch
-                                ? Colors.blueGrey
-                                : Colors.blue,
+                                    ? Colors.blueGrey
+                                    : Colors.blue,
                           ),
                           Text('Commentaire',
                               style: TextStyle(
-                                  color: a == 2 ? CupitHome.get(context).dartSwitch
-                                      ? Colors.white
-                                      : Colors.redAccent
+                                  color: a == 2
+                                      ? CupitHome.get(context).dartSwitch
+                                          ? Colors.white
+                                          : Colors.redAccent
                                       : CupitHome.get(context).dartSwitch
-                                      ? Colors.blueGrey
-                                      : Colors.blue,
+                                          ? Colors.blueGrey
+                                          : Colors.blue,
                                   fontSize: 14)),
                           const SizedBox(
                             height: 7,
@@ -402,17 +402,18 @@ class _OfferdetailagenceState extends State<Offerdetailagence> {
                           const SizedBox(
                             height: 5,
                           ),
-                           Icon(
+                          Icon(
                             Icons.delete,
                             color: CupitHome.get(context).dartSwitch
                                 ? Colors.blueGrey
                                 : Colors.blue,
                           ),
-                           Text('delete',
+                          Text('delete',
                               style: TextStyle(
                                   color: CupitHome.get(context).dartSwitch
                                       ? Colors.blueGrey
-                                      : Colors.blue, fontSize: 14)),
+                                      : Colors.blue,
+                                  fontSize: 14)),
                           const SizedBox(
                             height: 7,
                           )
@@ -478,89 +479,281 @@ Widget Information(context) => Padding(
     );
 
 Widget Details(context) => Padding(
-  padding: const EdgeInsets.all(18.0),
-  child:
-  SingleChildScrollView(
-    physics: BouncingScrollPhysics(),
-    child: Card(
-      color: CupitHome.get(context).dartSwitch
-          ? Colors.blueGrey
-          : Colors.lightBlue,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(width: 2, color: Colors.lightBlue),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child:
-      Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(children: [
-          SizedBox(height: 5,),
-
-          Row(children: [ SizedBox(width: 8,) , Container(width:130,child: Text('Wilaya ',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.white),)),SizedBox(width: 10,),Text('Constantine',style: TextStyle(color: Colors.white,fontSize: 18),)],),
-
-          SizedBox(height: 10,),
-
-          Row(children: [ SizedBox(width: 8,) , Container(width:130,child: Text('Superficie ',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),)),SizedBox(width: 10,),Text('140 m2',style: TextStyle(color: Colors.white,fontSize: 18),)],),
-
-          SizedBox(height: 10,),
-
-          Row(children: [ SizedBox(width: 8,) , Container(width:130,child: Text('Etages ',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),)),SizedBox(width: 10,),Text('4 ',style: TextStyle(color: Colors.white,fontSize: 18),)],),
-
-          SizedBox(height: 10,),
-
-          Row(children: [ SizedBox(width: 8,) , Container(width:130,child: Text('Chambres ',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),)),SizedBox(width: 10,),Text('5 chambre(s)',style: TextStyle(color: Colors.white,fontSize: 18),)],),
-
-          SizedBox(height: 10,),
-
-          Row(children: [ SizedBox(width: 8,) , Container(width:130,child: Text('Type de vente ',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),)),SizedBox(width: 10,),Text('5 chambre(s)',style: TextStyle(color: Colors.white,fontSize: 18),)],),
-
-          SizedBox(height: 10,),
-
-          Row(children: [ SizedBox(width: 8,) , Container(width:130,child: Text('Categorie ',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),)),SizedBox(width: 10,),Text('5 chambre(s)',style: TextStyle(color: Colors.white,fontSize: 18),)],),
-
-          SizedBox(height: 10,),
-
-
-          SizedBox(height: 1,),
-
-          Container(
-            height: 28,
-            child: Row(children: [ SizedBox(width: 8,) , Container(width:130,child: Text('Specification ',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),)),SizedBox(width: 10,),Expanded(
-              child: ListView.separated(scrollDirection : Axis.horizontal,itemCount: 3,itemBuilder: ((context, index) => listoption(context)),physics: const BouncingScrollPhysics(),  separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(
-                  width: 5,
-                );
-              },),
-            )],),
+      padding: const EdgeInsets.all(18.0),
+      child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Card(
+          color: CupitHome.get(context).dartSwitch
+              ? Colors.blueGrey
+              : Colors.lightBlue,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(width: 2, color: Colors.lightBlue),
+            borderRadius: BorderRadius.circular(20),
           ),
-          SizedBox(height: 8,),
-
-          Container(
-            height: 28,
-            child: Row(children: [ SizedBox(width: 8,) , Container(width:130,child: Text('paiement ',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),)),SizedBox(width: 10,),Expanded(
-              child: ListView.separated(scrollDirection : Axis.horizontal,itemCount: 3,itemBuilder: ((context, index) => listoption(context)),physics: const BouncingScrollPhysics(),  separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(
-                  width: 5,
-                );
-              },),
-            )],),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Container(
+                        width: 130,
+                        child: Text(
+                          'Wilaya ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.white),
+                        )),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Constantine',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Container(
+                        width: 130,
+                        child: Text(
+                          'Superficie ',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        )),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      '140 m2',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Container(
+                        width: 130,
+                        child: Text(
+                          'Etages ',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        )),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      '4 ',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Container(
+                        width: 130,
+                        child: Text(
+                          'Chambres ',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        )),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      '5 chambre(s)',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Container(
+                        width: 130,
+                        child: Text(
+                          'Type de vente ',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        )),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      '5 chambre(s)',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Container(
+                        width: 130,
+                        child: Text(
+                          'Categorie ',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        )),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      '5 chambre(s)',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  height: 1,
+                ),
+                Container(
+                  height: 28,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Container(
+                          width: 130,
+                          child: Text(
+                            'Specification ',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          )),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 3,
+                          itemBuilder: ((context, index) =>
+                              listoption(context)),
+                          physics: const BouncingScrollPhysics(),
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const SizedBox(
+                              width: 5,
+                            );
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Container(
+                  height: 28,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Container(
+                          width: 130,
+                          child: Text(
+                            'paiement ',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          )),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 3,
+                          itemBuilder: ((context, index) =>
+                              listoption(context)),
+                          physics: const BouncingScrollPhysics(),
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const SizedBox(
+                              width: 5,
+                            );
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-        ],),
+        ),
       ),
-    ),
-  ),
-);
+    );
 
-
-
-
-
-listoption(context)=> Container(
-
-
-  decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(15),
-    color: Colors.blueAccent,
-  ),
-  child: Center(child: Row(children:[ SizedBox(width: 6,),Text('5 chambre',style: TextStyle(fontSize: 18,color: Colors.white),),SizedBox(width: 6,)])) ,
-);
+listoption(context) => Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Colors.blueAccent,
+      ),
+      child: Center(
+          child: Row(children: [
+        SizedBox(
+          width: 6,
+        ),
+        Text(
+          '5 chambre',
+          style: TextStyle(fontSize: 18, color: Colors.white),
+        ),
+        SizedBox(
+          width: 6,
+        )
+      ])),
+    );

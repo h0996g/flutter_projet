@@ -1,6 +1,6 @@
 import 'package:agence/Api/constApi.dart';
 import 'package:agence/Model/ErrorRegisterModel.dart';
-import 'package:agence/Model/RegisterAgenceModel.dart';
+import 'package:agence/Model/RegisterModel.dart';
 import 'package:agence/home/home.dart';
 import 'package:agence/login/login.dart';
 import 'package:agence/login/other/cachhelper.dart';
@@ -334,6 +334,8 @@ class Agenceregister extends StatelessWidget {
           if (state.model is RegisterModel) {
             CachHelper.putcache(key: 'token', value: state.model!.token)
                 .then((value) {
+              CupitHome.get(context).getOfferAgence();
+              CupitHome.get(context).getinformationAgence();
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const Home()),

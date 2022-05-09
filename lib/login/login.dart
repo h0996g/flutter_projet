@@ -410,6 +410,7 @@ class LoginScreen extends StatelessWidget {
             CachHelper.putcache(key: 'token', value: state.model!.token)
                 .then((value) {
               CupitHome.get(context).getOfferAgence();
+              CupitHome.get(context).getinformationAgence();
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const Home()),

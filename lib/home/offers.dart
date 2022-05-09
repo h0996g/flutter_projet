@@ -18,69 +18,86 @@ class Offers extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
-        return ConditionalBuilder(
-          builder: (BuildContext context) {
-            return Scaffold(
-              floatingActionButton: FloatingActionButton(
-                onPressed: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) =>  Navbar()));
-                  Changepage(context, const Navbar());
-                },
-                child: Icon(
-                  Icons.place,
-                  color: CupitHome.get(context).dartSwitch
-                      ? Colors.white
-                      : Colors.white,
-                ),
-              ),
-              appBar: AppBar(
-                elevation: 10,
-                title: Text('Offers',
-                    style: Theme.of(context).textTheme.headline4),
-                actions: [
-                  IconButton(
-                      onPressed: () {
-                        CupitHome.get(context).changeSwitch(
-                            value: !CupitHome.get(context).dartSwitch);
-                      },
-                      icon: const Icon(
-                        Icons.dark_mode_outlined,
-                        size: 30,
-                      )),
-                  IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Search()));
-                      },
-                      icon: const Icon(
-                        Icons.search,
-                        size: 30,
-                      ))
-                ],
-              ),
-              body: Padding(
+        return Scaffold(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              // Navigator.push(context, MaterialPageRoute(builder: (context) =>  Navbar()));
+              Changepage(context, const Navbar());
+            },
+            child: Icon(
+              Icons.place,
+              color: CupitHome.get(context).dartSwitch
+                  ? Colors.white
+                  : Colors.white,
+            ),
+          ),
+          appBar: AppBar(
+            elevation: 10,
+            title: Text('Offers', style: Theme.of(context).textTheme.headline4),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    CupitHome.get(context).changeSwitch(
+                        value: !CupitHome.get(context).dartSwitch);
+                  },
+                  icon: const Icon(
+                    Icons.dark_mode_outlined,
+                    size: 30,
+                  )),
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Search()));
+                  },
+                  icon: const Icon(
+                    Icons.search,
+                    size: 30,
+                  ))
+            ],
+          ),
+          body: ConditionalBuilder(
+            builder: (BuildContext context) {
+              return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 0),
                   child: ListView.separated(
                     physics: const BouncingScrollPhysics(),
-                    itemBuilder: ((context, index) => ListItembuilder(context,
-                        CupitHome.get(context).dataOffer!.data!.offers[index])),
-                    itemCount:
-                        CupitHome.get(context).dataOffer!.data!.offers.length,
+                    itemBuilder: ((context, index) => ListItembuilder(
+                        context,
+                        CupitHome.get(context)
+                            .dataOfferModel!
+                            .data!
+                            .offers[index])),
+                    itemCount: CupitHome.get(context)
+                        .dataOfferModel!
+                        .data!
+                        .offers
+                        .length,
                     separatorBuilder: (BuildContext context, int index) {
                       return const SizedBox(
                         height: 0,
                       );
                     },
-                  )),
-            );
-          },
-          condition: CupitHome.get(context).dataOffer != null,
-          fallback: (BuildContext context) {
-            return const Center(child: CircularProgressIndicator());
-          },
+                  ));
+            },
+            condition: CupitHome.get(context).dataOfferModel != null,
+            fallback: (BuildContext context) {
+              return const Center(child: CircularProgressIndicator());
+            },
+          ),
         );
+
+        // return ConditionalBuilder(
+        //   builder: (BuildContext context) {
+        //     return
+
+        //   },
+        //   condition: CupitHome.get(context).dataOfferModel != null,
+        //   fallback: (BuildContext context) {
+        //     return const Center(child: CircularProgressIndicator());
+        //   },
+        // );
       },
       listener: (BuildContext context, Object? state) {},
     );
@@ -102,10 +119,10 @@ ListItembuilder(context, OffersModel model) {
     },
     child: Column(mainAxisSize: MainAxisSize.min, children: [
       Container(
-        height: 150,
+        height: 200,
         width: double.infinity,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
           image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
         ),
       ),
@@ -128,7 +145,7 @@ ListItembuilder(context, OffersModel model) {
                   end: Alignment.bottomLeft,
                   colors: [
                       Colors.blue,
-                      const Color(0xffCFD9E2FF),
+                      Color(0xffCFD9E2FF),
                     ]),
           borderRadius:
               const BorderRadius.vertical(bottom: Radius.circular(20)),
@@ -149,7 +166,7 @@ ListItembuilder(context, OffersModel model) {
             )
           ]),
           const SizedBox(
-            height: 10,
+            height: 3,
           ),
           Row(children: [
             const SizedBox(
@@ -163,7 +180,7 @@ ListItembuilder(context, OffersModel model) {
             )
           ])
         ]),
-        height: 100,
+        height: 90,
         width: double.infinity,
       )
     ]),
