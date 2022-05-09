@@ -33,71 +33,81 @@ class Setting extends StatelessWidget {
             actions: [
               IconButton(
                   onPressed: () {
-                    CupitHome.get(context).changeSwitch(value: !CupitHome.get(context).dartSwitch);
+                    CupitHome.get(context).changeSwitch(
+                        value: !CupitHome.get(context).dartSwitch);
                   },
                   icon: const Icon(
                     Icons.dark_mode_outlined,
                     size: 30,
                   )),
-
             ],
           ),
           body: Padding(
-
             padding: const EdgeInsets.all(20.0),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-              SizedBox(
-
-                height: 5,
-              ),
-
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 5,
+                  ),
                   CircleAvatar(
                     radius: 70,
                     backgroundImage: AssetImage('assets/images/design.png'),
                   ),
-
-               SizedBox(
-
-                height: 9,
-              ),
-              Center(
-                child: Row(
-                  mainAxisAlignment:MainAxisAlignment.center ,
-                  children:[ TextButton(onPressed: (){
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => Modifierprofile()));
-                    Changepage(context, Modifierprofile());
-                  }, child: Text('Modifier profile',style: TextStyle(
-                    decoration: TextDecoration.underline,
-                  ),)),
-                    const SizedBox(
-                    width: 1,
+                  SizedBox(
+                    height: 9,
                   ),
-                    Text('/',style: TextStyle(color: CupitHome.get(context).dartSwitch
-                        ? Colors.blueGrey
-                        : Colors.blue,),),
-                    SizedBox(
-                      width: 1,
-                    ),
-                    TextButton(onPressed: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Modifierpassword()));
-                    }, child: Text('Modifier password',style: TextStyle(
-                      decoration: TextDecoration.underline,
-                    ),)),
-                  ]
-                ),
-              ),
-                   SizedBox(
+                  Center(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                              onPressed: () {
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => Modifierprofile()));
+                                Changepage(context, Modifierprofile());
+                              },
+                              child: Text(
+                                'Modifier profile',
+                                style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                ),
+                              )),
+                          const SizedBox(
+                            width: 1,
+                          ),
+                          Text(
+                            '/',
+                            style: TextStyle(
+                              color: CupitHome.get(context).dartSwitch
+                                  ? Colors.blueGrey
+                                  : Colors.blue,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 1,
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Modifierpassword()));
+                              },
+                              child: Text(
+                                'Modifier password',
+                                style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                ),
+                              )),
+                        ]),
+                  ),
+                  SizedBox(
                     height: 6,
                   ),
-
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
@@ -113,9 +123,7 @@ class Setting extends StatelessWidget {
                           "Constantine Nouvelle Ville, Alger wali",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-
-                          style:
-                          TextStyle(color: Colors.white, fontSize: 16),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                         // SizedBox(width: 10,)
                       ],
@@ -123,15 +131,14 @@ class Setting extends StatelessWidget {
                     height: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color:  CupitHome.get(context).dartSwitch
+                      color: CupitHome.get(context).dartSwitch
                           ? Colors.blueGrey
                           : Colors.blue,
                     ),
                   ),
-              SizedBox(
-                height: 15,
-              ),
-
+                  SizedBox(
+                    height: 15,
+                  ),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
@@ -146,23 +153,21 @@ class Setting extends StatelessWidget {
                         Text(
                           "Constantine Issm agence",
                           maxLines: 1,
-                          style:
-                          TextStyle(color: Colors.white, fontSize: 16),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         )
                       ],
                     ),
                     height: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color:  CupitHome.get(context).dartSwitch
+                      color: CupitHome.get(context).dartSwitch
                           ? Colors.blueGrey
                           : Colors.blue,
                     ),
                   ),
-              SizedBox(
-                height: 15,
-              ),
-
+                  SizedBox(
+                    height: 15,
+                  ),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
@@ -177,23 +182,21 @@ class Setting extends StatelessWidget {
                         Text(
                           "077640169",
                           maxLines: 1,
-                          style:
-                          TextStyle(color: Colors.white, fontSize: 18),
+                          style: TextStyle(color: Colors.white, fontSize: 18),
                         )
                       ],
                     ),
                     height: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color:  CupitHome.get(context).dartSwitch
+                      color: CupitHome.get(context).dartSwitch
                           ? Colors.blueGrey
                           : Colors.blue,
                     ),
                   ),
-            SizedBox(
-                height: 15,
-              ),
-
+                  SizedBox(
+                    height: 15,
+                  ),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
@@ -208,71 +211,69 @@ class Setting extends StatelessWidget {
                         Text(
                           "alaeddine1305@gmail.com",
                           maxLines: 1,
-                          style:
-                          TextStyle(color: Colors.white, fontSize: 16),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         )
                       ],
                     ),
                     height: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color:  CupitHome.get(context).dartSwitch
+                      color: CupitHome.get(context).dartSwitch
                           ? Colors.blueGrey
                           : Colors.blue,
                     ),
                   ),
-               Spacer(),
-              Center(
-                child: ConditionalBuilder(
-                  builder: (BuildContext context) {
-                    return Container(
-                      height: 46,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: CupitHome.get(context).dartSwitch
-                            ? Colors.blueGrey
-                            : Colors.blue,
-                        borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(5),
-                            bottomLeft: Radius.circular(5),
-                            bottomRight: Radius.circular(15)),
-                      ),
-                      child: Center(
-                        child: Container(
-                          padding:
-                          const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  Spacer(),
+                  Center(
+                    child: ConditionalBuilder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          height: 46,
                           width: double.infinity,
-                          child: MaterialButton(
-                            highlightColor:
-                            CupitHome.get(context).dartSwitch
+                          decoration: BoxDecoration(
+                            color: CupitHome.get(context).dartSwitch
                                 ? Colors.blueGrey
                                 : Colors.blue,
-                            splashColor: Colors.transparent,
-                            onPressed: () {
-                              CupitHome.get(context).logOut();
-                            },
-                            child: const Text(
-                          'DÉCONNEXION',
-                              style: TextStyle(color: Colors.white),
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(5),
+                                bottomLeft: Radius.circular(5),
+                                bottomRight: Radius.circular(15)),
+                          ),
+                          child: Center(
+                            child: Container(
+                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              width: double.infinity,
+                              child: MaterialButton(
+                                highlightColor:
+                                    CupitHome.get(context).dartSwitch
+                                        ? Colors.blueGrey
+                                        : Colors.blue,
+                                splashColor: Colors.transparent,
+                                onPressed: () {
+                                  CupitHome.get(context).logOut();
+                                },
+                                child: const Text(
+                                  'DÉCONNEXION',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                    );
-                  },
-                  condition: state is! ConditionalLodinState,
-                  fallback: (BuildContext context) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              )
-            ]),
+                        );
+                      },
+                      condition: state is! ConditionalLodinState,
+                      fallback: (BuildContext context) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  )
+                ]),
           ),
         );
       },
@@ -281,6 +282,7 @@ class Setting extends StatelessWidget {
           CachHelper.removdata(key: 'token').then((value) {
             print(TOKEN);
             TOKEN = '';
+            CupitHome.get(context).dataOffer = null;
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => LoginScreen()),
@@ -308,5 +310,3 @@ class Setting extends StatelessWidget {
     );
   }
 }
-
-

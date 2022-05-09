@@ -233,10 +233,12 @@ class Addphoto extends StatelessWidget {
       },
       listener: (BuildContext context, Object? state) {
         if (state is CreateOfferSuccessState) {
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const Home()),
-              (route) => false);
+          CupitHome.get(context).getOfferAgence().then((value) {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const Home()),
+                (route) => false);
+          });
           Fluttertoast.showToast(
               msg: 'add offer success',
               toastLength: Toast.LENGTH_SHORT,

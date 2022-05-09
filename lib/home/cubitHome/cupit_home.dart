@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+import 'dart:convert' as convert;
+
+import 'package:agence/Model/AfficheOffer.dart';
 
 import 'package:agence/login/other/cachhelper.dart';
 import 'package:flutter/material.dart';
@@ -292,20 +295,38 @@ class CupitHome extends Cubit<HomeStates> {
   }
 
   //------------------------- te3 l3yn te3 password f modifier profile------------------------------------------
-  Icon iconhiddens =  Icon(Icons.visibility);
+  Icon iconhiddens = Icon(Icons.visibility);
 
   bool ishiddens = true;
   void showpasse() {
     if (ishiddens) {
-      iconhiddens =  Icon(Icons.visibility_off);
+      iconhiddens = Icon(Icons.visibility_off);
       ishiddens = !ishiddens;
     } else {
-      iconhiddens =  Icon(Icons.visibility);
+      iconhiddens = Icon(Icons.visibility);
       ishiddens = !ishiddens;
     }
     emit(HiddenPasswordModifierState());
   }
 
+  DataOffer? dataOffer;
+  Future<void> getOfferAgence() async {
+    emit(ConditionalLodinState());
+    Httplar.httpget(path: GETOFFERSAGENCE).then((value) {
+      if (value.statusCode == 200) {
+        var jsonResponse =
+            convert.jsonDecode(value.body) as Map<String, dynamic>;
+
+        dataOffer = DataOffer.fromJson(jsonResponse);
+        print('ook');
+        print(dataOffer!.data!.offers[0].papiers);
+        emit(GoodGetOffersAgence());
+      }
+    }).catchError((e) {
+      print(e.toString());
+      emit(BadGetOffersAgence());
+    });
+  }
 }
 
 class Conditions_paiment {
@@ -337,4 +358,3 @@ class Papiers {
     required this.name,
   });
 }
-

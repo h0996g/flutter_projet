@@ -45,8 +45,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => CupitsearchCubit()),
         // BlocProvider(create: (context) => CupitMain()),
         BlocProvider(
-            create: (context) =>
-                CupitHome()..changeSwitch(darkswitchmain: darkswitchmain)),
+            create: (context) => CupitHome()
+              ..changeSwitch(darkswitchmain: darkswitchmain)
+              ..getOfferAgence()),
       ],
       child: BlocConsumer<CupitHome, HomeStates>(
         builder: (BuildContext context, state) {
