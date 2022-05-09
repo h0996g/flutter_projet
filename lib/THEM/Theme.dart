@@ -4,17 +4,13 @@ import 'package:flutter_hex_color/flutter_hex_color.dart';
 
 ThemeData light_theme() => ThemeData(
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
-
         backgroundColor: Colors.blue,
-
-       
       ),
       textTheme: const TextTheme(
           headline4:
               TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           bodyText2: TextStyle(
-            color: Colors.black,
-          ),
+              color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
           headline6: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 18)),
       scaffoldBackgroundColor: Colors.white,
