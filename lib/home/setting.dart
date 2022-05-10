@@ -64,11 +64,8 @@ class Setting extends StatelessWidget {
                             children: [
                               TextButton(
                                   onPressed: () {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) => Modifierprofile()));
-                                    Changepage(context, Modifierprofile());
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) => Modifierprofile()));
                                   },
                                   child: const Text(
                                     'Modifier profile',

@@ -321,7 +321,7 @@ class CupitHome extends Cubit<HomeStates> {
 
         dataOfferModel = DataOffer.fromJson(jsonResponse);
         print('ook');
-        print(dataOfferModel!.data!.offers[0].papiers);
+        // print(dataOfferModel!.data!.offers[0].papiers);
         emit(GoodGetOffersAgence());
       }
     }).catchError((e) {

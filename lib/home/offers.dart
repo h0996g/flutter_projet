@@ -76,7 +76,7 @@ class Offers extends StatelessWidget {
                         .length,
                     separatorBuilder: (BuildContext context, int index) {
                       return const SizedBox(
-                        height: 0,
+                        height: 10,
                       );
                     },
                   ));

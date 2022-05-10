@@ -1,3 +1,5 @@
+import 'package:agence/home/modifierprofile/modifierpasswordclient.dart';
+import 'package:agence/home/modifierprofile/modifierprofileclient.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,8 +8,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../Api/constApi.dart';
 import '../home/cubitHome/cupit_home.dart';
 import '../home/cubitHome/homeStates.dart';
+import '../home/cubitHome/modifierprofileagence.dart';
+import '../home/modifierprofile/modifierpasswordagence.dart';
 import '../login/login.dart';
 import '../login/other/cachhelper.dart';
+import '../shared/components/components.dart';
 
 class Settingsclient extends StatelessWidget {
   Settingsclient({Key? key}) : super(key: key);
@@ -54,40 +59,59 @@ class Settingsclient extends StatelessWidget {
 
                     backgroundImage: AssetImage('assets/images/design.png'),
                   ),
-                    // ButtonTheme(
-                    //   minWidth: 10,
-                    //   height: 10,
-                    //   child: MaterialButton(
-                    //     minWidth: 2,
-                    //
-                    //     onPressed: () {},
-                    //     shape: const CircleBorder(),
-                    //     color: CupitHome.get(context).dartSwitch
-                    //         ? Color(0xff8d8d8d)
-                    //         : Colors.blue,
-                    //     child: Icon(
-                    //
-                    //       Icons.favorite_sharp,
-                    //
-                    //       color: CupitHome.get(context).dartSwitch
-                    //           ? Colors.white
-                    //           : Colors.white,
-                    //     ),
-                    //   ),
-                    // )
+
                   ]
               ),
-              // const Divider(
-              //   color: Colors.grey,
-              //   height: 15,
-              //   thickness: 2,
-              // ),
+
               const SizedBox(
                 height: 9,
               ),
-              TextButton(onPressed: (){}, child: Text('Modifier profile',style: TextStyle(
-                decoration: TextDecoration.underline,
-              ),)),
+              Center(
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                          onPressed: () {
+
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => Modifierprofileclient()));
+                          },
+                          child: const Text(
+                            'Modifier profile',
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                            ),
+                          )),
+                      const SizedBox(
+                        width: 1,
+                      ),
+                      Text(
+                        '/',
+                        style: TextStyle(
+                          color: CupitHome.get(context).dartSwitch
+                              ? Colors.blueGrey
+                              : Colors.blue,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 1,
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Modifierpasswordclient()));
+                          },
+                          child: const Text(
+                            'Modifier password',
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                            ),
+                          )),
+                    ]),
+              ),
               const SizedBox(
                 height: 6,
               ),

@@ -66,7 +66,7 @@ class Offersclient extends StatelessWidget {
                 itemCount: 5,
                 separatorBuilder: (BuildContext context, int index) {
                   return const SizedBox(
-                    height: 0,
+                    height: 20,
                   );
                 },
               )),
@@ -151,7 +151,7 @@ class Offersclient extends StatelessWidget {
                 )
               ])
             ]),
-            height: 100,
+            height: 120,
             width: double.infinity,
           )
         ]),

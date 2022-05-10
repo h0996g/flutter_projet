@@ -15,3 +15,13 @@ class AjouterImageProfilecameraState extends ModifierStates {}
 
 
 class RemovePhotoprofilState extends ModifierStates {}
+
+
+
+class AjouterImageProfileClientState extends ModifierStates {}
+
+
+class AjouterImageProfilecameraClientState extends ModifierStates {}
+
+
+class RemovePhotoprofilClientState extends ModifierStates {}

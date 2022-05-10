@@ -364,35 +364,7 @@ class LoginScreen extends StatelessWidget {
         );
       },
       listener: (BuildContext context, Object? state) {
-        // if (state is GoodLoginState) {
-        //   if (state.mod.status) {
-        //     CachHelper.putcache(key: 'islogin', value: state.mod.data?.token)
-        //         .then((value) {
-        //       Navigator.pushAndRemoveUntil(
-        //           context,
-        //           MaterialPageRoute(builder: (context) => const Home()),
-        //           (route) => false);
-        //     }).then((value) {
-        //       Fluttertoast.showToast(
-        //           msg: state.mod.message,
-        //           toastLength: Toast.LENGTH_SHORT,
-        //           gravity: ToastGravity.BOTTOM,
-        //           timeInSecForIosWeb: 1,
-        //           backgroundColor: Colors.green,
-        //           textColor: Colors.white,
-        //           fontSize: 16.0);
-        //     });
-        //   } else {
-        //     Fluttertoast.showToast(
-        //         msg: state.mod.message,
-        //         toastLength: Toast.LENGTH_SHORT,
-        //         gravity: ToastGravity.BOTTOM,
-        //         timeInSecForIosWeb: 1,
-        //         backgroundColor: Colors.red,
-        //         textColor: Colors.white,
-        //         fontSize: 16.0);
-        //   }
-        // }
+
 
         if (state is GoodLoginState) {
           if (state.model is ErrorRegisterModel) {
@@ -409,12 +381,13 @@ class LoginScreen extends StatelessWidget {
             FocusScope.of(context).unfocus();
             CachHelper.putcache(key: 'token', value: state.model!.token)
                 .then((value) {
-              CupitHome.get(context).getOfferAgence();
+
               CupitHome.get(context).getinformationAgence();
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const Home()),
                   (route) => false);
+              CupitHome.get(context).getOfferAgence();
             }).then((value) {
               Fluttertoast.showToast(
                   msg: 'Welcom ${state.model!.name}',

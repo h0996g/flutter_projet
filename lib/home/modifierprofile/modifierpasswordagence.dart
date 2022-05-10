@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../shared/components/components.dart';
 import '../cubitHome/cupit_home.dart';
 import '../cubitHome/homeStates.dart';
+import '../home.dart';
 import 'cubitmodifier.dart';
 import 'modifierstate.dart';
 
@@ -21,6 +22,14 @@ class Modifierpassword extends StatelessWidget {
         builder: (BuildContext context, state) {
           return Scaffold(
             appBar: AppBar(
+              leading: IconButton(
+                onPressed: () {
+                  FocusScope.of(context).unfocus();
+                  CupitHome.get(context).currentindex=2;
+                  Changepage(context, const Home());
+                },
+                icon: Icon(Icons.arrow_back),
+              ),
               elevation: 10,
               title: Text('Modifier Mdp', style: Theme.of(context).textTheme.headline4),
             ),
