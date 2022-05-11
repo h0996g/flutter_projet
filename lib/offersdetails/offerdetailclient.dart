@@ -1,5 +1,3 @@
-
-
 import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/home/home.dart';
 import 'package:agence/shared/components/components.dart';
@@ -53,21 +51,7 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                   color: Colors.white54,
                   // child: Image(image:AssetImage('assets/images/building.jpg'),fit: BoxFit.cover,),
                   child: PageView.builder(
-                    onPageChanged: (int index) {
-                      // if (index == models.length - 1) {
-                      //   islast = true;
-                      //
-                      //   setState(() {
-                      //     nextIcon = const Icon(Icons.done);
-                      //   });
-                      // } else {
-                      //   islast = false;
-                      //
-                      //   setState(() {
-                      //     nextIcon = const Icon(Icons.arrow_forward_ios);
-                      //   });
-                      // }
-                    },
+                    onPageChanged: (int index) {},
                     controller: onbordingController,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) => Ala(models[index]),
@@ -170,14 +154,6 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                         : Colors.white,
                   ),
                 ),
-
-                // MaterialButton(
-                //   onPressed: () {},
-                //   shape: const CircleBorder(),
-                //   color: CupitHome.get(context).dartSwitch ? Color(0xff8d8d8d): Colors.blue,
-                //   child: Icon(Icons.favorite_sharp,color:CupitHome.get(context).dartSwitch ? Colors.white : Colors.white, ),
-                //
-                // )
               ],
             ),
           ),
@@ -265,15 +241,6 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                     ),
                   ),
                 ),
-
-                //         VerticalDivider(
-                //           thickness: 2,
-                //            width: 2,
-                //            color: CupitHome.get(context).dartSwitch
-                // ? Color(0xff131313)
-                //     : Color(0xffF3F3F3FF),
-                //         ),
-
                 Expanded(
                   child: Container(
                     color: CupitHome.get(context).dartSwitch
@@ -320,13 +287,6 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                     ),
                   ),
                 ),
-                // VerticalDivider(
-                //     thickness: 2,
-                //   width: 2,
-                //     color: CupitHome.get(context).dartSwitch
-                //         ? Color(0xff131313)
-                //         : Color(0xffF3F3F3FF),
-                // ),
                 Expanded(
                   child: Container(
                     height: 54,
@@ -370,13 +330,6 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                     ),
                   ),
                 ),
-                // VerticalDivider(
-                //     thickness: 2,
-                //   width: 2,
-                //     color: CupitHome.get(context).dartSwitch
-                //         ? Color(0xff131313)
-                //         : Color(0xffF3F3F3FF),
-                // ),
                 Expanded(
                   child: Container(
                     height: 54,
@@ -423,8 +376,9 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
           Expanded(
             flex: 43,
             child: Container(
-              child:
-                  a == 0 ? Information(context) : (a == 1 ? Details(context) : Commentaire()),
+              child: a == 0
+                  ? Information(context)
+                  : (a == 1 ? Details(context) : Commentaire()),
             ),
           ),
         ],
@@ -433,32 +387,33 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
   }
 
   Widget Commentaire() => Padding(
-    padding: const EdgeInsets.all(12.0),
-    child: Column(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
           children: [
             Expanded(
                 child: ListView.separated(
-                  physics: const BouncingScrollPhysics(),
-                  itemBuilder: ((context, index) => Listemessage(context)),
-                  itemCount: 5,
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(
-                      height: 1,
-                    );
-                  },
-                )),
-            SizedBox( height:8),
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: ((context, index) => Listemessage(context)),
+              itemCount: 5,
+              separatorBuilder: (BuildContext context, int index) {
+                return const SizedBox(
+                  height: 1,
+                );
+              },
+            )),
+            SizedBox(height: 8),
             Container(
               height: 58,
               child: defaultForm(
                 lable: Text(
-  'write a message',
-  style: TextStyle(
-  color: CupitHome.get(context).dartSwitch
-  ? Colors.white
-      : Colors.grey),
-  ),
-                sufixIcon:IconButton(onPressed:(){}, icon: Icon(Icons.send_sharp)) ,
+                  'write a message',
+                  style: TextStyle(
+                      color: CupitHome.get(context).dartSwitch
+                          ? Colors.white
+                          : Colors.grey),
+                ),
+                sufixIcon:
+                    IconButton(onPressed: () {}, icon: Icon(Icons.send_sharp)),
                 textInputAction: TextInputAction.done,
                 controller: alaController,
                 context: context,
@@ -468,15 +423,17 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                     return 'you can not add an umpty message';
                   }
                 },
-
               ),
             )
           ],
         ),
-  );
+      );
 }
 
-Widget Listemessage(context) => Container(color: Colors.blueAccent,height: 80,);
+Widget Listemessage(context) => Container(
+      color: Colors.blueAccent,
+      height: 80,
+    );
 
 Widget Ala(String k) => Image(
       image: AssetImage('${k}'),

@@ -107,7 +107,7 @@ class Offers extends StatelessWidget {
 ListItembuilder(context, OffersModel model) {
   // Uint8List bytes = base64Decode();
   // Image img = Image.memory(base64Decode(model.photo![0]));
-  final imageProvider = MemoryImage(base64Decode(model.photo![0]));
+   final imageProvider = MemoryImage(base64Decode(model.photo![0]));
 
   return NeumorphicButton(
     style: NeumorphicStyle(
@@ -120,10 +120,11 @@ ListItembuilder(context, OffersModel model) {
     child: Column(mainAxisSize: MainAxisSize.min, children: [
       Container(
         height: 200,
+
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-          image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+           image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
         ),
       ),
       Container(
