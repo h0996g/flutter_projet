@@ -5,7 +5,7 @@ const USERINFOTOKEN = '/api/user';
 const REGISTERCLIENT = '/api/registerclient';
 const REGISTERAGENCE = '/api/registeragence';
 const ADDOFFER = '/api/createoffer';
-const URLHTTP = '192.168.1.4:8000';
+const URLHTTP = '192.168.43.194:8000';
 const GETOFFERSAGENCE = '/api/getofferagence';
 const GETINFOUSER = '/api/getuser';
 
