@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import '../clienthome/search.dart';
+import '../shimmer_widget.dart';
 import 'cubitHome/homeStates.dart';
 
 class Offers extends StatelessWidget {
@@ -16,6 +17,49 @@ class Offers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    buildFoodShimmer() =>
+        //  ListTile(
+        //       leading: ShimmerWidget.circular(
+        //         width: 64,
+        //         height: 64,
+        //         shapeBorder: RoundedRectangleBorder(
+        //           borderRadius: BorderRadius.circular(12),
+        //         ),
+        //       ),
+        //       title: Align(
+        //         alignment: Alignment.centerLeft,
+        //         child: ShimmerWidget.rectangular(
+        //           width: MediaQuery.of(context).size.width * 0.3,
+        //           height: 16,
+        //         ),
+        //       ),
+        //       subtitle: ShimmerWidget.rectangular(height: 14),
+        // );
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 200,
+              width: double.infinity,
+              child: ShimmerWidget.rectangular(
+                width: MediaQuery.of(context).size.width * 0.3,
+                height: 16,
+              ),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            const Align(
+                alignment: Alignment.centerLeft,
+                child: ShimmerWidget.rectangular(
+                  width: double.infinity,
+                  height: 16,
+                )),
+          ],
+        );
     return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
@@ -83,7 +127,20 @@ class Offers extends StatelessWidget {
             },
             condition: CupitHome.get(context).dataOfferModel != null,
             fallback: (BuildContext context) {
-              return const Center(child: CircularProgressIndicator());
+              return Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                child: ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) => buildFoodShimmer(),
+                  itemCount: 6,
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const SizedBox(
+                      height: 10,
+                    );
+                  },
+                ),
+              );
             },
           ),
         );
@@ -107,7 +164,7 @@ class Offers extends StatelessWidget {
 ListItembuilder(context, OffersModel model) {
   // Uint8List bytes = base64Decode();
   // Image img = Image.memory(base64Decode(model.photo![0]));
-   final imageProvider = MemoryImage(base64Decode(model.photo![0]));
+  final imageProvider = MemoryImage(base64Decode(model.photo![0]));
 
   return NeumorphicButton(
     style: NeumorphicStyle(
@@ -120,11 +177,10 @@ ListItembuilder(context, OffersModel model) {
     child: Column(mainAxisSize: MainAxisSize.min, children: [
       Container(
         height: 200,
-
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-           image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+          image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
         ),
       ),
       Container(

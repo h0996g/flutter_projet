@@ -13,14 +13,14 @@ import 'cubitmodifier.dart';
 import 'modifierstate.dart';
 
 class Modifierprofileclient extends StatelessWidget {
-   Modifierprofileclient({Key? key}) : super(key: key);
+  Modifierprofileclient({Key? key}) : super(key: key);
 
-   var namemodControllerr = TextEditingController(text: 'boulrens');
-   var addressemodControllerr = new TextEditingController(text: 'constantine');
-   var passmodControllerr = TextEditingController();
-   var numbermodControllerr = TextEditingController(text: '05567894');
-   var formKeyyyyy = GlobalKey<FormState>();
-   Map<String, dynamic>  sendinfoclientmodifier = {};
+  var namemodControllerr = TextEditingController(text: 'boulrens');
+  var addressemodControllerr = new TextEditingController(text: 'constantine');
+  var passmodControllerr = TextEditingController();
+  var numbermodControllerr = TextEditingController(text: '05567894');
+  var formKeyyyyy = GlobalKey<FormState>();
+  Map<String, dynamic> sendinfoclientmodifier = {};
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class Modifierprofileclient extends StatelessWidget {
             leading: IconButton(
               onPressed: () {
                 FocusScope.of(context).unfocus();
-                CupitHome.get(context).currentindex=2;
+                CupitHome.get(context).currentindex = 2;
                 Changepage(context, const Navbar());
               },
               icon: Icon(Icons.arrow_back),
@@ -59,12 +59,12 @@ class Modifierprofileclient extends StatelessWidget {
                       radius: 70,
                       // backgroundImage: CubitModifier.get(context).imagecamera==null ? AssetImage('assets/images/design.png') : Image.file(File(CubitModifier.get(context).imagecamera!.path)).image ,
                       backgroundImage:
-                      CubitModifier.get(context).selectedImageclient == null
-                          ? AssetImage('assets/images/design.png')
-                          : Image.file(File(CubitModifier.get(context)
-                          .selectedImageclient!
-                          .path))
-                          .image,
+                          CubitModifier.get(context).selectedImageclient == null
+                              ? AssetImage('assets/images/design.png')
+                              : Image.file(File(CubitModifier.get(context)
+                                      .selectedImageclient!
+                                      .path))
+                                  .image,
                     ),
                     const SizedBox(
                       height: 9,
@@ -100,7 +100,7 @@ class Modifierprofileclient extends StatelessWidget {
                                             Text(
                                               'Camera',
                                               style:
-                                              TextStyle(color: Colors.grey),
+                                                  TextStyle(color: Colors.grey),
                                             ),
                                           ],
                                         ),
@@ -123,7 +123,7 @@ class Modifierprofileclient extends StatelessWidget {
                                             Text(
                                               'Galery',
                                               style:
-                                              TextStyle(color: Colors.grey),
+                                                  TextStyle(color: Colors.grey),
                                             ),
                                           ],
                                         ),
@@ -139,7 +139,6 @@ class Modifierprofileclient extends StatelessWidget {
                             decoration: TextDecoration.underline,
                           ),
                         )),
-
                     const SizedBox(
                       height: 14,
                     ),
@@ -170,7 +169,6 @@ class Modifierprofileclient extends StatelessWidget {
                     const SizedBox(
                       height: 22,
                     ),
-
                     defaultForm(
                         context: context,
                         // valeurinitial: ala,
@@ -196,11 +194,9 @@ class Modifierprofileclient extends StatelessWidget {
                               : Colors.grey,
                         ),
                         textInputAction: TextInputAction.next),
-
                     const SizedBox(
                       height: 22,
                     ),
-
                     defaultForm(
                       context: context,
                       controller: numbermodControllerr,
@@ -250,9 +246,9 @@ class Modifierprofileclient extends StatelessWidget {
                               width: double.infinity,
                               child: MaterialButton(
                                 highlightColor:
-                                CupitHome.get(context).dartSwitch
-                                    ? Colors.blueGrey
-                                    : Colors.blue,
+                                    CupitHome.get(context).dartSwitch
+                                        ? Colors.blueGrey
+                                        : Colors.blue,
                                 splashColor: Colors.transparent,
                                 onPressed: () {
                                   if (formKeyyyyy.currentState!.validate()) {

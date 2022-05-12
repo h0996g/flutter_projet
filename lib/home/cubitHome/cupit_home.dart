@@ -4,8 +4,6 @@ import 'dart:typed_data';
 import 'dart:convert' as convert;
 
 import 'package:agence/Model/AfficheOffer.dart';
-import 'package:agence/Model/RegisterModel.dart';
-
 import 'package:agence/login/other/cachhelper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -247,7 +245,7 @@ class CupitHome extends Cubit<HomeStates> {
   }
 
   void logOut() {
-    emit(ConditionalLodinState());
+    emit(ConditionalLodinLogoutState());
     Httplar.httpget(path: LOGOUT).then((value) {
       TOKEN = '';
 
@@ -315,15 +313,12 @@ class CupitHome extends Cubit<HomeStates> {
   Future<void> getOfferAgence() async {
     emit(ConditionalLodinState());
     Httplar.httpget(path: GETOFFERSAGENCE).then((value) {
-      if (value.statusCode == 200) {
-        var jsonResponse =
-            convert.jsonDecode(value.body) as Map<String, dynamic>;
+      var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
 
-        dataOfferModel = DataOffer.fromJson(jsonResponse);
-        print('ook');
-        // print(dataOfferModel!.data!.offers[0].papiers);
-        emit(GoodGetOffersAgence());
-      }
+      dataOfferModel = DataOffer.fromJson(jsonResponse);
+      print('ook');
+      // print(dataOfferModel!.data!.offers[0].papiers);
+      emit(GoodGetOffersAgence());
     }).catchError((e) {
       print(e.toString());
       emit(BadGetOffersAgence());
@@ -333,19 +328,16 @@ class CupitHome extends Cubit<HomeStates> {
 //------------------------hadi t3 get information-----------------------------
   GetInfoUser? getinfouserModel;
   Future<void> getinformationAgence() async {
-    emit(ConditionalLodinState());
+    emit(ConditionalLodinInfoState());
     Httplar.httpget(path: GETINFOUSER).then((value) {
-      if (value.statusCode == 200) {
-        var jsonResponse =
-            convert.jsonDecode(value.body) as Map<String, dynamic>;
+      var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
 
-        getinfouserModel = GetInfoUser.fromJson(jsonResponse);
-        print('ook user info');
-        // print(getinfouserModel!.agence!.address);
-        print(value.body);
+      getinfouserModel = GetInfoUser.fromJson(jsonResponse);
+      print('ook user info');
+      // print(getinfouserModel!.agence!.address);
+      print(value.body);
 
-        emit(GoodGetOffersAgence());
-      }
+      emit(GoodGetOffersAgence());
     }).catchError((e) {
       print(e.toString());
       emit(BaadGetInfoUserState());
