@@ -9,14 +9,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../home/cubitHome/cupit_home.dart';
 
-class Offerdetailclient extends StatefulWidget {
+class Offerdetailclient extends StatelessWidget {
   Offerdetailclient({Key? key}) : super(key: key);
 
-  @override
-  State<Offerdetailclient> createState() => _OfferdetailclientState();
-}
 
-class _OfferdetailclientState extends State<Offerdetailclient> {
   var onbordingController = PageController();
 
   var alaController = TextEditingController();
@@ -29,10 +25,7 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
 
   int a = 0;
   String number = '07666666';
-  void initState() {
-    super.initState();
-    number = '06666554';
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -137,8 +130,8 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                 Text(
                   "\$245.00",
                   style: Theme.of(context).textTheme.headline4?.copyWith(
-                        fontSize: 32,
-                      ),
+                    fontSize: 32,
+                  ),
                 ),
                 Spacer(),
                 MaterialButton(
@@ -204,9 +197,9 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                     child: MaterialButton(
                       padding: EdgeInsets.all(0),
                       onPressed: () {
-                        setState(() {
-                          a = 0;
-                        });
+                        // setState(() {
+                        //   a = 0;
+                        // });
                       },
                       child: Column(
                         children: [
@@ -217,21 +210,21 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                             Icons.description_outlined,
                             color: a == 0
                                 ? CupitHome.get(context).dartSwitch
-                                    ? Colors.white
-                                    : Colors.redAccent
+                                ? Colors.white
+                                : Colors.redAccent
                                 : CupitHome.get(context).dartSwitch
-                                    ? Colors.blueGrey
-                                    : Colors.blue,
+                                ? Colors.blueGrey
+                                : Colors.blue,
                           ),
                           Text('Information',
                               style: TextStyle(
                                   color: a == 0
                                       ? CupitHome.get(context).dartSwitch
-                                          ? Colors.white
-                                          : Colors.redAccent
+                                      ? Colors.white
+                                      : Colors.redAccent
                                       : CupitHome.get(context).dartSwitch
-                                          ? Colors.blueGrey
-                                          : Colors.blue,
+                                      ? Colors.blueGrey
+                                      : Colors.blue,
                                   fontSize: 14)),
                           SizedBox(
                             height: 7,
@@ -250,9 +243,9 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                     child: MaterialButton(
                       padding: EdgeInsets.all(0),
                       onPressed: () {
-                        setState(() {
-                          a = 1;
-                        });
+                        // setState(() {
+                        //   a = 1;
+                        // });
                       },
                       child: Column(
                         children: [
@@ -263,21 +256,21 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                             Icons.menu_sharp,
                             color: a == 1
                                 ? CupitHome.get(context).dartSwitch
-                                    ? Colors.white
-                                    : Colors.redAccent
+                                ? Colors.white
+                                : Colors.redAccent
                                 : CupitHome.get(context).dartSwitch
-                                    ? Colors.blueGrey
-                                    : Colors.blue,
+                                ? Colors.blueGrey
+                                : Colors.blue,
                           ),
                           Text('Details',
                               style: TextStyle(
                                   color: a == 1
                                       ? CupitHome.get(context).dartSwitch
-                                          ? Colors.white
-                                          : Colors.redAccent
+                                      ? Colors.white
+                                      : Colors.redAccent
                                       : CupitHome.get(context).dartSwitch
-                                          ? Colors.blueGrey
-                                          : Colors.blue,
+                                      ? Colors.blueGrey
+                                      : Colors.blue,
                                   fontSize: 14)),
                           SizedBox(
                             height: 7,
@@ -293,9 +286,9 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                     child: MaterialButton(
                       padding: EdgeInsets.all(0),
                       onPressed: () {
-                        setState(() {
-                          a = 2;
-                        });
+                        // setState(() {
+                        //   a = 2;
+                        // });
                       },
                       child: Column(
                         children: [
@@ -306,21 +299,21 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                             Icons.message_outlined,
                             color: a == 2
                                 ? CupitHome.get(context).dartSwitch
-                                    ? Colors.white
-                                    : Colors.redAccent
+                                ? Colors.white
+                                : Colors.redAccent
                                 : CupitHome.get(context).dartSwitch
-                                    ? Colors.blueGrey
-                                    : Colors.blue,
+                                ? Colors.blueGrey
+                                : Colors.blue,
                           ),
                           Text('Commentaire',
                               style: TextStyle(
                                   color: a == 2
                                       ? CupitHome.get(context).dartSwitch
-                                          ? Colors.white
-                                          : Colors.redAccent
+                                      ? Colors.white
+                                      : Colors.redAccent
                                       : CupitHome.get(context).dartSwitch
-                                          ? Colors.blueGrey
-                                          : Colors.blue,
+                                      ? Colors.blueGrey
+                                      : Colors.blue,
                                   fontSize: 14)),
                           SizedBox(
                             height: 7,
@@ -378,7 +371,7 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
             child: Container(
               child: a == 0
                   ? Information(context)
-                  : (a == 1 ? Details(context) : Commentaire()),
+                  : (a == 1 ? Details(context) : Commentaire(context)),
             ),
           ),
         ],
@@ -386,12 +379,12 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
     );
   }
 
-  Widget Commentaire() => Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          children: [
-            Expanded(
-                child: ListView.separated(
+  Widget Commentaire(context) => Padding(
+    padding: const EdgeInsets.all(12.0),
+    child: Column(
+      children: [
+        Expanded(
+            child: ListView.separated(
               physics: const BouncingScrollPhysics(),
               itemBuilder: ((context, index) => Listemessage(context)),
               itemCount: 5,
@@ -401,341 +394,341 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                 );
               },
             )),
-            SizedBox(height: 8),
-            Container(
-              height: 58,
-              child: defaultForm(
-                lable: Text(
-                  'write a message',
-                  style: TextStyle(
-                      color: CupitHome.get(context).dartSwitch
-                          ? Colors.white
-                          : Colors.grey),
-                ),
-                sufixIcon:
-                    IconButton(onPressed: () {}, icon: Icon(Icons.send_sharp)),
-                textInputAction: TextInputAction.done,
-                controller: alaController,
-                context: context,
-                type: TextInputType.text,
-                valid: (value) {
-                  if (value.isEmpty) {
-                    return 'you can not add an umpty message';
-                  }
-                },
-              ),
-            )
-          ],
-        ),
-      );
+        SizedBox(height: 8),
+        Container(
+          height: 58,
+          child: defaultForm(
+            lable: Text(
+              'write a message',
+              style: TextStyle(
+                  color: CupitHome.get(context).dartSwitch
+                      ? Colors.white
+                      : Colors.grey),
+            ),
+            sufixIcon:
+            IconButton(onPressed: () {}, icon: Icon(Icons.send_sharp)),
+            textInputAction: TextInputAction.done,
+            controller: alaController,
+            context: context,
+            type: TextInputType.text,
+            valid: (value) {
+              if (value.isEmpty) {
+                return 'you can not add an umpty message';
+              }
+            },
+          ),
+        )
+      ],
+    ),
+  );
 }
 
 Widget Listemessage(context) => Container(
-      color: Colors.blueAccent,
-      height: 80,
-    );
+  color: Colors.blueAccent,
+  height: 80,
+);
 
 Widget Ala(String k) => Image(
-      image: AssetImage('${k}'),
-      fit: BoxFit.cover,
-    );
+  image: AssetImage('${k}'),
+  fit: BoxFit.cover,
+);
 
 Widget Information(context) => Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: SingleChildScrollView(
+  padding: const EdgeInsets.all(16.0),
+  child: SingleChildScrollView(
+    child: Column(
+      children: [
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          'Description ',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 28,
+          ),
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        Text(
+          '  aaaaaaaaaa sssssssssss ddddddd ffffff eeeeeee qqqqqq sdrhfejf wlc lwcw wlehcwfelhf weeee eeeeeeeeeeeeee eeeeeeeeeee eeeeeeeeeeeeee eeeeeeeeeeeeee eeeeeeeeeee eeeeeeeeee e',
+          style: TextStyle(fontSize: 16),
+        ),
+      ],
+    ),
+  ),
+);
+
+Widget Details(context) => Padding(
+  padding: const EdgeInsets.all(18.0),
+  child: SingleChildScrollView(
+    physics: BouncingScrollPhysics(),
+    child: Card(
+      color: CupitHome.get(context).dartSwitch
+          ? Colors.blueGrey
+          : Colors.lightBlue,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(width: 2, color: Colors.lightBlue),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             SizedBox(
+              height: 5,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 8,
+                ),
+                Container(
+                    width: 130,
+                    child: Text(
+                      'Wilaya ',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white),
+                    )),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  'Constantine',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                )
+              ],
+            ),
+            SizedBox(
               height: 10,
             ),
-            Text(
-              'Description ',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 28,
+            Row(
+              children: [
+                SizedBox(
+                  width: 8,
+                ),
+                Container(
+                    width: 130,
+                    child: Text(
+                      'Superficie ',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  '140 m2',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 8,
+                ),
+                Container(
+                    width: 130,
+                    child: Text(
+                      'Etages ',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  '4 ',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 8,
+                ),
+                Container(
+                    width: 130,
+                    child: Text(
+                      'Chambres ',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  '5 chambre(s)',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 8,
+                ),
+                Container(
+                    width: 130,
+                    child: Text(
+                      'Type de vente ',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  '5 chambre(s)',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 8,
+                ),
+                Container(
+                    width: 130,
+                    child: Text(
+                      'Categorie ',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  '5 chambre(s)',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 1,
+            ),
+            Container(
+              height: 28,
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Container(
+                      width: 130,
+                      child: Text(
+                        'Specification ',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      )),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 3,
+                      itemBuilder: ((context, index) =>
+                          listoption(context)),
+                      physics: const BouncingScrollPhysics(),
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(
+                          width: 5,
+                        );
+                      },
+                    ),
+                  )
+                ],
               ),
             ),
             SizedBox(
-              height: 16,
+              height: 8,
             ),
-            Text(
-              '  aaaaaaaaaa sssssssssss ddddddd ffffff eeeeeee qqqqqq sdrhfejf wlc lwcw wlehcwfelhf weeee eeeeeeeeeeeeee eeeeeeeeeee eeeeeeeeeeeeee eeeeeeeeeeeeee eeeeeeeeeee eeeeeeeeee e',
-              style: TextStyle(fontSize: 16),
+            Container(
+              height: 28,
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Container(
+                      width: 130,
+                      child: Text(
+                        'paiement ',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      )),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 3,
+                      itemBuilder: ((context, index) =>
+                          listoption(context)),
+                      physics: const BouncingScrollPhysics(),
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(
+                          width: 5,
+                        );
+                      },
+                    ),
+                  )
+                ],
+              ),
             ),
           ],
         ),
       ),
-    );
-
-Widget Details(context) => Padding(
-      padding: const EdgeInsets.all(18.0),
-      child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Card(
-          color: CupitHome.get(context).dartSwitch
-              ? Colors.blueGrey
-              : Colors.lightBlue,
-          shape: RoundedRectangleBorder(
-            side: BorderSide(width: 2, color: Colors.lightBlue),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Container(
-                        width: 130,
-                        child: Text(
-                          'Wilaya ',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.white),
-                        )),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'Constantine',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Container(
-                        width: 130,
-                        child: Text(
-                          'Superficie ',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        )),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      '140 m2',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Container(
-                        width: 130,
-                        child: Text(
-                          'Etages ',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        )),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      '4 ',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Container(
-                        width: 130,
-                        child: Text(
-                          'Chambres ',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        )),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      '5 chambre(s)',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Container(
-                        width: 130,
-                        child: Text(
-                          'Type de vente ',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        )),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      '5 chambre(s)',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Container(
-                        width: 130,
-                        child: Text(
-                          'Categorie ',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        )),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      '5 chambre(s)',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  height: 1,
-                ),
-                Container(
-                  height: 28,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Container(
-                          width: 130,
-                          child: Text(
-                            'Specification ',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),
-                          )),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 3,
-                          itemBuilder: ((context, index) =>
-                              listoption(context)),
-                          physics: const BouncingScrollPhysics(),
-                          separatorBuilder: (BuildContext context, int index) {
-                            return const SizedBox(
-                              width: 5,
-                            );
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Container(
-                  height: 28,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Container(
-                          width: 130,
-                          child: Text(
-                            'paiement ',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),
-                          )),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 3,
-                          itemBuilder: ((context, index) =>
-                              listoption(context)),
-                          physics: const BouncingScrollPhysics(),
-                          separatorBuilder: (BuildContext context, int index) {
-                            return const SizedBox(
-                              width: 5,
-                            );
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+    ),
+  ),
+);
 
 listoption(context) => Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: CupitHome.get(context).dartSwitch
-            ? Colors.blueGrey
-            : Colors.blueAccent,
-      ),
-      child: Center(
-          child: Row(children: [
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(15),
+    color: CupitHome.get(context).dartSwitch
+        ? Colors.blueGrey
+        : Colors.blueAccent,
+  ),
+  child: Center(
+      child: Row(children: [
         SizedBox(
           width: 6,
         ),
@@ -747,4 +740,4 @@ listoption(context) => Container(
           width: 6,
         )
       ])),
-    );
+);
