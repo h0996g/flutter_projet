@@ -2,6 +2,12 @@ abstract class HomeStates {}
 
 class InitialHomeState extends HomeStates {}
 
+class ConditionalLodinState extends HomeStates {}
+
+class ConditionalLodinLogoutState extends HomeStates {}
+
+class ConditionalLodinInfoState extends HomeStates {}
+
 class ChangeNaveIndex extends HomeStates {}
 
 class ChangeNavebarIndex extends HomeStates {}
@@ -19,8 +25,6 @@ class AddImageCameraGoodState extends HomeStates {}
 class LougOutSuccesState extends HomeStates {}
 
 class LougOutBadState extends HomeStates {}
-
-class ConditionalLodinState extends HomeStates {}
 
 class CreateOfferSuccessState extends HomeStates {}
 

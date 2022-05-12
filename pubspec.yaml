@@ -52,6 +52,7 @@ dependencies:
   intl_phone_field: ^3.1.0
   image_cropper: ^1.4.1
   multi_select_flutter: ^4.1.2
+  shimmer: ^2.0.0
   
 
 

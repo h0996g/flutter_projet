@@ -2,7 +2,6 @@ import 'package:agence/Api/constApi.dart';
 import 'package:agence/home/cubitHome/modifierprofileagence.dart';
 
 import 'package:agence/login/other/cachhelper.dart';
-import 'package:agence/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,8 +63,11 @@ class Setting extends StatelessWidget {
                             children: [
                               TextButton(
                                   onPressed: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) => Modifierprofile()));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Modifierprofile()));
                                   },
                                   child: const Text(
                                     'Modifier profile',
@@ -226,52 +228,49 @@ class Setting extends StatelessWidget {
                         ),
                       ),
                       const Spacer(),
-                      Center(
-                        child: ConditionalBuilder(
-                          builder: (BuildContext context) {
-                            return Container(
-                              height: 46,
+                      ConditionalBuilder(
+                        builder: (BuildContext context) {
+                          return Container(
+                            height: 46,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: CupitHome.get(context).dartSwitch
+                                  ? Colors.blueGrey
+                                  : Colors.blue,
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(5),
+                                  bottomLeft: Radius.circular(5),
+                                  bottomRight: Radius.circular(15)),
+                            ),
+                            child: Container(
+                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                               width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: CupitHome.get(context).dartSwitch
-                                    ? Colors.blueGrey
-                                    : Colors.blue,
-                                borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(15),
-                                    topRight: Radius.circular(5),
-                                    bottomLeft: Radius.circular(5),
-                                    bottomRight: Radius.circular(15)),
-                              ),
-                              child: Center(
-                                child: Container(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                  width: double.infinity,
-                                  child: MaterialButton(
-                                    highlightColor:
-                                        CupitHome.get(context).dartSwitch
-                                            ? Colors.blueGrey
-                                            : Colors.blue,
-                                    splashColor: Colors.transparent,
-                                    onPressed: () {
-                                      CupitHome.get(context).logOut();
-                                    },
-                                    child: const Text(
-                                      'DÉCONNEXION',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
+                              child: MaterialButton(
+                                highlightColor:
+                                    CupitHome.get(context).dartSwitch
+                                        ? Colors.blueGrey
+                                        : Colors.blue,
+                                splashColor: Colors.transparent,
+                                onPressed: () {
+                                  CupitHome.get(context).logOut();
+                                },
+                                child: const Text(
+                                  'DÉCONNEXION',
+                                  style: TextStyle(color: Colors.white),
                                 ),
                               ),
-                            );
-                          },
-                          condition: state is! ConditionalLodinState,
-                          fallback: (BuildContext context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          },
-                        ),
+                            ),
+                          );
+                        },
+                        condition:
+                            // CupitHome.get(context).getinfouserModel != null,
+                            state is! ConditionalLodinLogoutState,
+                        fallback: (BuildContext context) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                       ),
                       const SizedBox(
                         height: 10,
@@ -279,7 +278,8 @@ class Setting extends StatelessWidget {
                     ]),
               );
             },
-            condition: CupitHome.get(context).getinfouserModel != null,
+            condition: CupitHome.get(context).getinfouserModel != null &&
+                state is! ConditionalLodinInfoState,
             fallback: (BuildContext context) {
               return const Center(child: CircularProgressIndicator());
             },
