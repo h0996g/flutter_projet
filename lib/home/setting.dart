@@ -21,7 +21,7 @@ class Setting extends StatelessWidget {
     return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
-          resizeToAvoidBottomInset: false,
+          // resizeToAvoidBottomInset: false,
           appBar: AppBar(
             elevation: 10,
             title: Text(
@@ -227,50 +227,57 @@ class Setting extends StatelessWidget {
                               : Colors.blue,
                         ),
                       ),
-                      const Spacer(),
-                      ConditionalBuilder(
-                        builder: (BuildContext context) {
-                          return Container(
-                            height: 46,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: CupitHome.get(context).dartSwitch
-                                  ? Colors.blueGrey
-                                  : Colors.blue,
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(15),
-                                  topRight: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                  bottomRight: Radius.circular(15)),
-                            ),
-                            child: Container(
-                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                              width: double.infinity,
-                              child: MaterialButton(
-                                highlightColor:
-                                    CupitHome.get(context).dartSwitch
-                                        ? Colors.blueGrey
-                                        : Colors.blue,
-                                splashColor: Colors.transparent,
-                                onPressed: () {
-                                  CupitHome.get(context).logOut();
-                                },
-                                child: const Text(
-                                  'DÉCONNEXION',
-                                  style: TextStyle(color: Colors.white),
+                      Spacer(),
+                      Flexible(
+                        child: ConditionalBuilder(
+                          builder: (BuildContext context) {
+                            return Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Container(
+                                height: 46,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: CupitHome.get(context).dartSwitch
+                                      ? Colors.blueGrey
+                                      : Colors.blue,
+                                  borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(5),
+                                      bottomLeft: Radius.circular(5),
+                                      bottomRight: Radius.circular(15)),
+                                ),
+                                child: Container(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  width: double.infinity,
+                                  child: MaterialButton(
+                                    highlightColor:
+                                        CupitHome.get(context).dartSwitch
+                                            ? Colors.blueGrey
+                                            : Colors.blue,
+                                    splashColor: Colors.transparent,
+                                    onPressed: () {
+                                      CupitHome.get(context).logOut();
+                                    },
+                                    child: const Text(
+                                      'DÉCONNEXION',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                        condition:
-                            // CupitHome.get(context).getinfouserModel != null,
-                            state is! ConditionalLodinLogoutState,
-                        fallback: (BuildContext context) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        },
+                            );
+                          },
+                          condition:
+                              // CupitHome.get(context).getinfouserModel != null,
+                              state is! ConditionalLodinLogoutState,
+                          fallback: (BuildContext context) {
+                            return const Align(
+                              alignment: Alignment.bottomCenter,
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                        ),
                       ),
                     ]),
               );

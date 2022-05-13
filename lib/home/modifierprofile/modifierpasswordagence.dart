@@ -28,8 +28,8 @@ class Modifierpassword extends StatelessWidget {
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
-              FocusScope.of(context).unfocus();
-              CupitHome.get(context).currentindex = 2;
+              //  FocusScope.of(context).unfocus();
+              // CupitHome.get(context).currentindex = 2;
               Changepage(context, const Home());
             },
             icon: Icon(Icons.arrow_back),
