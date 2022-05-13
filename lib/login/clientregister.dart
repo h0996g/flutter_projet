@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../Api/constApi.dart';
-import '../Model/ErrorRegisterModel.dart';
+import '../Model/ErrorRegisterAndLoginModel.dart';
 import '../Model/RegisterModel.dart';
 import '../home/cubitHome/cupit_home.dart';
 import '../home/home.dart';
@@ -323,7 +323,7 @@ class Clientregister extends StatelessWidget {
                   textColor: Colors.white,
                   fontSize: 16.0);
             });
-          } else if (state.model is ErrorRegisterModel) {
+          } else if (state.model is ErrorRegisterAndLoginModel) {
             Fluttertoast.showToast(
                 msg: state.model!.message,
                 toastLength: Toast.LENGTH_SHORT,

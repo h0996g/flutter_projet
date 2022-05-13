@@ -4,9 +4,10 @@ import 'dart:typed_data';
 
 import 'package:agence/Api/constApi.dart';
 import 'package:agence/Api/httplaravel.dart';
+import 'package:agence/Model/ErrorRegisterAndLoginModel.dart';
 import 'package:agence/home/modifierprofile/modifierstate.dart';
-import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
+import 'dart:convert' as convert;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -162,5 +163,29 @@ class CubitModifier extends Cubit<ModifierStates> {
       print(e.toString());
       emit(BadUpdateAgenceInfoState());
     }));
+  }
+
+  ErrorRegisterAndLoginModel? errorUpdatePasswordModel;
+  void updatePasswordAgence(Map<String, dynamic> data) {
+    emit(ModifierConditionalLodinState());
+    Httplar.httpPost(path: UPDATEAGENCEPASSWORD, data: data).then((value) {
+      if (value.statusCode == 200) {
+        // var jsonResponse =
+        //     convert.jsonDecode(value.body) as Map<String, dynamic>;
+        // errorUpdatePasswordModel =
+        //     ErrorRegisterAndLoginModel.fromJson(jsonResponse);
+        emit(GoodUpdatePasswordAgenceState());
+      } else if (value.statusCode == 422) {
+        var jsonResponse =
+            convert.jsonDecode(value.body) as Map<String, dynamic>;
+        errorUpdatePasswordModel =
+            ErrorRegisterAndLoginModel.fromJson(jsonResponse);
+
+        emit(GoodUpdatePasswordAgenceState(model: errorUpdatePasswordModel));
+      }
+    }).catchError((e) {
+      print(e.toString());
+      emit(BadUpdatePasswordAgenceState());
+    });
   }
 }

@@ -24,4 +24,12 @@ class GoodUpdateAgenceInfoState extends ModifierStates {}
 
 class BadUpdateAgenceInfoState extends ModifierStates {}
 
+class GoodUpdatePasswordAgenceState extends ModifierStates {
+  dynamic model;
+
+  GoodUpdatePasswordAgenceState({this.model});
+}
+
+class BadUpdatePasswordAgenceState extends ModifierStates {}
+
 class ModifierConditionalLodinState extends ModifierStates {}

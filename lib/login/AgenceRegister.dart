@@ -1,5 +1,5 @@
 import 'package:agence/Api/constApi.dart';
-import 'package:agence/Model/ErrorRegisterModel.dart';
+import 'package:agence/Model/ErrorRegisterAndLoginModel.dart';
 import 'package:agence/Model/RegisterModel.dart';
 import 'package:agence/home/home.dart';
 import 'package:agence/login/login.dart';
@@ -351,7 +351,7 @@ class Agenceregister extends StatelessWidget {
                   textColor: Colors.white,
                   fontSize: 16.0);
             });
-          } else if (state.model is ErrorRegisterModel) {
+          } else if (state.model is ErrorRegisterAndLoginModel) {
             Fluttertoast.showToast(
                 msg: state.model!.message,
                 toastLength: Toast.LENGTH_SHORT,

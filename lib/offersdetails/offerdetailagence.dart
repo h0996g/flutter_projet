@@ -44,7 +44,8 @@ class Offerdetailagence extends StatelessWidget {
                   children: [
                     Container(
                       width: double.infinity,
-                      height: 295,
+                      // height: 295,
+                      height: double.infinity,
 
                       color: Colors.white54,
                       // child: Image(image:AssetImage('assets/images/building.jpg'),fit: BoxFit.cover,),
@@ -66,12 +67,33 @@ class Offerdetailagence extends StatelessWidget {
                         },
                         controller: onbordingController,
                         physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) => Ala(
-                            CupitHome.get(context)
-                                .dataOfferModel!
-                                .data!
-                                .offers[position]),
-                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          // return Ala(CupitHome.get(context)
+                          //     .dataOfferModel!
+                          //     .data!
+                          //     .offers[position]);
+
+                          List? k;
+                          k = CupitHome.get(context)
+                              .dataOfferModel!
+                              .data!
+                              .offers[position]
+                              .photo
+                              ?.map((e) {
+                            return base64Decode(e);
+                          }).toList();
+                          return Image(
+                            image: MemoryImage(k![index]),
+                            width: 400,
+                            fit: BoxFit.cover,
+                          );
+                        },
+                        itemCount: CupitHome.get(context)
+                            .dataOfferModel!
+                            .data!
+                            .offers[position]
+                            .photo!
+                            .length,
                       ),
                     ),
                     Positioned(
@@ -107,28 +129,43 @@ class Offerdetailagence extends StatelessWidget {
                     //     )
                     // ),
                     Positioned(
-                      bottom: 20,
-                      left: 140,
-                      child: SmoothPageIndicator(
-                          controller: onbordingController, // PageController
-                          count: models.length,
-                          effect: ScrollingDotsEffect(
-                            dotColor: CupitHome.get(context).dartSwitch
-                                ? const Color(0xffb3b2b2)
-                                : Colors.white,
-                            activeDotColor: CupitHome.get(context).dartSwitch
-                                ? const Color(0xff131313)
-                                : Colors.blue,
-                          ),
+                      // bottom: 20,
+                      // left: 140,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: SmoothPageIndicator(
+                              controller: onbordingController, // PageController
+                              count: CupitHome.get(context)
+                                  .dataOfferModel!
+                                  .data!
+                                  .offers[position]
+                                  .photo!
+                                  .length,
+                              effect: ScrollingDotsEffect(
+                                dotColor: CupitHome.get(context).dartSwitch
+                                    ? const Color(0xffb3b2b2)
+                                    : Colors.white,
+                                activeDotColor:
+                                    CupitHome.get(context).dartSwitch
+                                        ? const Color(0xff131313)
+                                        : Colors.blue,
+                              ),
 
-                          // effect: const ExpandingDotsEffect(
-                          //
-                          //     dotWidth: 20,
-                          //     dotHeight: 15,
-                          //     dotColor: Colors.black26,
-                          //     activeDotColor:
-                          //     Colors.deepOrange), // your preferred effect
-                          onDotClicked: (index) {}),
+                              // effect: const ExpandingDotsEffect(
+                              //
+                              //     dotWidth: 20,
+                              //     dotHeight: 15,
+                              //     dotColor: Colors.black26,
+                              //     activeDotColor:
+                              //     Colors.deepOrange), // your preferred effect
+                              onDotClicked: (index) {}),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
                     )
                   ],
                 ),
