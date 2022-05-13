@@ -25,8 +25,12 @@ import 'homeStates.dart';
 
 class CupitHome extends Cubit<HomeStates> {
   CupitHome() : super(InitialHomeState());
+
+  static CupitHome get(context) => BlocProvider.of(context);
   List<Widget> body = [const Offers(), AddPost(), const Setting()];
   List<Widget> bodyy = [Offersclient(), Favorite(), Settingsclient()];
+
+  // int position = 0;
 
   // --------------------hadi  rahi t3 add photo fl offer----------------------
 
@@ -219,7 +223,6 @@ class CupitHome extends Cubit<HomeStates> {
 
 // --------------------hadi  rahi t3 MultiDropDown    END  ---------------------
 
-  static CupitHome get(context) => BlocProvider.of(context);
   int currentindex = 0;
   void changenav(value) {
     currentindex = value;

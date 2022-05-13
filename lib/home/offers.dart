@@ -107,12 +107,17 @@ class Offers extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 0),
                   child: ListView.separated(
                     physics: const BouncingScrollPhysics(),
-                    itemBuilder: ((context, index) => ListItembuilder(
-                        context,
-                        CupitHome.get(context)
-                            .dataOfferModel!
-                            .data!
-                            .offers[index])),
+                    itemBuilder: ((context, index) {
+                      int position = index;
+
+                      return ListItembuilder(
+                          position,
+                          context,
+                          CupitHome.get(context)
+                              .dataOfferModel!
+                              .data!
+                              .offers[index]);
+                    }),
                     itemCount: CupitHome.get(context)
                         .dataOfferModel!
                         .data!
@@ -161,7 +166,7 @@ class Offers extends StatelessWidget {
   }
 }
 
-ListItembuilder(context, OffersModel model) {
+ListItembuilder(int position, context, OffersModel model) {
   // Uint8List bytes = base64Decode();
   // Image img = Image.memory(base64Decode(model.photo![0]));
   final imageProvider = MemoryImage(base64Decode(model.photo![0]));
@@ -171,8 +176,13 @@ ListItembuilder(context, OffersModel model) {
         color: CupitHome.get(context).dartSwitch ? Colors.black : Colors.white,
         depth: 0),
     onPressed: () {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Offerdetailagence()));
+      print(position);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Offerdetailagence(
+                    position: position,
+                  )));
     },
     child: Column(mainAxisSize: MainAxisSize.min, children: [
       Container(

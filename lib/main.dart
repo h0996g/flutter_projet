@@ -7,6 +7,7 @@ import 'package:agence/login/cupitlogin/observer.dart';
 import 'package:agence/login/login.dart';
 import 'package:agence/login/onbording.dart';
 import 'package:agence/login/other/cachhelper.dart';
+import 'package:agence/offersdetails/cubitOfferDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'THEM/Theme.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => LoginCubit()),
         BlocProvider(create: (context) => CubitModifier()),
         BlocProvider(create: (context) => CupitsearchCubit()),
+        BlocProvider(create: (context) => CubitDetail()),
         // BlocProvider(create: (context) => CupitMain()),
         BlocProvider(
             create: (context) => CupitHome()
