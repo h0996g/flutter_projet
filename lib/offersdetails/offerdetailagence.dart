@@ -224,7 +224,7 @@ class Offerdetailagence extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Container(
+                      child: SizedBox(
                         height: 54,
                         child: MaterialButton(
                           padding: const EdgeInsets.all(0),
@@ -331,7 +331,7 @@ class Offerdetailagence extends StatelessWidget {
                     //         : Color(0xffF3F3F3FF),
                     // ),
                     Expanded(
-                      child: Container(
+                      child: SizedBox(
                         height: 54,
                         child: MaterialButton(
                           padding: const EdgeInsets.all(0),
@@ -382,7 +382,7 @@ class Offerdetailagence extends StatelessWidget {
                     //         : Color(0xffF3F3F3FF),
                     // ),
                     Expanded(
-                      child: Container(
+                      child: SizedBox(
                         height: 54,
                         child: MaterialButton(
                           padding: const EdgeInsets.all(0),
@@ -462,7 +462,8 @@ class Offerdetailagence extends StatelessWidget {
                               CupitHome.get(context)
                                   .dataOfferModel!
                                   .data!
-                                  .offers[position])
+                                  .offers[position],
+                              position)
                           : const Text('sousou')),
                 ),
               ),
@@ -530,38 +531,38 @@ Widget Information(context, OffersModel model) => Padding(
             ),
             Text(
               '${model.description} ',
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
           ],
         ),
       ),
     );
 
-Widget Details(context, OffersModel model) => Padding(
+Widget Details(context, OffersModel model, position) => Padding(
       padding: const EdgeInsets.all(18.0),
       child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Card(
           color: CupitHome.get(context).dartSwitch
               ? Colors.blueGrey
               : Colors.lightBlue,
           shape: RoundedRectangleBorder(
-            side: BorderSide(width: 2, color: Colors.lightBlue),
+            side: const BorderSide(width: 2, color: Colors.lightBlue),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 8,
                     ),
-                    Container(
+                    const SizedBox(
                         width: 130,
                         child: Text(
                           'Wilaya ',
@@ -570,24 +571,24 @@ Widget Details(context, OffersModel model) => Padding(
                               fontSize: 20,
                               color: Colors.white),
                         )),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Text(
                       '${model.wilaya}',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 8,
                     ),
-                    Container(
+                    const SizedBox(
                         width: 130,
                         child: Text(
                           'Superficie ',
@@ -596,24 +597,24 @@ Widget Details(context, OffersModel model) => Padding(
                               fontWeight: FontWeight.bold,
                               fontSize: 20),
                         )),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Text(
                       '${model.space} m2',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 8,
                     ),
-                    Container(
+                    const SizedBox(
                         width: 130,
                         child: Text(
                           'Etages ',
@@ -622,24 +623,24 @@ Widget Details(context, OffersModel model) => Padding(
                               fontWeight: FontWeight.bold,
                               fontSize: 20),
                         )),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Text(
                       '${model.nEtage} ',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 8,
                     ),
-                    Container(
+                    const SizedBox(
                         width: 130,
                         child: Text(
                           'Chambres ',
@@ -648,24 +649,24 @@ Widget Details(context, OffersModel model) => Padding(
                               fontWeight: FontWeight.bold,
                               fontSize: 20),
                         )),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Text(
                       '${model.nChambre} chambre(s)',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 8,
                     ),
-                    Container(
+                    const SizedBox(
                         width: 130,
                         child: Text(
                           'Type de vente ',
@@ -674,24 +675,24 @@ Widget Details(context, OffersModel model) => Padding(
                               fontWeight: FontWeight.bold,
                               fontSize: 20),
                         )),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Text(
                       '${model.typeVente}',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 8,
                     ),
-                    Container(
+                    const SizedBox(
                         width: 130,
                         child: Text(
                           'Categorie ',
@@ -700,29 +701,29 @@ Widget Details(context, OffersModel model) => Padding(
                               fontWeight: FontWeight.bold,
                               fontSize: 20),
                         )),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Text(
                       '${model.typeOffer}',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 1,
                 ),
-                Container(
+                SizedBox(
                   height: 28,
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
-                      Container(
+                      const SizedBox(
                           width: 130,
                           child: Text(
                             'Specification ',
@@ -731,37 +732,43 @@ Widget Details(context, OffersModel model) => Padding(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20),
                           )),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Expanded(
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 3,
-                          itemBuilder: ((context, index) =>
-                              listoption(context)),
-                          physics: const BouncingScrollPhysics(),
-                          separatorBuilder: (BuildContext context, int index) {
-                            return const SizedBox(
-                              width: 5,
-                            );
-                          },
-                        ),
+                        child: listSpecefication(
+                            context,
+                            CupitHome.get(context)
+                                .dataOfferModel!
+                                .data!
+                                .offers[position]),
+                        // child: ListView.separated(
+                        //   scrollDirection: Axis.horizontal,
+                        //   itemCount: 3,
+                        //   itemBuilder: ((context, index) =>
+                        //       listoption(context)),
+                        //   physics: const BouncingScrollPhysics(),
+                        //   separatorBuilder: (BuildContext context, int index) {
+                        //     return const SizedBox(
+                        //       width: 5,
+                        //     );
+                        //   },
+                        // ),
                       )
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
-                Container(
+                SizedBox(
                   height: 28,
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
-                      Container(
+                      const SizedBox(
                           width: 130,
                           child: Text(
                             'paiement ',
@@ -770,22 +777,28 @@ Widget Details(context, OffersModel model) => Padding(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20),
                           )),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Expanded(
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 3,
-                          itemBuilder: ((context, index) =>
-                              listoption(context)),
-                          physics: const BouncingScrollPhysics(),
-                          separatorBuilder: (BuildContext context, int index) {
-                            return const SizedBox(
-                              width: 5,
-                            );
-                          },
-                        ),
+                        child: listPaiment(
+                            context,
+                            CupitHome.get(context)
+                                .dataOfferModel!
+                                .data!
+                                .offers[position]),
+                        // child: ListView.separated(
+                        //   scrollDirection: Axis.horizontal,
+                        //   itemCount: 3,
+                        //   itemBuilder: ((context, index) =>
+                        //       listoption(context)),
+                        //   physics: const BouncingScrollPhysics(),
+                        //   separatorBuilder: (BuildContext context, int index) {
+                        //     return const SizedBox(
+                        //       width: 5,
+                        //     );
+                        //   },
+                        // ),
                       )
                     ],
                   ),
@@ -797,22 +810,71 @@ Widget Details(context, OffersModel model) => Padding(
       ),
     );
 
-listoption(context) => Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: Colors.blueAccent,
-      ),
-      child: Center(
-          child: Row(children: [
-        SizedBox(
-          width: 6,
-        ),
-        Text(
-          '5 chambre',
-          style: TextStyle(fontSize: 18, color: Colors.white),
-        ),
-        SizedBox(
-          width: 6,
-        )
-      ])),
+// listoption(context) => Container(
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(15),
+//         color: Colors.blueAccent,
+//       ),
+//       child: Center(
+//           child: Row(children: const [
+//         SizedBox(
+//           width: 6,
+//         ),
+//         Text(
+//           '5 chambre',
+//           style: TextStyle(fontSize: 18, color: Colors.white),
+//         ),
+//         SizedBox(
+//           width: 6,
+//         )
+//       ])),
+//     );
+
+listSpecefication(context, OffersModel model) => ListView(
+      scrollDirection: Axis.horizontal,
+      children: model.specification!
+          .map((e) => Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.blueAccent,
+                ),
+                child: Center(
+                    child: Row(children: [
+                  const SizedBox(
+                    width: 6,
+                  ),
+                  Text(
+                    '$e',
+                    style: const TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                  const SizedBox(
+                    width: 6,
+                  )
+                ])),
+              ))
+          .toList(),
+    );
+listPaiment(context, OffersModel model) => ListView(
+      scrollDirection: Axis.horizontal,
+      children: model.papiers!
+          .map((e) => Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.blueAccent,
+                ),
+                child: Center(
+                    child: Row(children: [
+                  const SizedBox(
+                    width: 6,
+                  ),
+                  Text(
+                    '$e',
+                    style: const TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                  const SizedBox(
+                    width: 6,
+                  )
+                ])),
+              ))
+          .toList(),
     );
