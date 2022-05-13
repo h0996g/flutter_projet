@@ -1,5 +1,5 @@
 import 'package:agence/Api/constApi.dart';
-import 'package:agence/Model/ErrorRegisterModel.dart';
+import 'package:agence/Model/ErrorRegisterAndLoginModel.dart';
 import 'package:agence/Model/LoginModel.dart';
 import 'package:agence/Model/RegisterModel.dart';
 import 'dart:convert' as convert;
@@ -16,7 +16,7 @@ class LoginCubit extends Cubit<LoginStates> {
   Icon iconhidden = const Icon(Icons.visibility);
 
   LoginModel? loginModel;
-  ErrorRegisterModel? loginModelError;
+  ErrorRegisterAndLoginModel? loginModelError;
 
   login({required Map<String, dynamic> data, required String path}) {
     emit(ConditionalLodinState());
@@ -35,7 +35,7 @@ class LoginCubit extends Cubit<LoginStates> {
         var jsonResponse =
             convert.jsonDecode(value.body) as Map<String, dynamic>;
 
-        loginModelError = ErrorRegisterModel.fromJson(jsonResponse);
+        loginModelError = ErrorRegisterAndLoginModel.fromJson(jsonResponse);
         print(loginModelError!.message);
         emit(GoodLoginState(loginModelError));
       }
@@ -46,7 +46,7 @@ class LoginCubit extends Cubit<LoginStates> {
   }
 
   RegisterModel? registerModel;
-  ErrorRegisterModel? errorRegisterModel;
+  ErrorRegisterAndLoginModel? errorRegisterModel;
   void registerUser(
       {required Map<String, dynamic> data, required String path}) {
     emit(ConditionalLodinState());
@@ -63,7 +63,7 @@ class LoginCubit extends Cubit<LoginStates> {
       } else if (value.statusCode == 422) {
         var jsonResponse =
             convert.jsonDecode(value.body) as Map<String, dynamic>;
-        errorRegisterModel = ErrorRegisterModel.fromJson(jsonResponse);
+        errorRegisterModel = ErrorRegisterAndLoginModel.fromJson(jsonResponse);
         emit(RegisterSuccesState(errorRegisterModel));
       }
     }).catchError((e) {

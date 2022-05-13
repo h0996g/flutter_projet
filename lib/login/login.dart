@@ -1,4 +1,4 @@
-import 'package:agence/Model/ErrorRegisterModel.dart';
+import 'package:agence/Model/ErrorRegisterAndLoginModel.dart';
 import 'package:agence/Model/LoginModel.dart';
 import 'package:agence/login/cupitlogin/cupitl.dart';
 import 'package:agence/login/cupitlogin/loginStates.dart';
@@ -364,10 +364,8 @@ class LoginScreen extends StatelessWidget {
         );
       },
       listener: (BuildContext context, Object? state) {
-
-
         if (state is GoodLoginState) {
-          if (state.model is ErrorRegisterModel) {
+          if (state.model is ErrorRegisterAndLoginModel) {
             Fluttertoast.showToast(
                 msg: state.model!.message,
                 toastLength: Toast.LENGTH_SHORT,
@@ -380,14 +378,13 @@ class LoginScreen extends StatelessWidget {
             // zedt hedi brk
             FocusScope.of(context).unfocus();
             CachHelper.putcache(key: 'token', value: state.model!.token)
-                .then((value) {
-
+                .then((value) async {
               CupitHome.get(context).getinformationAgence();
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const Home()),
                   (route) => false);
-              CupitHome.get(context).getOfferAgence();
+              await CupitHome.get(context).getOfferAgence();
             }).then((value) {
               Fluttertoast.showToast(
                   msg: 'Welcom ${state.model!.name}',
