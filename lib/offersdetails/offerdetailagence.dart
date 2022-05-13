@@ -269,7 +269,7 @@ class Offerdetailagence extends StatelessWidget {
                             // setState(() {   -------- hadi lawla
                             //   a = 0;
                             // });
-                            CubitDetail.get(context).declarA(0);
+                            CubitDetail.get(context).changeNavDetailAgence(0);
                           },
                           child: Column(
                             children: [
@@ -278,7 +278,7 @@ class Offerdetailagence extends StatelessWidget {
                               ),
                               Icon(
                                 Icons.description_outlined,
-                                color: CubitDetail.get(context).a == 0
+                                color: CubitDetail.get(context).indexAgence == 0
                                     ? CupitHome.get(context).dartSwitch
                                         ? Colors.white
                                         : Colors.redAccent
@@ -288,7 +288,9 @@ class Offerdetailagence extends StatelessWidget {
                               ),
                               Text('Information',
                                   style: TextStyle(
-                                      color: CubitDetail.get(context).a == 0
+                                      color: CubitDetail.get(context)
+                                                  .indexAgence ==
+                                              0
                                           ? CupitHome.get(context).dartSwitch
                                               ? Colors.white
                                               : Colors.redAccent
@@ -325,7 +327,7 @@ class Offerdetailagence extends StatelessWidget {
                             // setState(() {      -- hadi tnya
                             //   a = 1;
                             // });
-                            CubitDetail.get(context).declarA(1);
+                            CubitDetail.get(context).changeNavDetailAgence(1);
                           },
                           child: Column(
                             children: [
@@ -334,7 +336,7 @@ class Offerdetailagence extends StatelessWidget {
                               ),
                               Icon(
                                 Icons.menu_sharp,
-                                color: CubitDetail.get(context).a == 1
+                                color: CubitDetail.get(context).indexAgence == 1
                                     ? CupitHome.get(context).dartSwitch
                                         ? Colors.white
                                         : Colors.redAccent
@@ -344,7 +346,9 @@ class Offerdetailagence extends StatelessWidget {
                               ),
                               Text('Details',
                                   style: TextStyle(
-                                      color: CubitDetail.get(context).a == 1
+                                      color: CubitDetail.get(context)
+                                                  .indexAgence ==
+                                              1
                                           ? CupitHome.get(context).dartSwitch
                                               ? Colors.white
                                               : Colors.redAccent
@@ -376,7 +380,7 @@ class Offerdetailagence extends StatelessWidget {
                             // setState(() { -------hadi 3
                             //   a = 2;
                             // });
-                            CubitDetail.get(context).declarA(2);
+                            CubitDetail.get(context).changeNavDetailAgence(2);
                           },
                           child: Column(
                             children: [
@@ -385,7 +389,7 @@ class Offerdetailagence extends StatelessWidget {
                               ),
                               Icon(
                                 Icons.message_outlined,
-                                color: CubitDetail.get(context).a == 2
+                                color: CubitDetail.get(context).indexAgence == 2
                                     ? CupitHome.get(context).dartSwitch
                                         ? Colors.white
                                         : Colors.redAccent
@@ -395,7 +399,9 @@ class Offerdetailagence extends StatelessWidget {
                               ),
                               Text('Commentaire',
                                   style: TextStyle(
-                                      color: CubitDetail.get(context).a == 2
+                                      color: CubitDetail.get(context)
+                                                  .indexAgence ==
+                                              2
                                           ? CupitHome.get(context).dartSwitch
                                               ? Colors.white
                                               : Colors.redAccent
@@ -486,14 +492,14 @@ class Offerdetailagence extends StatelessWidget {
               Expanded(
                 flex: 43,
                 child: Container(
-                  child: CubitDetail.get(context).a == 0
+                  child: CubitDetail.get(context).indexAgence == 0
                       ? Information(
                           context,
                           CupitHome.get(context)
                               .dataOfferModel!
                               .data!
                               .offers[position])
-                      : (CubitDetail.get(context).a == 1
+                      : (CubitDetail.get(context).indexAgence == 1
                           ? Details(
                               context,
                               CupitHome.get(context)

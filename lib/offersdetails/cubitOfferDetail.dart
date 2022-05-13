@@ -6,10 +6,16 @@ class CubitDetail extends Cubit<DetailStates> {
   CubitDetail() : super(InitialDetailState());
   static CubitDetail get(context) => BlocProvider.of(context);
 
-  int a = 0;
+  int indexAgence = 0;
+  int indexClient = 0;
 
-  void declarA(int index) {
-    a = index;
+  void changeNavDetailAgence(int index) {
+    indexAgence = index;
+    emit(DeclarIndexState());
+  }
+
+  void changeNavDetailClient(int index) {
+    indexClient = index;
     emit(DeclarIndexState());
   }
 }
