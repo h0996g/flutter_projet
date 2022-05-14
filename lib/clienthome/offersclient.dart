@@ -6,6 +6,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import '../home/cubitHome/cupit_home.dart';
 import '../home/cubitHome/homeStates.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class Offersclient extends StatelessWidget {
   Offersclient({Key? key}) : super(key: key);
@@ -60,15 +61,80 @@ class Offersclient extends StatelessWidget {
           ),
           body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0),
-              child: ListView.separated(
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: ((context, index) => ListItembuilder(context)),
-                itemCount: 5,
-                separatorBuilder: (BuildContext context, int index) {
-                  return const SizedBox(
-                    height: 20,
-                  );
-                },
+              child: Column(
+                children: [
+                  SizedBox(height: 5,),
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5,right: 5,top: 16,bottom: 5),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: ToggleSwitch(
+                        onToggle: (index){
+
+                        },
+                        labels: [
+                          'Tout',
+                          'Appartement',
+                          'Villa',
+                          'Terrain'
+                        ],
+                        radiusStyle: true,
+                         customWidths: [MediaQuery.of(context).size.width/5,MediaQuery.of(context).size.width/3.8+20,MediaQuery.of(context).size.width/5,MediaQuery.of(context).size.width/5,],
+
+                        minHeight: 50,
+                        minWidth: double.infinity,
+                        cornerRadius: 50,
+                        fontSize: 16,
+                        activeBgColor: [
+                          CupitHome.get(context).dartSwitch
+                              ? Colors.blueGrey
+                               : Colors.blue,
+                          CupitHome.get(context).dartSwitch
+                              ? Colors.blueGrey
+                              : Colors.blue,
+                          CupitHome.get(context).dartSwitch
+                              ? Colors.blueGrey
+                              : Colors.blue,
+                          CupitHome.get(context).dartSwitch
+                              ? Colors.blueGrey
+                              : Colors.blue,
+                        ],
+                        inactiveBgColor: CupitHome.get(context).dartSwitch
+                            ? Color(0xff131313)
+                            : Colors.white,
+                        activeFgColor: Colors.white,
+                        inactiveFgColor: CupitHome.get(context).dartSwitch
+                            ? Colors.white
+                            : Colors.blue,
+
+                        borderColor: [
+                          CupitHome.get(context).dartSwitch
+                              ? Color(0xff131313)
+                              : Colors.blue,
+                        ],
+                        borderWidth: 3,
+                        dividerColor:  CupitHome.get(context).dartSwitch
+                            ? Color(0xff131313)
+                            : Colors.white,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 5,),
+                  
+                  Expanded(
+                    child: ListView.separated(
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: ((context, index) => ListItembuilder(context)),
+                      itemCount: 5,
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(
+                          height: 20,
+                        );
+                      },
+                    ),
+                  ),
+                ],
               )),
         );
       },
