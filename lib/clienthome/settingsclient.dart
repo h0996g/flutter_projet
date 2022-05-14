@@ -57,7 +57,7 @@ class Settingsclient extends StatelessWidget {
                   children:[ CircleAvatar(
                     radius: 70,
 
-                    backgroundImage: AssetImage('assets/images/design.png'),
+                    backgroundImage: AssetImage('assets/images/profile_avatar.jpg'),
                   ),
 
                   ]

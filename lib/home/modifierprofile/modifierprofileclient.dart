@@ -60,7 +60,7 @@ class Modifierprofileclient extends StatelessWidget {
                       // backgroundImage: CubitModifier.get(context).imagecamera==null ? AssetImage('assets/images/design.png') : Image.file(File(CubitModifier.get(context).imagecamera!.path)).image ,
                       backgroundImage:
                           CubitModifier.get(context).selectedImageclient == null
-                              ? AssetImage('assets/images/design.png')
+                              ? AssetImage('assets/images/profile_avatar.jpg')
                               : Image.file(File(CubitModifier.get(context)
                                       .selectedImageclient!
                                       .path))

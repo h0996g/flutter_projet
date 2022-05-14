@@ -82,7 +82,7 @@ class _ModifierprofileState extends State<Modifierprofile> {
                     // backgroundImage: CubitModifier.get(context).imagecamera==null ? AssetImage('assets/images/design.png') : Image.file(File(CubitModifier.get(context).imagecamera!.path)).image ,
                     backgroundImage:
                         CubitModifier.get(context).selectedImages == null
-                            ? const AssetImage('assets/images/design.png')
+                            ? const AssetImage('assets/images/profile_avatar.jpg')
                             : Image.file(File(CubitModifier.get(context)
                                     .selectedImages!
                                     .path))

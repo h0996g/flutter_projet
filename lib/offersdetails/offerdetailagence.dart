@@ -17,6 +17,7 @@ class Offerdetailagence extends StatelessWidget {
   Offerdetailagence({required this.position}) : super();
 
   var onbordingController = PageController();
+  var alaControllerr = TextEditingController();
 
   List<String> models = [
     'assets/images/on2.png',
@@ -257,7 +258,7 @@ class Offerdetailagence extends StatelessWidget {
                 thickness: 2,
               ),
               Expanded(
-                flex: 7,
+                flex: 8,
                 child: Row(
                   children: [
                     Expanded(
@@ -507,7 +508,7 @@ class Offerdetailagence extends StatelessWidget {
                                   .data!
                                   .offers[position],
                               position)
-                          : const Text('sousou')),
+                          : Commentaire(context)),
                 ),
               ),
             ],
@@ -517,7 +518,97 @@ class Offerdetailagence extends StatelessWidget {
       listener: (BuildContext context, Object? state) {},
     );
   }
+  Widget Commentaire(context) => Padding(
+    padding: const EdgeInsets.all(12.0),
+    child: Column(
+      children: [
+        Expanded(
+            child: ListView.separated(
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: ((context, index) => Listemessage(context)),
+              itemCount: 5,
+              separatorBuilder: (BuildContext context, int index) {
+                return const SizedBox(
+                  height: 1,
+                );
+              },
+            )),
+        const SizedBox(height: 8),
+        Container(
+          height: 58,
+          child: defaultForm(
+            lable: Text(
+              'write a message',
+              style: TextStyle(
+                  color: CupitHome.get(context).dartSwitch
+                      ? Colors.white
+                      : Colors.grey),
+            ),
+            sufixIcon: IconButton(
+                onPressed: () {}, icon: const Icon(Icons.send_sharp)),
+            textInputAction: TextInputAction.done,
+            controller: alaControllerr,
+            context: context,
+            type: TextInputType.text,
+            valid: (value) {
+              if (value.isEmpty) {
+                return 'you can not add an umpty message';
+              }
+            },
+          ),
+        )
+      ],
+    ),
+  );
 }
+Widget Listemessage(context) => Container(
+  decoration: BoxDecoration( color: CupitHome.get(context).dartSwitch
+      ? Color(0xff131313)
+      : Colors.lightBlue,borderRadius: BorderRadius.all(Radius.circular(4))),
+
+  height: 100,
+  child: Padding(
+    padding: const EdgeInsets.all(5.0),
+    child: Column(children: [
+      Row(crossAxisAlignment : CrossAxisAlignment.end,children: [
+
+
+        CircleAvatar(
+          radius: 16,
+
+          backgroundImage: AssetImage('assets/images/profile_avatar.jpg'),
+        ),
+        SizedBox(width: 6,),
+        Text('Ala eddine Agence',style:TextStyle(fontSize:20,color: Colors.white,fontWeight: FontWeight.bold)),
+        SizedBox(width: 7,),
+        Text('27/12/2001 13:45',style:TextStyle(color: Colors.white,fontSize: 10,)),
+      ],),
+      SizedBox(height: 3,),
+      Row(children: [
+        SizedBox(width: 7,),
+        Expanded(child: Text('27/12/2001 aaaaaaaa aaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaaaa aaaaaaaaaaaa aaaaaaa',style:TextStyle(color: Colors.white,fontSize: 14,),maxLines: 3,overflow: TextOverflow.ellipsis,)),
+        // Spacer(),
+        SizedBox(width: 7,),
+        MaterialButton(
+
+          onPressed: () {},
+          shape: const CircleBorder(),
+          color: CupitHome.get(context).dartSwitch
+              ? const Color(0xff8d8d8d)
+              : Colors.blue,
+          child: Icon(
+            Icons.delete,
+            color: CupitHome.get(context).dartSwitch
+                ? Colors.white
+                : Colors.white,
+          ),
+        ),
+        SizedBox(width: 0,),
+
+      ],)
+    ],),
+  ),
+);
 
 Widget Ala(OffersModel model) => Image(
       image: MemoryImage(base64Decode(model.photo![0])),
@@ -536,11 +627,12 @@ Widget Ala2(OffersModel model) {
         child: CarouselSlider(
             carouselController: carouselController,
             items: model.photo
-                ?.map((e) => Image(
-                      image: MemoryImage(base64Decode(e)),
-                      width: 400,
-                      fit: BoxFit.cover,
-                    ))
+                ?.map((e) =>
+                Image(
+                  image: MemoryImage(base64Decode(e)),
+                  width: 400,
+                  fit: BoxFit.cover,
+                ))
                 .toList(),
             options: CarouselOptions(
               height: double.infinity,
@@ -587,10 +679,12 @@ Widget Details(context, OffersModel model, position) => Padding(
         physics: const BouncingScrollPhysics(),
         child: Card(
           color: CupitHome.get(context).dartSwitch
-              ? Colors.blueGrey
+              ? Color(0xff131313)
               : Colors.lightBlue,
           shape: RoundedRectangleBorder(
-            side: const BorderSide(width: 2, color: Colors.lightBlue),
+            side:  BorderSide(width: 2, color: CupitHome.get(context).dartSwitch
+                ? Color(0xff131313)
+                : Colors.lightBlue),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(

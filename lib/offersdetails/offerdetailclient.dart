@@ -244,9 +244,9 @@ class Offerdetailclient extends StatelessWidget {
                     ),
                     Expanded(
                       child: Container(
-                        color: CupitHome.get(context).dartSwitch
-                            ? const Color(0xff131313)
-                            : Colors.white,
+                        // color: CupitHome.get(context).dartSwitch
+                        //     ? const Color(0xff131313)
+                        //     : Colors.white,
                         height: 54,
                         child: MaterialButton(
                           padding: const EdgeInsets.all(0),
@@ -443,8 +443,52 @@ class Offerdetailclient extends StatelessWidget {
 }
 
 Widget Listemessage(context) => Container(
-      color: Colors.blueAccent,
-      height: 80,
+  decoration: BoxDecoration( color: CupitHome.get(context).dartSwitch
+      ? Color(0xff131313)
+      : Colors.lightBlue,borderRadius: BorderRadius.all(Radius.circular(4))),
+     
+      height: 100,
+  child: Padding(
+    padding: const EdgeInsets.all(5.0),
+    child: Column(children: [
+      Row(crossAxisAlignment : CrossAxisAlignment.end,children: [
+
+
+        CircleAvatar(
+          radius: 16,
+
+          backgroundImage: AssetImage('assets/images/profile_avatar.jpg'),
+        ),
+        SizedBox(width: 6,),
+        Text('Ala eddine Agence',style:TextStyle(fontSize:20,color: Colors.white,fontWeight: FontWeight.bold)),
+        SizedBox(width: 7,),
+        Text('27/12/2001 13:45',style:TextStyle(color: Colors.white,fontSize: 10,)),
+      ],),
+      SizedBox(height: 3,),
+      Row(children: [
+        SizedBox(width: 7,),
+        Expanded(child: Text('27/12/2001 aaaaaaaa aaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaaaa aaaaaaaaaaaa aaaaaaa',style:TextStyle(color: Colors.white,fontSize: 14,),maxLines: 3,overflow: TextOverflow.ellipsis,)),
+        // Spacer(),
+        SizedBox(width: 7,),
+        MaterialButton(
+
+          onPressed: () {},
+          shape: const CircleBorder(),
+          color: CupitHome.get(context).dartSwitch
+              ? const Color(0xff8d8d8d)
+              : Colors.blue,
+          child: Icon(
+            Icons.delete,
+            color: CupitHome.get(context).dartSwitch
+                ? Colors.white
+                : Colors.white,
+          ),
+        ),
+        SizedBox(width: 0,),
+
+      ],)
+    ],),
+  ),
     );
 
 Widget Ala(String k) => Image(
@@ -485,10 +529,12 @@ Widget Details(context) => Padding(
         physics: const BouncingScrollPhysics(),
         child: Card(
           color: CupitHome.get(context).dartSwitch
-              ? Colors.blueGrey
+              ? Color(0xff131313)
               : Colors.lightBlue,
           shape: RoundedRectangleBorder(
-            side: const BorderSide(width: 2, color: Colors.lightBlue),
+            side:  BorderSide(width: 2, color: CupitHome.get(context).dartSwitch
+                ? Color(0xff131313)
+                : Colors.lightBlue),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
