@@ -1,5 +1,6 @@
 import 'package:agence/Model/ErrorRegisterAndLoginModel.dart';
 import 'package:agence/Model/LoginModel.dart';
+import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/login/cupitlogin/cupitl.dart';
 import 'package:agence/login/cupitlogin/loginStates.dart';
 import 'package:agence/login/ChooseRegister.dart';
@@ -381,22 +382,29 @@ class LoginScreen extends StatelessWidget {
             // FocusScope.of(context).unfocus();
             CachHelper.putcache(key: 'token', value: state.model!.token)
                 .then((value) async {
-              CupitHome.get(context).getinformationAgence();
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Home()),
-                  (route) => false);
-              await CupitHome.get(context).getOfferAgence();
-            }).then((value) {
-              Fluttertoast.showToast(
-                  msg: 'Welcom ${state.model!.name}',
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.green,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
+              await CupitHome.get(context).getinformationAgenceOrClient();
+
+              if (LoginCubit.get(context).path == LOGINCLIENT) {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Navbar()),
+                    (route) => false);
+              } else if (LoginCubit.get(context).path == LOGINAGENCE) {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Home()),
+                    (route) => false);
+                await CupitHome.get(context).getOfferAgence();
+              }
             });
+            Fluttertoast.showToast(
+                msg: 'Welcom ${state.model!.name}',
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.green,
+                textColor: Colors.white,
+                fontSize: 16.0);
           }
         } else if (state is BadLoginState) {
           Fluttertoast.showToast(

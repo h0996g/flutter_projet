@@ -330,7 +330,7 @@ class CupitHome extends Cubit<HomeStates> {
 
 //------------------------hadi t3 get information-----------------------------
   GetInfoUser? getinfouserModel;
-  Future<void> getinformationAgence() async {
+  Future<void> getinformationAgenceOrClient() async {
     emit(ConditionalLodinInfoState());
     Httplar.httpget(path: GETINFOUSER).then((value) {
       var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
@@ -340,7 +340,7 @@ class CupitHome extends Cubit<HomeStates> {
       // print(getinfouserModel!.agence!.address);
       print(value.body);
 
-      emit(GoodGetOffersAgence());
+      emit(GoodGetInfoUserState());
     }).catchError((e) {
       print(e.toString());
       emit(BaadGetInfoUserState());
