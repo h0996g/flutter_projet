@@ -92,114 +92,136 @@ class Offersclient extends StatelessWidget {
                   ))
             ],
           ),
-          body: ConditionalBuilder(
-            builder: (BuildContext context) {
-              return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 0),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 5, right: 5, top: 16, bottom: 5),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: ToggleSwitch(
-                            onToggle: (index) {
-                              print(CupitHome.get(context).type_vente[index!]);
-                            },
-                            labels: CupitHome.get(context).type_vente,
-                            radiusStyle: true,
-                            customWidths: [
-                              MediaQuery.of(context).size.width / 5,
-                              MediaQuery.of(context).size.width / 3.8 + 20,
-                              MediaQuery.of(context).size.width / 5,
-                              MediaQuery.of(context).size.width / 5,
-                            ],
-                            minHeight: 50,
-                            minWidth: double.infinity,
-                            cornerRadius: 50,
-                            fontSize: 16,
-                            activeBgColor: [
-                              CupitHome.get(context).dartSwitch
-                                  ? Colors.blueGrey
-                                  : Colors.blue,
-                              CupitHome.get(context).dartSwitch
-                                  ? Colors.blueGrey
-                                  : Colors.blue,
-                              CupitHome.get(context).dartSwitch
-                                  ? Colors.blueGrey
-                                  : Colors.blue,
-                              CupitHome.get(context).dartSwitch
-                                  ? Colors.blueGrey
-                                  : Colors.blue,
-                            ],
-                            inactiveBgColor: CupitHome.get(context).dartSwitch
-                                ? const Color(0xff131313)
-                                : Colors.white,
-                            activeFgColor: Colors.white,
-                            inactiveFgColor: CupitHome.get(context).dartSwitch
-                                ? Colors.white
-                                : Colors.blue,
-                            borderColor: [
-                              CupitHome.get(context).dartSwitch
-                                  ? const Color(0xff131313)
-                                  : Colors.blue,
-                            ],
-                            borderWidth: 3,
-                            dividerColor: CupitHome.get(context).dartSwitch
-                                ? const Color(0xff131313)
-                                : Colors.white,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Expanded(
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 0),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 5,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 5, right: 5, top: 16, bottom: 5),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: ToggleSwitch(
+                      onToggle: (index) {
+                        print(CupitHome.get(context).type_vente[index!]);
+
+                        // Builder(builder: (context) =>CupitHome.get(context).getTypeOffer ,);
+                      },
+                      labels: CupitHome.get(context).type_vente,
+                      radiusStyle: true,
+                      customWidths: [
+                        MediaQuery.of(context).size.width / 5,
+                        MediaQuery.of(context).size.width / 3.8 + 20,
+                        MediaQuery.of(context).size.width / 5,
+                        MediaQuery.of(context).size.width / 5,
+                      ],
+                      minHeight: 50,
+                      minWidth: double.infinity,
+                      cornerRadius: 50,
+                      fontSize: 16,
+                      activeBgColor: [
+                        CupitHome.get(context).dartSwitch
+                            ? Colors.blueGrey
+                            : Colors.blue,
+                        CupitHome.get(context).dartSwitch
+                            ? Colors.blueGrey
+                            : Colors.blue,
+                        CupitHome.get(context).dartSwitch
+                            ? Colors.blueGrey
+                            : Colors.blue,
+                        CupitHome.get(context).dartSwitch
+                            ? Colors.blueGrey
+                            : Colors.blue,
+                      ],
+                      inactiveBgColor: CupitHome.get(context).dartSwitch
+                          ? const Color(0xff131313)
+                          : Colors.white,
+                      activeFgColor: Colors.white,
+                      inactiveFgColor: CupitHome.get(context).dartSwitch
+                          ? Colors.white
+                          : Colors.blue,
+                      borderColor: [
+                        CupitHome.get(context).dartSwitch
+                            ? const Color(0xff131313)
+                            : Colors.blue,
+                      ],
+                      borderWidth: 3,
+                      dividerColor: CupitHome.get(context).dartSwitch
+                          ? const Color(0xff131313)
+                          : Colors.white,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Expanded(
+                  child: ConditionalBuilder(
+                    builder: (BuildContext context) {
+                      return ListView.separated(
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: ((context, index) => ListItembuilder(
+                            context,
+                            CupitHome.get(context)
+                                .allofferModel!
+                                .data!
+                                .offers[index])),
+                        itemCount: CupitHome.get(context)
+                            .allofferModel!
+                            .data!
+                            .offers
+                            .length,
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const SizedBox(
+                            height: 10,
+                          );
+                        },
+                      );
+                    },
+                    condition: CupitHome.get(context).allofferModel != null,
+                    fallback: (BuildContext context) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 8),
                         child: ListView.separated(
                           physics: const BouncingScrollPhysics(),
-                          itemBuilder: ((context, index) => ListItembuilder(
-                              context,
-                              CupitHome.get(context)
-                                  .allofferModel!
-                                  .data!
-                                  .offers[index])),
-                          itemCount: CupitHome.get(context)
-                              .allofferModel!
-                              .data!
-                              .offers
-                              .length,
+                          itemBuilder: (context, index) =>
+                              buildFoodShimmer(context),
+                          itemCount: 6,
                           separatorBuilder: (BuildContext context, int index) {
                             return const SizedBox(
                               height: 10,
                             );
                           },
                         ),
-                      ),
-                    ],
-                  ));
-            },
-            condition: CupitHome.get(context).allofferModel != null,
-            fallback: (BuildContext context) {
-              return Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-                child: ListView.separated(
-                  physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context, index) => buildFoodShimmer(context),
-                  itemCount: 6,
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(
-                      height: 10,
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-              );
-            },
+              ],
+            ),
           ),
+
+          // condition: CupitHome.get(context).allofferModel != null,
+          // fallback: (BuildContext context) {
+          //   return Padding(
+          //     padding:
+          //         const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+          //     child: ListView.separated(
+          //       physics: const BouncingScrollPhysics(),
+          //       itemBuilder: (context, index) => buildFoodShimmer(context),
+          //       itemCount: 6,
+          //       separatorBuilder: (BuildContext context, int index) {
+          //         return const SizedBox(
+          //           height: 10,
+          //         );
+          //       },
+          //     ),
+          //   );
+          // },
         );
       },
       listener: (BuildContext context, Object? state) {},

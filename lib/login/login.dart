@@ -61,8 +61,8 @@ class LoginScreen extends StatelessWidget {
 
                       Center(
                         child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(30),
                                 topRight: Radius.circular(30),
                                 bottomLeft: Radius.circular(30),
@@ -78,7 +78,7 @@ class LoginScreen extends StatelessWidget {
                                     border: Border.all(
                                       width: 3,
                                       color: CupitHome.get(context).dartSwitch
-                                          ? Color(0xff131313)
+                                          ? const Color(0xff131313)
                                           : Colors.blue,
                                     ),
                                     borderRadius: const BorderRadius.only(
@@ -87,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                                     // color: Colors.blue,
                                     color: LoginCubit.get(context).typenumber
                                         ? CupitHome.get(context).dartSwitch
-                                            ? Color(0xff131313)
+                                            ? const Color(0xff131313)
                                             : Colors.blue
                                         : CupitHome.get(context).dartSwitch
                                             ? Colors.blueGrey
@@ -126,7 +126,7 @@ class LoginScreen extends StatelessWidget {
                                     border: Border.all(
                                       width: 3,
                                       color: CupitHome.get(context).dartSwitch
-                                          ? Color(0xff131313)
+                                          ? const Color(0xff131313)
                                           : Colors.blue,
                                     ),
                                     borderRadius: const BorderRadius.only(
@@ -134,7 +134,7 @@ class LoginScreen extends StatelessWidget {
                                         bottomRight: Radius.circular(30)),
                                     color: !LoginCubit.get(context).typenumber
                                         ? CupitHome.get(context).dartSwitch
-                                            ? Color(0xff131313)
+                                            ? const Color(0xff131313)
                                             : Colors.blue
                                         : CupitHome.get(context).dartSwitch
                                             ? Colors.blueGrey

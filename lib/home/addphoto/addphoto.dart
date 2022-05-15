@@ -191,7 +191,8 @@ class Addphoto extends StatelessWidget {
                     ElevatedButton(
                         onPressed: () async {
                           sendinfoOffer = {
-                            'type_vente': 'Appartement',
+                            'type_vente':
+                                CupitHome.get(context).appartementvalueDrop,
                             'address':
                                 CupitHome.get(context).addressController.text,
                             'description': CupitHome.get(context)
