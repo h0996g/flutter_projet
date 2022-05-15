@@ -333,7 +333,8 @@ class Agenceregister extends StatelessWidget {
         if (state is RegisterSuccesState) {
           if (state.model is RegisterModel) {
             CachHelper.putcache(key: 'token', value: state.model!.token)
-                .then((value) {
+                .then((value) async {
+              await CachHelper.putcache(key: 'userType', value: LOGINAGENCE);
               CupitHome.get(context).getOfferAgence();
               CupitHome.get(context).getinformationAgenceOrClient();
               Navigator.pushAndRemoveUntil(
