@@ -1,5 +1,3 @@
-import 'package:agence/Api/constApi.dart';
-import 'package:agence/Api/httplaravel.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../../Model/ErrorRegisterAndLoginModel.dart';
 import '../../shared/components/components.dart';
 import '../cubitHome/cupit_home.dart';
-import '../cubitHome/homeStates.dart';
+
 import '../home.dart';
 import 'cubitmodifier.dart';
 import 'modifierstate.dart';
@@ -18,7 +16,7 @@ class Modifierpassword extends StatelessWidget {
   var oldPassmodController = TextEditingController();
   var newPasswordCondroller = TextEditingController();
   var newPasswordControllerverifi = TextEditingController();
-  var formKeyyyyy = GlobalKey<FormState>();
+  var formKey = GlobalKey<FormState>();
   Map<String, dynamic> sendinfoagencemodifierpassword = {};
   @override
   Widget build(BuildContext context) {
@@ -32,7 +30,7 @@ class Modifierpassword extends StatelessWidget {
               // CupitHome.get(context).currentindex = 2;
               Changepage(context, const Home());
             },
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
           ),
           elevation: 10,
           title: Text('Modifier Mdp',
@@ -42,7 +40,7 @@ class Modifierpassword extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Form(
-              key: formKeyyyyy,
+              key: formKey,
               child: Column(
                 children: [
                   defaultForm(
@@ -183,7 +181,7 @@ class Modifierpassword extends StatelessWidget {
                                   : Colors.blue,
                               splashColor: Colors.transparent,
                               onPressed: () {
-                                if (formKeyyyyy.currentState!.validate()) {
+                                if (formKey.currentState!.validate()) {
                                   sendinfoagencemodifierpassword = {
                                     'oldpassword': oldPassmodController.text,
                                     'newpassword': newPasswordCondroller.text,

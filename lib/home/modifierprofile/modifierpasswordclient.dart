@@ -2,7 +2,9 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../Model/ErrorRegisterAndLoginModel.dart';
 import '../../clienthome/navbar.dart';
 import '../../login/cupitlogin/loginStates.dart';
 import '../../shared/components/components.dart';
@@ -13,11 +15,13 @@ import 'modifierstate.dart';
 class Modifierpasswordclient extends StatelessWidget {
   Modifierpasswordclient({Key? key}) : super(key: key);
 
-  var passmodControllerr = TextEditingController();
-  var passmodControllerneww = TextEditingController();
-  var passmodControllerverificationn = TextEditingController();
-  var formKeyyyyyz = GlobalKey<FormState>();
+  var oldPassmodController = TextEditingController();
+  var newPasswordCondroller = TextEditingController();
+  var newPasswordControllerverifi = TextEditingController();
+  var formKey = GlobalKey<FormState>();
   Map<String, dynamic> sendinfoclientmodifierpassword = {};
+
+  // Map<String, dynamic> get sendinfoagencemodifierpassword => null;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CubitModifier, ModifierStates>(
@@ -40,13 +44,13 @@ class Modifierpasswordclient extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Form(
-              key: formKeyyyyyz,
+              key: formKey,
               child: Column(
                 children: [
                   defaultForm(
                       context: context,
                       textInputAction: TextInputAction.done,
-                      controller: passmodControllerr,
+                      controller: oldPassmodController,
                       type: TextInputType.visiblePassword,
                       onFieldSubmitted: () {},
                       obscureText: CubitModifier.get(context).ishiddens,
@@ -83,7 +87,7 @@ class Modifierpasswordclient extends StatelessWidget {
                   defaultForm(
                       context: context,
                       textInputAction: TextInputAction.done,
-                      controller: passmodControllerneww,
+                      controller: newPasswordCondroller,
                       type: TextInputType.visiblePassword,
                       onFieldSubmitted: () {},
                       obscureText: CubitModifier.get(context).ishiddenss,
@@ -120,13 +124,15 @@ class Modifierpasswordclient extends StatelessWidget {
                   defaultForm(
                       context: context,
                       textInputAction: TextInputAction.done,
-                      controller: passmodControllerverificationn,
+                      controller: newPasswordControllerverifi,
                       type: TextInputType.visiblePassword,
                       onFieldSubmitted: () {},
                       obscureText: CubitModifier.get(context).ishiddensss,
                       valid: (value) {
                         if (value.isEmpty) {
                           return 'Password Must Be Not Empty';
+                        } else if (value != newPasswordCondroller.text) {
+                          return 'The new password is not the same';
                         }
                       },
                       lable: Text(
@@ -155,7 +161,7 @@ class Modifierpasswordclient extends StatelessWidget {
                     height: 20,
                   ),
                   ConditionalBuilder(
-                    condition: state is! ConditionalLodinState,
+                    condition: state is! ModifierConditionalLodinState,
                     builder: (BuildContext context) {
                       return Container(
                         width: double.infinity,
@@ -179,13 +185,14 @@ class Modifierpasswordclient extends StatelessWidget {
                                   : Colors.blue,
                               splashColor: Colors.transparent,
                               onPressed: () {
-                                if (formKeyyyyyz.currentState!.validate()) {
+                                if (formKey.currentState!.validate()) {
                                   sendinfoclientmodifierpassword = {
-                                    'password': passmodControllerr.text,
-                                    'new password': passmodControllerneww.text,
-                                    'new password two':
-                                        passmodControllerverificationn.text,
+                                    'oldpassword': oldPassmodController.text,
+                                    'newpassword': newPasswordCondroller.text,
                                   };
+                                  CubitModifier.get(context)
+                                      .updatePasswordAgence(
+                                          sendinfoclientmodifierpassword);
                                 }
                               },
                               child: const Text(
@@ -210,33 +217,40 @@ class Modifierpasswordclient extends StatelessWidget {
         ),
       );
     }, listener: (BuildContext context, Object? state) {
-      //   if (state is LougOutSuccesState) {
-      //   var then = CachHelper.removdata(key: 'token').then((value) {
-      //     print(TOKEN);
-      //     TOKEN = '';
-      //     Navigator.pushAndRemoveUntil(
-      //         context,
-      //         MaterialPageRoute(builder: (context) => LoginScreen()),
-      //             (route) => false);
-      //   });
-      //   Fluttertoast.showToast(
-      //       msg: 'déconnexion réussie',
-      //       toastLength: Toast.LENGTH_SHORT,
-      //       gravity: ToastGravity.BOTTOM,
-      //       timeInSecForIosWeb: 1,
-      //       backgroundColor: Colors.green,
-      //       textColor: Colors.white,
-      //       fontSize: 16.0);
-      // } else if (state is LougOutBadState) {
-      //   Fluttertoast.showToast(
-      //       msg: 'There\'s a problem',
-      //       toastLength: Toast.LENGTH_SHORT,
-      //       gravity: ToastGravity.BOTTOM,
-      //       timeInSecForIosWeb: 1,
-      //       backgroundColor: Colors.red,
-      //       textColor: Colors.white,
-      //       fontSize: 16.0);
-      // }
+      if (state is GoodUpdatePasswordAgenceState) {
+        if (state.model is ErrorRegisterAndLoginModel) {
+          Fluttertoast.showToast(
+              msg: state.model!.message,
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        } else {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const Navbar()),
+              (route) => false);
+          Fluttertoast.showToast(
+              msg: 'Password changed Successfuly',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      } else if (state is BadUpdatePasswordAgenceState) {
+        Fluttertoast.showToast(
+            msg: 'Some Error',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
     });
   }
 }
