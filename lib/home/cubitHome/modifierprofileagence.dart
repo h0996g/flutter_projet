@@ -80,13 +80,14 @@ class _ModifierprofileState extends State<Modifierprofile> {
                   CircleAvatar(
                     radius: 70,
                     // backgroundImage: CubitModifier.get(context).imagecamera==null ? AssetImage('assets/images/design.png') : Image.file(File(CubitModifier.get(context).imagecamera!.path)).image ,
-                    backgroundImage:
-                        CubitModifier.get(context).selectedImages == null
-                            ? const AssetImage('assets/images/profile_avatar.jpg')
-                            : Image.file(File(CubitModifier.get(context)
-                                    .selectedImages!
-                                    .path))
-                                .image,
+                    backgroundImage: CubitModifier.get(context)
+                                .selectedImages ==
+                            null
+                        ? const AssetImage('assets/images/profile_avatar.jpg')
+                        : Image.file(File(CubitModifier.get(context)
+                                .selectedImages!
+                                .path))
+                            .image,
                   ),
                   const SizedBox(
                     height: 9,
@@ -351,7 +352,7 @@ class _ModifierprofileState extends State<Modifierprofile> {
     }, listener: (BuildContext context, Object? state) {
       if (state is GoodUpdateAgenceInfoState) {
         // CupitHome.get(context).getinfouserModel = null;
-        CupitHome.get(context).getinformationAgence().then((value) {
+        CupitHome.get(context).getinformationAgenceOrClient().then((value) {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const Home()),

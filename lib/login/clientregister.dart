@@ -1,3 +1,4 @@
+import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/login/login.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 
@@ -307,10 +308,11 @@ class Clientregister extends StatelessWidget {
         if (state is RegisterSuccesState) {
           if (state.model is RegisterModel) {
             CachHelper.putcache(key: 'token', value: state.model!.token)
-                .then((value) {
+                .then((value) async {
+              await CachHelper.putcache(key: 'userType', value: LOGINCLIENT);
               Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => const Home()),
+                  MaterialPageRoute(builder: (context) => const Navbar()),
                   (route) => false);
             }).then((value) {
               Fluttertoast.showToast(

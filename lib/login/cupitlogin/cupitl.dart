@@ -94,8 +94,10 @@ class LoginCubit extends Cubit<LoginStates> {
   // }
 
   bool typenumber = true;
+  String path = LOGINCLIENT;
   void changetype(value) {
     typenumber = value;
+    path = typenumber ? LOGINCLIENT : LOGINAGENCE;
     emit(ChangetypeState());
   }
 }

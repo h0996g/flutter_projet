@@ -1,5 +1,6 @@
 import 'package:agence/Model/ErrorRegisterAndLoginModel.dart';
 import 'package:agence/Model/LoginModel.dart';
+import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/login/cupitlogin/cupitl.dart';
 import 'package:agence/login/cupitlogin/loginStates.dart';
 import 'package:agence/login/ChooseRegister.dart';
@@ -26,8 +27,8 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginStates>(
       builder: (BuildContext context, state) {
-        String path =
-            LoginCubit.get(context).typenumber ? LOGINCLIENT : LOGINAGENCE;
+        // String path =
+        //     LoginCubit.get(context).typenumber ? LOGINCLIENT : LOGINAGENCE;
         return Scaffold(
           body: Center(
             child: SingleChildScrollView(
@@ -113,8 +114,8 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                     onPressed: () {
                                       LoginCubit.get(context).changetype(true);
-                                      path = LOGINCLIENT;
-                                      print(path);
+                                      // path = LOGINCLIENT;
+                                      print(LoginCubit.get(context).path);
                                     },
                                   ),
                                 ),
@@ -160,8 +161,8 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                     onPressed: () {
                                       LoginCubit.get(context).changetype(false);
-                                      path = LOGINAGENCE;
-                                      print(path);
+                                      // path = LOGINAGENCE;
+                                      print(LoginCubit.get(context).path);
                                     },
                                   ),
                                 ),
@@ -242,8 +243,9 @@ class LoginScreen extends StatelessWidget {
                                 'email': emailController.text,
                                 'password': passController.text
                               };
-                              LoginCubit.get(context)
-                                  .login(data: sendinfologin, path: path);
+                              LoginCubit.get(context).login(
+                                  data: sendinfologin,
+                                  path: LoginCubit.get(context).path);
                             }
                           },
                           obscureText: LoginCubit.get(context).ishidden,
@@ -310,9 +312,10 @@ class LoginScreen extends StatelessWidget {
                                         'password': passController.text
                                       };
                                       LoginCubit.get(context).login(
-                                          data: sendinfologin, path: path);
+                                          data: sendinfologin,
+                                          path: LoginCubit.get(context).path);
                                     }
-                                    print(path);
+                                    print(LoginCubit.get(context).path);
                                   },
                                   child: const Text(
                                     'LOGIN',
@@ -379,22 +382,31 @@ class LoginScreen extends StatelessWidget {
             // FocusScope.of(context).unfocus();
             CachHelper.putcache(key: 'token', value: state.model!.token)
                 .then((value) async {
-              CupitHome.get(context).getinformationAgence();
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Home()),
-                  (route) => false);
-              await CupitHome.get(context).getOfferAgence();
-            }).then((value) {
-              Fluttertoast.showToast(
-                  msg: 'Welcom ${state.model!.name}',
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.green,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
+              await CachHelper.putcache(
+                  key: 'userType', value: LoginCubit.get(context).path);
+              await CupitHome.get(context).getinformationAgenceOrClient();
+
+              if (LoginCubit.get(context).path == LOGINCLIENT) {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Navbar()),
+                    (route) => false);
+              } else if (LoginCubit.get(context).path == LOGINAGENCE) {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Home()),
+                    (route) => false);
+                await CupitHome.get(context).getOfferAgence();
+              }
             });
+            Fluttertoast.showToast(
+                msg: 'Welcom ${state.model!.name}',
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.green,
+                textColor: Colors.white,
+                fontSize: 16.0);
           }
         } else if (state is BadLoginState) {
           Fluttertoast.showToast(

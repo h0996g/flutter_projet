@@ -52,7 +52,8 @@ class Setting extends StatelessWidget {
                       ),
                       const CircleAvatar(
                         radius: 70,
-                        backgroundImage: AssetImage('assets/images/profile_avatar.jpg'),
+                        backgroundImage:
+                            AssetImage('assets/images/profile_avatar.jpg'),
                       ),
                       const SizedBox(
                         height: 9,
@@ -292,7 +293,8 @@ class Setting extends StatelessWidget {
       },
       listener: (BuildContext context, Object? state) {
         if (state is LougOutSuccesState) {
-          CachHelper.removdata(key: 'token').then((value) {
+          CachHelper.removdata(key: 'token').then((value) async {
+            await CachHelper.removdata(key: 'userType');
             print(TOKEN);
             TOKEN = '';
             CupitHome.get(context).dataOfferModel = null;
