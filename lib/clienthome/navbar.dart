@@ -1,4 +1,3 @@
-
 import 'package:agence/home/cubitHome/homeStates.dart';
 
 import 'package:flutter/material.dart';
@@ -32,7 +31,7 @@ class _NavbarState extends State<Navbar> {
         return Scaffold(
           body: obj.bodyy[obj.currentindexa],
           bottomNavigationBar: BottomNavigationBar(
-            items: [
+            items: const [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Offers'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.favorite), label: 'Favorite'),

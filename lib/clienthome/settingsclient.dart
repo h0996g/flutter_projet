@@ -252,22 +252,24 @@ class Settingsclient extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  Center(
+                  Flexible(
                     child: ConditionalBuilder(
                       builder: (BuildContext context) {
-                        return Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: CupitHome.get(context).dartSwitch
-                                ? Colors.blueGrey
-                                : Colors.blue,
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                topRight: Radius.circular(5),
-                                bottomLeft: Radius.circular(5),
-                                bottomRight: Radius.circular(15)),
-                          ),
-                          child: Center(
+                        return Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Container(
+                            height: 46,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: CupitHome.get(context).dartSwitch
+                                  ? Colors.blueGrey
+                                  : Colors.blue,
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(5),
+                                  bottomLeft: Radius.circular(5),
+                                  bottomRight: Radius.circular(15)),
+                            ),
                             child: Container(
                               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                               width: double.infinity,
@@ -291,9 +293,9 @@ class Settingsclient extends StatelessWidget {
                       },
                       condition: state is! ConditionalLodinState,
                       fallback: (BuildContext context) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
+                        return const Align(
+                            alignment: Alignment.bottomCenter,
+                            child: CircularProgressIndicator());
                       },
                     ),
                   ),
