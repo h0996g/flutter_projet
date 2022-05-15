@@ -35,6 +35,11 @@ class CupitHome extends Cubit<HomeStates> {
   List<Widget> bodyy = [Offersclient(), Favorite(), Settingsclient()];
   int currentindexa = 0;
   List<String> type_vente = ['Tout', 'Appartement', 'Villa', 'Terrain'];
+  int toggelindex = 0;
+  void changeToggelIndex(index) {
+    toggelindex = index;
+    emit(ChangeToggelStates());
+  }
 
   void changenavbar(value) {
     currentindexa = value;
@@ -42,9 +47,10 @@ class CupitHome extends Cubit<HomeStates> {
   }
 
   DataOffer? allofferModel;
-  Future<void> getTypeOffer() async {
+  // String TYPE = 'Villa';
+  Future<void> getTypeOffer({String type = '/Tout'}) async {
     emit(ConditionalLodinGetAllOfferState());
-    Httplar.httpget(path: GETOFFERCATEGORIES).then((value) {
+    Httplar.httpget(path: GETOFFERCATEGORIES + type).then((value) {
       var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
 
       allofferModel = DataOffer.fromJson(jsonResponse);

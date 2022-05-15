@@ -190,7 +190,7 @@ class Offerdetailagence extends StatelessWidget {
                       width: 20,
                     ),
                     Text(
-                      "\$245.00",
+                      "${CupitHome.get(context).offerAgencModel!.data!.offers[position].price}",
                       style: Theme.of(context).textTheme.headline4?.copyWith(
                             fontSize: 32,
                           ),
@@ -229,7 +229,7 @@ class Offerdetailagence extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        '730 Columbus Ave, Manhattan, Ny 10025',
+                        '${CupitHome.get(context).offerAgencModel!.data!.offers[position].address}',
                         style: Theme.of(context).textTheme.bodyText2,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,

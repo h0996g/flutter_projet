@@ -16,6 +16,8 @@ class ChangeNavebarIndex extends HomeStates {}
 
 class ChangeSwitchStates extends HomeStates {}
 
+class ChangeToggelStates extends HomeStates {}
+
 class ChangevalueDropdownState extends HomeStates {}
 
 class AddImageGoodState extends HomeStates {}

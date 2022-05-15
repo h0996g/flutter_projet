@@ -105,8 +105,15 @@ class Offersclient extends StatelessWidget {
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: ToggleSwitch(
+                      initialLabelIndex: CupitHome.get(context).toggelindex,
                       onToggle: (index) {
-                        print(CupitHome.get(context).type_vente[index!]);
+                        CupitHome.get(context).changeToggelIndex(index);
+                        print(CupitHome.get(context)
+                            .type_vente[CupitHome.get(context).toggelindex]);
+                        CupitHome.get(context).getTypeOffer(
+                            type: '/' +
+                                CupitHome.get(context).type_vente[
+                                    CupitHome.get(context).toggelindex]);
 
                         // Builder(builder: (context) =>CupitHome.get(context).getTypeOffer ,);
                       },
@@ -181,7 +188,8 @@ class Offersclient extends StatelessWidget {
                         },
                       );
                     },
-                    condition: CupitHome.get(context).allofferModel != null,
+                    condition: CupitHome.get(context).allofferModel != null &&
+                        state is! ConditionalLodinGetAllOfferState,
                     fallback: (BuildContext context) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(
