@@ -34,9 +34,9 @@ class _OnbordingState extends State<Onbording> {
   bool islast = false;
   var onbordingController = PageController();
   List<OnbordingModel> models = [
-    OnbordingModel('assets/images/on2.png', 'Title 1', 'Body 1'),
-    OnbordingModel('assets/images/on2.png', 'Title 2', 'Body 2'),
-    OnbordingModel('assets/images/on2.png', 'Title 3', 'Body 3'),
+    OnbordingModel('assets/images/on2.png', 'Acheter ou louer ', 'Acheter ou louez votre maison attendue depuis chez vous'),
+    OnbordingModel('assets/images/on2.png', 'Trouver la maison idéale', 'Trouver votre maison depuis carte géographique'),
+    OnbordingModel('assets/images/on2.png', 'Inscrivez-vous', 'Connectez-vous pour voir nos offres exceptionnelles'),
   ];
   @override
   Widget build(BuildContext context) {
