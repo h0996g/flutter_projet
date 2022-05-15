@@ -11,3 +11,4 @@ const GETINFOUSER = '/api/getuser';
 const UPDATEAGENCE = '/api/updateagence';
 const UPDATEAGENCEPASSWORD = '/api/updateagencePassword';
 var TOKEN = '';
+var USERTYPE = LOGINCLIENT;

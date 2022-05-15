@@ -1,5 +1,6 @@
 import 'package:agence/Api/constApi.dart';
 import 'package:agence/clienthome/cupitSearch/cupitsearch_cubit.dart';
+import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/home/home.dart';
 import 'package:agence/home/modifierprofile/cubitmodifier.dart';
 import 'package:agence/login/cupitlogin/cupitl.dart';
@@ -24,6 +25,7 @@ main() {
 
       bool darkswitchmain = CachHelper.getData(key: 'dartswitch') ?? false;
       TOKEN = CachHelper.getData(key: 'token') ?? '';
+      USERTYPE = CachHelper.getData(key: 'userType') ?? LOGINCLIENT;
 
       runApp(MyApp(onbordingmain, darkswitchmain));
     },
@@ -57,7 +59,11 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
               debugShowCheckedModeBanner: false,
               home: onbordingmain
-                  ? (TOKEN != '' ? const Home() : LoginScreen())
+                  ? (TOKEN != ''
+                      ? (USERTYPE == LOGINAGENCE
+                          ? const Home()
+                          : const Navbar())
+                      : LoginScreen())
                   : const Onbording(),
               themeMode: CupitHome.get(context).dartSwitch
                   ? ThemeMode.dark

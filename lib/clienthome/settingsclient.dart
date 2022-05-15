@@ -306,7 +306,8 @@ class Settingsclient extends StatelessWidget {
       },
       listener: (BuildContext context, Object? state) {
         if (state is LougOutSuccesState) {
-          CachHelper.removdata(key: 'token').then((value) {
+          CachHelper.removdata(key: 'token').then((value) async {
+            await CachHelper.removdata(key: 'userType');
             print(TOKEN);
             TOKEN = '';
             // CupitHome.get(context).dataOfferModel = null;
