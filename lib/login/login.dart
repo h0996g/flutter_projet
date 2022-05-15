@@ -26,8 +26,8 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginStates>(
       builder: (BuildContext context, state) {
-        String path =
-            LoginCubit.get(context).typenumber ? LOGINCLIENT : LOGINAGENCE;
+        // String path =
+        //     LoginCubit.get(context).typenumber ? LOGINCLIENT : LOGINAGENCE;
         return Scaffold(
           body: Center(
             child: SingleChildScrollView(
@@ -113,8 +113,8 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                     onPressed: () {
                                       LoginCubit.get(context).changetype(true);
-                                      path = LOGINCLIENT;
-                                      print(path);
+                                      // path = LOGINCLIENT;
+                                      print(LoginCubit.get(context).path);
                                     },
                                   ),
                                 ),
@@ -160,8 +160,8 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                     onPressed: () {
                                       LoginCubit.get(context).changetype(false);
-                                      path = LOGINAGENCE;
-                                      print(path);
+                                      // path = LOGINAGENCE;
+                                      print(LoginCubit.get(context).path);
                                     },
                                   ),
                                 ),
@@ -242,8 +242,9 @@ class LoginScreen extends StatelessWidget {
                                 'email': emailController.text,
                                 'password': passController.text
                               };
-                              LoginCubit.get(context)
-                                  .login(data: sendinfologin, path: path);
+                              LoginCubit.get(context).login(
+                                  data: sendinfologin,
+                                  path: LoginCubit.get(context).path);
                             }
                           },
                           obscureText: LoginCubit.get(context).ishidden,
@@ -310,9 +311,10 @@ class LoginScreen extends StatelessWidget {
                                         'password': passController.text
                                       };
                                       LoginCubit.get(context).login(
-                                          data: sendinfologin, path: path);
+                                          data: sendinfologin,
+                                          path: LoginCubit.get(context).path);
                                     }
-                                    print(path);
+                                    print(LoginCubit.get(context).path);
                                   },
                                   child: const Text(
                                     'LOGIN',
