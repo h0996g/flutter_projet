@@ -310,6 +310,8 @@ class Clientregister extends StatelessWidget {
             CachHelper.putcache(key: 'token', value: state.model!.token)
                 .then((value) async {
               await CachHelper.putcache(key: 'userType', value: LOGINCLIENT);
+              CupitHome.get(context).getTypeOffer();
+              CupitHome.get(context).getinformationAgenceOrClient();
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const Navbar()),

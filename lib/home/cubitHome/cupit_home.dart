@@ -28,10 +28,37 @@ class CupitHome extends Cubit<HomeStates> {
 
   static CupitHome get(context) => BlocProvider.of(context);
   List<Widget> body = [const Offers(), AddPost(), const Setting()];
-  List<Widget> bodyy = [Offersclient(), Favorite(), Settingsclient()];
 
   // int position = 0;
 
+//------------------- T3 Client :::-------------------------------------------
+  List<Widget> bodyy = [Offersclient(), Favorite(), Settingsclient()];
+  int currentindexa = 0;
+  List<String> type_vente = ['Tout', 'Appartement', 'Villa', 'Terrain'];
+
+  void changenavbar(value) {
+    currentindexa = value;
+    emit(ChangeNavebarIndex());
+  }
+
+  DataOffer? allofferModel;
+  Future<void> getTypeOffer() async {
+    emit(ConditionalLodinGetAllOfferState());
+    Httplar.httpget(path: GETOFFERCATEGORIES).then((value) {
+      var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
+
+      allofferModel = DataOffer.fromJson(jsonResponse);
+      print('jbt alloffer good');
+      print(allofferModel!.data!.offers[0].address);
+      // print(dataOfferModel!.data!.offers[0].papiers);
+      emit(GoodGetAllOffers());
+    }).catchError((e) {
+      print(e.toString());
+      emit(BadGetAlltOffers());
+    });
+  }
+
+//--------------------------------------------------------------------------
   // --------------------hadi  rahi t3 add photo fl offer----------------------
 
   final ImagePicker imagePicker = ImagePicker();
@@ -229,12 +256,6 @@ class CupitHome extends Cubit<HomeStates> {
     emit(ChangeNaveIndex());
   }
 
-  int currentindexa = 0;
-  void changenavbar(value) {
-    currentindexa = value;
-    emit(ChangeNavebarIndex());
-  }
-
   bool dartSwitch = false;
   void changeSwitch({value, darkswitchmain}) {
     if (darkswitchmain != null) {
@@ -312,13 +333,13 @@ class CupitHome extends Cubit<HomeStates> {
     emit(HiddenPasswordModifierState());
   }
 
-  DataOffer? dataOfferModel;
+  DataOffer? offerAgencModel;
   Future<void> getOfferAgence() async {
-    emit(ConditionalLodinState());
+    emit(ConditionalLodinOfferAgenceState());
     Httplar.httpget(path: GETOFFERSAGENCE).then((value) {
       var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
 
-      dataOfferModel = DataOffer.fromJson(jsonResponse);
+      offerAgencModel = DataOffer.fromJson(jsonResponse);
       print('ook');
       // print(dataOfferModel!.data!.offers[0].papiers);
       emit(GoodGetOffersAgence());

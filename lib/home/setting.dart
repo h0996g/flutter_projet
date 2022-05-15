@@ -297,7 +297,8 @@ class Setting extends StatelessWidget {
             await CachHelper.removdata(key: 'userType');
             print(TOKEN);
             TOKEN = '';
-            CupitHome.get(context).dataOfferModel = null;
+            CupitHome.get(context).offerAgencModel = null;
+            CupitHome.get(context).allofferModel = null;
             CupitHome.get(context).getinfouserModel = null;
             Navigator.pushAndRemoveUntil(
                 context,

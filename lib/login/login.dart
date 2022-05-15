@@ -391,6 +391,7 @@ class LoginScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(builder: (context) => const Navbar()),
                     (route) => false);
+                await CupitHome.get(context).getTypeOffer();
               } else if (LoginCubit.get(context).path == LOGINAGENCE) {
                 Navigator.pushAndRemoveUntil(
                     context,

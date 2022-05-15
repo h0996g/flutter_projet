@@ -291,7 +291,7 @@ class Settingsclient extends StatelessWidget {
                           ),
                         );
                       },
-                      condition: state is! ConditionalLodinState,
+                      condition: state is! ConditionalLodinLogoutState,
                       fallback: (BuildContext context) {
                         return const Align(
                             alignment: Alignment.bottomCenter,

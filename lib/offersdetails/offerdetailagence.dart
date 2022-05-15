@@ -76,7 +76,7 @@ class Offerdetailagence extends StatelessWidget {
 
                           List? k;
                           k = CupitHome.get(context)
-                              .dataOfferModel!
+                              .offerAgencModel!
                               .data!
                               .offers[position]
                               .photo
@@ -90,7 +90,7 @@ class Offerdetailagence extends StatelessWidget {
                           );
                         },
                         itemCount: CupitHome.get(context)
-                            .dataOfferModel!
+                            .offerAgencModel!
                             .data!
                             .offers[position]
                             .photo!
@@ -139,7 +139,7 @@ class Offerdetailagence extends StatelessWidget {
                           child: SmoothPageIndicator(
                               controller: onbordingController, // PageController
                               count: CupitHome.get(context)
-                                  .dataOfferModel!
+                                  .offerAgencModel!
                                   .data!
                                   .offers[position]
                                   .photo!
@@ -497,14 +497,14 @@ class Offerdetailagence extends StatelessWidget {
                       ? Information(
                           context,
                           CupitHome.get(context)
-                              .dataOfferModel!
+                              .offerAgencModel!
                               .data!
                               .offers[position])
                       : (CubitDetail.get(context).indexAgence == 1
                           ? Details(
                               context,
                               CupitHome.get(context)
-                                  .dataOfferModel!
+                                  .offerAgencModel!
                                   .data!
                                   .offers[position],
                               position)
@@ -518,12 +518,13 @@ class Offerdetailagence extends StatelessWidget {
       listener: (BuildContext context, Object? state) {},
     );
   }
+
   Widget Commentaire(context) => Padding(
-    padding: const EdgeInsets.all(12.0),
-    child: Column(
-      children: [
-        Expanded(
-            child: ListView.separated(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          children: [
+            Expanded(
+                child: ListView.separated(
               physics: const BouncingScrollPhysics(),
               itemBuilder: ((context, index) => Listemessage(context)),
               itemCount: 5,
@@ -533,82 +534,116 @@ class Offerdetailagence extends StatelessWidget {
                 );
               },
             )),
-        const SizedBox(height: 8),
-        Container(
-          height: 58,
-          child: defaultForm(
-            lable: Text(
-              'write a message',
-              style: TextStyle(
-                  color: CupitHome.get(context).dartSwitch
-                      ? Colors.white
-                      : Colors.grey),
-            ),
-            sufixIcon: IconButton(
-                onPressed: () {}, icon: const Icon(Icons.send_sharp)),
-            textInputAction: TextInputAction.done,
-            controller: alaControllerr,
-            context: context,
-            type: TextInputType.text,
-            valid: (value) {
-              if (value.isEmpty) {
-                return 'you can not add an umpty message';
-              }
-            },
-          ),
-        )
-      ],
-    ),
-  );
+            const SizedBox(height: 8),
+            Container(
+              height: 58,
+              child: defaultForm(
+                lable: Text(
+                  'write a message',
+                  style: TextStyle(
+                      color: CupitHome.get(context).dartSwitch
+                          ? Colors.white
+                          : Colors.grey),
+                ),
+                sufixIcon: IconButton(
+                    onPressed: () {}, icon: const Icon(Icons.send_sharp)),
+                textInputAction: TextInputAction.done,
+                controller: alaControllerr,
+                context: context,
+                type: TextInputType.text,
+                valid: (value) {
+                  if (value.isEmpty) {
+                    return 'you can not add an umpty message';
+                  }
+                },
+              ),
+            )
+          ],
+        ),
+      );
 }
+
 Widget Listemessage(context) => Container(
-  decoration: BoxDecoration( color: CupitHome.get(context).dartSwitch
-      ? Color(0xff131313)
-      : Colors.lightBlue,borderRadius: BorderRadius.all(Radius.circular(4))),
-
-  height: 100,
-  child: Padding(
-    padding: const EdgeInsets.all(5.0),
-    child: Column(children: [
-      Row(crossAxisAlignment : CrossAxisAlignment.end,children: [
-
-
-        CircleAvatar(
-          radius: 16,
-
-          backgroundImage: AssetImage('assets/images/profile_avatar.jpg'),
-        ),
-        SizedBox(width: 6,),
-        Text('Ala eddine Agence',style:TextStyle(fontSize:20,color: Colors.white,fontWeight: FontWeight.bold)),
-        SizedBox(width: 7,),
-        Text('27/12/2001 13:45',style:TextStyle(color: Colors.white,fontSize: 10,)),
-      ],),
-      SizedBox(height: 3,),
-      Row(children: [
-        SizedBox(width: 7,),
-        Expanded(child: Text('27/12/2001 aaaaaaaa aaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaaaa aaaaaaaaaaaa aaaaaaa',style:TextStyle(color: Colors.white,fontSize: 14,),maxLines: 3,overflow: TextOverflow.ellipsis,)),
-        // Spacer(),
-        SizedBox(width: 7,),
-        MaterialButton(
-
-          onPressed: () {},
-          shape: const CircleBorder(),
+      decoration: BoxDecoration(
           color: CupitHome.get(context).dartSwitch
-              ? const Color(0xff8d8d8d)
-              : Colors.blue,
-          child: Icon(
-            Icons.delete,
-            color: CupitHome.get(context).dartSwitch
-                ? Colors.white
-                : Colors.white,
-          ),
+              ? Color(0xff131313)
+              : Colors.lightBlue,
+          borderRadius: BorderRadius.all(Radius.circular(4))),
+      height: 100,
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                CircleAvatar(
+                  radius: 16,
+                  backgroundImage:
+                      AssetImage('assets/images/profile_avatar.jpg'),
+                ),
+                SizedBox(
+                  width: 6,
+                ),
+                Text('Ala eddine Agence',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold)),
+                SizedBox(
+                  width: 7,
+                ),
+                Text('27/12/2001 13:45',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                    )),
+              ],
+            ),
+            SizedBox(
+              height: 3,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 7,
+                ),
+                Expanded(
+                    child: Text(
+                  '27/12/2001 aaaaaaaa aaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaaaa aaaaaaaaaaaa aaaaaaa',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                  ),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                )),
+                // Spacer(),
+                SizedBox(
+                  width: 7,
+                ),
+                MaterialButton(
+                  onPressed: () {},
+                  shape: const CircleBorder(),
+                  color: CupitHome.get(context).dartSwitch
+                      ? const Color(0xff8d8d8d)
+                      : Colors.blue,
+                  child: Icon(
+                    Icons.delete,
+                    color: CupitHome.get(context).dartSwitch
+                        ? Colors.white
+                        : Colors.white,
+                  ),
+                ),
+                SizedBox(
+                  width: 0,
+                ),
+              ],
+            )
+          ],
         ),
-        SizedBox(width: 0,),
-
-      ],)
-    ],),
-  ),
-);
+      ),
+    );
 
 Widget Ala(OffersModel model) => Image(
       image: MemoryImage(base64Decode(model.photo![0])),
@@ -627,12 +662,11 @@ Widget Ala2(OffersModel model) {
         child: CarouselSlider(
             carouselController: carouselController,
             items: model.photo
-                ?.map((e) =>
-                Image(
-                  image: MemoryImage(base64Decode(e)),
-                  width: 400,
-                  fit: BoxFit.cover,
-                ))
+                ?.map((e) => Image(
+                      image: MemoryImage(base64Decode(e)),
+                      width: 400,
+                      fit: BoxFit.cover,
+                    ))
                 .toList(),
             options: CarouselOptions(
               height: double.infinity,
@@ -682,9 +716,11 @@ Widget Details(context, OffersModel model, position) => Padding(
               ? Color(0xff131313)
               : Colors.lightBlue,
           shape: RoundedRectangleBorder(
-            side:  BorderSide(width: 2, color: CupitHome.get(context).dartSwitch
-                ? Color(0xff131313)
-                : Colors.lightBlue),
+            side: BorderSide(
+                width: 2,
+                color: CupitHome.get(context).dartSwitch
+                    ? Color(0xff131313)
+                    : Colors.lightBlue),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
@@ -876,7 +912,7 @@ Widget Details(context, OffersModel model, position) => Padding(
                         child: listSpecefication(
                             context,
                             CupitHome.get(context)
-                                .dataOfferModel!
+                                .offerAgencModel!
                                 .data!
                                 .offers[position]),
                         // child: ListView.separated(
@@ -921,7 +957,7 @@ Widget Details(context, OffersModel model, position) => Padding(
                         child: listPaiment(
                             context,
                             CupitHome.get(context)
-                                .dataOfferModel!
+                                .offerAgencModel!
                                 .data!
                                 .offers[position]),
                         // child: ListView.separated(

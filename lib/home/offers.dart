@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import '../clienthome/search.dart';
+
 import '../shimmer_widget.dart';
 import 'cubitHome/homeStates.dart';
 
@@ -17,49 +18,6 @@ class Offers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    buildFoodShimmer() =>
-        //  ListTile(
-        //       leading: ShimmerWidget.circular(
-        //         width: 64,
-        //         height: 64,
-        //         shapeBorder: RoundedRectangleBorder(
-        //           borderRadius: BorderRadius.circular(12),
-        //         ),
-        //       ),
-        //       title: Align(
-        //         alignment: Alignment.centerLeft,
-        //         child: ShimmerWidget.rectangular(
-        //           width: MediaQuery.of(context).size.width * 0.3,
-        //           height: 16,
-        //         ),
-        //       ),
-        //       subtitle: ShimmerWidget.rectangular(height: 14),
-        // );
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              height: 200,
-              width: double.infinity,
-              child: ShimmerWidget.rectangular(
-                width: MediaQuery.of(context).size.width * 0.3,
-                height: 16,
-              ),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            const Align(
-                alignment: Alignment.centerLeft,
-                child: ShimmerWidget.rectangular(
-                  width: double.infinity,
-                  height: 16,
-                )),
-          ],
-        );
     return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
@@ -114,12 +72,12 @@ class Offers extends StatelessWidget {
                           position,
                           context,
                           CupitHome.get(context)
-                              .dataOfferModel!
+                              .offerAgencModel!
                               .data!
                               .offers[index]);
                     }),
                     itemCount: CupitHome.get(context)
-                        .dataOfferModel!
+                        .offerAgencModel!
                         .data!
                         .offers
                         .length,
@@ -130,14 +88,14 @@ class Offers extends StatelessWidget {
                     },
                   ));
             },
-            condition: CupitHome.get(context).dataOfferModel != null,
+            condition: CupitHome.get(context).offerAgencModel != null,
             fallback: (BuildContext context) {
               return Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 child: ListView.separated(
                   physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context, index) => buildFoodShimmer(),
+                  itemBuilder: (context, index) => buildFoodShimmer(context),
                   itemCount: 6,
                   separatorBuilder: (BuildContext context, int index) {
                     return const SizedBox(
@@ -186,7 +144,7 @@ ListItembuilder(int position, context, OffersModel model) {
     },
     child: Column(mainAxisSize: MainAxisSize.min, children: [
       Container(
-        height: 200,
+        height: 150,
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
@@ -233,7 +191,7 @@ ListItembuilder(int position, context, OffersModel model) {
             )
           ]),
           const SizedBox(
-            height: 3,
+            height: 10,
           ),
           Row(children: [
             const SizedBox(
@@ -247,9 +205,35 @@ ListItembuilder(int position, context, OffersModel model) {
             )
           ])
         ]),
-        height: 90,
+        height: 120,
         width: double.infinity,
       )
     ]),
   );
 }
+
+buildFoodShimmer(context) => Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          height: 200,
+          width: double.infinity,
+          child: ShimmerWidget.rectangular(
+            width: MediaQuery.of(context).size.width * 0.3,
+            height: 16,
+          ),
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        const Align(
+            alignment: Alignment.centerLeft,
+            child: ShimmerWidget.rectangular(
+              width: double.infinity,
+              height: 16,
+            )),
+      ],
+    );

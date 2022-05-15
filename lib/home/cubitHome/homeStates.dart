@@ -2,7 +2,9 @@ abstract class HomeStates {}
 
 class InitialHomeState extends HomeStates {}
 
-class ConditionalLodinState extends HomeStates {}
+class ConditionalLodinOfferAgenceState extends HomeStates {}
+
+class ConditionalLodinGetAllOfferState extends HomeStates {}
 
 class ConditionalLodinLogoutState extends HomeStates {}
 
@@ -35,6 +37,10 @@ class HiddenPasswordModifierState extends HomeStates {}
 class GoodGetOffersAgence extends HomeStates {}
 
 class BadGetOffersAgence extends HomeStates {}
+
+class GoodGetAllOffers extends HomeStates {}
+
+class BadGetAlltOffers extends HomeStates {}
 
 class GoodGetInfoUserState extends HomeStates {}
 
