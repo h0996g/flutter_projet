@@ -12,6 +12,7 @@ const GETOFFERSAGENCE = '/api/getofferagence';
 var GETOFFERCATEGORIES = '/api/getoffercategorie';
 const GETINFOUSER = '/api/getuser';
 const UPDATEAGENCE = '/api/updateagence';
+const UPDATECLIENT = '/api/updateclient';
 const UPDATEAGENCEPASSWORD = '/api/updateagencePassword';
 var TOKEN = '';
 var USERTYPE = LOGINCLIENT;

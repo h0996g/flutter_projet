@@ -5,22 +5,49 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../login/cupitlogin/loginStates.dart';
 import '../../shared/components/components.dart';
 import '../cubitHome/cupit_home.dart';
+import '../cubitHome/homeStates.dart';
 import 'cubitmodifier.dart';
 import 'modifierstate.dart';
 
-class Modifierprofileclient extends StatelessWidget {
+class Modifierprofileclient extends StatefulWidget {
   Modifierprofileclient({Key? key}) : super(key: key);
 
-  var namemodControllerr = TextEditingController(text: 'boulrens');
-  var addressemodControllerr = new TextEditingController(text: 'constantine');
-  var passmodControllerr = TextEditingController();
-  var numbermodControllerr = TextEditingController(text: '05567894');
-  var formKeyyyyy = GlobalKey<FormState>();
+  @override
+  State<Modifierprofileclient> createState() => _ModifierprofileclientState();
+}
+
+class _ModifierprofileclientState extends State<Modifierprofileclient> {
+  CupitHome? objHome;
+  CubitModifier? objModifier;
+  var namemodController = TextEditingController();
+  var prenommodController = TextEditingController();
+
+  // var addressemodControllerr = new TextEditingController(text: 'constantine');
+  var numbermodController = TextEditingController();
+
+  var formKey = GlobalKey<FormState>();
+
   Map<String, dynamic> sendinfoclientmodifier = {};
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    objHome = BlocProvider.of(context);
+    objModifier = BlocProvider.of(context);
+    namemodController =
+        TextEditingController(text: objHome?.getinfouserModel!.name);
+    prenommodController =
+        TextEditingController(text: objHome!.getinfouserModel!.client!.prenom);
+    //  passmodController = TextEditingController();
+    numbermodController =
+        TextEditingController(text: objHome!.getinfouserModel!.phone);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +72,7 @@ class Modifierprofileclient extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Form(
-                key: formKeyyyyy,
+                key: formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -144,7 +171,7 @@ class Modifierprofileclient extends StatelessWidget {
                     ),
                     defaultForm(
                         context: context,
-                        controller: namemodControllerr,
+                        controller: namemodController,
                         type: TextInputType.text,
                         lable: Text(
                           'nom',
@@ -172,7 +199,7 @@ class Modifierprofileclient extends StatelessWidget {
                     defaultForm(
                         context: context,
                         // valeurinitial: ala,
-                        controller: addressemodControllerr,
+                        controller: prenommodController,
                         type: TextInputType.text,
                         lable: Text(
                           'prenom',
@@ -199,7 +226,7 @@ class Modifierprofileclient extends StatelessWidget {
                     ),
                     defaultForm(
                       context: context,
-                      controller: numbermodControllerr,
+                      controller: numbermodController,
                       type: TextInputType.number,
                       lable: Text(
                         'number',
@@ -226,7 +253,7 @@ class Modifierprofileclient extends StatelessWidget {
                       height: 26,
                     ),
                     ConditionalBuilder(
-                      condition: state is! ConditionalLodinState,
+                      condition: state is! ModifierConditionalLodinState,
                       builder: (BuildContext context) {
                         return Container(
                           width: double.infinity,
@@ -251,14 +278,16 @@ class Modifierprofileclient extends StatelessWidget {
                                         : Colors.blue,
                                 splashColor: Colors.transparent,
                                 onPressed: () {
-                                  if (formKeyyyyy.currentState!.validate()) {
+                                  if (formKey.currentState!.validate()) {
                                     sendinfoclientmodifier = {
-                                      'name': namemodControllerr.text,
+                                      'name': namemodController.text,
 
                                       // 'password': passmodController.text,
-                                      'phone': numbermodControllerr.text,
-                                      'address': addressemodControllerr.text
+                                      'phone': numbermodController.text,
+                                      'prenom': prenommodController.text
                                     };
+                                    objModifier!
+                                        .updateClient(sendinfoclientmodifier);
                                   }
                                 },
                                 child: const Text(
@@ -284,33 +313,32 @@ class Modifierprofileclient extends StatelessWidget {
         );
       },
       listener: (BuildContext context, Object? state) {
-        //   if (state is LougOutSuccesState) {
-        //   var then = CachHelper.removdata(key: 'token').then((value) {
-        //     print(TOKEN);
-        //     TOKEN = '';
-        //     Navigator.pushAndRemoveUntil(
-        //         context,
-        //         MaterialPageRoute(builder: (context) => LoginScreen()),
-        //             (route) => false);
-        //   });
-        //   Fluttertoast.showToast(
-        //       msg: 'déconnexion réussie',
-        //       toastLength: Toast.LENGTH_SHORT,
-        //       gravity: ToastGravity.BOTTOM,
-        //       timeInSecForIosWeb: 1,
-        //       backgroundColor: Colors.green,
-        //       textColor: Colors.white,
-        //       fontSize: 16.0);
-        // } else if (state is LougOutBadState) {
-        //   Fluttertoast.showToast(
-        //       msg: 'There\'s a problem',
-        //       toastLength: Toast.LENGTH_SHORT,
-        //       gravity: ToastGravity.BOTTOM,
-        //       timeInSecForIosWeb: 1,
-        //       backgroundColor: Colors.red,
-        //       textColor: Colors.white,
-        //       fontSize: 16.0);
-        // }
+        if (state is GoodUpdateClientInfoState) {
+          // CupitHome.get(context).getinfouserModel = null;
+          CupitHome.get(context).getinformationAgenceOrClient().then((value) {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const Navbar()),
+                (route) => false);
+            Fluttertoast.showToast(
+                msg: 'Updates Successfully',
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.green,
+                textColor: Colors.white,
+                fontSize: 16.0);
+          });
+        } else if (state is BadUpdateClientInfoState) {
+          Fluttertoast.showToast(
+              msg: 'There\'s a problem',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
       },
     );
   }

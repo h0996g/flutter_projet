@@ -130,7 +130,7 @@ class Settingsclient extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              "${CupitHome.get(context).getinfouserModel!.client!.prenom}",
+                              "${CupitHome.get(context).getinfouserModel!.name}",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
@@ -163,7 +163,7 @@ class Settingsclient extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              "${CupitHome.get(context).getinfouserModel!.name}",
+                              "${CupitHome.get(context).getinfouserModel!.client!.prenom}",
                               maxLines: 1,
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 16),

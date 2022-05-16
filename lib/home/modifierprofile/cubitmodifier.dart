@@ -165,6 +165,20 @@ class CubitModifier extends Cubit<ModifierStates> {
     }));
   }
 
+  void updateClient(Map<String, dynamic> data) {
+    emit(ModifierConditionalLodinState());
+    Httplar.httpPost(path: UPDATECLIENT, data: data).then((value) {
+      if (value.statusCode == 200) {
+        emit(GoodUpdateClientInfoState());
+      } else {
+        emit(BadUpdateClientInfoState());
+      }
+    }).catchError(((e) {
+      print(e.toString());
+      emit(BadUpdateClientInfoState());
+    }));
+  }
+
   ErrorRegisterAndLoginModel? errorUpdatePasswordModel;
   void updatePasswordAgence(Map<String, dynamic> data) {
     emit(ModifierConditionalLodinState());

@@ -24,6 +24,10 @@ class GoodUpdateAgenceInfoState extends ModifierStates {}
 
 class BadUpdateAgenceInfoState extends ModifierStates {}
 
+class GoodUpdateClientInfoState extends ModifierStates {}
+
+class BadUpdateClientInfoState extends ModifierStates {}
+
 class GoodUpdatePasswordAgenceState extends ModifierStates {
   dynamic model;
 

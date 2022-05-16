@@ -24,9 +24,9 @@ class _ModifierprofileState extends State<Modifierprofile> {
   CubitModifier? objModifier;
   var namemodController = TextEditingController();
   var addressemodController = TextEditingController();
-  var passmodController = TextEditingController();
+  // var passmodController = TextEditingController();
   var numbermodController = TextEditingController();
-  var formKeyyyy = GlobalKey<FormState>();
+  var formKey = GlobalKey<FormState>();
   Map<String, dynamic> sendinfoagencemodifier = {};
 
   @override
@@ -67,7 +67,7 @@ class _ModifierprofileState extends State<Modifierprofile> {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Form(
-              key: formKeyyyy,
+              key: formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -316,7 +316,7 @@ class _ModifierprofileState extends State<Modifierprofile> {
                                   : Colors.blue,
                               splashColor: Colors.transparent,
                               onPressed: () {
-                                if (formKeyyyy.currentState!.validate()) {
+                                if (formKey.currentState!.validate()) {
                                   sendinfoagencemodifier = {
                                     'name': namemodController.text,
 
@@ -392,7 +392,7 @@ class _ModifierprofileState extends State<Modifierprofile> {
         //       textColor: Colors.white,
         //       fontSize: 16.0);
         // }
-      } else if (state is LougOutBadState) {
+      } else if (state is BadUpdateAgenceInfoState) {
         Fluttertoast.showToast(
             msg: 'There\'s a problem',
             toastLength: Toast.LENGTH_SHORT,
