@@ -105,15 +105,21 @@ class Offersclient extends StatelessWidget {
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: ToggleSwitch(
+                      changeOnTap: false,
                       initialLabelIndex: CupitHome.get(context).toggelindex,
                       onToggle: (index) {
-                        CupitHome.get(context).changeToggelIndex(index);
-                        print(CupitHome.get(context)
-                            .type_vente[CupitHome.get(context).toggelindex]);
-                        CupitHome.get(context).getTypeOffer(
-                            type: '/' +
-                                CupitHome.get(context).type_vente[
-                                    CupitHome.get(context).toggelindex]);
+                        // CupitHome.get(context).allofferModel = null;
+                        if (CupitHome.get(context).isGetOffetType == true) {
+                          CupitHome.get(context).changeToggelIndex(index);
+
+                          print(CupitHome.get(context)
+                              .type_vente[CupitHome.get(context).toggelindex]);
+
+                          CupitHome.get(context).getTypeOffer(
+                              type: '/' +
+                                  CupitHome.get(context).type_vente[
+                                      CupitHome.get(context).toggelindex]);
+                        }
 
                         // Builder(builder: (context) =>CupitHome.get(context).getTypeOffer ,);
                       },
@@ -189,7 +195,8 @@ class Offersclient extends StatelessWidget {
                       );
                     },
                     condition: CupitHome.get(context).allofferModel != null &&
-                        state is! ConditionalLodinGetAllOfferState,
+                        state is! ConditionalLodinGetAllOfferState &&
+                        CupitHome.get(context).isGetOffetType,
                     fallback: (BuildContext context) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(
