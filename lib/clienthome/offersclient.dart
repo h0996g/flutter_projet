@@ -176,12 +176,16 @@ class Offersclient extends StatelessWidget {
                     builder: (BuildContext context) {
                       return ListView.separated(
                         physics: const BouncingScrollPhysics(),
-                        itemBuilder: ((context, index) => ListItembuilder(
-                            context,
-                            CupitHome.get(context)
-                                .allofferModel!
-                                .data!
-                                .offers[index])),
+                        itemBuilder: ((context, index) {
+                          int positionClient = index;
+                          return ListItembuilder(
+                              context,
+                              CupitHome.get(context)
+                                  .allofferModel!
+                                  .data!
+                                  .offers[index],
+                              positionClient);
+                        }),
                         itemCount: CupitHome.get(context)
                             .allofferModel!
                             .data!
@@ -243,7 +247,7 @@ class Offersclient extends StatelessWidget {
     );
   }
 
-  ListItembuilder(context, OffersModel model) {
+  ListItembuilder(context, OffersModel model, int positionClient) {
     final imageProvider = MemoryImage(base64Decode(model.photo![0]));
 
     return NeumorphicButton(
@@ -252,8 +256,13 @@ class Offersclient extends StatelessWidget {
               CupitHome.get(context).dartSwitch ? Colors.black : Colors.white,
           depth: 0),
       onPressed: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => Offerdetailclient()));
+        print(positionClient);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Offerdetailclient(
+                      position: positionClient,
+                    )));
       },
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         Container(

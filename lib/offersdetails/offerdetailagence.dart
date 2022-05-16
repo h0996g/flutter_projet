@@ -1052,7 +1052,7 @@ listSpecefication(context, OffersModel model) => ListView(
     );
 listPaiment(context, OffersModel model) => ListView(
       scrollDirection: Axis.horizontal,
-      children: model.papiers!
+      children: model.conditionDePaiment!
           .map((e) => Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
