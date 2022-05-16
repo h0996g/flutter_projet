@@ -46,22 +46,31 @@ class CupitHome extends Cubit<HomeStates> {
     emit(ChangeNavebarIndex());
   }
 
+  bool isGetOffetType = true;
   DataOffer? allofferModel;
-  // String TYPE = 'Villa';
-  Future<void> getTypeOffer({String type = '/Tout'}) async {
-    emit(ConditionalLodinGetAllOfferState());
-    Httplar.httpget(path: GETOFFERCATEGORIES + type).then((value) {
-      var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
+  // String TYPE = '/Tout';
+  Future<void> getTypeOffer({
+    String type = '/Tout',
+  }) async {
+    if (isGetOffetType) {
+      isGetOffetType = false;
+      emit(ConditionalLodinGetAllOfferState());
 
-      allofferModel = DataOffer.fromJson(jsonResponse);
-      print('jbt alloffer good');
-      print(allofferModel!.data!.offers[0].address);
-      // print(dataOfferModel!.data!.offers[0].papiers);
-      emit(GoodGetAllOffers());
-    }).catchError((e) {
-      print(e.toString());
-      emit(BadGetAlltOffers());
-    });
+      Httplar.httpget(path: GETOFFERCATEGORIES + type).then((value) {
+        var jsonResponse =
+            convert.jsonDecode(value.body) as Map<String, dynamic>;
+
+        allofferModel = DataOffer.fromJson(jsonResponse);
+        print('jbt alloffer good');
+        print(allofferModel!.data!.offers[0].address);
+        // print(dataOfferModel!.data!.offers[0].papiers);
+        isGetOffetType = true;
+        emit(GoodGetAllOffers());
+      }).catchError((e) {
+        print(e.toString());
+        emit(BadGetAlltOffers());
+      });
+    }
   }
 
 //--------------------------------------------------------------------------

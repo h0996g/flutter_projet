@@ -10,7 +10,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../shared/components/components.dart';
 import 'cupit_home.dart';
-import 'homeStates.dart';
 
 class Modifierprofile extends StatefulWidget {
   Modifierprofile({Key? key}) : super(key: key);

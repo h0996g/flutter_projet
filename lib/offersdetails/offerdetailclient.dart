@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:agence/Model/AfficheOffer.dart';
 import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/offersdetails/CubitOfferDetailState.dart';
 import 'package:agence/offersdetails/cubitOfferDetail.dart';
@@ -12,7 +15,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../home/cubitHome/cupit_home.dart';
 
 class Offerdetailclient extends StatelessWidget {
-  Offerdetailclient({Key? key}) : super(key: key);
+  int? position;
+  Offerdetailclient({this.position});
 
   var onbordingController = PageController();
 
@@ -29,201 +33,225 @@ class Offerdetailclient extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CubitDetail, DetailStates>(
-      builder: (BuildContext context, Object? state) {
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Column(
-            children: [
-              Expanded(
-                flex: 35,
-                child: Stack(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      // height: 295,
-                      height: double.infinity,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Column(
+        children: [
+          Expanded(
+            flex: 35,
+            child: Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  // height: 295,
+                  height: double.infinity,
 
-                      color: Colors.white54,
-                      // child: Image(image:AssetImage('assets/images/building.jpg'),fit: BoxFit.cover,),
-                      child: PageView.builder(
-                        onPageChanged: (int index) {},
-                        controller: onbordingController,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) => Ala(models[index]),
-                        itemCount: 3,
-                      ),
-                    ),
-                    Positioned(
-                      top: 45,
-                      left: -5,
-                      child: MaterialButton(
-                        onPressed: () {
-                          Changepage(context, const Navbar());
-                        },
-                        shape: const CircleBorder(),
-                        color: CupitHome.get(context).dartSwitch
-                            ? Colors.black
-                            : Colors.blue,
-                        child: Icon(
-                          Icons.arrow_back_ios_outlined,
-                          color: CupitHome.get(context).dartSwitch
-                              ? Colors.white
-                              : Colors.white,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                        top: 46,
-                        right: -5,
-                        child: MaterialButton(
-                          onPressed: () {},
-                          shape: const CircleBorder(),
-                          color: CupitHome.get(context).dartSwitch
-                              ? const Color(0xff8d8d8d)
-                              : Colors.blue,
-                          child: Icon(
-                            Icons.favorite_sharp,
-                            color: CupitHome.get(context).dartSwitch
-                                ? Colors.white
-                                : Colors.white,
-                          ),
-                        )),
-                    Positioned(
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: SmoothPageIndicator(
-                              controller: onbordingController, // PageController
-                              count: models.length,
-                              effect: ScrollingDotsEffect(
-                                dotColor: CupitHome.get(context).dartSwitch
-                                    ? const Color(0xffb3b2b2)
-                                    : Colors.white,
-                                activeDotColor:
-                                    CupitHome.get(context).dartSwitch
-                                        ? const Color(0xff131313)
-                                        : Colors.blue,
-                              ),
+                  color: Colors.white54,
+                  // child: Image(image:AssetImage('assets/images/building.jpg'),fit: BoxFit.cover,),
+                  child: PageView.builder(
+                    onPageChanged: (int index) {},
+                    controller: onbordingController,
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      // return Ala(models[index]);
 
-                              // effect: const ExpandingDotsEffect(
-                              //
-                              //     dotWidth: 20,
-                              //     dotHeight: 15,
-                              //     dotColor: Colors.black26,
-                              //     activeDotColor:
-                              //     Colors.deepOrange), // your preferred effect
-                              onDotClicked: (index) {}),
-                        ),
-                      ),
-                    )
-                  ],
+                      List? k;
+                      k = CupitHome.get(context)
+                          .allofferModel!
+                          .data!
+                          .offers[position!]
+                          .photo
+                          ?.map((e) {
+                        return base64Decode(e);
+                      }).toList();
+                      return Image(
+                        image: MemoryImage(k![index]),
+                        width: 400,
+                        fit: BoxFit.cover,
+                      );
+                    },
+                    itemCount: CupitHome.get(context)
+                        .allofferModel!
+                        .data!
+                        .offers[position!]
+                        .photo!
+                        .length,
+                  ),
                 ),
-              ),
-              Divider(
-                color: CupitHome.get(context).dartSwitch
-                    ? Colors.blueGrey
-                    : const Color(0xffF3F3F3FF),
-                height: 1,
-                thickness: 2,
-              ),
-              Expanded(
-                flex: 7,
-                child: Row(
-                  children: [
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Text(
-                      "\$245.00",
-                      style: Theme.of(context).textTheme.headline4?.copyWith(
-                            fontSize: 32,
-                          ),
-                    ),
-                    const Spacer(),
-                    MaterialButton(
-                      onPressed: () {},
-                      shape: const CircleBorder(),
+                Positioned(
+                  top: 45,
+                  left: -5,
+                  child: MaterialButton(
+                    onPressed: () {
+                      Changepage(context, const Navbar());
+                    },
+                    shape: const CircleBorder(),
+                    color: CupitHome.get(context).dartSwitch
+                        ? Colors.black
+                        : Colors.blue,
+                    child: Icon(
+                      Icons.arrow_back_ios_outlined,
                       color: CupitHome.get(context).dartSwitch
-                          ? const Color(0xff8d8d8d)
-                          : Colors.blue,
-                      child: Icon(
-                        Icons.place,
-                        color: CupitHome.get(context).dartSwitch
-                            ? Colors.white
-                            : Colors.white,
-                      ),
+                          ? Colors.white
+                          : Colors.white,
                     ),
-                  ],
+                  ),
                 ),
-              ),
-              Expanded(
-                flex: 7,
-                child: Row(
-                  children: [
-                    const SizedBox(
-                      width: 20,
+                // Positioned(
+                //     top: 46,
+                //     right: -5,
+                //     child: MaterialButton(
+                //       onPressed: () {},
+                //       shape: const CircleBorder(),
+                //       color: CupitHome.get(context).dartSwitch
+                //           ? const Color(0xff8d8d8d)
+                //           : Colors.blue,
+                //       child: Icon(
+                //         Icons.favorite_sharp,
+                //         color: CupitHome.get(context).dartSwitch
+                //             ? Colors.white
+                //             : Colors.white,
+                //       ),
+                //     )),
+                Positioned(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: SmoothPageIndicator(
+                          controller: onbordingController, // PageController
+                          count: CupitHome.get(context)
+                              .allofferModel!
+                              .data!
+                              .offers[position!]
+                              .photo!
+                              .length,
+                          effect: ScrollingDotsEffect(
+                            dotColor: CupitHome.get(context).dartSwitch
+                                ? const Color(0xffb3b2b2)
+                                : Colors.white,
+                            activeDotColor: CupitHome.get(context).dartSwitch
+                                ? const Color(0xff131313)
+                                : Colors.blue,
+                          ),
+
+                          // effect: const ExpandingDotsEffect(
+                          //
+                          //     dotWidth: 20,
+                          //     dotHeight: 15,
+                          //     dotColor: Colors.black26,
+                          //     activeDotColor:
+                          //     Colors.deepOrange), // your preferred effect
+                          onDotClicked: (index) {}),
                     ),
-                    Expanded(
-                      child: Text(
-                        '730 Columbus Ave, Manhattan, Ny 10025',
-                        style: Theme.of(context).textTheme.bodyText2,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Se Loger',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        )),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-              Divider(
-                color: CupitHome.get(context).dartSwitch
-                    ? Colors.blueGrey
-                    : const Color(0xffF3F3F3FF),
-                height: 1,
-                thickness: 2,
-              ),
-              Expanded(
-                flex: 8,
-                child: Row(
+                const SizedBox(
+                  height: 5,
+                )
+              ],
+            ),
+          ),
+          Divider(
+            color: CupitHome.get(context).dartSwitch
+                ? Colors.blueGrey
+                : const Color(0xffF3F3F3FF),
+            height: 1,
+            thickness: 2,
+          ),
+          Expanded(
+            flex: 7,
+            child: Row(
+              children: [
+                const SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  "${CupitHome.get(context).allofferModel!.data!.offers[position!].price} \$",
+                  style: Theme.of(context).textTheme.headline4?.copyWith(
+                        fontSize: 32,
+                      ),
+                ),
+                const Spacer(),
+                MaterialButton(
+                  onPressed: () {},
+                  shape: const CircleBorder(),
+                  color: CupitHome.get(context).dartSwitch
+                      ? const Color(0xff8d8d8d)
+                      : Colors.blue,
+                  child: Icon(
+                    Icons.place,
+                    color: CupitHome.get(context).dartSwitch
+                        ? Colors.white
+                        : Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 7,
+            child: Row(
+              children: [
+                const SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: Text(
+                    '${CupitHome.get(context).allofferModel!.data!.offers[position!].address}',
+                    style: Theme.of(context).textTheme.bodyText2,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Se Loger',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    )),
+                const SizedBox(
+                  width: 20,
+                ),
+              ],
+            ),
+          ),
+          Divider(
+            color: CupitHome.get(context).dartSwitch
+                ? Colors.blueGrey
+                : const Color(0xffF3F3F3FF),
+            height: 1,
+            thickness: 2,
+          ),
+          Expanded(
+            flex: 51,
+            child: BlocConsumer<CubitDetail, DetailStates>(
+              builder: (BuildContext context, state) {
+                return Column(
                   children: [
                     Expanded(
-                      child: Container(
-                        height: 54,
-                        child: MaterialButton(
-                          padding: const EdgeInsets.all(0),
-                          onPressed: () {
-                            CubitDetail.get(context).changeNavDetailClient(0);
-                          },
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Icon(
-                                Icons.description_outlined,
-                                color: CubitDetail.get(context).indexClient == 0
-                                    ? CupitHome.get(context).dartSwitch
-                                        ? Colors.white
-                                        : Colors.redAccent
-                                    : CupitHome.get(context).dartSwitch
-                                        ? Colors.blueGrey
-                                        : Colors.blue,
-                              ),
-                              Text('Information',
-                                  style: TextStyle(
+                      flex: 8,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              height: 54,
+                              child: MaterialButton(
+                                padding: const EdgeInsets.all(0),
+                                onPressed: () {
+                                  CubitDetail.get(context)
+                                      .changeNavDetailClient(0);
+                                },
+                                child: Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Icon(
+                                      Icons.description_outlined,
                                       color: CubitDetail.get(context)
                                                   .indexClient ==
                                               0
@@ -233,46 +261,51 @@ class Offerdetailclient extends StatelessWidget {
                                           : CupitHome.get(context).dartSwitch
                                               ? Colors.blueGrey
                                               : Colors.blue,
-                                      fontSize: 14)),
-                              const SizedBox(
-                                height: 7,
-                              )
-                            ],
+                                    ),
+                                    Text('Information',
+                                        style: TextStyle(
+                                            color: CubitDetail.get(context)
+                                                        .indexClient ==
+                                                    0
+                                                ? CupitHome.get(context)
+                                                        .dartSwitch
+                                                    ? Colors.white
+                                                    : Colors.redAccent
+                                                : CupitHome.get(context)
+                                                        .dartSwitch
+                                                    ? Colors.blueGrey
+                                                    : Colors.blue,
+                                            fontSize: 14)),
+                                    const SizedBox(
+                                      height: 7,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        // color: CupitHome.get(context).dartSwitch
-                        //     ? const Color(0xff131313)
-                        //     : Colors.white,
-                        height: 54,
-                        child: MaterialButton(
-                          padding: const EdgeInsets.all(0),
-                          onPressed: () {
-                            // setState(() {
-                            //   a = 1;
-                            // });
-                            CubitDetail.get(context).changeNavDetailClient(1);
-                          },
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Icon(
-                                Icons.menu_sharp,
-                                color: CubitDetail.get(context).indexClient == 1
-                                    ? CupitHome.get(context).dartSwitch
-                                        ? Colors.white
-                                        : Colors.redAccent
-                                    : CupitHome.get(context).dartSwitch
-                                        ? Colors.blueGrey
-                                        : Colors.blue,
-                              ),
-                              Text('Details',
-                                  style: TextStyle(
+                          Expanded(
+                            child: Container(
+                              // color: CupitHome.get(context).dartSwitch
+                              //     ? const Color(0xff131313)
+                              //     : Colors.white,
+                              height: 54,
+                              child: MaterialButton(
+                                padding: const EdgeInsets.all(0),
+                                onPressed: () {
+                                  // setState(() {
+                                  //   a = 1;
+                                  // });
+                                  CubitDetail.get(context)
+                                      .changeNavDetailClient(1);
+                                },
+                                child: Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Icon(
+                                      Icons.menu_sharp,
                                       color: CubitDetail.get(context)
                                                   .indexClient ==
                                               1
@@ -282,43 +315,48 @@ class Offerdetailclient extends StatelessWidget {
                                           : CupitHome.get(context).dartSwitch
                                               ? Colors.blueGrey
                                               : Colors.blue,
-                                      fontSize: 14)),
-                              const SizedBox(
-                                height: 7,
-                              )
-                            ],
+                                    ),
+                                    Text('Details',
+                                        style: TextStyle(
+                                            color: CubitDetail.get(context)
+                                                        .indexClient ==
+                                                    1
+                                                ? CupitHome.get(context)
+                                                        .dartSwitch
+                                                    ? Colors.white
+                                                    : Colors.redAccent
+                                                : CupitHome.get(context)
+                                                        .dartSwitch
+                                                    ? Colors.blueGrey
+                                                    : Colors.blue,
+                                            fontSize: 14)),
+                                    const SizedBox(
+                                      height: 7,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 54,
-                        child: MaterialButton(
-                          padding: const EdgeInsets.all(0),
-                          onPressed: () {
-                            // setState(() {
-                            //   a = 2;
-                            // });
-                            CubitDetail.get(context).changeNavDetailClient(2);
-                          },
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Icon(
-                                Icons.message_outlined,
-                                color: CubitDetail.get(context).indexClient == 2
-                                    ? CupitHome.get(context).dartSwitch
-                                        ? Colors.white
-                                        : Colors.redAccent
-                                    : CupitHome.get(context).dartSwitch
-                                        ? Colors.blueGrey
-                                        : Colors.blue,
-                              ),
-                              Text('Commentaire',
-                                  style: TextStyle(
+                          Expanded(
+                            child: Container(
+                              height: 54,
+                              child: MaterialButton(
+                                padding: const EdgeInsets.all(0),
+                                onPressed: () {
+                                  // setState(() {
+                                  //   a = 2;
+                                  // });
+                                  CubitDetail.get(context)
+                                      .changeNavDetailClient(2);
+                                },
+                                child: Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Icon(
+                                      Icons.message_outlined,
                                       color: CubitDetail.get(context)
                                                   .indexClient ==
                                               2
@@ -328,73 +366,102 @@ class Offerdetailclient extends StatelessWidget {
                                           : CupitHome.get(context).dartSwitch
                                               ? Colors.blueGrey
                                               : Colors.blue,
-                                      fontSize: 14)),
-                              const SizedBox(
-                                height: 7,
-                              )
-                            ],
+                                    ),
+                                    Text('Commentaire',
+                                        style: TextStyle(
+                                            color: CubitDetail.get(context)
+                                                        .indexClient ==
+                                                    2
+                                                ? CupitHome.get(context)
+                                                        .dartSwitch
+                                                    ? Colors.white
+                                                    : Colors.redAccent
+                                                : CupitHome.get(context)
+                                                        .dartSwitch
+                                                    ? Colors.blueGrey
+                                                    : Colors.blue,
+                                            fontSize: 14)),
+                                    const SizedBox(
+                                      height: 7,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 54,
-                        child: MaterialButton(
-                          padding: const EdgeInsets.all(0),
-                          onPressed: () async {
-                            FlutterPhoneDirectCaller.callNumber(number);
-                          },
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Icon(
-                                Icons.call,
-                                color: CupitHome.get(context).dartSwitch
-                                    ? Colors.blueGrey
-                                    : Colors.blue,
-                              ),
-                              Text('Call',
-                                  style: TextStyle(
+                          Expanded(
+                            child: Container(
+                              height: 54,
+                              child: MaterialButton(
+                                padding: const EdgeInsets.all(0),
+                                onPressed: () async {
+                                  FlutterPhoneDirectCaller.callNumber(number);
+                                },
+                                child: Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Icon(
+                                      Icons.call,
                                       color: CupitHome.get(context).dartSwitch
                                           ? Colors.blueGrey
                                           : Colors.blue,
-                                      fontSize: 14)),
-                              const SizedBox(
-                                height: 7,
-                              )
-                            ],
+                                    ),
+                                    Text('Call',
+                                        style: TextStyle(
+                                            color: CupitHome.get(context)
+                                                    .dartSwitch
+                                                ? Colors.blueGrey
+                                                : Colors.blue,
+                                            fontSize: 14)),
+                                    const SizedBox(
+                                      height: 7,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
+                      ),
+                    ),
+                    Divider(
+                      color: CupitHome.get(context).dartSwitch
+                          ? Colors.blueGrey
+                          : const Color(0xffF3F3F3FF),
+                      height: 1,
+                      thickness: 2,
+                    ),
+                    Expanded(
+                      flex: 43,
+                      child: Container(
+                        child: CubitDetail.get(context).indexClient == 0
+                            ? Information(
+                                context,
+                                CupitHome.get(context)
+                                    .allofferModel!
+                                    .data!
+                                    .offers[position!])
+                            : (CubitDetail.get(context).indexClient == 1
+                                ? Details(
+                                    context,
+                                    CupitHome.get(context)
+                                        .allofferModel!
+                                        .data!
+                                        .offers[position!],
+                                    position)
+                                : Commentaire(context)),
                       ),
                     ),
                   ],
-                ),
-              ),
-              Divider(
-                color: CupitHome.get(context).dartSwitch
-                    ? Colors.blueGrey
-                    : const Color(0xffF3F3F3FF),
-                height: 1,
-                thickness: 2,
-              ),
-              Expanded(
-                flex: 43,
-                child: Container(
-                  child: CubitDetail.get(context).indexClient == 0
-                      ? Information(context)
-                      : (CubitDetail.get(context).indexClient == 1
-                          ? Details(context)
-                          : Commentaire(context)),
-                ),
-              ),
-            ],
+                );
+              },
+              listener: (BuildContext context, Object? state) {},
+            ),
           ),
-        );
-      },
-      listener: (BuildContext context, state) {},
+        ],
+      ),
     );
   }
 
@@ -443,98 +510,133 @@ class Offerdetailclient extends StatelessWidget {
 }
 
 Widget Listemessage(context) => Container(
-  decoration: BoxDecoration( color: CupitHome.get(context).dartSwitch
-      ? Color(0xff131313)
-      : Colors.lightBlue,borderRadius: BorderRadius.all(Radius.circular(4))),
-     
-      height: 100,
-  child: Padding(
-    padding: const EdgeInsets.all(5.0),
-    child: Column(children: [
-      Row(crossAxisAlignment : CrossAxisAlignment.end,children: [
-
-
-        CircleAvatar(
-          radius: 16,
-
-          backgroundImage: AssetImage('assets/images/profile_avatar.jpg'),
-        ),
-        SizedBox(width: 6,),
-        Text('Ala eddine Agence',style:TextStyle(fontSize:20,color: Colors.white,fontWeight: FontWeight.bold)),
-        SizedBox(width: 7,),
-        Text('27/12/2001 13:45',style:TextStyle(color: Colors.white,fontSize: 10,)),
-      ],),
-      SizedBox(height: 3,),
-      Row(children: [
-        SizedBox(width: 7,),
-        Expanded(child: Text('27/12/2001 aaaaaaaa aaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaaaa aaaaaaaaaaaa aaaaaaa',style:TextStyle(color: Colors.white,fontSize: 14,),maxLines: 3,overflow: TextOverflow.ellipsis,)),
-        // Spacer(),
-        SizedBox(width: 7,),
-        MaterialButton(
-
-          onPressed: () {},
-          shape: const CircleBorder(),
+      decoration: BoxDecoration(
           color: CupitHome.get(context).dartSwitch
-              ? const Color(0xff8d8d8d)
-              : Colors.blue,
-          child: Icon(
-            Icons.delete,
-            color: CupitHome.get(context).dartSwitch
-                ? Colors.white
-                : Colors.white,
-          ),
+              ? const Color(0xff131313)
+              : Colors.lightBlue,
+          borderRadius: const BorderRadius.all(const Radius.circular(4))),
+      height: 100,
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                const CircleAvatar(
+                  radius: 16,
+                  backgroundImage:
+                      const AssetImage('assets/images/profile_avatar.jpg'),
+                ),
+                const SizedBox(
+                  width: 6,
+                ),
+                const Text('Ala eddine Agence',
+                    style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold)),
+                const SizedBox(
+                  width: 7,
+                ),
+                const Text('27/12/2001 13:45',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                    )),
+              ],
+            ),
+            const SizedBox(
+              height: 3,
+            ),
+            Row(
+              children: [
+                const SizedBox(
+                  width: 7,
+                ),
+                const Expanded(
+                    child: Text(
+                  '27/12/2001 aaaaaaaa aaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaaaa aaaaaaaaaaaa aaaaaaa',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                  ),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                )),
+                // Spacer(),
+                const SizedBox(
+                  width: 7,
+                ),
+                MaterialButton(
+                  onPressed: () {},
+                  shape: const CircleBorder(),
+                  color: CupitHome.get(context).dartSwitch
+                      ? const Color(0xff8d8d8d)
+                      : Colors.blue,
+                  child: Icon(
+                    Icons.delete,
+                    color: CupitHome.get(context).dartSwitch
+                        ? Colors.white
+                        : Colors.white,
+                  ),
+                ),
+                const SizedBox(
+                  width: 0,
+                ),
+              ],
+            )
+          ],
         ),
-        SizedBox(width: 0,),
-
-      ],)
-    ],),
-  ),
+      ),
     );
 
-Widget Ala(String k) => Image(
-      image: AssetImage('${k}'),
-      fit: BoxFit.cover,
-    );
+// Widget Ala(String k) => Image(
+//       image: AssetImage('${k}'),
+//       fit: BoxFit.cover,
+//     );
 
-Widget Information(context) => Padding(
+Widget Information(context, OffersModel model) => Padding(
       padding: const EdgeInsets.all(16.0),
       child: SingleChildScrollView(
         child: Column(
-          children: const [
-            SizedBox(
+          children: [
+            const SizedBox(
               height: 10,
             ),
-            Text(
+            const Text(
               'Description ',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 28,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             Text(
-              '  aaaaaaaaaa sssssssssss ddddddd ffffff eeeeeee qqqqqq sdrhfejf wlc lwcw wlehcwfelhf weeee eeeeeeeeeeeeee eeeeeeeeeee eeeeeeeeeeeeee eeeeeeeeeeeeee eeeeeeeeeee eeeeeeeeee e',
-              style: TextStyle(fontSize: 16),
+              '${model.description}',
+              style: const TextStyle(fontSize: 16),
             ),
           ],
         ),
       ),
     );
 
-Widget Details(context) => Padding(
+Widget Details(context, OffersModel model, position) => Padding(
       padding: const EdgeInsets.all(18.0),
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Card(
           color: CupitHome.get(context).dartSwitch
-              ? Color(0xff131313)
+              ? const Color(0xff131313)
               : Colors.lightBlue,
           shape: RoundedRectangleBorder(
-            side:  BorderSide(width: 2, color: CupitHome.get(context).dartSwitch
-                ? Color(0xff131313)
-                : Colors.lightBlue),
+            side: BorderSide(
+                width: 2,
+                color: CupitHome.get(context).dartSwitch
+                    ? const Color(0xff131313)
+                    : Colors.lightBlue),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
@@ -561,8 +663,8 @@ Widget Details(context) => Padding(
                     const SizedBox(
                       width: 10,
                     ),
-                    const Text(
-                      'Constantine',
+                    Text(
+                      '${model.wilaya}',
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     )
                   ],
@@ -587,8 +689,8 @@ Widget Details(context) => Padding(
                     const SizedBox(
                       width: 10,
                     ),
-                    const Text(
-                      '140 m2',
+                    Text(
+                      '${model.space} m2',
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     )
                   ],
@@ -603,8 +705,8 @@ Widget Details(context) => Padding(
                     ),
                     Container(
                         width: 130,
-                        child: const Text(
-                          'Etages ',
+                        child: Text(
+                          'Etages',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -613,8 +715,8 @@ Widget Details(context) => Padding(
                     const SizedBox(
                       width: 10,
                     ),
-                    const Text(
-                      '4 ',
+                    Text(
+                      '${model.nEtage}',
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     )
                   ],
@@ -639,8 +741,8 @@ Widget Details(context) => Padding(
                     const SizedBox(
                       width: 10,
                     ),
-                    const Text(
-                      '5 chambre(s)',
+                    Text(
+                      '${model.nChambre} chambre(s)',
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     )
                   ],
@@ -665,8 +767,8 @@ Widget Details(context) => Padding(
                     const SizedBox(
                       width: 10,
                     ),
-                    const Text(
-                      '5 chambre(s)',
+                    Text(
+                      '${model.typeVente}',
                       style: const TextStyle(color: Colors.white, fontSize: 18),
                     )
                   ],
@@ -691,8 +793,8 @@ Widget Details(context) => Padding(
                     const SizedBox(
                       width: 10,
                     ),
-                    const Text(
-                      '5 chambre(s)',
+                    Text(
+                      '${model.typeOffer}',
                       style: const TextStyle(color: Colors.white, fontSize: 18),
                     )
                   ],
@@ -723,19 +825,12 @@ Widget Details(context) => Padding(
                         width: 10,
                       ),
                       Expanded(
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 3,
-                          itemBuilder: ((context, index) =>
-                              listoption(context)),
-                          physics: const BouncingScrollPhysics(),
-                          separatorBuilder: (BuildContext context, int index) {
-                            return const SizedBox(
-                              width: 5,
-                            );
-                          },
-                        ),
-                      )
+                          child: listSpecefication(
+                              context,
+                              CupitHome.get(context)
+                                  .allofferModel!
+                                  .data!
+                                  .offers[position!]))
                     ],
                   ),
                 ),
@@ -762,19 +857,12 @@ Widget Details(context) => Padding(
                         width: 10,
                       ),
                       Expanded(
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 3,
-                          itemBuilder: ((context, index) =>
-                              listoption(context)),
-                          physics: const BouncingScrollPhysics(),
-                          separatorBuilder: (BuildContext context, int index) {
-                            return const SizedBox(
-                              width: 5,
-                            );
-                          },
-                        ),
-                      )
+                          child: listPaiment(
+                              context,
+                              CupitHome.get(context)
+                                  .allofferModel!
+                                  .data!
+                                  .offers[position!]))
                     ],
                   ),
                 ),
@@ -785,24 +873,73 @@ Widget Details(context) => Padding(
       ),
     );
 
-listoption(context) => Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: CupitHome.get(context).dartSwitch
-            ? Colors.blueGrey
-            : Colors.blueAccent,
-      ),
-      child: Center(
-          child: Row(children: const [
-        SizedBox(
-          width: 6,
-        ),
-        Text(
-          '5 chambre',
-          style: TextStyle(fontSize: 18, color: Colors.white),
-        ),
-        SizedBox(
-          width: 6,
-        )
-      ])),
+// listoption(context) => Container(
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(15),
+//         color: CupitHome.get(context).dartSwitch
+//             ? Colors.blueGrey
+//             : Colors.blueAccent,
+//       ),
+//       child: Center(
+//           child: Row(children: const [
+//         SizedBox(
+//           width: 6,
+//         ),
+//         Text(
+//           '5 chambre',
+//           style: TextStyle(fontSize: 18, color: Colors.white),
+//         ),
+//         SizedBox(
+//           width: 6,
+//         )
+//       ])),
+//     );
+
+listSpecefication(context, OffersModel model) => ListView(
+      scrollDirection: Axis.horizontal,
+      children: model.specification!
+          .map((e) => Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.blueAccent,
+                ),
+                child: Center(
+                    child: Row(children: [
+                  const SizedBox(
+                    width: 6,
+                  ),
+                  Text(
+                    '$e',
+                    style: const TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                  const SizedBox(
+                    width: 6,
+                  )
+                ])),
+              ))
+          .toList(),
+    );
+listPaiment(context, OffersModel model) => ListView(
+      scrollDirection: Axis.horizontal,
+      children: model.conditionDePaiment!
+          .map((e) => Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.blueAccent,
+                ),
+                child: Center(
+                    child: Row(children: [
+                  const SizedBox(
+                    width: 6,
+                  ),
+                  Text(
+                    '$e',
+                    style: const TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                  const SizedBox(
+                    width: 6,
+                  )
+                ])),
+              ))
+          .toList(),
     );

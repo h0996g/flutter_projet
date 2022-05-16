@@ -328,6 +328,8 @@ class Settingsclient extends StatelessWidget {
             TOKEN = '';
             // CupitHome.get(context).dataOfferModel = null;
             CupitHome.get(context).getinfouserModel = null;
+            CupitHome.get(context).allofferModel = null;
+
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => LoginScreen()),

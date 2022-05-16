@@ -105,15 +105,21 @@ class Offersclient extends StatelessWidget {
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: ToggleSwitch(
+                      changeOnTap: false,
                       initialLabelIndex: CupitHome.get(context).toggelindex,
                       onToggle: (index) {
-                        CupitHome.get(context).changeToggelIndex(index);
-                        print(CupitHome.get(context)
-                            .type_vente[CupitHome.get(context).toggelindex]);
-                        CupitHome.get(context).getTypeOffer(
-                            type: '/' +
-                                CupitHome.get(context).type_vente[
-                                    CupitHome.get(context).toggelindex]);
+                        // CupitHome.get(context).allofferModel = null;
+                        if (CupitHome.get(context).isGetOffetType == true) {
+                          CupitHome.get(context).changeToggelIndex(index);
+
+                          print(CupitHome.get(context)
+                              .type_vente[CupitHome.get(context).toggelindex]);
+
+                          CupitHome.get(context).getTypeOffer(
+                              type: '/' +
+                                  CupitHome.get(context).type_vente[
+                                      CupitHome.get(context).toggelindex]);
+                        }
 
                         // Builder(builder: (context) =>CupitHome.get(context).getTypeOffer ,);
                       },
@@ -170,12 +176,16 @@ class Offersclient extends StatelessWidget {
                     builder: (BuildContext context) {
                       return ListView.separated(
                         physics: const BouncingScrollPhysics(),
-                        itemBuilder: ((context, index) => ListItembuilder(
-                            context,
-                            CupitHome.get(context)
-                                .allofferModel!
-                                .data!
-                                .offers[index])),
+                        itemBuilder: ((context, index) {
+                          int positionClient = index;
+                          return ListItembuilder(
+                              context,
+                              CupitHome.get(context)
+                                  .allofferModel!
+                                  .data!
+                                  .offers[index],
+                              positionClient);
+                        }),
                         itemCount: CupitHome.get(context)
                             .allofferModel!
                             .data!
@@ -189,7 +199,8 @@ class Offersclient extends StatelessWidget {
                       );
                     },
                     condition: CupitHome.get(context).allofferModel != null &&
-                        state is! ConditionalLodinGetAllOfferState,
+                        state is! ConditionalLodinGetAllOfferState &&
+                        CupitHome.get(context).isGetOffetType,
                     fallback: (BuildContext context) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(
@@ -236,7 +247,7 @@ class Offersclient extends StatelessWidget {
     );
   }
 
-  ListItembuilder(context, OffersModel model) {
+  ListItembuilder(context, OffersModel model, int positionClient) {
     final imageProvider = MemoryImage(base64Decode(model.photo![0]));
 
     return NeumorphicButton(
@@ -245,8 +256,13 @@ class Offersclient extends StatelessWidget {
               CupitHome.get(context).dartSwitch ? Colors.black : Colors.white,
           depth: 0),
       onPressed: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => Offerdetailclient()));
+        print(positionClient);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Offerdetailclient(
+                      position: positionClient,
+                    )));
       },
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         Container(
