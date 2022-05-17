@@ -68,6 +68,7 @@ class CupitHome extends Cubit<HomeStates> {
         emit(GoodGetAllOffers());
       }).catchError((e) {
         print(e.toString());
+        isGetOffetType = true;
         emit(BadGetAlltOffers());
       });
     }
@@ -382,6 +383,72 @@ class CupitHome extends Cubit<HomeStates> {
       emit(BaadGetInfoUserState());
     });
   }
+  //----------------favorite------------------------------------
+String path =CHECKFAVORITE;
+  bool colorfav =false;
+getexistfav({required Map<String, dynamic> data, required String path}){
+  emit(LoadingExState());
+    Httplar.httpPost(path: path, data: data).then((value) {
+      if (value.statusCode == 200) {
+        var jsonResponse =
+        convert.jsonDecode(value.body) as Map<String, dynamic>;
+        print(jsonResponse);
+colorfav=true;
+
+
+        emit(ExistFavState());
+      } else if (value.statusCode == 201) {
+        var jsonResponse =
+        convert.jsonDecode(value.body) as Map<String, dynamic>;
+        print(jsonResponse);
+
+colorfav=false;
+        emit(DoNotExState());
+      }
+    } ).catchError((error) {
+      // print(error.toString());
+      emit(BaadGetFavState());
+    });
+}
+
+String patha=CHANGEFAVTOFALSE;
+String pathaa=CHANGEFAVTOTRUE;
+changefav({required Map<String, dynamic> data,bool? dd}){
+  if (dd==true) {
+    print('true');
+
+
+
+
+    Httplar.httpdelete(path:patha , data: data).then((value) {
+
+      colorfav=false;
+      emit(DoNotExState());
+    }).catchError((error) {
+      // print(error.toString());
+      emit(ChangetofalseState());
+    });
+
+    emit(ExistFavState());
+  } else if (dd==false) {
+    print('false');
+    Httplar.httpPost(path:pathaa , data: data).then((value) {
+
+      colorfav=true;
+      emit(ChangetotrueState());
+    }).catchError((error) {
+      print(error.toString());
+
+      emit(BaaadChangeState());
+    });
+
+
+
+  }
+
+}
+
+
   // -----------------------------------------------------------------
 }
 

@@ -27,4 +27,19 @@ class Httplar {
       'Authorization': 'Bearer $TOKEN'
     });
   }
-}
+
+
+  static Future<http.Response> httpdelete(
+      {required path,
+        Map<String, dynamic>? query,
+        required Map<String, dynamic> data}) async {
+    var url = Uri.http(
+      URLHTTP,
+      path,
+      query,
+    );
+    return await http.delete(url, body: data, headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $TOKEN'
+    });
+  }}

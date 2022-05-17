@@ -17,6 +17,7 @@ import '../shimmer_widget.dart';
 
 class Offersclient extends StatelessWidget {
   Offersclient({Key? key}) : super(key: key);
+  Map<String, dynamic> sendfav = {};
 
   @override
   Widget build(BuildContext context) {
@@ -256,7 +257,12 @@ class Offersclient extends StatelessWidget {
               CupitHome.get(context).dartSwitch ? Colors.black : Colors.white,
           depth: 0),
       onPressed: () {
-        print(positionClient);
+        print(CupitHome.get(context).allofferModel!.data!.offers[positionClient].id);
+        sendfav={
+          'offer_id' : CupitHome.get(context).allofferModel!.data!.offers[positionClient].id,
+        };
+        CupitHome.get(context).getexistfav(data: sendfav, path: CupitHome.get(context).path);
+        // print(positionClient);
         Navigator.push(
             context,
             MaterialPageRoute(

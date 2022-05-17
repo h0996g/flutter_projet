@@ -235,12 +235,12 @@ class Offerdetailagence extends StatelessWidget {
                 const SizedBox(
                   width: 20,
                 ),
-                TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Se Loger',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    )),
+                // TextButton(
+                //     onPressed: () {},
+                //     child: const Text(
+                //       'Se Loger',
+                //       style: TextStyle(fontWeight: FontWeight.bold),
+                //     )),
                 const SizedBox(
                   width: 20,
                 ),

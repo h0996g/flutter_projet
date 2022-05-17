@@ -4,6 +4,7 @@ import 'package:agence/shared/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 import '../home/cubitHome/cupit_home.dart';
 import '../home/offers.dart';
@@ -23,6 +24,58 @@ class Search extends StatelessWidget {
           body: Padding(
             padding: const EdgeInsets.all(5),
             child: Column(children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 5, right: 5, top: 16, bottom: 5),
+                child: ToggleSwitch(
+                  changeOnTap: false,
+
+                  onToggle: (index) {
+
+
+                  },
+                  labels: [
+                    'Agence',
+                    'Wilaya'
+                  ],
+                  radiusStyle: true,
+                  customWidths: [
+                    MediaQuery.of(context).size.width / 2-20,
+
+                    MediaQuery.of(context).size.width / 2-20,
+                  ],
+                  minHeight: 45,
+                  minWidth: double.infinity,
+                  cornerRadius: 50,
+                  fontSize: 18,
+                  activeBgColor: [
+                    CupitHome.get(context).dartSwitch
+                        ? Colors.blueGrey
+                        : Colors.blue,
+                    CupitHome.get(context).dartSwitch
+                        ? Colors.blueGrey
+                        : Colors.blue,
+
+                  ],
+                  inactiveBgColor: CupitHome.get(context).dartSwitch
+                      ? const Color(0xff131313)
+                      : Colors.white,
+                  activeFgColor: Colors.white,
+                  inactiveFgColor: CupitHome.get(context).dartSwitch
+                      ? Colors.white
+                      : Colors.blue,
+                  borderColor: [
+                    CupitHome.get(context).dartSwitch
+                        ? const Color(0xff131313)
+                        : Colors.blue,
+                  ],
+                  borderWidth: 3,
+                  dividerColor: CupitHome.get(context).dartSwitch
+                      ? const Color(0xff131313)
+                      : Colors.white,
+                ),
+              ),
+
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: defaultForm(
