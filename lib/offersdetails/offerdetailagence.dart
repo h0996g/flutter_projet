@@ -114,19 +114,26 @@ class Offerdetailagence extends StatelessWidget {
                     ),
                   ),
                 ),
-                // Positioned(
-                //     top: 46,
-                //     right: -5,
-                //
-                //
-                //     child:     MaterialButton(
-                //       onPressed: () {},
-                //       shape: const CircleBorder(),
-                //       color: CupitHome.get(context).dartSwitch ? Color(0xff8d8d8d): Colors.blue,
-                //       child: Icon(Icons.favorite_sharp,color:CupitHome.get(context).dartSwitch ? Colors.white : Colors.white, ),
-                //
-                //     )
-                // ),
+                Positioned(
+                  top: 45,
+                  right: -5,
+                  child: MaterialButton(
+                    onPressed: () {
+
+                    },
+                    shape: const CircleBorder(),
+                    color: CupitHome.get(context).dartSwitch
+                        ? Colors.black
+                        : Colors.blue,
+                    child: Icon(
+                      Icons.place,
+                      color: CupitHome.get(context).dartSwitch
+                          ? Colors.white
+                          : Colors.white,
+                    ),
+                  ),
+                ),
+
                 Positioned(
                   // bottom: 20,
                   // left: 140,

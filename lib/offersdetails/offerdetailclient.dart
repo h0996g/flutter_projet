@@ -104,7 +104,7 @@ class Offerdetailclient extends StatelessWidget {
                     ),
 
                     Positioned(
-                        top: 46,
+                        top: 45,
                         right: -5,
                         child: ConditionalBuilder(condition: state is! LoadingExState, builder: (BuildContext context) {return MaterialButton(
                           onPressed: () {
@@ -224,12 +224,10 @@ class Offerdetailclient extends StatelessWidget {
                     const SizedBox(
                       width: 20,
                     ),
-                    TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Se Loger',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        )),
+                    const Text(
+                      'Se Loger',
+                      style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),
+                    ),
                     const SizedBox(
                       width: 20,
                     ),
