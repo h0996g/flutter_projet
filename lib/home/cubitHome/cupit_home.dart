@@ -389,10 +389,12 @@ String path =CHECKFAVORITE;
 getexistfav({required Map<String, dynamic> data, required String path}){
   emit(LoadingExState());
     Httplar.httpPost(path: path, data: data).then((value) {
+      print('dkholt l verifier favoris');
       if (value.statusCode == 200) {
         var jsonResponse =
         convert.jsonDecode(value.body) as Map<String, dynamic>;
         print(jsonResponse);
+        print('ryh nrodu true');
 colorfav=true;
 
 
@@ -401,11 +403,12 @@ colorfav=true;
         var jsonResponse =
         convert.jsonDecode(value.body) as Map<String, dynamic>;
         print(jsonResponse);
-
+        print('ryh nrodu false');
 colorfav=false;
         emit(DoNotExState());
       }
     } ).catchError((error) {
+      print('ki l3ada erreur');
       // print(error.toString());
       emit(BaadGetFavState());
     });

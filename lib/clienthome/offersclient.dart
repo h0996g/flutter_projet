@@ -259,9 +259,9 @@ class Offersclient extends StatelessWidget {
       onPressed: () {
         print(CupitHome.get(context).allofferModel!.data!.offers[positionClient].id);
         sendfav={
-          'offer_id' : CupitHome.get(context).allofferModel!.data!.offers[positionClient].id,
+          'offer_id' : '${CupitHome.get(context).allofferModel!.data!.offers[positionClient].id}',
         };
-        CupitHome.get(context).getexistfav(data: sendfav, path: CupitHome.get(context).path);
+        CupitHome.get(context).getexistfav(data: sendfav, path: CupitHome.get(context).path );
         // print(positionClient);
         Navigator.push(
             context,

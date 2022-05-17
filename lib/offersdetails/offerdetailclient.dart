@@ -6,6 +6,7 @@ import 'package:agence/offersdetails/CubitOfferDetailState.dart';
 import 'package:agence/offersdetails/cubitOfferDetail.dart';
 
 import 'package:agence/shared/components/components.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../home/cubitHome/cupit_home.dart';
+import '../home/cubitHome/homeStates.dart';
 
 class Offerdetailclient extends StatelessWidget {
   int? position;
@@ -100,10 +102,11 @@ class Offerdetailclient extends StatelessWidget {
                         ),
                       ),
                     ),
+
                     Positioned(
                         top: 46,
                         right: -5,
-                        child: MaterialButton(
+                        child: ConditionalBuilder(condition: state is! LoadingExState, builder: (BuildContext context) {return MaterialButton(
                           onPressed: () {
 
                             sendfava={
@@ -122,7 +125,11 @@ class Offerdetailclient extends StatelessWidget {
                             //     ? Colors.white
                             //     : Colors.white,
                           ),
-                        )),
+                        );}, fallback: (BuildContext context) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },)),
                     Positioned(
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 10),
