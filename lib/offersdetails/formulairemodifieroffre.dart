@@ -1,29 +1,33 @@
-import 'package:agence/home/addphoto/addphoto.dart';
+import 'package:agence/offersdetails/CubitOfferDetailState.dart';
+import 'package:agence/offersdetails/cubitOfferDetail.dart';
+import 'package:agence/offersdetails/modifieroffrephoto.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
 
+import '../home/addphoto/addphoto.dart';
+import '../home/cubitHome/cupit_home.dart';
 import '../shared/components/components.dart';
-import 'cubitHome/cupit_home.dart';
-import 'cubitHome/homeStates.dart';
 
-class AddPost extends StatelessWidget {
+class Formulairemodifier extends StatelessWidget {
+   Formulairemodifier({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    var formKey = GlobalKey<FormState>();
-    return BlocConsumer<CupitHome, HomeStates>(
-      builder: (BuildContext context, state) {
-        return Scaffold(
+    var formKez = GlobalKey<FormState>();
+    return BlocConsumer<CubitDetail, DetailStates>(
+        builder: (BuildContext context, state) {return Scaffold(
             appBar: AppBar(
               elevation: 15,
-              title: Text('Add Offer',
+              title: Text('Modifier offer',
                   style:
-                      //  TextStyle(
-                      //     color: CupitHome.get(context).dartSwitch
-                      //         ? Colors.white
-                      //         : Colors.black,
-                      //     fontSize: 34),
-                      Theme.of(context).textTheme.headline4),
+                  //  TextStyle(
+                  //     color: CupitHome.get(context).dartSwitch
+                  //         ? Colors.white
+                  //         : Colors.black,
+                  //     fontSize: 34),
+                  Theme.of(context).textTheme.headline4),
               actions: [
                 IconButton(
                     onPressed: () {
@@ -42,7 +46,7 @@ class AddPost extends StatelessWidget {
                 child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
                   child: Form(
-                      key: formKey,
+                      key: formKez,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -64,9 +68,9 @@ class AddPost extends StatelessWidget {
                                             ? Colors.white
                                             : Colors.grey),
                                   ),
-                                  items: CupitHome.get(context)
+                                  items: CubitDetail.get(context)
                                       .vende
-                                      .map(buildMenuItem)
+                                      .map(buildMenuItemm)
                                       .toList(),
                                   onChanged: (value) {
                                     CupitHome.get(context).vendeDropDown(value);
@@ -97,9 +101,9 @@ class AddPost extends StatelessWidget {
                                             ? Colors.white
                                             : Colors.grey),
                                   ),
-                                  items: CupitHome.get(context)
+                                  items: CubitDetail.get(context)
                                       .appartement
-                                      .map(buildMenuItem)
+                                      .map(buildMenuItemm)
                                       .toList(),
                                   onChanged: (value) {
                                     CupitHome.get(context)
@@ -130,7 +134,7 @@ class AddPost extends StatelessWidget {
                                 }
                               },
                               controller:
-                                  CupitHome.get(context).superficieController,
+                              CupitHome.get(context).superficieController,
                               sufixText: 'm2'),
                           const SizedBox(
                             height: 26,
@@ -157,7 +161,7 @@ class AddPost extends StatelessWidget {
                           ),
                           Visibility(
                             visible:
-                                CupitHome.get(context).isvisibility['etages']!,
+                            CupitHome.get(context).isvisibility['etages']!,
                             child: Container(
                               margin: const EdgeInsets.only(bottom: 26),
                               child: defaultForm(
@@ -176,7 +180,7 @@ class AddPost extends StatelessWidget {
                                   }
                                 },
                                 controller:
-                                    CupitHome.get(context).nEtageController,
+                                CupitHome.get(context).nEtageController,
                               ),
                             ),
                           ),
@@ -217,7 +221,7 @@ class AddPost extends StatelessWidget {
                             selectedColor: Colors.blue,
                             decoration: BoxDecoration(
                               borderRadius:
-                                  const BorderRadius.all(Radius.circular(50)),
+                              const BorderRadius.all(Radius.circular(50)),
                               border: Border.all(
                                 color: Colors.grey,
                               ),
@@ -251,7 +255,7 @@ class AddPost extends StatelessWidget {
                             selectedColor: Colors.blue,
                             decoration: BoxDecoration(
                               borderRadius:
-                                  const BorderRadius.all(Radius.circular(50)),
+                              const BorderRadius.all(Radius.circular(50)),
                               border: Border.all(color: Colors.grey),
                             ),
                             buttonText: Text(
@@ -284,7 +288,7 @@ class AddPost extends StatelessWidget {
                             selectedColor: Colors.blue,
                             decoration: BoxDecoration(
                               borderRadius:
-                                  const BorderRadius.all(Radius.circular(50)),
+                              const BorderRadius.all(Radius.circular(50)),
                               border: Border.all(color: Colors.grey),
                             ),
                             buttonText: Text(
@@ -324,9 +328,9 @@ class AddPost extends StatelessWidget {
                                           ? Colors.white
                                           : Colors.black),
                                   dropdownColor:
-                                      CupitHome.get(context).dartSwitch
-                                          ? Colors.black
-                                          : Colors.white,
+                                  CupitHome.get(context).dartSwitch
+                                      ? Colors.black
+                                      : Colors.white,
                                   isExpanded: true,
                                   hint: Text(
                                     'Wilaya',
@@ -335,9 +339,9 @@ class AddPost extends StatelessWidget {
                                             ? Colors.white
                                             : Colors.grey),
                                   ),
-                                  items: CupitHome.get(context)
+                                  items: CubitDetail.get(context)
                                       .items
-                                      .map(buildMenuItem)
+                                      .map(buildMenuItemm)
                                       .toList(),
                                   onChanged: (value) {
                                     CupitHome.get(context)
@@ -379,7 +383,7 @@ class AddPost extends StatelessWidget {
                               }
                             },
                             controller:
-                                CupitHome.get(context).descriptionController,
+                            CupitHome.get(context).descriptionController,
                             maxline: 6,
                           ),
                           const SizedBox(
@@ -401,9 +405,8 @@ class AddPost extends StatelessWidget {
                               }
                             },
                             controller:
-                                CupitHome.get(context).addressController,
+                            CupitHome.get(context).addressController,
                           ),
-
                           const SizedBox(
                             height: 26,
                           ),
@@ -418,28 +421,26 @@ class AddPost extends StatelessWidget {
                               ),),
 
                             child: MaterialButton(onPressed: (){},
-                              child: Row(children: [
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Icon(Icons.gps_fixed_rounded,
-                                    size: 40,
-                                    color: CupitHome.get(context).dartSwitch
-                                        ? Colors.white
-                                        : Colors.black
-                                ),
-                                const SizedBox(
-                                  width: 25,
-                                ),
-                                Text('Ajouter Location',style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold,color:CupitHome.get(context).dartSwitch
-                                    ? Colors.white
-                                    : Colors.black),)
+                            child: Row(children: [
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Icon(Icons.gps_fixed_rounded,
+                                  size: 40,
+                                  color: CupitHome.get(context).dartSwitch
+                                      ? Colors.white
+                                      : Colors.black
+                              ),
+                              const SizedBox(
+                                width: 25,
+                              ),
+                              Text('Ajouter Location',style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold,color:CupitHome.get(context).dartSwitch
+                                  ? Colors.white
+                                  : Colors.black),)
 
-                              ],),),
+                            ],),),
 
                           ),
-
-                          
                           const SizedBox(
                             height: 26,
                           ),
@@ -449,11 +450,11 @@ class AddPost extends StatelessWidget {
                               const Spacer(),
                               IconButton(
                                 onPressed: () {
-                                  if (formKey.currentState!.validate()) {
+                                  if (formKez.currentState!.validate()) {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => Addphoto()));
+                                            builder: (context) => Modifieroffrephoto()));
                                   }
                                 },
                                 icon: Icon(Icons.arrow_forward_ios,
@@ -462,22 +463,22 @@ class AddPost extends StatelessWidget {
                                         : Colors.grey),
                               )
                             ],
-                          )
+                          ),
+
                         ],
                       )),
                 ),
               ),
-            ));
-      },
-      listener: (BuildContext context, Object? state) {},
+            ));},
+        listener: (BuildContext context, Object? state) {},
+
     );
   }
-
-  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
-        onTap: () {},
-        child: Text(
-          item,
-        ),
-        value: item,
-      );
+   DropdownMenuItem<String> buildMenuItemm(String item) => DropdownMenuItem(
+     onTap: () {},
+     child: Text(
+       item,
+     ),
+     value: item,
+   );
 }

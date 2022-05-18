@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:agence/Model/AfficheOffer.dart';
 import 'package:agence/offersdetails/CubitOfferDetailState.dart';
 import 'package:agence/offersdetails/cubitOfferDetail.dart';
+import 'package:agence/offersdetails/formulairemodifieroffre.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -201,7 +202,13 @@ class Offerdetailagence extends StatelessWidget {
                 ),
                 const Spacer(),
                 MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                Formulairemodifier()));
+                  },
                   shape: const CircleBorder(),
                   color: CupitHome.get(context).dartSwitch
                       ? const Color(0xff8d8d8d)
