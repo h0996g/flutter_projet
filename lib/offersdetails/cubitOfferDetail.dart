@@ -82,7 +82,6 @@ class CubitDetail extends Cubit<DetailStates> {
     'Relizane'
   ];
 
-
   Map<String, bool> isvisibility = {'N-champre': true, 'etages': true};
 
   List papiersListhttp = [];
@@ -94,7 +93,6 @@ class CubitDetail extends Cubit<DetailStates> {
   var descriptionController = TextEditingController();
   var addressController = TextEditingController();
   var priceController = TextEditingController();
-
 
   final vende = ['Vente', 'Echange', 'Vacances'];
   final appartement = ['Appartement', 'Terrain', 'Villa', 'Studio'];
@@ -122,6 +120,7 @@ class CubitDetail extends Cubit<DetailStates> {
 
     emit(ChangevalueDropdownState());
   }
+
 //---------
   vendeDropDown(value) {
     vendevalueDrop = value;
@@ -131,6 +130,7 @@ class CubitDetail extends Cubit<DetailStates> {
 
     emit(ChangevalueDropdownState());
   }
+
   //----------
   wilaraDropdown(value) {
     wilayavalueDropdown = value;
@@ -138,6 +138,7 @@ class CubitDetail extends Cubit<DetailStates> {
 
     emit(ChangevalueDropdownState());
   }
+
   //-----end drop down
 //-----------multidropdown
   static List<Conditions_paiment> paiment = [
@@ -147,7 +148,7 @@ class CubitDetail extends Cubit<DetailStates> {
   ];
   final paymentVar = paiment
       .map((payment) =>
-      MultiSelectItem<Conditions_paiment>(payment, payment.name))
+          MultiSelectItem<Conditions_paiment>(payment, payment.name))
       .toList();
 
   static List<Specefication> specefication = [
@@ -159,7 +160,8 @@ class CubitDetail extends Cubit<DetailStates> {
     Specefication(id: 6, name: "Garage"),
   ];
   final speceficationVar = specefication
-      .map((specefication) => MultiSelectItem<Specefication>(specefication, specefication.name))
+      .map((specefication) =>
+          MultiSelectItem<Specefication>(specefication, specefication.name))
       .toList();
 
   static List<Papiers> papiers = [
@@ -179,9 +181,7 @@ class CubitDetail extends Cubit<DetailStates> {
 //------------------modifier photo f offre--------------
 
   Future<void> savePhotoBd({required Map<String, dynamic> data}) async {
-
     await Httplar.httpPost(data: data, path: ADDOFFER).then((value) {
-
       print('succes send');
       print(value.body);
       emit(CreateOfferSuccessState());
@@ -190,7 +190,6 @@ class CubitDetail extends Cubit<DetailStates> {
       emit(CreateOfferBadState());
     });
   }
-
 
   void resetValueoffer() {
     papiersListhttp = [];
@@ -206,8 +205,6 @@ class CubitDetail extends Cubit<DetailStates> {
     base64List = [];
     emit(InitialDetailState());
   }
-
-
 
   final ImagePicker imagePicker = ImagePicker();
   List<XFile>? imageFileList = [];
@@ -236,7 +233,7 @@ class CubitDetail extends Cubit<DetailStates> {
 
   Future<void> selectimagecamera() async {
     final imagecamera =
-    await ImagePicker().pickImage(source: ImageSource.camera);
+        await ImagePicker().pickImage(source: ImageSource.camera);
     if (imagecamera == null) return;
     final imageTemporary = File(imagecamera.path);
     this.imagecamera = imageTemporary;
@@ -246,18 +243,68 @@ class CubitDetail extends Cubit<DetailStates> {
     emit(AddImageCameraGoodState());
   }
 
+//-----------------------------------------favorite--------------------------------------------
+  bool colorfav = false;
+  getexistfav({required Map<String, dynamic> data, required String path}) {
+    emit(LoadingExState());
 
+    Httplar.httpPost(path: path, data: data).then((value) async {
+      print('dkholt l verifier favoris');
+      if (value.statusCode == 200) {
+        var jsonResponse =
+            convert.jsonDecode(value.body) as Map<String, dynamic>;
+        print(jsonResponse);
+        print('ryh nrodu true');
+        await Future.delayed(Duration(seconds: 2));
+        colorfav = true;
 
+        emit(ExistFavState());
+      } else if (value.statusCode == 201) {
+        var jsonResponse =
+            convert.jsonDecode(value.body) as Map<String, dynamic>;
+        print(jsonResponse);
+        print('ryh nrodu false');
+        await Future.delayed(Duration(seconds: 2));
+        colorfav = false;
 
-// ---------------------------------------------
+        emit(DoNotExState());
+      }
+    }).catchError((error) {
+      print('ki l3ada erreur');
+      // print(error.toString());
+      emit(BaadGetFavState());
+    });
+  }
+
+  changefav({required Map<String, dynamic> data, bool? dd}) {
+    if (dd == true) {
+      print('true');
+
+      Httplar.httpdelete(path: CHANGEFAVTOFALSE, data: data).then((value) {
+        colorfav = false;
+        emit(DoNotExState());
+      }).catchError((error) {
+        // print(error.toString());
+        emit(ChangetofalseState());
+      });
+
+      emit(ExistFavState());
+    } else if (dd == false) {
+      print('false');
+      Httplar.httpPost(path: CHANGEFAVTOTRUE, data: data).then((value) {
+        colorfav = true;
+        emit(ChangetotrueState());
+      }).catchError((error) {
+        print(error.toString());
+
+        emit(BaaadChangeState());
+      });
+    }
+  }
+
+// ------------------------------------------------------------------------------------
 
 }
-
-
-
-
-
-
 
 class Conditions_paiment {
   final int id;
@@ -288,4 +335,3 @@ class Papiers {
     required this.name,
   });
 }
-

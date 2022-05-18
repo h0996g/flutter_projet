@@ -15,3 +15,20 @@ class AddImageCameraGoodState extends DetailStates {}
 class CreateOfferSuccessState extends DetailStates {}
 
 class CreateOfferBadState extends DetailStates {}
+
+class LoadingExState extends DetailStates {}
+
+class ExistFavState extends DetailStates {}
+
+class DoNotExState extends DetailStates {}
+
+class BaadGetFavState extends DetailStates {}
+
+class ChangetofalseState extends DetailStates {}
+
+class ChangetotrueState extends DetailStates {}
+
+class BaaadChangeState extends DetailStates {}
+// class CreateOfferBadState extends DetailStates {}
+// class CreateOfferBadState extends DetailStates {}
+// class CreateOfferBadState extends DetailStates {}

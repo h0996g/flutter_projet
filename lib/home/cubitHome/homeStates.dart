@@ -48,12 +48,12 @@ class GoodGetInfoUserState extends HomeStates {}
 
 class BaadGetInfoUserState extends HomeStates {}
 
-class LoadingExState extends HomeStates {}
-class ExistFavState extends HomeStates {}
-class DoNotExState extends HomeStates {}
-class BaadGetFavState extends HomeStates {}
+// class LoadingExState extends HomeStates {}
+// class ExistFavState extends HomeStates {}
+// class DoNotExState extends HomeStates {}
+// class BaadGetFavState extends HomeStates {}
 
 
-class ChangetotrueState extends HomeStates {}
-class BaaadChangeState extends HomeStates {}
-class ChangetofalseState extends HomeStates {}
+// class ChangetotrueState extends HomeStates {}
+// class BaaadChangeState extends HomeStates {}
+// class ChangetofalseState extends HomeStates {}

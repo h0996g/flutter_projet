@@ -2,12 +2,14 @@ import 'dart:convert';
 
 import 'package:agence/Model/AfficheOffer.dart';
 import 'package:agence/clienthome/search.dart';
+import 'package:agence/offersdetails/cubitOfferDetail.dart';
 import 'package:agence/offersdetails/offerdetailclient.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
+import '../Api/constApi.dart';
 import '../home/cubitHome/cupit_home.dart';
 import '../home/cubitHome/homeStates.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -266,8 +268,8 @@ class Offersclient extends StatelessWidget {
           'offer_id':
               '${CupitHome.get(context).allofferModel!.data!.offers[positionClient].id}',
         };
-        CupitHome.get(context)
-            .getexistfav(data: sendfav, path: CupitHome.get(context).path);
+        CubitDetail.get(context)
+            .getexistfav(data: sendfav, path: CHECKFAVORITE);
         // print(positionClient);
         Navigator.push(
             context,

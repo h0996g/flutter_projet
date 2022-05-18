@@ -386,62 +386,6 @@ class CupitHome extends Cubit<HomeStates> {
   }
 
   //----------------favorite------------------------------------
-  String path = CHECKFAVORITE;
-  bool colorfav = false;
-  getexistfav({required Map<String, dynamic> data, required String path}) {
-    emit(LoadingExState());
-    Httplar.httpPost(path: path, data: data).then((value) {
-      print('dkholt l verifier favoris');
-      if (value.statusCode == 200) {
-        var jsonResponse =
-            convert.jsonDecode(value.body) as Map<String, dynamic>;
-        print(jsonResponse);
-        print('ryh nrodu true');
-        colorfav = true;
-
-        emit(ExistFavState());
-      } else if (value.statusCode == 201) {
-        var jsonResponse =
-            convert.jsonDecode(value.body) as Map<String, dynamic>;
-        print(jsonResponse);
-        print('ryh nrodu false');
-        colorfav = false;
-        emit(DoNotExState());
-      }
-    }).catchError((error) {
-      print('ki l3ada erreur');
-      // print(error.toString());
-      emit(BaadGetFavState());
-    });
-  }
-
-  String patha = CHANGEFAVTOFALSE;
-  String pathaa = CHANGEFAVTOTRUE;
-  changefav({required Map<String, dynamic> data, bool? dd}) {
-    if (dd == true) {
-      print('true');
-
-      Httplar.httpdelete(path: patha, data: data).then((value) {
-        colorfav = false;
-        emit(DoNotExState());
-      }).catchError((error) {
-        // print(error.toString());
-        emit(ChangetofalseState());
-      });
-
-      emit(ExistFavState());
-    } else if (dd == false) {
-      print('false');
-      Httplar.httpPost(path: pathaa, data: data).then((value) {
-        colorfav = true;
-        emit(ChangetotrueState());
-      }).catchError((error) {
-        print(error.toString());
-
-        emit(BaaadChangeState());
-      });
-    }
-  }
 
   // -----------------------------------------------------------------
 }
