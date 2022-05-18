@@ -5,7 +5,11 @@ const USERINFOTOKEN = '/api/user';
 const REGISTERCLIENT = '/api/registerclient';
 const REGISTERAGENCE = '/api/registeragence';
 const ADDOFFER = '/api/createoffer';
-const URLHTTP = '172.20.10.4:8000';
+
+const URLHTTP = '192.168.171.68:8000';
+
+
+
 const GETOFFERSAGENCE = '/api/getofferagence';
 // const GETALLOFFER = '/api/getofferall';
 // var TYPE = 'Tout';
@@ -16,9 +20,9 @@ const UPDATECLIENT = '/api/updateclient';
 const UPDATEAGENCEPASSWORD = '/api/updateagencePassword';
 
 //--------------
-const CHECKFAVORITE='/api/searchfavorit';
-const CHANGEFAVTOFALSE='/api/deletefavorite';
-const CHANGEFAVTOTRUE='/api/addfavorite';
+const CHECKFAVORITE = '/api/searchfavorit';
+const CHANGEFAVTOFALSE = '/api/deletefavorite';
+const CHANGEFAVTOTRUE = '/api/addfavorite';
 
 //-------------
 var TOKEN = '';

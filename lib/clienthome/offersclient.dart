@@ -257,11 +257,17 @@ class Offersclient extends StatelessWidget {
               CupitHome.get(context).dartSwitch ? Colors.black : Colors.white,
           depth: 0),
       onPressed: () {
-        print(CupitHome.get(context).allofferModel!.data!.offers[positionClient].id);
-        sendfav={
-          'offer_id' : '${CupitHome.get(context).allofferModel!.data!.offers[positionClient].id}',
+        print(CupitHome.get(context)
+            .allofferModel!
+            .data!
+            .offers[positionClient]
+            .id);
+        sendfav = {
+          'offer_id':
+              '${CupitHome.get(context).allofferModel!.data!.offers[positionClient].id}',
         };
-        CupitHome.get(context).getexistfav(data: sendfav, path: CupitHome.get(context).path );
+        CupitHome.get(context)
+            .getexistfav(data: sendfav, path: CupitHome.get(context).path);
         // print(positionClient);
         Navigator.push(
             context,

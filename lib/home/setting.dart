@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:agence/Api/constApi.dart';
 import 'package:agence/home/cubitHome/modifierprofileagence.dart';
 
@@ -11,6 +13,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../login/login.dart';
 import 'cubitHome/cupit_home.dart';
 import 'cubitHome/homeStates.dart';
+import 'modifierprofile/cubitmodifier.dart';
 import 'modifierprofile/modifierpasswordagence.dart';
 
 class Setting extends StatelessWidget {
@@ -50,10 +53,20 @@ class Setting extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 70,
                         backgroundImage:
-                            AssetImage('assets/images/profile_avatar.jpg'),
+                            CupitHome.get(context).getinfouserModel!.photo ==
+                                    null
+                                ? const AssetImage(
+                                    'assets/images/profile_avatar.jpg')
+                                : Image.memory(
+                                    base64Decode(CupitHome.get(context)
+                                        .getinfouserModel!
+                                        .photo!),
+                                    fit: BoxFit.cover,
+                                  ).image,
+                        // AssetImage('assets/images/profile_avatar.jpg'),
                       ),
                       const SizedBox(
                         height: 9,
@@ -63,12 +76,17 @@ class Setting extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Modifierprofile()));
+                                  onPressed: () async {
+                                    var navigationResultAgence =
+                                        await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Modifierprofile()));
+                                    if (navigationResultAgence == true) {
+                                      CubitModifier.get(context)
+                                          .selectimageAgencenull();
+                                    }
                                   },
                                   child: const Text(
                                     'Modifier profile',

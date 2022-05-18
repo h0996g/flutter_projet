@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:agence/home/modifierprofile/modifierpasswordclient.dart';
 import 'package:agence/home/modifierprofile/modifierprofileclient.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -9,6 +11,7 @@ import '../Api/constApi.dart';
 import '../home/cubitHome/cupit_home.dart';
 import '../home/cubitHome/homeStates.dart';
 
+import '../home/modifierprofile/cubitmodifier.dart';
 import '../login/login.dart';
 import '../login/other/cachhelper.dart';
 
@@ -55,11 +58,21 @@ class Settingsclient extends StatelessWidget {
 
                       Stack(
                           alignment: AlignmentDirectional.bottomEnd,
-                          children: const [
+                          children: [
                             CircleAvatar(
                               radius: 70,
-                              backgroundImage: AssetImage(
-                                  'assets/images/profile_avatar.jpg'),
+                              backgroundImage: CupitHome.get(context)
+                                          .getinfouserModel!
+                                          .photo ==
+                                      null
+                                  ? const AssetImage(
+                                      'assets/images/profile_avatar.jpg')
+                                  : Image.memory(
+                                      base64Decode(CupitHome.get(context)
+                                          .getinfouserModel!
+                                          .photo!),
+                                      fit: BoxFit.cover,
+                                    ).image,
                             ),
                           ]),
 
@@ -71,12 +84,18 @@ class Settingsclient extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Modifierprofileclient()));
+                                  onPressed: () async {
+                                    var navigationResultClent =
+                                        await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Modifierprofileclient()));
+                                    if (navigationResultClent == true) {
+                                      CubitModifier.get(context)
+                                          .selectimageClientnull();
+                                      // print('ook');
+                                    }
                                   },
                                   child: const Text(
                                     'Modifier profile',

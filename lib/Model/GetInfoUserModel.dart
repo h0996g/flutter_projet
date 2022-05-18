@@ -3,6 +3,7 @@ class GetInfoUser {
   String? name;
   String? email;
   String? phone;
+  String? photo;
   AgenceModel? agence;
   ClientModel? client;
   GetInfoUser.fromJson(Map<String, dynamic> json) {
@@ -10,6 +11,7 @@ class GetInfoUser {
     name = json['name'];
     email = json['email'];
     phone = json['phone'];
+    photo = json['photo'];
 
     agence =
         json['agence'] != null ? AgenceModel.fromJson(json['agence']) : null;
