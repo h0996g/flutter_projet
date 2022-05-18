@@ -37,3 +37,5 @@ class GoodUpdatePasswordAgenceState extends ModifierStates {
 class BadUpdatePasswordAgenceState extends ModifierStates {}
 
 class ModifierConditionalLodinState extends ModifierStates {}
+
+class DeletSelectImageState extends ModifierStates {}
