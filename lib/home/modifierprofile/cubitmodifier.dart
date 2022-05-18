@@ -206,8 +206,13 @@ class CubitModifier extends Cubit<ModifierStates> {
     });
   }
 
-  void selectimagenull() {
+  void selectimageClientnull() {
     selectedImageclient = null;
+    emit(DeletSelectImageState());
+  }
+
+  void selectimageAgencenull() {
+    selectedImages = null;
     emit(DeletSelectImageState());
   }
 }

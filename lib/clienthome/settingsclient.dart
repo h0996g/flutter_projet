@@ -85,14 +85,15 @@ class Settingsclient extends StatelessWidget {
                             children: [
                               TextButton(
                                   onPressed: () async {
-                                    var navigationResult = await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Modifierprofileclient()));
-                                    if (navigationResult == true) {
+                                    var navigationResultClent =
+                                        await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Modifierprofileclient()));
+                                    if (navigationResultClent == true) {
                                       CubitModifier.get(context)
-                                          .selectimagenull();
+                                          .selectimageClientnull();
                                       // print('ook');
                                     }
                                   },

@@ -60,7 +60,7 @@ class _ModifierprofileclientState extends State<Modifierprofileclient> {
             return false;
           },
           child: Scaffold(
-            resizeToAvoidBottomInset: true,
+            // resizeToAvoidBottomInset: true,
             appBar: AppBar(
               leading: IconButton(
                 onPressed: () {
@@ -358,7 +358,7 @@ class _ModifierprofileclientState extends State<Modifierprofileclient> {
         if (state is GoodUpdateClientInfoState) {
           // CupitHome.get(context).getinfouserModel = null;
           CupitHome.get(context).getinformationAgenceOrClient().then((value) {
-            CubitModifier.get(context).selectimagenull();
+            CubitModifier.get(context).selectimageClientnull();
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const Navbar()),
