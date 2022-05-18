@@ -5,7 +5,11 @@ const USERINFOTOKEN = '/api/user';
 const REGISTERCLIENT = '/api/registerclient';
 const REGISTERAGENCE = '/api/registeragence';
 const ADDOFFER = '/api/createoffer';
+
 const URLHTTP = '192.168.171.68:8000';
+
+
+
 const GETOFFERSAGENCE = '/api/getofferagence';
 // const GETALLOFFER = '/api/getofferall';
 // var TYPE = 'Tout';
