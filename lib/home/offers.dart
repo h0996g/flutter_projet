@@ -62,30 +62,35 @@ class Offers extends StatelessWidget {
           body: ConditionalBuilder(
             builder: (BuildContext context) {
               return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 0),
-                  child: ListView.separated(
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: ((context, index) {
-                      int position = index;
-
-                      return ListItembuilder(
-                          position,
-                          context,
-                          CupitHome.get(context)
-                              .offerAgencModel!
-                              .data!
-                              .offers[index]);
-                    }),
-                    itemCount: CupitHome.get(context)
-                        .offerAgencModel!
-                        .data!
-                        .offers
-                        .length,
-                    separatorBuilder: (BuildContext context, int index) {
-                      return const SizedBox(
-                        height: 10,
-                      );
+                  padding: EdgeInsets.symmetric(horizontal: 0),
+                  child: RefreshIndicator(
+                    onRefresh: () {
+                      return CupitHome.get(context).getOfferAgence();
                     },
+                    child: ListView.separated(
+                      physics: BouncingScrollPhysics(),
+                      itemBuilder: ((context, index) {
+                        int position = index;
+
+                        return ListItembuilder(
+                            position,
+                            context,
+                            CupitHome.get(context)
+                                .offerAgencModel!
+                                .data!
+                                .offers[index]);
+                      }),
+                      itemCount: CupitHome.get(context)
+                          .offerAgencModel!
+                          .data!
+                          .offers
+                          .length,
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(
+                          height: 10,
+                        );
+                      },
+                    ),
                   ));
             },
             condition: CupitHome.get(context).offerAgencModel != null,

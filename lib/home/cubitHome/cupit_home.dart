@@ -395,6 +395,7 @@ class CupitHome extends Cubit<HomeStates> {
 
   DataOffer? offerAgencModel;
   Future<void> getOfferAgence() async {
+    offerAgencModel = null;
     emit(ConditionalLodinOfferAgenceState());
     Httplar.httpget(path: GETOFFERSAGENCE).then((value) {
       var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
