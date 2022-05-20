@@ -93,7 +93,8 @@ class Offers extends StatelessWidget {
                     ),
                   ));
             },
-            condition: CupitHome.get(context).offerAgencModel != null,
+            condition: CupitHome.get(context).offerAgencModel != null &&
+                state is! ConditionalLodinOfferAgenceState,
             fallback: (BuildContext context) {
               return Padding(
                 padding:

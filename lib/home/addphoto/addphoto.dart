@@ -237,6 +237,7 @@ class Addphoto extends StatelessWidget {
       listener: (BuildContext context, Object? state) {
         if (state is CreateOfferSuccessState) {
           CupitHome.get(context).getOfferAgence().then((value) {
+            CupitHome.get(context).currentindex = 0;
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const Home()),
