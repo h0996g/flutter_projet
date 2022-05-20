@@ -202,8 +202,8 @@ class Modifieroffrephoto extends StatelessWidget {
                     ElevatedButton(
                         onPressed: () async {
                           sendinfoOffer = {
-                            // 'id':
-                            //     ' ${CupitHome.get(context).allofferModel!.data!.offers[position].id}',
+                            'id':
+                                ' ${CupitHome.get(context).allofferModel!.data!.offers[position].id}',
                             'type_vente':
                                 CupitHome.get(context).appartementvalueDrop,
                             'address': CupitHome.get(context)
@@ -225,15 +225,15 @@ class Modifieroffrephoto extends StatelessWidget {
                                 CupitHome.get(context).nChambresUpdate.text,
                             'wilaya':
                                 CupitHome.get(context).wilayavalueDropdown,
-                            // 'photo':
-                            //     jsonEncode(CupitHome.get(context).base64List),
+                            'photo': jsonEncode(
+                                "${CupitHome.get(context).base64ListUpdate}"),
                             // 'type_offer': CupitHome.get(context).vendevalueDrop,
                             // 'condition_de_paiment': jsonEncode(
-                            //     CupitHome.get(context).conditionsListhttp),
+                            //     "${CupitHome.get(context).conditionsListhttp}"),
                             // 'specification': jsonEncode(
-                            //     CupitHome.get(context).specificationListhttp),
+                            //     "${CupitHome.get(context).specificationListhttp}"),
                             // 'papiers': jsonEncode(
-                            //     CupitHome.get(context).papiersListhttp)
+                            //     "${CupitHome.get(context).papiersListhttp}")
                           };
                           CupitHome.get(context)
                               .updateOffer(data: sendinfoOffer)

@@ -31,217 +31,217 @@ class CubitDetail extends Cubit<DetailStates> {
 
   //--------------------modifier offre--------------
   //--------dropdown
-  final items = [
-    'Alger',
-    'Blida',
-    'Tipaza',
-    'Boumerdes',
-    'Oran',
-    'Adrar',
-    'Chlef',
-    'Laghouat',
-    'Oum el bouaghi',
-    'Batna',
-    'Bejaia',
-    'Biskra',
-    'Bechar',
-    'Bouira',
-    'Tamenrasset',
-    'Tebessa',
-    'Tlemcen',
-    'Tiaret',
-    'Tizi ouzou',
-    'Djelfa',
-    'Jijle',
-    'Setif',
-    'Saida',
-    'Skikda',
-    'Sidi bel abbes',
-    'Annaba',
-    'Guelma',
-    'Constantine',
-    'Medea',
-    'Mostaganem',
-    'Msila',
-    'Mascara',
-    'Ouargla',
-    'El bayadh',
-    'Illizi',
-    'Bordj bou arreridj',
-    'El taref',
-    'Tindouf',
-    'Tissemsilt',
-    'El ouad',
-    'Khenchela',
-    'Souk ahras',
-    'Mila',
-    'Ain defla',
-    'Naama',
-    'Ain temouchent',
-    'Ghardaia',
-    'Relizane'
-  ];
+//   final items = [
+//     'Alger',
+//     'Blida',
+//     'Tipaza',
+//     'Boumerdes',
+//     'Oran',
+//     'Adrar',
+//     'Chlef',
+//     'Laghouat',
+//     'Oum el bouaghi',
+//     'Batna',
+//     'Bejaia',
+//     'Biskra',
+//     'Bechar',
+//     'Bouira',
+//     'Tamenrasset',
+//     'Tebessa',
+//     'Tlemcen',
+//     'Tiaret',
+//     'Tizi ouzou',
+//     'Djelfa',
+//     'Jijle',
+//     'Setif',
+//     'Saida',
+//     'Skikda',
+//     'Sidi bel abbes',
+//     'Annaba',
+//     'Guelma',
+//     'Constantine',
+//     'Medea',
+//     'Mostaganem',
+//     'Msila',
+//     'Mascara',
+//     'Ouargla',
+//     'El bayadh',
+//     'Illizi',
+//     'Bordj bou arreridj',
+//     'El taref',
+//     'Tindouf',
+//     'Tissemsilt',
+//     'El ouad',
+//     'Khenchela',
+//     'Souk ahras',
+//     'Mila',
+//     'Ain defla',
+//     'Naama',
+//     'Ain temouchent',
+//     'Ghardaia',
+//     'Relizane'
+//   ];
 
-  Map<String, bool> isvisibility = {'N-champre': true, 'etages': true};
+//   Map<String, bool> isvisibility = {'N-champre': true, 'etages': true};
 
-  List papiersListhttp = [];
-  List specificationListhttp = [];
-  List conditionsListhttp = [];
-  var superficieController = TextEditingController();
-  var nEtageController = TextEditingController();
-  var nChambres = TextEditingController();
-  var descriptionController = TextEditingController();
-  var addressController = TextEditingController();
-  var priceController = TextEditingController();
+//   List papiersListhttp = [];
+//   List specificationListhttp = [];
+//   List conditionsListhttp = [];
+//   var superficieController = TextEditingController();
+//   var nEtageController = TextEditingController();
+//   var nChambres = TextEditingController();
+//   var descriptionController = TextEditingController();
+//   var addressController = TextEditingController();
+//   var priceController = TextEditingController();
 
-  final vende = ['Vente', 'Echange', 'Vacances'];
-  final appartement = ['Appartement', 'Terrain', 'Villa', 'Studio'];
-  String? wilayavalueDropdown;
-  String? vendevalueDrop = 'Vente';
-  String? appartementvalueDrop = 'Appartement';
-//-----------------
-  appartementDropDown(value) {
-    appartementvalueDrop = value;
-    // print(appartement.indexOf(value));
-    if (appartementvalueDrop == 'Appartement') {
-      isvisibility['N-champre'] = true;
-      isvisibility['etages'] = true;
-    } else if (appartementvalueDrop == 'Terrain') {
-      isvisibility['N-champre'] = false;
-      isvisibility['etages'] = false;
-    } else if (appartementvalueDrop == 'Villa') {
-      isvisibility['N-champre'] = true;
-      isvisibility['etages'] = true;
-    } else if (appartementvalueDrop == 'Studio') {
-      isvisibility['N-champre'] = true;
-      isvisibility['etages'] = false;
-    }
-    print(appartementvalueDrop);
+//   final vende = ['Vente', 'Echange', 'Vacances'];
+//   final appartement = ['Appartement', 'Terrain', 'Villa', 'Studio'];
+//   String? wilayavalueDropdown;
+//   String? vendevalueDrop = 'Vente';
+//   String? appartementvalueDrop = 'Appartement';
+// //-----------------
+//   appartementDropDown(value) {
+//     appartementvalueDrop = value;
+//     // print(appartement.indexOf(value));
+//     if (appartementvalueDrop == 'Appartement') {
+//       isvisibility['N-champre'] = true;
+//       isvisibility['etages'] = true;
+//     } else if (appartementvalueDrop == 'Terrain') {
+//       isvisibility['N-champre'] = false;
+//       isvisibility['etages'] = false;
+//     } else if (appartementvalueDrop == 'Villa') {
+//       isvisibility['N-champre'] = true;
+//       isvisibility['etages'] = true;
+//     } else if (appartementvalueDrop == 'Studio') {
+//       isvisibility['N-champre'] = true;
+//       isvisibility['etages'] = false;
+//     }
+//     print(appartementvalueDrop);
 
-    emit(ChangevalueDropdownState());
-  }
+//     emit(ChangevalueDropdownState());
+//   }
 
-//---------
-  vendeDropDown(value) {
-    vendevalueDrop = value;
-    print(vendevalueDrop);
+// //---------
+//   vendeDropDown(value) {
+//     vendevalueDrop = value;
+//     print(vendevalueDrop);
 
-    // print(vende.indexOf(value));
+//     // print(vende.indexOf(value));
 
-    emit(ChangevalueDropdownState());
-  }
+//     emit(ChangevalueDropdownState());
+//   }
 
-  //----------
-  wilaraDropdown(value) {
-    wilayavalueDropdown = value;
-    print(wilayavalueDropdown);
+//   //----------
+//   wilaraDropdown(value) {
+//     wilayavalueDropdown = value;
+//     print(wilayavalueDropdown);
 
-    emit(ChangevalueDropdownState());
-  }
+//     emit(ChangevalueDropdownState());
+//   }
 
-  //-----end drop down
-//-----------multidropdown
-  static List<Conditions_paiment> paiment = [
-    Conditions_paiment(id: 1, name: "Promesse de vente possible"),
-    Conditions_paiment(id: 2, name: "Paiment par tranches possible"),
-    Conditions_paiment(id: 3, name: "Credit bancaire possible"),
-  ];
-  final paymentVar = paiment
-      .map((payment) =>
-          MultiSelectItem<Conditions_paiment>(payment, payment.name))
-      .toList();
+//   //-----end drop down
+// //-----------multidropdown
+//   static List<Conditions_paiment> paiment = [
+//     Conditions_paiment(id: 1, name: "Promesse de vente possible"),
+//     Conditions_paiment(id: 2, name: "Paiment par tranches possible"),
+//     Conditions_paiment(id: 3, name: "Credit bancaire possible"),
+//   ];
+//   final paymentVar = paiment
+//       .map((payment) =>
+//           MultiSelectItem<Conditions_paiment>(payment, payment.name))
+//       .toList();
 
-  static List<Specefication> specefication = [
-    Specefication(id: 1, name: "Jardin"),
-    Specefication(id: 2, name: "Electricite"),
-    Specefication(id: 3, name: "Gaz"),
-    Specefication(id: 4, name: "Eau"),
-    Specefication(id: 5, name: "Meuble"),
-    Specefication(id: 6, name: "Garage"),
-  ];
-  final speceficationVar = specefication
-      .map((specefication) =>
-          MultiSelectItem<Specefication>(specefication, specefication.name))
-      .toList();
+//   static List<Specefication> specefication = [
+//     Specefication(id: 1, name: "Jardin"),
+//     Specefication(id: 2, name: "Electricite"),
+//     Specefication(id: 3, name: "Gaz"),
+//     Specefication(id: 4, name: "Eau"),
+//     Specefication(id: 5, name: "Meuble"),
+//     Specefication(id: 6, name: "Garage"),
+//   ];
+//   final speceficationVar = specefication
+//       .map((specefication) =>
+//           MultiSelectItem<Specefication>(specefication, specefication.name))
+//       .toList();
 
-  static List<Papiers> papiers = [
-    Papiers(id: 1, name: "Promotion immobiliere"),
-    Papiers(id: 2, name: "Acte notarie"),
-    Papiers(id: 3, name: "Acte dans l'indivision"),
-    Papiers(id: 4, name: "Papier timbre"),
-    Papiers(id: 5, name: "Decision"),
-    Papiers(id: 6, name: "Livret foncier"),
-    Papiers(id: 7, name: "Parmis de construire"),
-  ];
-  final papiersVar = papiers
-      .map((papiers) => MultiSelectItem<Papiers>(papiers, papiers.name))
-      .toList();
-  //-------multidropdown end
-//------------------------modifier offre end -----------------
-//------------------modifier photo f offre--------------
+//   static List<Papiers> papiers = [
+//     Papiers(id: 1, name: "Promotion immobiliere"),
+//     Papiers(id: 2, name: "Acte notarie"),
+//     Papiers(id: 3, name: "Acte dans l'indivision"),
+//     Papiers(id: 4, name: "Papier timbre"),
+//     Papiers(id: 5, name: "Decision"),
+//     Papiers(id: 6, name: "Livret foncier"),
+//     Papiers(id: 7, name: "Parmis de construire"),
+//   ];
+//   final papiersVar = papiers
+//       .map((papiers) => MultiSelectItem<Papiers>(papiers, papiers.name))
+//       .toList();
+//   //-------multidropdown end
+// //------------------------modifier offre end -----------------
+// //------------------modifier photo f offre--------------
 
-  Future<void> savePhotoBd({required Map<String, dynamic> data}) async {
-    await Httplar.httpPost(data: data, path: ADDOFFER).then((value) {
-      print('succes send');
-      print(value.body);
-      emit(CreateOfferSuccessState());
-    }).catchError((e) {
-      print(e.toString());
-      emit(CreateOfferBadState());
-    });
-  }
+//   Future<void> savePhotoBd({required Map<String, dynamic> data}) async {
+//     await Httplar.httpPost(data: data, path: ADDOFFER).then((value) {
+//       print('succes send');
+//       print(value.body);
+//       emit(CreateOfferSuccessState());
+//     }).catchError((e) {
+//       print(e.toString());
+//       emit(CreateOfferBadState());
+//     });
+//   }
 
-  void resetValueoffer() {
-    papiersListhttp = [];
-    specificationListhttp = [];
-    conditionsListhttp = [];
-    superficieController = TextEditingController();
-    nEtageController = TextEditingController();
-    nChambres = TextEditingController();
-    descriptionController = TextEditingController();
-    addressController = TextEditingController();
-    priceController = TextEditingController();
-    imageFileList = [];
-    base64List = [];
-    emit(InitialDetailState());
-  }
+//   void resetValueoffer() {
+//     papiersListhttp = [];
+//     specificationListhttp = [];
+//     conditionsListhttp = [];
+//     superficieController = TextEditingController();
+//     nEtageController = TextEditingController();
+//     nChambres = TextEditingController();
+//     descriptionController = TextEditingController();
+//     addressController = TextEditingController();
+//     priceController = TextEditingController();
+//     imageFileList = [];
+//     base64List = [];
+//     emit(InitialDetailState());
+//   }
 
-  final ImagePicker imagePicker = ImagePicker();
-  List<XFile>? imageFileList = [];
-  List<String> base64List = [];
+//   final ImagePicker imagePicker = ImagePicker();
+//   List<XFile>? imageFileList = [];
+//   List<String> base64List = [];
 
-  void selectImagesGalery() async {
-    final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
-    if (selectedImages!.isNotEmpty) {
-      imageFileList!.addAll(selectedImages);
-      selectedImages.forEach((element) async {
-        Uint8List aa = await element.readAsBytes();
-        base64List.add(base64.encode(aa));
-      });
-    }
-    print("Image List Length:" + imageFileList!.length.toString());
-    emit(AddImageGoodState());
-  }
+//   void selectImagesGalery() async {
+//     final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
+//     if (selectedImages!.isNotEmpty) {
+//       imageFileList!.addAll(selectedImages);
+//       selectedImages.forEach((element) async {
+//         Uint8List aa = await element.readAsBytes();
+//         base64List.add(base64.encode(aa));
+//       });
+//     }
+//     print("Image List Length:" + imageFileList!.length.toString());
+//     emit(AddImageGoodState());
+//   }
 
-  void removephoto(int index) {
-    imageFileList?.removeAt(index);
-    base64List.removeAt(index);
-    emit(RemovePhotoState());
-  }
+//   void removephoto(int index) {
+//     imageFileList?.removeAt(index);
+//     base64List.removeAt(index);
+//     emit(RemovePhotoState());
+//   }
 
-  File? imagecamera;
+//   File? imagecamera;
 
-  Future<void> selectimagecamera() async {
-    final imagecamera =
-        await ImagePicker().pickImage(source: ImageSource.camera);
-    if (imagecamera == null) return;
-    final imageTemporary = File(imagecamera.path);
-    this.imagecamera = imageTemporary;
-    Uint8List imageBytes = await imagecamera.readAsBytes(); //convert to bytes
-    base64List.add(base64.encode(imageBytes));
-    imageFileList!.add(imagecamera);
-    emit(AddImageCameraGoodState());
-  }
+//   Future<void> selectimagecamera() async {
+//     final imagecamera =
+//         await ImagePicker().pickImage(source: ImageSource.camera);
+//     if (imagecamera == null) return;
+//     final imageTemporary = File(imagecamera.path);
+//     this.imagecamera = imageTemporary;
+//     Uint8List imageBytes = await imagecamera.readAsBytes(); //convert to bytes
+//     base64List.add(base64.encode(imageBytes));
+//     imageFileList!.add(imagecamera);
+//     emit(AddImageCameraGoodState());
+//   }
 
 //-----------------------------------------favorite--------------------------------------------
   bool colorfav = false;

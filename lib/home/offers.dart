@@ -39,6 +39,8 @@ class Offers extends StatelessWidget {
             actions: [
               IconButton(
                   onPressed: () {
+                    // String k = '\\"' + 'ggg' + '\\"';
+                    // print(k);
                     CupitHome.get(context).changeSwitch(
                         value: !CupitHome.get(context).dartSwitch);
                   },

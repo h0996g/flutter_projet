@@ -80,6 +80,7 @@ class CupitHome extends Cubit<HomeStates> {
   final ImagePicker imagePicker = ImagePicker();
   List<XFile>? imageFileList = [];
   List<String> base64List = [];
+  List<String> base64ListUpdate = [];
 
   void selectImagesGalery() async {
     final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
@@ -88,6 +89,7 @@ class CupitHome extends Cubit<HomeStates> {
       selectedImages.forEach((element) async {
         Uint8List aa = await element.readAsBytes();
         base64List.add(base64.encode(aa));
+        base64ListUpdate.add('\"' + base64.encode(aa) + '\"');
       });
     }
     print("Image List Length:" + imageFileList!.length.toString());
@@ -97,6 +99,7 @@ class CupitHome extends Cubit<HomeStates> {
   void removephoto(int index) {
     imageFileList?.removeAt(index);
     base64List.removeAt(index);
+    base64ListUpdate.removeAt(index);
     emit(RemovePhotoState());
   }
 
@@ -110,6 +113,8 @@ class CupitHome extends Cubit<HomeStates> {
     this.imagecamera = imageTemporary;
     Uint8List imageBytes = await imagecamera.readAsBytes(); //convert to bytes
     base64List.add(base64.encode(imageBytes));
+
+    base64ListUpdate.add('\"' + base64.encode(imageBytes) + '\"');
     imageFileList!.add(imagecamera);
     emit(AddImageCameraGoodState());
   }
@@ -376,6 +381,7 @@ class CupitHome extends Cubit<HomeStates> {
   void resetValuePhoto() {
     imageFileList = [];
     base64List = [];
+    base64ListUpdate = [];
   }
 
   //------------------------- te3 l3yn te3 password f modifier profile------------------------------------------
