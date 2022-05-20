@@ -129,6 +129,12 @@ class CupitHome extends Cubit<HomeStates> {
   var descriptionController = TextEditingController();
   var addressController = TextEditingController();
   var priceController = TextEditingController();
+  var superficieControllerUpdate = TextEditingController();
+  var nEtageControllerUpdate = TextEditingController();
+  var nChambresUpdate = TextEditingController();
+  var descriptionControllerUpdate = TextEditingController();
+  var addressControllerUpdate = TextEditingController();
+  var priceControllerUpdate = TextEditingController();
 
   final items = [
     'Alger',
@@ -183,7 +189,7 @@ class CupitHome extends Cubit<HomeStates> {
 
   final vende = ['Vente', 'Echange', 'Vacances'];
   final appartement = ['Appartement', 'Terrain', 'Villa', 'Studio'];
-  String? wilayavalueDropdown;
+  String? wilayavalueDropdown = 'Alger';
   String? vendevalueDrop = 'Vente';
   String? appartementvalueDrop = 'Appartement';
 
@@ -233,7 +239,7 @@ class CupitHome extends Cubit<HomeStates> {
     Conditions_paiment(id: 2, name: "Paiment par tranches possible"),
     Conditions_paiment(id: 3, name: "Credit bancaire possible"),
   ];
-  final paymentVar = paiment
+  var paymentVar = paiment
       .map((payment) =>
           MultiSelectItem<Conditions_paiment>(payment, payment.name))
       .toList();
@@ -246,7 +252,7 @@ class CupitHome extends Cubit<HomeStates> {
     Specefication(id: 5, name: "Meuble"),
     Specefication(id: 6, name: "Garage"),
   ];
-  final speceficationVar = specefication
+  var speceficationVar = specefication
       .map((specefication) =>
           MultiSelectItem<Specefication>(specefication, specefication.name))
       .toList();
@@ -260,7 +266,7 @@ class CupitHome extends Cubit<HomeStates> {
     Papiers(id: 6, name: "Livret foncier"),
     Papiers(id: 7, name: "Parmis de construire"),
   ];
-  final papiersVar = papiers
+  var papiersVar = papiers
       .map((papiers) => MultiSelectItem<Papiers>(papiers, papiers.name))
       .toList();
 
@@ -319,6 +325,28 @@ class CupitHome extends Cubit<HomeStates> {
     });
   }
 
+  Future<void> updateOffer({required Map<String, dynamic> data}) async {
+    // var jsonphoto = jsonEncode(base64List);
+    // var conditionsjson = jsonEncode(conditionsListhttp);
+    // var specificationjson = jsonEncode(specificationListhttp);
+    // var papiersjson = jsonEncode(papiersListhttp);
+    // var l = jsonEncode(test);
+    await Httplar.httpPost(data: data, path: UPDATEOFFER).then((value) {
+      // var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
+      // photoModels = PhotoModels.fromJson(jsonResponse);
+      // print(jsonResponse);
+
+      // print(jsonDecode(photoModels!.url)[1]);
+      // jsondecodephoto = jsonDecode(photoModels!.url);
+      print('update good');
+      print(value.body);
+      emit(GoodUpdateOfferState());
+    }).catchError((e) {
+      print(e.toString());
+      emit(BadUpdateOfferState());
+    });
+  }
+
   void resetValueoffer() {
     papiersListhttp = [];
     specificationListhttp = [];
@@ -329,9 +357,25 @@ class CupitHome extends Cubit<HomeStates> {
     descriptionController = TextEditingController();
     addressController = TextEditingController();
     priceController = TextEditingController();
+
+    paymentVar = paiment
+        .map((payment) =>
+            MultiSelectItem<Conditions_paiment>(payment, payment.name))
+        .toList();
+    speceficationVar = specefication
+        .map((specefication) =>
+            MultiSelectItem<Specefication>(specefication, specefication.name))
+        .toList();
+    papiersVar = papiers
+        .map((papiers) => MultiSelectItem<Papiers>(papiers, papiers.name))
+        .toList();
+
+    emit(InitialHomeState());
+  }
+
+  void resetValuePhoto() {
     imageFileList = [];
     base64List = [];
-    emit(InitialHomeState());
   }
 
   //------------------------- te3 l3yn te3 password f modifier profile------------------------------------------

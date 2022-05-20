@@ -119,9 +119,7 @@ class Offerdetailagence extends StatelessWidget {
                   top: 45,
                   right: -5,
                   child: MaterialButton(
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                     shape: const CircleBorder(),
                     color: CupitHome.get(context).dartSwitch
                         ? Colors.black
@@ -134,7 +132,6 @@ class Offerdetailagence extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 Positioned(
                   // bottom: 20,
                   // left: 140,
@@ -206,8 +203,9 @@ class Offerdetailagence extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                Formulairemodifier()));
+                            builder: (context) => Formulairemodifier(
+                                  position: position,
+                                )));
                   },
                   shape: const CircleBorder(),
                   color: CupitHome.get(context).dartSwitch

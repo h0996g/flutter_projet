@@ -1,43 +1,79 @@
-import 'package:agence/offersdetails/CubitOfferDetailState.dart';
-import 'package:agence/offersdetails/cubitOfferDetail.dart';
+import 'package:agence/home/cubitHome/homeStates.dart';
 import 'package:agence/offersdetails/modifieroffrephoto.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
-
-import '../home/addphoto/addphoto.dart';
 import '../home/cubitHome/cupit_home.dart';
 import '../shared/components/components.dart';
 
-class Formulairemodifier extends StatelessWidget {
-   Formulairemodifier({Key? key}) : super(key: key);
+class Formulairemodifier extends StatefulWidget {
+  final int position;
+  Formulairemodifier({required this.position}) : super();
+
+  @override
+  State<Formulairemodifier> createState() =>
+      _FormulairemodifierState(position: position);
+}
+
+class _FormulairemodifierState extends State<Formulairemodifier> {
+  int position;
+  _FormulairemodifierState({required this.position});
+  CupitHome? objHome;
+  // var superficieController = TextEditingController();
+  // var priceController = TextEditingController();
+  // var nEtageController = TextEditingController();
+  // var nChambres = TextEditingController();
+  // var descriptionController = TextEditingController();
+  // var addressController = TextEditingController();
+  // var nChambres=TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // superficieController = TextEditingController(text: objHome.offerAgencModel.data.offers[position].specification);
+
+    objHome = BlocProvider.of(context);
+    objHome!.superficieControllerUpdate = TextEditingController(
+        text: '${objHome?.offerAgencModel!.data!.offers[position].space}');
+    objHome!.priceControllerUpdate = TextEditingController(
+        text: '${objHome?.offerAgencModel!.data!.offers[position].price}');
+    objHome!.nEtageControllerUpdate = TextEditingController(
+        text: '${objHome?.offerAgencModel!.data!.offers[position].nEtage}');
+    objHome!.nChambresUpdate = TextEditingController(
+        text: '${objHome?.offerAgencModel!.data!.offers[position].nChambre}');
+    objHome!.descriptionControllerUpdate = TextEditingController(
+        text:
+            ' ${objHome?.offerAgencModel!.data!.offers[position].description}');
+    objHome!.addressControllerUpdate = TextEditingController(
+        text: '${objHome?.offerAgencModel!.data!.offers[position].address}');
+  }
 
   @override
   Widget build(BuildContext context) {
     var formKez = GlobalKey<FormState>();
-    return BlocConsumer<CubitDetail, DetailStates>(
-        builder: (BuildContext context, state) {return Scaffold(
+    return BlocConsumer<CupitHome, HomeStates>(
+      builder: (BuildContext context, state) {
+        return Scaffold(
             appBar: AppBar(
               elevation: 15,
               title: Text('Modifier offer',
                   style:
-                  //  TextStyle(
-                  //     color: CupitHome.get(context).dartSwitch
-                  //         ? Colors.white
-                  //         : Colors.black,
-                  //     fontSize: 34),
-                  Theme.of(context).textTheme.headline4),
+                      //  TextStyle(
+                      //     color: CupitHome.get(context).dartSwitch
+                      //         ? Colors.white
+                      //         : Colors.black,
+                      //     fontSize: 34),
+                      Theme.of(context).textTheme.headline4),
               actions: [
                 IconButton(
                     onPressed: () {
-                      CupitHome.get(context).changeSwitch(value: !CupitHome.get(context).dartSwitch);
+                      CupitHome.get(context).changeSwitch(
+                          value: !CupitHome.get(context).dartSwitch);
                     },
                     icon: const Icon(
                       Icons.dark_mode_outlined,
                       size: 30,
                     )),
-
               ],
             ),
             body: Center(
@@ -68,7 +104,7 @@ class Formulairemodifier extends StatelessWidget {
                                             ? Colors.white
                                             : Colors.grey),
                                   ),
-                                  items: CubitDetail.get(context)
+                                  items: CupitHome.get(context)
                                       .vende
                                       .map(buildMenuItemm)
                                       .toList(),
@@ -101,7 +137,7 @@ class Formulairemodifier extends StatelessWidget {
                                             ? Colors.white
                                             : Colors.grey),
                                   ),
-                                  items: CubitDetail.get(context)
+                                  items: CupitHome.get(context)
                                       .appartement
                                       .map(buildMenuItemm)
                                       .toList(),
@@ -133,8 +169,8 @@ class Formulairemodifier extends StatelessWidget {
                                   return 'Superficie Must Not Be Empty';
                                 }
                               },
-                              controller:
-                              CupitHome.get(context).superficieController,
+                              controller: CupitHome.get(context)
+                                  .superficieControllerUpdate,
                               sufixText: 'm2'),
                           const SizedBox(
                             height: 26,
@@ -154,14 +190,15 @@ class Formulairemodifier extends StatelessWidget {
                                 return 'Price Must Not Be Empty';
                               }
                             },
-                            controller: CupitHome.get(context).priceController,
+                            controller:
+                                CupitHome.get(context).priceControllerUpdate,
                           ),
                           const SizedBox(
                             height: 26,
                           ),
                           Visibility(
                             visible:
-                            CupitHome.get(context).isvisibility['etages']!,
+                                CupitHome.get(context).isvisibility['etages']!,
                             child: Container(
                               margin: const EdgeInsets.only(bottom: 26),
                               child: defaultForm(
@@ -179,8 +216,8 @@ class Formulairemodifier extends StatelessWidget {
                                     return 'Etage(s) Must Not Be Empty';
                                   }
                                 },
-                                controller:
-                                CupitHome.get(context).nEtageController,
+                                controller: CupitHome.get(context)
+                                    .nEtageControllerUpdate,
                               ),
                             ),
                           ),
@@ -207,7 +244,8 @@ class Formulairemodifier extends StatelessWidget {
                                     return '\u2116chambres Must Not Be Empty';
                                   }
                                 },
-                                controller: CupitHome.get(context).nChambres,
+                                controller:
+                                    CupitHome.get(context).nChambresUpdate,
                               ),
                             ),
                           ),
@@ -221,7 +259,7 @@ class Formulairemodifier extends StatelessWidget {
                             selectedColor: Colors.blue,
                             decoration: BoxDecoration(
                               borderRadius:
-                              const BorderRadius.all(Radius.circular(50)),
+                                  const BorderRadius.all(Radius.circular(50)),
                               border: Border.all(
                                 color: Colors.grey,
                               ),
@@ -255,7 +293,7 @@ class Formulairemodifier extends StatelessWidget {
                             selectedColor: Colors.blue,
                             decoration: BoxDecoration(
                               borderRadius:
-                              const BorderRadius.all(Radius.circular(50)),
+                                  const BorderRadius.all(Radius.circular(50)),
                               border: Border.all(color: Colors.grey),
                             ),
                             buttonText: Text(
@@ -288,7 +326,7 @@ class Formulairemodifier extends StatelessWidget {
                             selectedColor: Colors.blue,
                             decoration: BoxDecoration(
                               borderRadius:
-                              const BorderRadius.all(Radius.circular(50)),
+                                  const BorderRadius.all(Radius.circular(50)),
                               border: Border.all(color: Colors.grey),
                             ),
                             buttonText: Text(
@@ -328,9 +366,9 @@ class Formulairemodifier extends StatelessWidget {
                                           ? Colors.white
                                           : Colors.black),
                                   dropdownColor:
-                                  CupitHome.get(context).dartSwitch
-                                      ? Colors.black
-                                      : Colors.white,
+                                      CupitHome.get(context).dartSwitch
+                                          ? Colors.black
+                                          : Colors.white,
                                   isExpanded: true,
                                   hint: Text(
                                     'Wilaya',
@@ -339,7 +377,7 @@ class Formulairemodifier extends StatelessWidget {
                                             ? Colors.white
                                             : Colors.grey),
                                   ),
-                                  items: CubitDetail.get(context)
+                                  items: CupitHome.get(context)
                                       .items
                                       .map(buildMenuItemm)
                                       .toList(),
@@ -382,8 +420,8 @@ class Formulairemodifier extends StatelessWidget {
                                 return 'Description Must Not Be Empty';
                               }
                             },
-                            controller:
-                            CupitHome.get(context).descriptionController,
+                            controller: CupitHome.get(context)
+                                .descriptionControllerUpdate,
                             maxline: 6,
                           ),
                           const SizedBox(
@@ -405,41 +443,51 @@ class Formulairemodifier extends StatelessWidget {
                               }
                             },
                             controller:
-                            CupitHome.get(context).addressController,
+                                CupitHome.get(context).addressControllerUpdate,
                           ),
                           const SizedBox(
                             height: 26,
                           ),
-                          Container(height: 60,width: double.infinity,
-
-                            decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(15)),
+                          Container(
+                            height: 60,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
                               border: Border.all(
                                 width: 1,
                                 color: CupitHome.get(context).dartSwitch
                                     ? Colors.white
                                     : Colors.black,
-                              ),),
-
-                            child: MaterialButton(onPressed: (){},
-                            child: Row(children: [
-                              const SizedBox(
-                                width: 5,
                               ),
-                              Icon(Icons.gps_fixed_rounded,
-                                  size: 40,
-                                  color: CupitHome.get(context).dartSwitch
-                                      ? Colors.white
-                                      : Colors.black
+                            ),
+                            child: MaterialButton(
+                              onPressed: () {},
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Icon(Icons.gps_fixed_rounded,
+                                      size: 40,
+                                      color: CupitHome.get(context).dartSwitch
+                                          ? Colors.white
+                                          : Colors.black),
+                                  const SizedBox(
+                                    width: 25,
+                                  ),
+                                  Text(
+                                    'Ajouter Location',
+                                    style: TextStyle(
+                                        fontSize: 28,
+                                        fontWeight: FontWeight.bold,
+                                        color: CupitHome.get(context).dartSwitch
+                                            ? Colors.white
+                                            : Colors.black),
+                                  )
+                                ],
                               ),
-                              const SizedBox(
-                                width: 25,
-                              ),
-                              Text('Ajouter Location',style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold,color:CupitHome.get(context).dartSwitch
-                                  ? Colors.white
-                                  : Colors.black),)
-
-                            ],),),
-
+                            ),
                           ),
                           const SizedBox(
                             height: 26,
@@ -454,7 +502,10 @@ class Formulairemodifier extends StatelessWidget {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => Modifieroffrephoto()));
+                                            builder: (context) =>
+                                                Modifieroffrephoto(
+                                                  position: position,
+                                                )));
                                   }
                                 },
                                 icon: Icon(Icons.arrow_forward_ios,
@@ -464,21 +515,21 @@ class Formulairemodifier extends StatelessWidget {
                               )
                             ],
                           ),
-
                         ],
                       )),
                 ),
               ),
-            ));},
-        listener: (BuildContext context, Object? state) {},
-
+            ));
+      },
+      listener: (BuildContext context, Object? state) {},
     );
   }
-   DropdownMenuItem<String> buildMenuItemm(String item) => DropdownMenuItem(
-     onTap: () {},
-     child: Text(
-       item,
-     ),
-     value: item,
-   );
+
+  DropdownMenuItem<String> buildMenuItemm(String item) => DropdownMenuItem(
+        onTap: () {},
+        child: Text(
+          item,
+        ),
+        value: item,
+      );
 }

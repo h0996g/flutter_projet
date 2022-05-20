@@ -185,6 +185,7 @@ class Addphoto extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (context) => const Home()),
                               (route) => false);
+                          CupitHome.get(context).resetValuePhoto();
                         },
                         child: const Text('RETOUR')),
                     const Spacer(),
@@ -222,6 +223,7 @@ class Addphoto extends StatelessWidget {
                               .savePhotoBd(data: sendinfoOffer)
                               .then((value) {
                             CupitHome.get(context).resetValueoffer();
+                            CupitHome.get(context).resetValuePhoto();
                           });
                         },
                         child: const Text('CONFIRMER'))

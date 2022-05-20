@@ -1,20 +1,19 @@
 import 'dart:io';
 
-import 'package:agence/offersdetails/CubitOfferDetailState.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:agence/home/cubitHome/cupit_home.dart';
+import 'package:agence/home/cubitHome/homeStates.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'cubitOfferDetail.dart';
-
 class Modifierediterphoto extends StatelessWidget {
-   Modifierediterphoto({Key? key}) : super(key: key);
+  Modifierediterphoto({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CubitDetail, DetailStates>(
-        builder: (BuildContext context, state) {
-          return SafeArea(
+    return BlocConsumer<CupitHome, HomeStates>(
+      builder: (BuildContext context, state) {
+        return SafeArea(
           child: Scaffold(
             body: Column(
               children: [
@@ -31,18 +30,18 @@ class Modifierediterphoto extends StatelessWidget {
                 Expanded(
                   child: GridView.builder(
                       physics: const BouncingScrollPhysics(),
-                      itemCount: CubitDetail.get(context).imageFileList!.length,
+                      itemCount: CupitHome.get(context).imageFileList!.length,
                       gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10),
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10),
                       itemBuilder: (BuildContext context, int index) {
                         return Stack(
                           textDirection: TextDirection.rtl,
                           children: [
                             Image.file(
-                              File(CubitDetail.get(context)
+                              File(CupitHome.get(context)
                                   .imageFileList![index]
                                   .path),
                               fit: BoxFit.cover,
@@ -57,7 +56,7 @@ class Modifierediterphoto extends StatelessWidget {
                                   splashColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onPressed: () {
-                                    CubitDetail.get(context).removephoto(index);
+                                    CupitHome.get(context).removephoto(index);
                                   },
                                   icon: const Icon(
                                     Icons.remove_circle,
@@ -71,7 +70,8 @@ class Modifierediterphoto extends StatelessWidget {
               ],
             ),
           ),
-        );},
+        );
+      },
       listener: (BuildContext context, Object? state) {},
     );
   }
