@@ -339,7 +339,7 @@ class CupitHome extends Cubit<HomeStates> {
       // print(jsonDecode(photoModels!.url)[1]);
       // jsondecodephoto = jsonDecode(photoModels!.url);
       print('update good');
-      print(value.body);
+      // print(value.body);
       emit(GoodUpdateOfferState());
     }).catchError((e) {
       print(e.toString());

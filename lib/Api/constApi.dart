@@ -7,7 +7,7 @@ const REGISTERAGENCE = '/api/registeragence';
 const ADDOFFER = '/api/createoffer';
 const UPDATEOFFER = '/api/updateoffer';
 
-const URLHTTP = '192.168.171.68:8000';
+const URLHTTP = '192.168.136.68:8000';
 
 const GETOFFERSAGENCE = '/api/getofferagence';
 // const GETALLOFFER = '/api/getofferall';

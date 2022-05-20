@@ -28,11 +28,10 @@ class Httplar {
     });
   }
 
-
   static Future<http.Response> httpdelete(
       {required path,
-        Map<String, dynamic>? query,
-        required Map<String, dynamic> data}) async {
+      Map<String, dynamic>? query,
+      required Map<String, dynamic> data}) async {
     var url = Uri.http(
       URLHTTP,
       path,
@@ -42,4 +41,35 @@ class Httplar {
       'Accept': 'application/json',
       'Authorization': 'Bearer $TOKEN'
     });
-  }}
+  }
+
+  static Future<http.Response> httpPut(
+      {required path,
+      Map<String, dynamic>? query,
+      required Map<String, dynamic> data}) async {
+    var url = Uri.http(
+      URLHTTP,
+      path,
+      query,
+    );
+    return await http.put(url, body: data, headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $TOKEN'
+    });
+  }
+
+  static Future<http.Response> httpPatch(
+      {required path,
+      Map<String, dynamic>? query,
+      required Map<String, dynamic> data}) async {
+    var url = Uri.http(
+      URLHTTP,
+      path,
+      query,
+    );
+    return await http.patch(url, body: data, headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $TOKEN'
+    });
+  }
+}

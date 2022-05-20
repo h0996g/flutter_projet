@@ -5,8 +5,10 @@ import 'package:agence/home/cubitHome/homeStates.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../home/cubitHome/cupit_home.dart';
+
 import '../home/home.dart';
 import 'formulairemodifieroffre.dart';
 import 'modifierediterphoto.dart';
@@ -200,6 +202,8 @@ class Modifieroffrephoto extends StatelessWidget {
                     ElevatedButton(
                         onPressed: () async {
                           sendinfoOffer = {
+                            // 'id':
+                            //     ' ${CupitHome.get(context).allofferModel!.data!.offers[position].id}',
                             'type_vente':
                                 CupitHome.get(context).appartementvalueDrop,
                             'address': CupitHome.get(context)
@@ -221,15 +225,15 @@ class Modifieroffrephoto extends StatelessWidget {
                                 CupitHome.get(context).nChambresUpdate.text,
                             'wilaya':
                                 CupitHome.get(context).wilayavalueDropdown,
-                            'photo':
-                                jsonEncode(CupitHome.get(context).base64List),
-                            'type_offer': CupitHome.get(context).vendevalueDrop,
-                            'condition_de_paiment': jsonEncode(
-                                CupitHome.get(context).conditionsListhttp),
-                            'specification': jsonEncode(
-                                CupitHome.get(context).specificationListhttp),
-                            'papiers': jsonEncode(
-                                CupitHome.get(context).papiersListhttp)
+                            // 'photo':
+                            //     jsonEncode(CupitHome.get(context).base64List),
+                            // 'type_offer': CupitHome.get(context).vendevalueDrop,
+                            // 'condition_de_paiment': jsonEncode(
+                            //     CupitHome.get(context).conditionsListhttp),
+                            // 'specification': jsonEncode(
+                            //     CupitHome.get(context).specificationListhttp),
+                            // 'papiers': jsonEncode(
+                            //     CupitHome.get(context).papiersListhttp)
                           };
                           CupitHome.get(context)
                               .updateOffer(data: sendinfoOffer)
@@ -246,7 +250,33 @@ class Modifieroffrephoto extends StatelessWidget {
           ]),
         );
       },
-      listener: (BuildContext context, Object? state) {},
+      listener: (BuildContext context, Object? state) {
+        if (state is GoodUpdateOfferState) {
+          CupitHome.get(context).getOfferAgence().then((value) {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const Home()),
+                (route) => false);
+          });
+          Fluttertoast.showToast(
+              msg: 'Update offer success',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        } else if (state is BadUpdateOfferState) {
+          Fluttertoast.showToast(
+              msg: 'error',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      },
     );
   }
 }
