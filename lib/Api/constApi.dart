@@ -26,3 +26,7 @@ const CHANGEFAVTOTRUE = '/api/addfavorite';
 //-------------
 var TOKEN = '';
 var USERTYPE = LOGINCLIENT;
+
+//------
+const SENDMESSAGE = '/api/addmessage';
+const GETALLMSG = '/api/getmessage';

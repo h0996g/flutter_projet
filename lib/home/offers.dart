@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:agence/Model/AfficheOffer.dart';
 import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/home/cubitHome/cupit_home.dart';
+import 'package:agence/offersdetails/cubitOfferDetail.dart';
 import 'package:agence/offersdetails/offerdetailagence.dart';
 import 'package:agence/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -15,6 +16,7 @@ import 'cubitHome/homeStates.dart';
 
 class Offers extends StatelessWidget {
   const Offers({Key? key}) : super(key: key);
+  // Map<String, dynamic> getallmsg = {};
 
   @override
   Widget build(BuildContext context) {
@@ -143,6 +145,9 @@ ListItembuilder(int position, context, OffersModel model) {
         depth: 0),
     onPressed: () {
       print(position);
+      Map<String, dynamic> getallmsg = {'offer_id': '3'};
+      CubitDetail.get(context).getAllMsg(data: getallmsg);
+
       Navigator.push(
           context,
           MaterialPageRoute(

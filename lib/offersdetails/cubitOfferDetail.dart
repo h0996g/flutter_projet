@@ -304,6 +304,31 @@ class CubitDetail extends Cubit<DetailStates> {
 
 // ------------------------------------------------------------------------------------
 
+//----------------------messages--------------------------------------------------------
+
+  Future<void> sendMessage({required Map<String, dynamic> data}) async {
+    await Httplar.httpPost(data: data, path: SENDMESSAGE).then((value) {
+      print('succes msg send');
+      print(value.body);
+      emit(GoodSendMsgState());
+    }).catchError((e) {
+      print(e.toString());
+      emit(BadSendMsgState());
+    });
+  }
+
+  var allmsgmodel;
+  Future<void> getAllMsg({required Map<String, dynamic> data}) async {
+    await Httplar.httpPost(data: data, path: GETALLMSG).then((value) {
+      var jsonResponse = convert.jsonDecode(value.body);
+      allmsgmodel = jsonResponse;
+      print(allmsgmodel);
+      emit(GoodGetAllMsgState());
+    }).catchError((e) {
+      print(e.toString());
+      emit(BadGetAllMsgState());
+    });
+  }
 }
 
 class Conditions_paiment {

@@ -18,7 +18,8 @@ class Offerdetailagence extends StatelessWidget {
   Offerdetailagence({required this.position}) : super();
 
   var onbordingController = PageController();
-  var alaControllerr = TextEditingController();
+  var msgController = TextEditingController();
+  Map<String, dynamic> sendinfomsg = {};
 
   List<String> models = [
     'assets/images/on2.png',
@@ -35,521 +36,524 @@ class Offerdetailagence extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            flex: 35,
-            child: Stack(
-              children: [
-                Container(
-                  width: double.infinity,
-                  // height: 295,
-                  height: double.infinity,
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Column(
+          children: [
+            Expanded(
+              flex: 35,
+              child: Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    // height: 295,
+                    height: double.infinity,
 
-                  color: Colors.white54,
-                  // child: Image(image:AssetImage('assets/images/building.jpg'),fit: BoxFit.cover,),
-                  child: PageView.builder(
-                    onPageChanged: (int index) {
-                      // if (index == models.length - 1) {
-                      //   islast = true;
-                      //
-                      //   setState(() {
-                      //     nextIcon = const Icon(Icons.done);
-                      //   });
-                      // } else {
-                      //   islast = false;
-                      //
-                      //   setState(() {
-                      //     nextIcon = const Icon(Icons.arrow_forward_ios);
-                      //   });
-                      // }
-                    },
-                    controller: onbordingController,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      // return Ala(CupitHome.get(context)
-                      //     .dataOfferModel!
-                      //     .data!
-                      //     .offers[position]);
+                    color: Colors.white54,
+                    // child: Image(image:AssetImage('assets/images/building.jpg'),fit: BoxFit.cover,),
+                    child: PageView.builder(
+                      onPageChanged: (int index) {
+                        // if (index == models.length - 1) {
+                        //   islast = true;
+                        //
+                        //   setState(() {
+                        //     nextIcon = const Icon(Icons.done);
+                        //   });
+                        // } else {
+                        //   islast = false;
+                        //
+                        //   setState(() {
+                        //     nextIcon = const Icon(Icons.arrow_forward_ios);
+                        //   });
+                        // }
+                      },
+                      controller: onbordingController,
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        // return Ala(CupitHome.get(context)
+                        //     .dataOfferModel!
+                        //     .data!
+                        //     .offers[position]);
 
-                      List? k;
-                      k = CupitHome.get(context)
+                        List? k;
+                        k = CupitHome.get(context)
+                            .offerAgencModel!
+                            .data!
+                            .offers[position]
+                            .photo
+                            ?.map((e) {
+                          return base64Decode(e);
+                        }).toList();
+                        return Image(
+                          image: MemoryImage(k![index]),
+                          width: 400,
+                          fit: BoxFit.cover,
+                        );
+                      },
+                      itemCount: CupitHome.get(context)
                           .offerAgencModel!
                           .data!
                           .offers[position]
-                          .photo
-                          ?.map((e) {
-                        return base64Decode(e);
-                      }).toList();
-                      return Image(
-                        image: MemoryImage(k![index]),
-                        width: 400,
-                        fit: BoxFit.cover,
-                      );
-                    },
-                    itemCount: CupitHome.get(context)
-                        .offerAgencModel!
-                        .data!
-                        .offers[position]
-                        .photo!
-                        .length,
+                          .photo!
+                          .length,
+                    ),
                   ),
-                ),
-                Positioned(
-                  top: 45,
-                  left: -5,
-                  child: MaterialButton(
-                    onPressed: () {
-                      Changepage(context, const Home());
-                    },
-                    shape: const CircleBorder(),
-                    color: CupitHome.get(context).dartSwitch
-                        ? Colors.black
-                        : Colors.blue,
-                    child: Icon(
-                      Icons.arrow_back_ios_outlined,
+                  Positioned(
+                    top: 45,
+                    left: -5,
+                    child: MaterialButton(
+                      onPressed: () {
+                        Changepage(context, const Home());
+                      },
+                      shape: const CircleBorder(),
                       color: CupitHome.get(context).dartSwitch
-                          ? Colors.white
-                          : Colors.white,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 45,
-                  right: -5,
-                  child: MaterialButton(
-                    onPressed: () {},
-                    shape: const CircleBorder(),
-                    color: CupitHome.get(context).dartSwitch
-                        ? Colors.black
-                        : Colors.blue,
-                    child: Icon(
-                      Icons.place,
-                      color: CupitHome.get(context).dartSwitch
-                          ? Colors.white
-                          : Colors.white,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  // bottom: 20,
-                  // left: 140,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: SmoothPageIndicator(
-                          controller: onbordingController, // PageController
-                          count: CupitHome.get(context)
-                              .offerAgencModel!
-                              .data!
-                              .offers[position]
-                              .photo!
-                              .length,
-                          effect: ScrollingDotsEffect(
-                            dotColor: CupitHome.get(context).dartSwitch
-                                ? const Color(0xffb3b2b2)
-                                : Colors.white,
-                            activeDotColor: CupitHome.get(context).dartSwitch
-                                ? const Color(0xff131313)
-                                : Colors.blue,
-                          ),
-
-                          // effect: const ExpandingDotsEffect(
-                          //
-                          //     dotWidth: 20,
-                          //     dotHeight: 15,
-                          //     dotColor: Colors.black26,
-                          //     activeDotColor:
-                          //     Colors.deepOrange), // your preferred effect
-                          onDotClicked: (index) {}),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                )
-              ],
-            ),
-            // child: Ala(CupitHome.get(context)
-            //     .dataOfferModel!
-            //     .data!
-            //     .offers[position]),
-          ),
-          Divider(
-            color: CupitHome.get(context).dartSwitch
-                ? Colors.blueGrey
-                : const Color(0xffF3F3F3FF),
-            height: 1,
-            thickness: 2,
-          ),
-          Expanded(
-            flex: 7,
-            child: Row(
-              children: [
-                const SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  "${CupitHome.get(context).offerAgencModel!.data!.offers[position].price}",
-                  style: Theme.of(context).textTheme.headline4?.copyWith(
-                        fontSize: 32,
+                          ? Colors.black
+                          : Colors.blue,
+                      child: Icon(
+                        Icons.arrow_back_ios_outlined,
+                        color: CupitHome.get(context).dartSwitch
+                            ? Colors.white
+                            : Colors.white,
                       ),
-                ),
-                const Spacer(),
-                MaterialButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Formulairemodifier(
-                                  position: position,
-                                )));
-                  },
-                  shape: const CircleBorder(),
-                  color: CupitHome.get(context).dartSwitch
-                      ? const Color(0xff8d8d8d)
-                      : Colors.blue,
-                  child: Icon(
-                    Icons.settings,
-                    color: CupitHome.get(context).dartSwitch
-                        ? Colors.white
-                        : Colors.white,
+                    ),
                   ),
-                ),
-
-                // MaterialButton(
-                //   onPressed: () {},
-                //   shape: const CircleBorder(),
-                //   color: CupitHome.get(context).dartSwitch ? Color(0xff8d8d8d): Colors.blue,
-                //   child: Icon(Icons.favorite_sharp,color:CupitHome.get(context).dartSwitch ? Colors.white : Colors.white, ),
-                //
-                // )
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 7,
-            child: Row(
-              children: [
-                const SizedBox(
-                  width: 20,
-                ),
-                Expanded(
-                  child: Text(
-                    '${CupitHome.get(context).offerAgencModel!.data!.offers[position].address}',
-                    style: Theme.of(context).textTheme.bodyText2,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                  Positioned(
+                    top: 45,
+                    right: -5,
+                    child: MaterialButton(
+                      onPressed: () {},
+                      shape: const CircleBorder(),
+                      color: CupitHome.get(context).dartSwitch
+                          ? Colors.black
+                          : Colors.blue,
+                      child: Icon(
+                        Icons.place,
+                        color: CupitHome.get(context).dartSwitch
+                            ? Colors.white
+                            : Colors.white,
+                      ),
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                // TextButton(
-                //     onPressed: () {},
-                //     child: const Text(
-                //       'Se Loger',
-                //       style: TextStyle(fontWeight: FontWeight.bold),
-                //     )),
-                const SizedBox(
-                  width: 20,
-                ),
-              ],
-            ),
-          ),
-          Divider(
-            color: CupitHome.get(context).dartSwitch
-                ? Colors.blueGrey
-                : const Color(0xffF3F3F3FF),
-            height: 1,
-            thickness: 2,
-          ),
-          Expanded(
-            flex: 51,
-            child: BlocConsumer<CubitDetail, DetailStates>(
-              builder: (BuildContext context, state) {
-                return Column(
-                  children: [
-                    Expanded(
-                      flex: 8,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: SizedBox(
-                              height: 54,
-                              child: MaterialButton(
-                                padding: const EdgeInsets.all(0),
-                                onPressed: () {
-                                  // setState(() {   -------- hadi lawla
-                                  //   a = 0;
-                                  // });
-                                  CubitDetail.get(context)
-                                      .changeNavDetailAgence(0);
-                                },
-                                child: Column(
-                                  children: [
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Icon(
-                                      Icons.description_outlined,
-                                      color: CubitDetail.get(context)
-                                                  .indexAgence ==
-                                              0
-                                          ? CupitHome.get(context).dartSwitch
-                                              ? Colors.white
-                                              : Colors.redAccent
-                                          : CupitHome.get(context).dartSwitch
-                                              ? Colors.blueGrey
-                                              : Colors.blue,
-                                    ),
-                                    Text('Information',
-                                        style: TextStyle(
-                                            color: CubitDetail.get(context)
-                                                        .indexAgence ==
-                                                    0
-                                                ? CupitHome.get(context)
-                                                        .dartSwitch
-                                                    ? Colors.white
-                                                    : Colors.redAccent
-                                                : CupitHome.get(context)
-                                                        .dartSwitch
-                                                    ? Colors.blueGrey
-                                                    : Colors.blue,
-                                            fontSize: 14)),
-                                    const SizedBox(
-                                      height: 7,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          //         VerticalDivider(
-                          //           thickness: 2,
-                          //            width: 2,
-                          //            color: CupitHome.get(context).dartSwitch
-                          // ? Color(0xff131313)
-                          //     : Color(0xffF3F3F3FF),
-                          //         ),
-
-                          Expanded(
-                            child: Container(
-                              color: CupitHome.get(context).dartSwitch
-                                  ? const Color(0xff131313)
+                  Positioned(
+                    // bottom: 20,
+                    // left: 140,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: SmoothPageIndicator(
+                            controller: onbordingController, // PageController
+                            count: CupitHome.get(context)
+                                .offerAgencModel!
+                                .data!
+                                .offers[position]
+                                .photo!
+                                .length,
+                            effect: ScrollingDotsEffect(
+                              dotColor: CupitHome.get(context).dartSwitch
+                                  ? const Color(0xffb3b2b2)
                                   : Colors.white,
-                              height: 54,
-                              child: MaterialButton(
-                                padding: const EdgeInsets.all(0),
-                                onPressed: () {
-                                  // setState(() {      -- hadi tnya
-                                  //   a = 1;
-                                  // });
-                                  CubitDetail.get(context)
-                                      .changeNavDetailAgence(1);
-                                },
-                                child: Column(
-                                  children: [
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Icon(
-                                      Icons.menu_sharp,
-                                      color: CubitDetail.get(context)
-                                                  .indexAgence ==
-                                              1
-                                          ? CupitHome.get(context).dartSwitch
-                                              ? Colors.white
-                                              : Colors.redAccent
-                                          : CupitHome.get(context).dartSwitch
-                                              ? Colors.blueGrey
-                                              : Colors.blue,
-                                    ),
-                                    Text('Details',
-                                        style: TextStyle(
-                                            color: CubitDetail.get(context)
-                                                        .indexAgence ==
-                                                    1
-                                                ? CupitHome.get(context)
-                                                        .dartSwitch
-                                                    ? Colors.white
-                                                    : Colors.redAccent
-                                                : CupitHome.get(context)
-                                                        .dartSwitch
-                                                    ? Colors.blueGrey
-                                                    : Colors.blue,
-                                            fontSize: 14)),
-                                    const SizedBox(
-                                      height: 7,
-                                    )
-                                  ],
-                                ),
-                              ),
+                              activeDotColor: CupitHome.get(context).dartSwitch
+                                  ? const Color(0xff131313)
+                                  : Colors.blue,
                             ),
-                          ),
-                          // VerticalDivider(
-                          //     thickness: 2,
-                          //   width: 2,
-                          //     color: CupitHome.get(context).dartSwitch
-                          //         ? Color(0xff131313)
-                          //         : Color(0xffF3F3F3FF),
-                          // ),
-                          Expanded(
-                            child: SizedBox(
-                              height: 54,
-                              child: MaterialButton(
-                                padding: const EdgeInsets.all(0),
-                                onPressed: () {
-                                  // setState(() { -------hadi 3
-                                  //   a = 2;
-                                  // });
-                                  CubitDetail.get(context)
-                                      .changeNavDetailAgence(2);
-                                },
-                                child: Column(
-                                  children: [
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Icon(
-                                      Icons.message_outlined,
-                                      color: CubitDetail.get(context)
-                                                  .indexAgence ==
-                                              2
-                                          ? CupitHome.get(context).dartSwitch
-                                              ? Colors.white
-                                              : Colors.redAccent
-                                          : CupitHome.get(context).dartSwitch
-                                              ? Colors.blueGrey
-                                              : Colors.blue,
-                                    ),
-                                    Text('Commentaire',
-                                        style: TextStyle(
-                                            color: CubitDetail.get(context)
-                                                        .indexAgence ==
-                                                    2
-                                                ? CupitHome.get(context)
-                                                        .dartSwitch
-                                                    ? Colors.white
-                                                    : Colors.redAccent
-                                                : CupitHome.get(context)
-                                                        .dartSwitch
-                                                    ? Colors.blueGrey
-                                                    : Colors.blue,
-                                            fontSize: 14)),
-                                    const SizedBox(
-                                      height: 7,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          // VerticalDivider(
-                          //     thickness: 2,
-                          //   width: 2,
-                          //     color: CupitHome.get(context).dartSwitch
-                          //         ? Color(0xff131313)
-                          //         : Color(0xffF3F3F3FF),
-                          // ),
-                          Expanded(
-                            child: SizedBox(
-                              height: 54,
-                              child: MaterialButton(
-                                padding: const EdgeInsets.all(0),
-                                onPressed: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          title: const Text(
-                                            'you want to delete this offer?',
-                                            style:
-                                                TextStyle(color: Colors.black),
-                                          ),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () {},
-                                                child: const Text('yes')),
-                                            TextButton(
-                                                onPressed: () {
-                                                  // setState(() { ----- hadi mt7tajch setstate
-                                                  Navigator.of(context).pop();
-                                                  // });
-                                                },
-                                                child: const Text('no'))
-                                          ],
-                                        );
-                                      });
-                                  // FlutterPhoneDirectCaller.callNumber(number);
-                                },
-                                child: Column(
-                                  children: [
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Icon(
-                                      Icons.delete,
-                                      color: CupitHome.get(context).dartSwitch
-                                          ? Colors.blueGrey
-                                          : Colors.blue,
-                                    ),
-                                    Text('delete',
-                                        style: TextStyle(
-                                            color: CupitHome.get(context)
-                                                    .dartSwitch
+
+                            // effect: const ExpandingDotsEffect(
+                            //
+                            //     dotWidth: 20,
+                            //     dotHeight: 15,
+                            //     dotColor: Colors.black26,
+                            //     activeDotColor:
+                            //     Colors.deepOrange), // your preferred effect
+                            onDotClicked: (index) {}),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  )
+                ],
+              ),
+              // child: Ala(CupitHome.get(context)
+              //     .dataOfferModel!
+              //     .data!
+              //     .offers[position]),
+            ),
+            Divider(
+              color: CupitHome.get(context).dartSwitch
+                  ? Colors.blueGrey
+                  : const Color(0xffF3F3F3FF),
+              height: 1,
+              thickness: 2,
+            ),
+            Expanded(
+              flex: 7,
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    "${CupitHome.get(context).offerAgencModel!.data!.offers[position].price}",
+                    style: Theme.of(context).textTheme.headline4?.copyWith(
+                          fontSize: 32,
+                        ),
+                  ),
+                  const Spacer(),
+                  MaterialButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Formulairemodifier(
+                                    position: position,
+                                  )));
+                    },
+                    shape: const CircleBorder(),
+                    color: CupitHome.get(context).dartSwitch
+                        ? const Color(0xff8d8d8d)
+                        : Colors.blue,
+                    child: Icon(
+                      Icons.settings,
+                      color: CupitHome.get(context).dartSwitch
+                          ? Colors.white
+                          : Colors.white,
+                    ),
+                  ),
+
+                  // MaterialButton(
+                  //   onPressed: () {},
+                  //   shape: const CircleBorder(),
+                  //   color: CupitHome.get(context).dartSwitch ? Color(0xff8d8d8d): Colors.blue,
+                  //   child: Icon(Icons.favorite_sharp,color:CupitHome.get(context).dartSwitch ? Colors.white : Colors.white, ),
+                  //
+                  // )
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 7,
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    child: Text(
+                      '${CupitHome.get(context).offerAgencModel!.data!.offers[position].address}',
+                      style: Theme.of(context).textTheme.bodyText2,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  // TextButton(
+                  //     onPressed: () {},
+                  //     child: const Text(
+                  //       'Se Loger',
+                  //       style: TextStyle(fontWeight: FontWeight.bold),
+                  //     )),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                ],
+              ),
+            ),
+            Divider(
+              color: CupitHome.get(context).dartSwitch
+                  ? Colors.blueGrey
+                  : const Color(0xffF3F3F3FF),
+              height: 1,
+              thickness: 2,
+            ),
+            Expanded(
+              flex: 51,
+              child: BlocConsumer<CubitDetail, DetailStates>(
+                builder: (BuildContext context, state) {
+                  return Column(
+                    children: [
+                      Expanded(
+                        flex: 8,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: SizedBox(
+                                height: 54,
+                                child: MaterialButton(
+                                  padding: const EdgeInsets.all(0),
+                                  onPressed: () {
+                                    // setState(() {   -------- hadi lawla
+                                    //   a = 0;
+                                    // });
+                                    CubitDetail.get(context)
+                                        .changeNavDetailAgence(0);
+                                  },
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Icon(
+                                        Icons.description_outlined,
+                                        color: CubitDetail.get(context)
+                                                    .indexAgence ==
+                                                0
+                                            ? CupitHome.get(context).dartSwitch
+                                                ? Colors.white
+                                                : Colors.redAccent
+                                            : CupitHome.get(context).dartSwitch
                                                 ? Colors.blueGrey
                                                 : Colors.blue,
-                                            fontSize: 14)),
-                                    const SizedBox(
-                                      height: 7,
-                                    )
-                                  ],
+                                      ),
+                                      Text('Information',
+                                          style: TextStyle(
+                                              color: CubitDetail.get(context)
+                                                          .indexAgence ==
+                                                      0
+                                                  ? CupitHome.get(context)
+                                                          .dartSwitch
+                                                      ? Colors.white
+                                                      : Colors.redAccent
+                                                  : CupitHome.get(context)
+                                                          .dartSwitch
+                                                      ? Colors.blueGrey
+                                                      : Colors.blue,
+                                              fontSize: 14)),
+                                      const SizedBox(
+                                        height: 7,
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+
+                            //         VerticalDivider(
+                            //           thickness: 2,
+                            //            width: 2,
+                            //            color: CupitHome.get(context).dartSwitch
+                            // ? Color(0xff131313)
+                            //     : Color(0xffF3F3F3FF),
+                            //         ),
+
+                            Expanded(
+                              child: Container(
+                                color: CupitHome.get(context).dartSwitch
+                                    ? const Color(0xff131313)
+                                    : Colors.white,
+                                height: 54,
+                                child: MaterialButton(
+                                  padding: const EdgeInsets.all(0),
+                                  onPressed: () {
+                                    // setState(() {      -- hadi tnya
+                                    //   a = 1;
+                                    // });
+                                    CubitDetail.get(context)
+                                        .changeNavDetailAgence(1);
+                                  },
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Icon(
+                                        Icons.menu_sharp,
+                                        color: CubitDetail.get(context)
+                                                    .indexAgence ==
+                                                1
+                                            ? CupitHome.get(context).dartSwitch
+                                                ? Colors.white
+                                                : Colors.redAccent
+                                            : CupitHome.get(context).dartSwitch
+                                                ? Colors.blueGrey
+                                                : Colors.blue,
+                                      ),
+                                      Text('Details',
+                                          style: TextStyle(
+                                              color: CubitDetail.get(context)
+                                                          .indexAgence ==
+                                                      1
+                                                  ? CupitHome.get(context)
+                                                          .dartSwitch
+                                                      ? Colors.white
+                                                      : Colors.redAccent
+                                                  : CupitHome.get(context)
+                                                          .dartSwitch
+                                                      ? Colors.blueGrey
+                                                      : Colors.blue,
+                                              fontSize: 14)),
+                                      const SizedBox(
+                                        height: 7,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            // VerticalDivider(
+                            //     thickness: 2,
+                            //   width: 2,
+                            //     color: CupitHome.get(context).dartSwitch
+                            //         ? Color(0xff131313)
+                            //         : Color(0xffF3F3F3FF),
+                            // ),
+                            Expanded(
+                              child: SizedBox(
+                                height: 54,
+                                child: MaterialButton(
+                                  padding: const EdgeInsets.all(0),
+                                  onPressed: () {
+                                    // setState(() { -------hadi 3
+                                    //   a = 2;
+                                    // });
+                                    CubitDetail.get(context)
+                                        .changeNavDetailAgence(2);
+                                  },
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Icon(
+                                        Icons.message_outlined,
+                                        color: CubitDetail.get(context)
+                                                    .indexAgence ==
+                                                2
+                                            ? CupitHome.get(context).dartSwitch
+                                                ? Colors.white
+                                                : Colors.redAccent
+                                            : CupitHome.get(context).dartSwitch
+                                                ? Colors.blueGrey
+                                                : Colors.blue,
+                                      ),
+                                      Text('Commentaire',
+                                          style: TextStyle(
+                                              color: CubitDetail.get(context)
+                                                          .indexAgence ==
+                                                      2
+                                                  ? CupitHome.get(context)
+                                                          .dartSwitch
+                                                      ? Colors.white
+                                                      : Colors.redAccent
+                                                  : CupitHome.get(context)
+                                                          .dartSwitch
+                                                      ? Colors.blueGrey
+                                                      : Colors.blue,
+                                              fontSize: 14)),
+                                      const SizedBox(
+                                        height: 7,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            // VerticalDivider(
+                            //     thickness: 2,
+                            //   width: 2,
+                            //     color: CupitHome.get(context).dartSwitch
+                            //         ? Color(0xff131313)
+                            //         : Color(0xffF3F3F3FF),
+                            // ),
+                            Expanded(
+                              child: SizedBox(
+                                height: 54,
+                                child: MaterialButton(
+                                  padding: const EdgeInsets.all(0),
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            title: const Text(
+                                              'you want to delete this offer?',
+                                              style: TextStyle(
+                                                  color: Colors.black),
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () {},
+                                                  child: const Text('yes')),
+                                              TextButton(
+                                                  onPressed: () {
+                                                    // setState(() { ----- hadi mt7tajch setstate
+                                                    Navigator.of(context).pop();
+                                                    // });
+                                                  },
+                                                  child: const Text('no'))
+                                            ],
+                                          );
+                                        });
+                                    // FlutterPhoneDirectCaller.callNumber(number);
+                                  },
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Icon(
+                                        Icons.delete,
+                                        color: CupitHome.get(context).dartSwitch
+                                            ? Colors.blueGrey
+                                            : Colors.blue,
+                                      ),
+                                      Text('delete',
+                                          style: TextStyle(
+                                              color: CupitHome.get(context)
+                                                      .dartSwitch
+                                                  ? Colors.blueGrey
+                                                  : Colors.blue,
+                                              fontSize: 14)),
+                                      const SizedBox(
+                                        height: 7,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    Divider(
-                      color: CupitHome.get(context).dartSwitch
-                          ? Colors.blueGrey
-                          : const Color(0xffF3F3F3FF),
-                      height: 1,
-                      thickness: 2,
-                    ),
-                    Expanded(
-                      flex: 43,
-                      child: Container(
-                        child: CubitDetail.get(context).indexAgence == 0
-                            ? Information(
-                                context,
-                                CupitHome.get(context)
-                                    .offerAgencModel!
-                                    .data!
-                                    .offers[position])
-                            : (CubitDetail.get(context).indexAgence == 1
-                                ? Details(
-                                    context,
-                                    CupitHome.get(context)
-                                        .offerAgencModel!
-                                        .data!
-                                        .offers[position],
-                                    position)
-                                : Commentaire(context)),
+                      Divider(
+                        color: CupitHome.get(context).dartSwitch
+                            ? Colors.blueGrey
+                            : const Color(0xffF3F3F3FF),
+                        height: 1,
+                        thickness: 2,
                       ),
-                    ),
-                  ],
-                );
-              },
-              listener: (BuildContext context, Object? state) {},
+                      Expanded(
+                        flex: 43,
+                        child: Container(
+                          child: CubitDetail.get(context).indexAgence == 0
+                              ? Information(
+                                  context,
+                                  CupitHome.get(context)
+                                      .offerAgencModel!
+                                      .data!
+                                      .offers[position])
+                              : (CubitDetail.get(context).indexAgence == 1
+                                  ? Details(
+                                      context,
+                                      CupitHome.get(context)
+                                          .offerAgencModel!
+                                          .data!
+                                          .offers[position],
+                                      position)
+                                  : Commentaire(context)),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+                listener: (BuildContext context, Object? state) {},
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -561,8 +565,9 @@ class Offerdetailagence extends StatelessWidget {
             Expanded(
                 child: ListView.separated(
               physics: const BouncingScrollPhysics(),
-              itemBuilder: ((context, index) => Listemessage(context)),
-              itemCount: 5,
+              itemBuilder: ((context, index) => Listemessage(
+                  context, CubitDetail.get(context).allmsgmodel, position)),
+              itemCount: CubitDetail.get(context).allmsgmodel[position].length,
               separatorBuilder: (BuildContext context, int index) {
                 return const SizedBox(
                   height: 1,
@@ -581,9 +586,19 @@ class Offerdetailagence extends StatelessWidget {
                           : Colors.grey),
                 ),
                 sufixIcon: IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.send_sharp)),
+                    onPressed: () {
+                      sendinfomsg = {
+                        'text': msgController.text,
+                        'offer_id':
+                            ' ${CupitHome.get(context).offerAgencModel!.data!.offers[position].id}'
+                      };
+
+                      CubitDetail.get(context).sendMessage(data: sendinfomsg);
+                      msgController = TextEditingController();
+                    },
+                    icon: const Icon(Icons.send_sharp)),
                 textInputAction: TextInputAction.done,
-                controller: alaControllerr,
+                controller: msgController,
                 context: context,
                 type: TextInputType.text,
                 valid: (value) {
@@ -598,7 +613,7 @@ class Offerdetailagence extends StatelessWidget {
       );
 }
 
-Widget Listemessage(context) => Container(
+Widget Listemessage(context, msg, position) => Container(
       decoration: BoxDecoration(
           color: CupitHome.get(context).dartSwitch
               ? Color(0xff131313)
@@ -620,7 +635,7 @@ Widget Listemessage(context) => Container(
                 SizedBox(
                   width: 6,
                 ),
-                Text('Ala eddine Agence',
+                Text(msg[position]['name'],
                     style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
@@ -628,7 +643,7 @@ Widget Listemessage(context) => Container(
                 SizedBox(
                   width: 7,
                 ),
-                Text('27/12/2001 13:45',
+                Text('${msg[position]['created_at']}',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -645,7 +660,7 @@ Widget Listemessage(context) => Container(
                 ),
                 Expanded(
                     child: Text(
-                  '27/12/2001 aaaaaaaa aaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaaaa aaaaaaaaaaaa aaaaaaa',
+                  msg[position]['text'],
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,
