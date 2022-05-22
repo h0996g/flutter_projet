@@ -6,6 +6,8 @@ class ConditionalLodinOfferAgenceState extends HomeStates {}
 
 class ConditionalLodinGetAllOfferState extends HomeStates {}
 
+class ConditionalLodinGetFavoritesState extends HomeStates {}
+
 class ConditionalLodinLogoutState extends HomeStates {}
 
 class ConditionalLodinInfoState extends HomeStates {}
@@ -43,6 +45,10 @@ class HiddenPasswordModifierState extends HomeStates {}
 class GoodGetOffersAgence extends HomeStates {}
 
 class BadGetOffersAgence extends HomeStates {}
+
+class GoodGetFavorites extends HomeStates {}
+
+class BadGetFavorites extends HomeStates {}
 
 class GoodGetAllOffers extends HomeStates {}
 

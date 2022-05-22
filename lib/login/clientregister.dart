@@ -1,5 +1,6 @@
 import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/login/login.dart';
+import 'package:agence/offersdetails/cubitOfferDetail.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 
 import 'package:flutter/material.dart';
@@ -315,6 +316,7 @@ class Clientregister extends StatelessWidget {
                       CupitHome.get(context)
                           .type_vente[CupitHome.get(context).toggelindex]);
               CupitHome.get(context).getinformationAgenceOrClient();
+              // CubitDetail.get(context).getFavorites();
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const Navbar()),

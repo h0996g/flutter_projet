@@ -268,8 +268,7 @@ class Offersclient extends StatelessWidget {
           'offer_id':
               '${CupitHome.get(context).allofferModel!.data!.offers[positionClient].id}',
         };
-        CubitDetail.get(context)
-            .getexistfav(data: sendfav, path: CHECKFAVORITE);
+        CubitDetail.get(context).getexistfav(data: sendfav);
         // print(positionClient);
         Navigator.push(
             context,

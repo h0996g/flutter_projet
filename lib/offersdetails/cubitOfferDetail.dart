@@ -10,6 +10,7 @@ import 'package:multi_select_flutter/util/multi_select_item.dart';
 
 import '../Api/constApi.dart';
 import '../Api/httplaravel.dart';
+import '../Model/AfficheOffer.dart';
 import 'CubitOfferDetailState.dart';
 
 class CubitDetail extends Cubit<DetailStates> {
@@ -27,6 +28,24 @@ class CubitDetail extends Cubit<DetailStates> {
   void changeNavDetailClient(int index) {
     indexClient = index;
     emit(DeclarIndexState());
+  }
+
+  DataOffer? getFavoritesmodel;
+  Future<void> getFavorites() async {
+    getFavoritesmodel = null;
+    emit(ConditionalLodinGetFavoritesState());
+    await Httplar.httpget(path: GETALLFAVORITE).then((value) {
+      var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
+
+      getFavoritesmodel = DataOffer.fromJson(jsonResponse);
+      print('ook get favorites');
+      // print(dataOfferModel!.data!.offers[0].papiers);
+      emit(GoodGetFavorites());
+    }).catchError((e) {
+      print(e.toString());
+      print('majebt walo fav');
+      emit(BadGetFavorites());
+    });
   }
 
   //--------------------modifier offre--------------
@@ -245,29 +264,31 @@ class CubitDetail extends Cubit<DetailStates> {
 
 //-----------------------------------------favorite--------------------------------------------
   bool colorfav = false;
-  getexistfav({required Map<String, dynamic> data, required String path}) {
-    emit(LoadingExState());
+  getexistfav({
+    required Map<String, dynamic> data,
+  }) {
+    emit(LoadingExFavState());
 
-    Httplar.httpPost(path: path, data: data).then((value) async {
+    Httplar.httpPost(path: CHECKFAVORITE, data: data).then((value) async {
       print('dkholt l verifier favoris');
       if (value.statusCode == 200) {
         var jsonResponse =
             convert.jsonDecode(value.body) as Map<String, dynamic>;
         print(jsonResponse);
         print('ryh nrodu true');
-        await Future.delayed(Duration(seconds: 2));
+        await Future.delayed(Duration(seconds: 1));
         colorfav = true;
 
-        emit(ExistFavState());
+        emit(GoodGetFavState());
       } else if (value.statusCode == 201) {
         var jsonResponse =
             convert.jsonDecode(value.body) as Map<String, dynamic>;
         print(jsonResponse);
         print('ryh nrodu false');
-        await Future.delayed(Duration(seconds: 2));
+        await Future.delayed(Duration(seconds: 1));
         colorfav = false;
 
-        emit(DoNotExState());
+        emit(GoodGetFavState());
       }
     }).catchError((error) {
       print('ki l3ada erreur');
@@ -276,28 +297,30 @@ class CubitDetail extends Cubit<DetailStates> {
     });
   }
 
-  changefav({required Map<String, dynamic> data, bool? dd}) {
+  Future<void> changefav({required Map<String, dynamic> data, bool? dd}) async {
+    emit(LoadingChangeFavState());
     if (dd == true) {
       print('true');
 
-      Httplar.httpdelete(path: CHANGEFAVTOFALSE, data: data).then((value) {
+      await Httplar.httpdelete(path: CHANGEFAVTOFALSE, data: data)
+          .then((value) {
         colorfav = false;
-        emit(DoNotExState());
+        emit(GoodChangeFavoriteState());
       }).catchError((error) {
-        // print(error.toString());
-        emit(ChangetofalseState());
+        print(error.toString());
+        emit(BadChangeFavoriteState());
       });
 
-      emit(ExistFavState());
+      // emit(ExistFavState());
     } else if (dd == false) {
       print('false');
       Httplar.httpPost(path: CHANGEFAVTOTRUE, data: data).then((value) {
         colorfav = true;
-        emit(ChangetotrueState());
+        emit(GoodChangeFavoriteState());
       }).catchError((error) {
         print(error.toString());
 
-        emit(BaaadChangeState());
+        emit(BadChangeFavoriteState());
       });
     }
   }

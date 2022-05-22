@@ -22,6 +22,7 @@ const UPDATEAGENCEPASSWORD = '/api/updateagencePassword';
 const CHECKFAVORITE = '/api/searchfavorit';
 const CHANGEFAVTOFALSE = '/api/deletefavorite';
 const CHANGEFAVTOTRUE = '/api/addfavorite';
+const GETALLFAVORITE = '/api/getfavorite';
 
 //-------------
 var TOKEN = '';

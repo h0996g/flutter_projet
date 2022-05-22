@@ -4,6 +4,7 @@ import 'package:agence/Api/constApi.dart';
 import 'package:agence/home/cubitHome/modifierprofileagence.dart';
 
 import 'package:agence/login/other/cachhelper.dart';
+import 'package:agence/offersdetails/cubitOfferDetail.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -316,6 +317,7 @@ class Setting extends StatelessWidget {
             print(TOKEN);
             TOKEN = '';
             CupitHome.get(context).offerAgencModel = null;
+            CubitDetail.get(context).getFavoritesmodel = null;
             CupitHome.get(context).allofferModel = null;
             CupitHome.get(context).getinfouserModel = null;
             Navigator.pushAndRemoveUntil(

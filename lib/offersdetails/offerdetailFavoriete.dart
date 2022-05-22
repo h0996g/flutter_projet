@@ -12,13 +12,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../home/cubitHome/cupit_home.dart';
 
-class Offerdetailclient extends StatelessWidget {
+class OfferDetailFav extends StatelessWidget {
   int? position;
-  Offerdetailclient({this.position});
+  bool ischangeFav = false;
+  OfferDetailFav({this.position});
 
   var onbordingController = PageController();
 
@@ -60,8 +62,8 @@ class Offerdetailclient extends StatelessWidget {
                       // return Ala(models[index]);
 
                       List? k;
-                      k = CupitHome.get(context)
-                          .allofferModel!
+                      k = CubitDetail.get(context)
+                          .getFavoritesmodel!
                           .data!
                           .offers[position!]
                           .photo
@@ -74,8 +76,8 @@ class Offerdetailclient extends StatelessWidget {
                         fit: BoxFit.cover,
                       );
                     },
-                    itemCount: CupitHome.get(context)
-                        .allofferModel!
+                    itemCount: CubitDetail.get(context)
+                        .getFavoritesmodel!
                         .data!
                         .offers[position!]
                         .photo!
@@ -108,8 +110,8 @@ class Offerdetailclient extends StatelessWidget {
                       alignment: Alignment.bottomCenter,
                       child: SmoothPageIndicator(
                           controller: onbordingController, // PageController
-                          count: CupitHome.get(context)
-                              .allofferModel!
+                          count: CubitDetail.get(context)
+                              .getFavoritesmodel!
                               .data!
                               .offers[position!]
                               .photo!
@@ -161,7 +163,7 @@ class Offerdetailclient extends StatelessWidget {
                             width: 20,
                           ),
                           Text(
-                            "${CupitHome.get(context).allofferModel!.data!.offers[position!].price} \$",
+                            "${CubitDetail.get(context).getFavoritesmodel!.data!.offers[position!].price} \$",
                             style:
                                 Theme.of(context).textTheme.headline4?.copyWith(
                                       fontSize: 32,
@@ -173,13 +175,16 @@ class Offerdetailclient extends StatelessWidget {
                               return MaterialButton(
                                 minWidth: 0,
                                 onPressed: () {
+                                  ischangeFav = true;
                                   sendfava = {
                                     'offer_id':
-                                        '${CupitHome.get(context).allofferModel!.data!.offers[position!].id}',
+                                        '${CubitDetail.get(context).getFavoritesmodel!.data!.offers[position!].id}',
                                   };
-                                  CubitDetail.get(context).changefav(
-                                      data: sendfava,
-                                      dd: CubitDetail.get(context).colorfav);
+                                  CubitDetail.get(context)
+                                      .changefav(
+                                          data: sendfava,
+                                          dd: CubitDetail.get(context).colorfav)
+                                      .then((value) {});
                                 },
                                 shape: const CircleBorder(),
                                 color: CupitHome.get(context).dartSwitch
@@ -198,6 +203,7 @@ class Offerdetailclient extends StatelessWidget {
                             },
                             condition: state is! LoadingExFavState &&
                                 state is! LoadingChangeFavState,
+                            //  &&  CubitDetail.get(context).getFavoritesmodel !=     null,
                             fallback: (BuildContext context) {
                               return SpinKitRipple(
                                 duration: Duration(seconds: 1),
@@ -237,7 +243,7 @@ class Offerdetailclient extends StatelessWidget {
                           ),
                           Expanded(
                             child: Text(
-                              '${CupitHome.get(context).allofferModel!.data!.offers[position!].address}',
+                              '${CubitDetail.get(context).getFavoritesmodel!.data!.offers[position!].address}',
                               style: Theme.of(context).textTheme.bodyText2,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
@@ -471,15 +477,15 @@ class Offerdetailclient extends StatelessWidget {
                         child: CubitDetail.get(context).indexClient == 0
                             ? Information(
                                 context,
-                                CupitHome.get(context)
-                                    .allofferModel!
+                                CubitDetail.get(context)
+                                    .getFavoritesmodel!
                                     .data!
                                     .offers[position!])
                             : (CubitDetail.get(context).indexClient == 1
                                 ? Details(
                                     context,
-                                    CupitHome.get(context)
-                                        .allofferModel!
+                                    CubitDetail.get(context)
+                                        .getFavoritesmodel!
                                         .data!
                                         .offers[position!],
                                     position)
@@ -489,7 +495,26 @@ class Offerdetailclient extends StatelessWidget {
                   ],
                 );
               },
-              listener: (BuildContext context, Object? state) {},
+              listener: (BuildContext context, Object? state) async {
+                if (state is GoodChangeFavoriteState) {
+                  if (ischangeFav == true) {
+                    Fluttertoast.showToast(
+                        msg: 'Delet Success Fav',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                    CupitHome.get(context).currentindexa = 0;
+                    await Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Navbar()),
+                        (route) => false);
+                    ischangeFav = false;
+                  }
+                }
+              },
             ),
           )
         ],
@@ -506,7 +531,7 @@ class Offerdetailclient extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               itemBuilder: ((context, index) => Listemessage(context)),
               itemCount: 5,
-              separatorBuilder: (BuildContext context, int index) {
+              separatorBuilder: (context, int index) {
                 return const SizedBox(
                   height: 1,
                 );
@@ -859,8 +884,8 @@ Widget Details(context, OffersModel model, position) => Padding(
                       Expanded(
                           child: listSpecefication(
                               context,
-                              CupitHome.get(context)
-                                  .allofferModel!
+                              CubitDetail.get(context)
+                                  .getFavoritesmodel!
                                   .data!
                                   .offers[position!]))
                     ],
@@ -891,8 +916,8 @@ Widget Details(context, OffersModel model, position) => Padding(
                       Expanded(
                           child: listPaiment(
                               context,
-                              CupitHome.get(context)
-                                  .allofferModel!
+                              CubitDetail.get(context)
+                                  .getFavoritesmodel!
                                   .data!
                                   .offers[position!]))
                     ],

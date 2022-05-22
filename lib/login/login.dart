@@ -5,6 +5,7 @@ import 'package:agence/login/cupitlogin/cupitl.dart';
 import 'package:agence/login/cupitlogin/loginStates.dart';
 import 'package:agence/login/ChooseRegister.dart';
 import 'package:agence/login/other/cachhelper.dart';
+import 'package:agence/offersdetails/cubitOfferDetail.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -395,6 +396,7 @@ class LoginScreen extends StatelessWidget {
                     type: '/' +
                         CupitHome.get(context)
                             .type_vente[CupitHome.get(context).toggelindex]);
+                // await CubitDetail.get(context).getFavorites();
               } else if (LoginCubit.get(context).path == LOGINAGENCE) {
                 Navigator.pushAndRemoveUntil(
                     context,

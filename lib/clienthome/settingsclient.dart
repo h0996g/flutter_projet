@@ -14,6 +14,7 @@ import '../home/cubitHome/homeStates.dart';
 import '../home/modifierprofile/cubitmodifier.dart';
 import '../login/login.dart';
 import '../login/other/cachhelper.dart';
+import '../offersdetails/cubitOfferDetail.dart';
 
 class Settingsclient extends StatelessWidget {
   Settingsclient({Key? key}) : super(key: key);
@@ -348,7 +349,7 @@ class Settingsclient extends StatelessWidget {
             // CupitHome.get(context).dataOfferModel = null;
             CupitHome.get(context).getinfouserModel = null;
             CupitHome.get(context).allofferModel = null;
-
+            CubitDetail.get(context).getFavoritesmodel = null;
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => LoginScreen()),
