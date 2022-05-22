@@ -47,6 +47,8 @@ class BadSendMsgState extends DetailStates {}
 class GoodGetAllMsgState extends DetailStates {}
 
 class BadGetAllMsgState extends DetailStates {}
+
+class LodinGetAllMsgState extends DetailStates {}
 // class CreateOfferBadState extends DetailStates {}
 // class CreateOfferBadState extends DetailStates {}
 // class CreateOfferBadState extends DetailStates {}

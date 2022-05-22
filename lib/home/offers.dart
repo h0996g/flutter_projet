@@ -145,8 +145,12 @@ ListItembuilder(int position, context, OffersModel model) {
         depth: 0),
     onPressed: () {
       print(position);
-      Map<String, dynamic> getallmsg = {'offer_id': '3'};
-      CubitDetail.get(context).getAllMsg(data: getallmsg);
+      CubitDetail.get(context).indexAgence = 0;
+      // Map<String, dynamic> getallmsg = {
+      //   'offer_id':
+      //       '${CupitHome.get(context).offerAgencModel!.data!.offers[position].id}'
+      // };
+      // CubitDetail.get(context).getAllMsg(data: getallmsg);
 
       Navigator.push(
           context,

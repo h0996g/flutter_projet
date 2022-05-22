@@ -342,6 +342,7 @@ class CubitDetail extends Cubit<DetailStates> {
 
   var allmsgmodel;
   Future<void> getAllMsg({required Map<String, dynamic> data}) async {
+    emit(LodinGetAllMsgState());
     await Httplar.httpPost(data: data, path: GETALLMSG).then((value) {
       var jsonResponse = convert.jsonDecode(value.body);
       allmsgmodel = jsonResponse;
