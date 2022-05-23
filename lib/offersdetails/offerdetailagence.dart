@@ -481,7 +481,18 @@ class Offerdetailagence extends StatelessWidget {
                                           ),
                                           actions: [
                                             TextButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  print(CupitHome.get(context)
+                                                      .offerAgencModel!
+                                                      .data!
+                                                      .offers[position]
+                                                      .id);
+                                                  CubitDetail.get(context)
+                                                      .deletOffer(data: {
+                                                    'offer_id':
+                                                        '${CupitHome.get(context).offerAgencModel!.data!.offers[position].id}'
+                                                  });
+                                                },
                                                 child: const Text('yes')),
                                             TextButton(
                                                 onPressed: () {
@@ -566,7 +577,16 @@ class Offerdetailagence extends StatelessWidget {
                   ],
                 );
               },
-              listener: (BuildContext context, Object? state) {},
+              listener: (BuildContext context, Object? state) {
+                if (state is GoodDeleteOffersState) {
+                  CupitHome.get(context).getOfferAgence().then((value) {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => Home()),
+                        (route) => false);
+                  });
+                }
+              },
             ),
           ),
         ],

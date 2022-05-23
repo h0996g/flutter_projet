@@ -11,7 +11,6 @@ import '../Model/AfficheOffer.dart';
 import '../home/cubitHome/cupit_home.dart';
 
 import '../offersdetails/offerdetailFavoriete.dart';
-import '../offersdetails/offerdetailclient.dart';
 
 class Favorite extends StatefulWidget {
   Favorite({Key? key}) : super(key: key);

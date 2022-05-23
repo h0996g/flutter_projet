@@ -8,6 +8,12 @@ class GoodGetFavorites extends DetailStates {}
 
 class BadGetFavorites extends DetailStates {}
 
+class LodinDeleteOffer extends DetailStates {}
+
+class GoodDeleteOffersState extends DetailStates {}
+
+class BadDeleteOffersState extends DetailStates {}
+
 class DeclarIndexState extends DetailStates {}
 
 class ChangevalueDropdownState extends DetailStates {}

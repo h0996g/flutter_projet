@@ -48,6 +48,18 @@ class CubitDetail extends Cubit<DetailStates> {
     });
   }
 
+  Future<void> deletOffer({required Map<String, dynamic> data}) async {
+    emit(LodinDeleteOffer());
+    await Httplar.httpPost(data: data, path: DELETEOFFER).then((value) {
+      print('Good Delete');
+      // print(value.body);
+      emit(GoodDeleteOffersState());
+    }).catchError((e) {
+      print(e.toString());
+      emit(BadDeleteOffersState());
+    });
+  }
+
   //--------------------modifier offre--------------
   //--------dropdown
 //   final items = [
