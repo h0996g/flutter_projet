@@ -16,11 +16,17 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../home/cubitHome/cupit_home.dart';
 
-class Offerdetailclient extends StatelessWidget {
+class Offerdetailclient extends StatefulWidget {
   int? position;
   Offerdetailclient({this.position});
 
+  @override
+  State<Offerdetailclient> createState() => _OfferdetailclientState();
+}
+
+class _OfferdetailclientState extends State<Offerdetailclient> {
   var onbordingController = PageController();
+
   var msgController = TextEditingController();
 
   Map<String, dynamic> sendinfomsg = {};
@@ -32,9 +38,18 @@ class Offerdetailclient extends StatelessWidget {
   ];
 
   int a = 0;
-  String number = '07666666';
+
+  String? number;
+  String? seLoger;
 
   Map<String, dynamic> sendfava = {};
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    number = CubitDetail.get(context).namAndphoen[0]['phone'];
+    seLoger = CubitDetail.get(context).namAndphoen[0]['name'];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +79,7 @@ class Offerdetailclient extends StatelessWidget {
                       k = CupitHome.get(context)
                           .allofferModel!
                           .data!
-                          .offers[position!]
+                          .offers[widget.position!]
                           .photo
                           ?.map((e) {
                         return base64Decode(e);
@@ -78,7 +93,7 @@ class Offerdetailclient extends StatelessWidget {
                     itemCount: CupitHome.get(context)
                         .allofferModel!
                         .data!
-                        .offers[position!]
+                        .offers[widget.position!]
                         .photo!
                         .length,
                   ),
@@ -112,7 +127,7 @@ class Offerdetailclient extends StatelessWidget {
                           count: CupitHome.get(context)
                               .allofferModel!
                               .data!
-                              .offers[position!]
+                              .offers[widget.position!]
                               .photo!
                               .length,
                           effect: ScrollingDotsEffect(
@@ -162,7 +177,7 @@ class Offerdetailclient extends StatelessWidget {
                             width: 20,
                           ),
                           Text(
-                            "${CupitHome.get(context).allofferModel!.data!.offers[position!].price} \$",
+                            "${CupitHome.get(context).allofferModel!.data!.offers[widget.position!].price} \$",
                             style:
                                 Theme.of(context).textTheme.headline4?.copyWith(
                                       fontSize: 32,
@@ -176,7 +191,7 @@ class Offerdetailclient extends StatelessWidget {
                                 onPressed: () {
                                   sendfava = {
                                     'offer_id':
-                                        '${CupitHome.get(context).allofferModel!.data!.offers[position!].id}',
+                                        '${CupitHome.get(context).allofferModel!.data!.offers[widget.position!].id}',
                                   };
                                   CubitDetail.get(context).changefav(
                                       data: sendfava,
@@ -201,7 +216,7 @@ class Offerdetailclient extends StatelessWidget {
                                 state is! LoadingChangeFavState,
                             fallback: (BuildContext context) {
                               return SpinKitRipple(
-                                duration: Duration(seconds: 1),
+                                duration: const Duration(seconds: 1),
                                 // size: 80,
                                 itemBuilder: (context, index) {
                                   return const DecoratedBox(
@@ -238,7 +253,7 @@ class Offerdetailclient extends StatelessWidget {
                           ),
                           Expanded(
                             child: Text(
-                              '${CupitHome.get(context).allofferModel!.data!.offers[position!].address}',
+                              '${CupitHome.get(context).allofferModel!.data!.offers[widget.position!].address}',
                               style: Theme.of(context).textTheme.bodyText2,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
@@ -247,9 +262,9 @@ class Offerdetailclient extends StatelessWidget {
                           const SizedBox(
                             width: 20,
                           ),
-                          const Text(
-                            'Se Loger',
-                            style: TextStyle(
+                          Text(
+                            seLoger!,
+                            style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16),
                           ),
                           const SizedBox(
@@ -386,7 +401,7 @@ class Offerdetailclient extends StatelessWidget {
                                   //     .changeNavDetailAgence(2);
                                   CubitDetail.get(context).getAllMsg(data: {
                                     'offer_id':
-                                        '${CupitHome.get(context).allofferModel!.data!.offers[position!].id}'
+                                        '${CupitHome.get(context).allofferModel!.data!.offers[widget.position!].id}'
                                   });
                                 },
                                 child: Column(
@@ -434,7 +449,7 @@ class Offerdetailclient extends StatelessWidget {
                               child: MaterialButton(
                                 padding: const EdgeInsets.all(0),
                                 onPressed: () async {
-                                  FlutterPhoneDirectCaller.callNumber(number);
+                                  FlutterPhoneDirectCaller.callNumber(number!);
                                 },
                                 child: Column(
                                   children: [
@@ -481,15 +496,15 @@ class Offerdetailclient extends StatelessWidget {
                                 CupitHome.get(context)
                                     .allofferModel!
                                     .data!
-                                    .offers[position!])
+                                    .offers[widget.position!])
                             : (CubitDetail.get(context).indexClient == 1
                                 ? Details(
                                     context,
                                     CupitHome.get(context)
                                         .allofferModel!
                                         .data!
-                                        .offers[position!],
-                                    position)
+                                        .offers[widget.position!],
+                                    widget.position)
                                 : ConditionalBuilder(
                                     builder: (BuildContext context) {
                                       return Commentaire(context);
@@ -548,7 +563,7 @@ class Offerdetailclient extends StatelessWidget {
                       sendinfomsg = {
                         'text': msgController.text,
                         'offer_id':
-                            ' ${CupitHome.get(context).allofferModel!.data!.offers[position!].id}'
+                            ' ${CupitHome.get(context).allofferModel!.data!.offers[widget.position!].id}'
                       };
 
                       CubitDetail.get(context)
@@ -556,7 +571,7 @@ class Offerdetailclient extends StatelessWidget {
                           .then((value) {
                         CubitDetail.get(context).getAllMsg(data: {
                           'offer_id':
-                              '${CupitHome.get(context).allofferModel!.data!.offers[position!].id}'
+                              '${CupitHome.get(context).allofferModel!.data!.offers[widget.position!].id}'
                         });
                       });
                       msgController = TextEditingController();
@@ -626,7 +641,7 @@ Widget Listemessage(context, msg) => Container(
                 Expanded(
                     child: Text(
                   msg['text'],
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
                   ),

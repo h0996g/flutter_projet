@@ -61,6 +61,12 @@ class BadDeleteMsgOfferState extends DetailStates {}
 class LodinGetAllMsgOfferState extends DetailStates {}
 
 class LodinDeleteMsgOfferState extends DetailStates {}
+
+class LodinNamAndPhoneState extends DetailStates {}
+
+class GoodNamAndPhoneState extends DetailStates {}
+
+class BadNamAndPhoneState extends DetailStates {}
 // class CreateOfferBadState extends DetailStates {}
 // class CreateOfferBadState extends DetailStates {}
 // class CreateOfferBadState extends DetailStates {}
