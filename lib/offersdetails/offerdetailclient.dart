@@ -562,7 +562,7 @@ class Offerdetailclient extends StatelessWidget {
                       msgController = TextEditingController();
                     },
                     icon: const Icon(Icons.send_sharp)),
-                textInputAction: TextInputAction.done,
+                // textInputAction: TextInputAction.done,
                 controller: msgController,
                 context: context,
                 type: TextInputType.text,
@@ -634,22 +634,7 @@ Widget Listemessage(context, msg) => Container(
                   overflow: TextOverflow.ellipsis,
                 )),
                 // Spacer(),
-                const SizedBox(
-                  width: 7,
-                ),
-                MaterialButton(
-                  onPressed: () {},
-                  shape: const CircleBorder(),
-                  color: CupitHome.get(context).dartSwitch
-                      ? const Color(0xff8d8d8d)
-                      : Colors.blue,
-                  child: Icon(
-                    Icons.delete,
-                    color: CupitHome.get(context).dartSwitch
-                        ? Colors.white
-                        : Colors.white,
-                  ),
-                ),
+
                 const SizedBox(
                   width: 0,
                 ),

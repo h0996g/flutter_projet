@@ -172,7 +172,7 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
                           ),
                           defaultForm(
                               context: context,
-                              type: TextInputType.text,
+                              type: TextInputType.number,
                               lable: Text(
                                 'Superficie',
                                 style: TextStyle(
@@ -219,7 +219,7 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
                               margin: const EdgeInsets.only(bottom: 26),
                               child: defaultForm(
                                 context: context,
-                                type: TextInputType.text,
+                                type: TextInputType.number,
                                 lable: Text(
                                   'Etage(s)',
                                   style: TextStyle(
@@ -247,7 +247,7 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
                               margin: const EdgeInsets.only(bottom: 26),
                               child: defaultForm(
                                 context: context,
-                                type: TextInputType.text,
+                                type: TextInputType.number,
                                 lable: Text(
                                   '\u2116chambres',
                                   style: TextStyle(
