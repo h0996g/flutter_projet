@@ -96,6 +96,14 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
                               child: ButtonTheme(
                                 alignedDropdown: true,
                                 child: DropdownButton<String>(
+                                  style: TextStyle(
+                                      color: CupitHome.get(context).dartSwitch
+                                          ? Colors.white
+                                          : Colors.black),
+                                  dropdownColor:
+                                  CupitHome.get(context).dartSwitch
+                                      ? Colors.black
+                                      : Colors.white,
                                   isExpanded: true,
                                   hint: Text(
                                     'Vente',
@@ -129,6 +137,14 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
                               child: ButtonTheme(
                                 alignedDropdown: true,
                                 child: DropdownButton<String>(
+                                  style: TextStyle(
+                                      color: CupitHome.get(context).dartSwitch
+                                          ? Colors.white
+                                          : Colors.black),
+                                  dropdownColor:
+                                  CupitHome.get(context).dartSwitch
+                                      ? Colors.black
+                                      : Colors.white,
                                   isExpanded: true,
                                   hint: Text(
                                     'Appartement',

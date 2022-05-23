@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:agence/home/modifierprofile/modifierpasswordclient.dart';
 import 'package:agence/home/modifierprofile/modifierprofileclient.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -138,6 +139,7 @@ class Settingsclient extends StatelessWidget {
                         height: 6,
                       ),
 
+
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Row(
@@ -149,12 +151,14 @@ class Settingsclient extends StatelessWidget {
                             const SizedBox(
                               width: 10,
                             ),
-                            Text(
-                              "${CupitHome.get(context).getinfouserModel!.name}",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 16),
+                            Expanded(
+                              child: Text(
+                                "${CupitHome.get(context).getinfouserModel!.name}",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                              ),
                             ),
                             // SizedBox(width: 10,)
                           ],
@@ -182,11 +186,14 @@ class Settingsclient extends StatelessWidget {
                             const SizedBox(
                               width: 10,
                             ),
-                            Text(
-                              "${CupitHome.get(context).getinfouserModel!.client!.prenom}",
-                              maxLines: 1,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 16),
+                            Expanded(
+                              child: Text(
+                                "${CupitHome.get(context).getinfouserModel!.client!.prenom}",
+                                maxLines: 1,
+                             overflow: TextOverflow.ellipsis   ,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                              ),
                             )
                           ],
                         ),

@@ -37,7 +37,10 @@ class Offers extends StatelessWidget {
           ),
           appBar: AppBar(
             elevation: 10,
-            title: Text('Offers', style: Theme.of(context).textTheme.headline4),
+            title: Text('Offers', style:TextStyle(
+                color: CupitHome.get(context).dartSwitch
+                    ? Colors.white
+                    : Colors.black,fontSize: 34),),
             actions: [
               IconButton(
                   onPressed: () {

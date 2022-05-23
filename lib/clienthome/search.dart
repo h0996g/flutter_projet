@@ -28,7 +28,7 @@ class Search extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     left: 5, right: 5, top: 16, bottom: 5),
                 child: ToggleSwitch(
-                  changeOnTap: false,
+                  // changeOnTap: false,
 
                   onToggle: (index) {
 

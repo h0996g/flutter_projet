@@ -30,7 +30,10 @@ class Setting extends StatelessWidget {
             elevation: 10,
             title: Text(
               'Profile',
-              style: Theme.of(context).textTheme.headline4,
+              style:TextStyle(
+                  color: CupitHome.get(context).dartSwitch
+                      ? Colors.white
+                      : Colors.black,fontSize: 34),
             ),
             actions: [
               IconButton(
