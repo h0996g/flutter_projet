@@ -28,8 +28,6 @@ class _FavoriteState extends State<Favorite> {
     // TODO: implement initState
     super.initState();
     CubitDetail.get(context).getFavorites();
-    
-
   }
 
   @override
@@ -114,12 +112,16 @@ class _FavoriteState extends State<Favorite> {
           color:
               CupitHome.get(context).dartSwitch ? Colors.black : Colors.white,
           depth: 0),
-      onPressed: () {
+      onPressed: () async {
         CubitDetail.get(context).indexClient = 0;
         sendfav = {
           'offer_id':
               '${CubitDetail.get(context).getFavoritesmodel!.data!.offers[position].id}',
         };
+        await CubitDetail.get(context).getNameandPhone(data: {
+          'offer_id':
+              '${CubitDetail.get(context).getFavoritesmodel!.data!.offers[position].id}',
+        });
         CubitDetail.get(context).getexistfav(data: sendfav);
         Navigator.push(
             context,

@@ -258,7 +258,7 @@ class Offersclient extends StatelessWidget {
           color:
               CupitHome.get(context).dartSwitch ? Colors.black : Colors.white,
           depth: 0),
-      onPressed: () {
+      onPressed: () async {
         CubitDetail.get(context).indexClient = 0;
         print(CupitHome.get(context)
             .allofferModel!
@@ -269,7 +269,12 @@ class Offersclient extends StatelessWidget {
           'offer_id':
               '${CupitHome.get(context).allofferModel!.data!.offers[positionClient].id}',
         };
+        await CubitDetail.get(context).getNameandPhone(data: {
+          'offer_id':
+              '${CupitHome.get(context).allofferModel!.data!.offers[positionClient].id}',
+        });
         CubitDetail.get(context).getexistfav(data: sendfav);
+
         // print(positionClient);
         Navigator.push(
             context,

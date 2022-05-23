@@ -10,9 +10,6 @@ const UPDATEOFFER = '/api/updateoffer';
 const DELETEOFFER = '/api/deleteoffer';
 const URLHTTP = '192.168.136.68:8000';
 
-
-
-
 const GETOFFERSAGENCE = '/api/getofferagence';
 // const GETALLOFFER = '/api/getofferall';
 // var TYPE = 'Tout';
@@ -21,6 +18,7 @@ const GETINFOUSER = '/api/getuser';
 const UPDATEAGENCE = '/api/updateagence';
 const UPDATECLIENT = '/api/updateclient';
 const UPDATEAGENCEPASSWORD = '/api/updateagencePassword';
+const GETPHONEAGENCE = '/api/getnamephone';
 
 //--------------
 const CHECKFAVORITE = '/api/searchfavorit';

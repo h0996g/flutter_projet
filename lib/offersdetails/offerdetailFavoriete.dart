@@ -17,17 +17,25 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../home/cubitHome/cupit_home.dart';
 
-class OfferDetailFav extends StatelessWidget {
+class OfferDetailFav extends StatefulWidget {
   int? position;
-  bool ischangeFav = false;
+
   OfferDetailFav({this.position});
 
+  @override
+  State<OfferDetailFav> createState() => _OfferDetailFavState();
+}
+
+class _OfferDetailFavState extends State<OfferDetailFav> {
+  bool ischangeFav = false;
+
   var onbordingController = PageController();
+
   var msgController = TextEditingController();
 
   Map<String, dynamic> sendinfomsg = {};
-  // var alaController = TextEditingController();
 
+  // var alaController = TextEditingController();
   List<String> models = [
     'assets/images/on2.png',
     'assets/images/building.jpg',
@@ -35,9 +43,19 @@ class OfferDetailFav extends StatelessWidget {
   ];
 
   int a = 0;
-  String number = '07666666';
+
+  String? number;
+
+  String? seLoger;
 
   Map<String, dynamic> sendfava = {};
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    number = CubitDetail.get(context).namAndphoen[0]['phone'];
+    seLoger = CubitDetail.get(context).namAndphoen[0]['name'];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +85,7 @@ class OfferDetailFav extends StatelessWidget {
                       k = CubitDetail.get(context)
                           .getFavoritesmodel!
                           .data!
-                          .offers[position!]
+                          .offers[widget.position!]
                           .photo
                           ?.map((e) {
                         return base64Decode(e);
@@ -81,7 +99,7 @@ class OfferDetailFav extends StatelessWidget {
                     itemCount: CubitDetail.get(context)
                         .getFavoritesmodel!
                         .data!
-                        .offers[position!]
+                        .offers[widget.position!]
                         .photo!
                         .length,
                   ),
@@ -116,7 +134,7 @@ class OfferDetailFav extends StatelessWidget {
                           count: CubitDetail.get(context)
                               .getFavoritesmodel!
                               .data!
-                              .offers[position!]
+                              .offers[widget.position!]
                               .photo!
                               .length,
                           effect: ScrollingDotsEffect(
@@ -166,7 +184,7 @@ class OfferDetailFav extends StatelessWidget {
                             width: 20,
                           ),
                           Text(
-                            "${CubitDetail.get(context).getFavoritesmodel!.data!.offers[position!].price} \$",
+                            "${CubitDetail.get(context).getFavoritesmodel!.data!.offers[widget.position!].price} \$",
                             style:
                                 Theme.of(context).textTheme.headline4?.copyWith(
                                       fontSize: 32,
@@ -181,7 +199,7 @@ class OfferDetailFav extends StatelessWidget {
                                   ischangeFav = true;
                                   sendfava = {
                                     'offer_id':
-                                        '${CubitDetail.get(context).getFavoritesmodel!.data!.offers[position!].id}',
+                                        '${CubitDetail.get(context).getFavoritesmodel!.data!.offers[widget.position!].id}',
                                   };
                                   CubitDetail.get(context)
                                       .changefav(
@@ -246,7 +264,7 @@ class OfferDetailFav extends StatelessWidget {
                           ),
                           Expanded(
                             child: Text(
-                              '${CubitDetail.get(context).getFavoritesmodel!.data!.offers[position!].address}',
+                              '${CubitDetail.get(context).getFavoritesmodel!.data!.offers[widget.position!].address}',
                               style: Theme.of(context).textTheme.bodyText2,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
@@ -255,8 +273,8 @@ class OfferDetailFav extends StatelessWidget {
                           const SizedBox(
                             width: 20,
                           ),
-                          const Text(
-                            'Se Loger',
+                          Text(
+                            seLoger!,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16),
                           ),
@@ -392,7 +410,7 @@ class OfferDetailFav extends StatelessWidget {
                                       .changeNavDetailClient(2);
                                   CubitDetail.get(context).getAllMsg(data: {
                                     'offer_id':
-                                        '${CubitDetail.get(context).getFavoritesmodel!.data!.offers[position!].id}'
+                                        '${CubitDetail.get(context).getFavoritesmodel!.data!.offers[widget.position!].id}'
                                   });
                                 },
                                 child: Column(
@@ -440,7 +458,7 @@ class OfferDetailFav extends StatelessWidget {
                               child: MaterialButton(
                                 padding: const EdgeInsets.all(0),
                                 onPressed: () async {
-                                  FlutterPhoneDirectCaller.callNumber(number);
+                                  FlutterPhoneDirectCaller.callNumber(number!);
                                 },
                                 child: Column(
                                   children: [
@@ -487,15 +505,15 @@ class OfferDetailFav extends StatelessWidget {
                                 CubitDetail.get(context)
                                     .getFavoritesmodel!
                                     .data!
-                                    .offers[position!])
+                                    .offers[widget.position!])
                             : (CubitDetail.get(context).indexClient == 1
                                 ? Details(
                                     context,
                                     CubitDetail.get(context)
                                         .getFavoritesmodel!
                                         .data!
-                                        .offers[position!],
-                                    position)
+                                        .offers[widget.position!],
+                                    widget.position)
                                 : ConditionalBuilder(
                                     builder: (BuildContext context) {
                                       return Commentaire(context);

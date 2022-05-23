@@ -48,7 +48,6 @@ class CubitDetail extends Cubit<DetailStates> {
     });
   }
 
-
   Future<void> deletOffer({required Map<String, dynamic> data}) async {
     emit(LodinDeleteOffer());
     await Httplar.httpPost(data: data, path: DELETEOFFER).then((value) {
@@ -60,7 +59,6 @@ class CubitDetail extends Cubit<DetailStates> {
       emit(BadDeleteOffersState());
     });
   }
-
 
   //--------------------modifier offre--------------
   //--------dropdown
@@ -381,6 +379,34 @@ class CubitDetail extends Cubit<DetailStates> {
 
       print('ma7abch ytna7a msg');
       emit(BadDeleteMsgOfferState());
+    });
+  }
+
+  var namAndphoen;
+  Future<void> getNameandPhone({required Map<String, dynamic> data}) async {
+    emit(LodinNamAndPhoneState());
+    // var jsonphoto = jsonEncode(base64List);
+    // var conditionsjson = jsonEncode(conditionsListhttp);
+    // var specificationjson = jsonEncode(specificationListhttp);
+    // var papiersjson = jsonEncode(papiersListhttp);
+    // var l = jsonEncode(test);
+    await Httplar.httpPost(data: data, path: GETPHONEAGENCE).then((value) {
+      var jsonResponse = convert.jsonDecode(value.body);
+      //  photoModels = PhotoModels.fromJson(jsonResponse);
+      namAndphoen = jsonResponse;
+      print(namAndphoen);
+      // print(value.body);
+      // print(jsonResponse);
+
+      // print(jsonDecode(photoModels!.url)[1]);
+      // jsondecodephoto = jsonDecode(photoModels!.url);
+      print('get num and phone Good ');
+      // print(value.body);
+      emit(GoodNamAndPhoneState());
+    }).catchError((e) {
+      print(e.toString());
+      print('oooooooooooooo kyn mochkol phone');
+      emit(BadNamAndPhoneState());
     });
   }
 }
