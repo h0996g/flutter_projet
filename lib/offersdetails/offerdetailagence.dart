@@ -9,6 +9,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../home/cubitHome/cupit_home.dart';
 import '../home/home.dart';
@@ -481,7 +482,18 @@ class Offerdetailagence extends StatelessWidget {
                                           ),
                                           actions: [
                                             TextButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  print(CupitHome.get(context)
+                                                      .offerAgencModel!
+                                                      .data!
+                                                      .offers[position]
+                                                      .id);
+                                                  CubitDetail.get(context)
+                                                      .deletOffer(data: {
+                                                    'offer_id':
+                                                        '${CupitHome.get(context).offerAgencModel!.data!.offers[position].id}'
+                                                  });
+                                                },
                                                 child: const Text('yes')),
                                             TextButton(
                                                 onPressed: () {
@@ -553,7 +565,8 @@ class Offerdetailagence extends StatelessWidget {
                                     builder: (BuildContext context) {
                                       return Commentaire(context);
                                     },
-                                    condition: state is! LodinGetAllMsgState &&
+                                    condition: state
+                                            is! LodinGetAllMsgOfferState &&
                                         CubitDetail.get(context).allmsgmodel !=
                                             null,
                                     fallback: (BuildContext context) {
@@ -566,7 +579,30 @@ class Offerdetailagence extends StatelessWidget {
                   ],
                 );
               },
-              listener: (BuildContext context, Object? state) {},
+              listener: (BuildContext context, Object? state) {
+                if (state is GoodDeleteOffersState) {
+                  CupitHome.get(context).getOfferAgence().then((value) {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => Home()),
+                        (route) => false);
+                  });
+                }
+                if (state is GoodDeleteMsgState) {
+                  CubitDetail.get(context).getAllMsg(data: {
+                    'offer_id':
+                        '${CupitHome.get(context).offerAgencModel!.data!.offers[position].id}'
+                  });
+                  Fluttertoast.showToast(
+                      msg: 'Delete Success',
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.green,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                }
+              },
             ),
           ),
         ],
@@ -583,8 +619,9 @@ class Offerdetailagence extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               itemBuilder: ((context, index) {
                 // var ind = index;
-                return Listemessage(
-                    context, CubitDetail.get(context).allmsgmodel[index]);
+                int positionmsg = index;
+                return Listemessage(context,
+                    CubitDetail.get(context).allmsgmodel[index], positionmsg);
               }),
               itemCount: CubitDetail.get(context).allmsgmodel.length,
               separatorBuilder: (BuildContext context, int index) {
@@ -639,7 +676,7 @@ class Offerdetailagence extends StatelessWidget {
       );
 }
 
-Widget Listemessage(context, msg) => Container(
+Widget Listemessage(context, msg, positionmsg) => Container(
       decoration: BoxDecoration(
           color: CupitHome.get(context).dartSwitch
               ? const Color(0xff131313)
@@ -699,7 +736,17 @@ Widget Listemessage(context, msg) => Container(
                   width: 7,
                 ),
                 MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    print(positionmsg);
+
+                    CubitDetail.get(context).deleteMsg(data: {
+                      'id':
+                          '${CubitDetail.get(context).allmsgmodel[positionmsg]['id']}'
+                    });
+
+                    // print( CubitDetail.get(context).allmsgmodel[index]);
+                    // print(object)
+                  },
                   shape: const CircleBorder(),
                   color: CupitHome.get(context).dartSwitch
                       ? const Color(0xff8d8d8d)
