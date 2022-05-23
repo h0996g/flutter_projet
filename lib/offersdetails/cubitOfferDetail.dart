@@ -354,7 +354,7 @@ class CubitDetail extends Cubit<DetailStates> {
 
   var allmsgmodel;
   Future<void> getAllMsg({required Map<String, dynamic> data}) async {
-    emit(LodinGetAllMsgState());
+    emit(LodinGetAllMsgOfferState());
     await Httplar.httpPost(data: data, path: GETALLMSG).then((value) {
       var jsonResponse = convert.jsonDecode(value.body);
       allmsgmodel = jsonResponse;
@@ -363,6 +363,22 @@ class CubitDetail extends Cubit<DetailStates> {
     }).catchError((e) {
       print(e.toString());
       emit(BadGetAllMsgState());
+    });
+  }
+
+  Future<void> deleteMsg({required Map<String, dynamic> data}) async {
+    emit(LodinDeleteMsgOfferState());
+    await Httplar.httpPost(data: data, path: DELETEMSGOFFER).then((value) {
+      // var jsonResponse = convert.jsonDecode(value.body);
+      // allmsgmodel = jsonResponse;
+      // print(allmsgmodel);
+      print('tna7a msg');
+      emit(GoodDeleteMsgState());
+    }).catchError((e) {
+      print(e.toString());
+
+      print('ma7abch ytna7a msg');
+      emit(BadDeleteMsgOfferState());
     });
   }
 }

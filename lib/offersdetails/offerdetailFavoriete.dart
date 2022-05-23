@@ -500,7 +500,8 @@ class OfferDetailFav extends StatelessWidget {
                                     builder: (BuildContext context) {
                                       return Commentaire(context);
                                     },
-                                    condition: state is! LodinGetAllMsgState &&
+                                    condition: state
+                                            is! LodinGetAllMsgOfferState &&
                                         CubitDetail.get(context).allmsgmodel !=
                                             null,
                                     fallback: (BuildContext context) {
