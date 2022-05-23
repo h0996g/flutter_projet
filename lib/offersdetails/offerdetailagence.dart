@@ -612,7 +612,14 @@ class Offerdetailagence extends StatelessWidget {
                             ' ${CupitHome.get(context).offerAgencModel!.data!.offers[position].id}'
                       };
 
-                      CubitDetail.get(context).sendMessage(data: sendinfomsg);
+                      CubitDetail.get(context)
+                          .sendMessage(data: sendinfomsg)
+                          .then((value) {
+                        CubitDetail.get(context).getAllMsg(data: {
+                          'offer_id':
+                              '${CupitHome.get(context).offerAgencModel!.data!.offers[position].id}'
+                        });
+                      });
                       msgController = TextEditingController();
                     },
                     icon: const Icon(Icons.send_sharp)),

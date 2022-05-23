@@ -21,8 +21,9 @@ class Offerdetailclient extends StatelessWidget {
   Offerdetailclient({this.position});
 
   var onbordingController = PageController();
+  var msgController = TextEditingController();
 
-  var alaController = TextEditingController();
+  Map<String, dynamic> sendinfomsg = {};
 
   List<String> models = [
     'assets/images/on2.png',
@@ -38,7 +39,7 @@ class Offerdetailclient extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           Expanded(
@@ -381,6 +382,12 @@ class Offerdetailclient extends StatelessWidget {
                                   // });
                                   CubitDetail.get(context)
                                       .changeNavDetailClient(2);
+                                  // CubitDetail.get(context)
+                                  //     .changeNavDetailAgence(2);
+                                  CubitDetail.get(context).getAllMsg(data: {
+                                    'offer_id':
+                                        '${CupitHome.get(context).allofferModel!.data!.offers[position!].id}'
+                                  });
                                 },
                                 child: Column(
                                   children: [
@@ -483,7 +490,18 @@ class Offerdetailclient extends StatelessWidget {
                                         .data!
                                         .offers[position!],
                                     position)
-                                : Commentaire(context)),
+                                : ConditionalBuilder(
+                                    builder: (BuildContext context) {
+                                      return Commentaire(context);
+                                    },
+                                    condition: state is! LodinGetAllMsgState &&
+                                        CubitDetail.get(context).allmsgmodel !=
+                                            null,
+                                    fallback: (BuildContext context) {
+                                      return const Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  )),
                       ),
                     ),
                   ],
@@ -504,8 +522,9 @@ class Offerdetailclient extends StatelessWidget {
             Expanded(
                 child: ListView.separated(
               physics: const BouncingScrollPhysics(),
-              itemBuilder: ((context, index) => Listemessage(context)),
-              itemCount: 5,
+              itemBuilder: ((context, index) => Listemessage(
+                  context, CubitDetail.get(context).allmsgmodel[index])),
+              itemCount: CubitDetail.get(context).allmsgmodel.length,
               separatorBuilder: (BuildContext context, int index) {
                 return const SizedBox(
                   height: 1,
@@ -524,9 +543,26 @@ class Offerdetailclient extends StatelessWidget {
                           : Colors.grey),
                 ),
                 sufixIcon: IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.send_sharp)),
+                    onPressed: () {
+                      sendinfomsg = {
+                        'text': msgController.text,
+                        'offer_id':
+                            ' ${CupitHome.get(context).allofferModel!.data!.offers[position!].id}'
+                      };
+
+                      CubitDetail.get(context)
+                          .sendMessage(data: sendinfomsg)
+                          .then((value) {
+                        CubitDetail.get(context).getAllMsg(data: {
+                          'offer_id':
+                              '${CupitHome.get(context).allofferModel!.data!.offers[position!].id}'
+                        });
+                      });
+                      msgController = TextEditingController();
+                    },
+                    icon: const Icon(Icons.send_sharp)),
                 textInputAction: TextInputAction.done,
-                controller: alaController,
+                controller: msgController,
                 context: context,
                 type: TextInputType.text,
                 valid: (value) {
@@ -541,7 +577,7 @@ class Offerdetailclient extends StatelessWidget {
       );
 }
 
-Widget Listemessage(context) => Container(
+Widget Listemessage(context, msg) => Container(
       decoration: BoxDecoration(
           color: CupitHome.get(context).dartSwitch
               ? const Color(0xff131313)
@@ -563,7 +599,7 @@ Widget Listemessage(context) => Container(
                 const SizedBox(
                   width: 6,
                 ),
-                const Text('Ala eddine Agence',
+                Text(msg['name'],
                     style: const TextStyle(
                         fontSize: 20,
                         color: Colors.white,
@@ -571,7 +607,7 @@ Widget Listemessage(context) => Container(
                 const SizedBox(
                   width: 7,
                 ),
-                const Text('27/12/2001 13:45',
+                Text('${msg['created_at']}',
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -586,9 +622,9 @@ Widget Listemessage(context) => Container(
                 const SizedBox(
                   width: 7,
                 ),
-                const Expanded(
+                Expanded(
                     child: Text(
-                  '27/12/2001 aaaaaaaa aaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaaaa aaaaaaaaaaaa aaaaaaa',
+                  msg['text'],
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,

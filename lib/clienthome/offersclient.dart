@@ -259,6 +259,7 @@ class Offersclient extends StatelessWidget {
               CupitHome.get(context).dartSwitch ? Colors.black : Colors.white,
           depth: 0),
       onPressed: () {
+        CubitDetail.get(context).indexClient = 0;
         print(CupitHome.get(context)
             .allofferModel!
             .data!

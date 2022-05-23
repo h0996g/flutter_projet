@@ -114,6 +114,7 @@ class _FavoriteState extends State<Favorite> {
               CupitHome.get(context).dartSwitch ? Colors.black : Colors.white,
           depth: 0),
       onPressed: () {
+        CubitDetail.get(context).indexClient = 0;
         sendfav = {
           'offer_id':
               '${CubitDetail.get(context).getFavoritesmodel!.data!.offers[position].id}',
