@@ -29,6 +29,8 @@ class _FavoriteState extends State<Favorite> {
     // TODO: implement initState
     super.initState();
     CubitDetail.get(context).getFavorites();
+    
+
   }
 
   @override
@@ -37,7 +39,7 @@ class _FavoriteState extends State<Favorite> {
       builder: (BuildContext context, state) {
         return Scaffold(
           appBar: AppBar(
-            elevation: 15,
+            elevation: 10,
             title: Text(
               'Favorite',
               style: TextStyle(

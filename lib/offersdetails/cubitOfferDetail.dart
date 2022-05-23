@@ -48,6 +48,7 @@ class CubitDetail extends Cubit<DetailStates> {
     });
   }
 
+
   //--------------------modifier offre--------------
   //--------dropdown
 //   final items = [

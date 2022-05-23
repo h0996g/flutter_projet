@@ -17,13 +17,10 @@ class AddPost extends StatelessWidget {
             appBar: AppBar(
               elevation: 15,
               title: Text('Add Offer',
-                  style:
-                      //  TextStyle(
-                      //     color: CupitHome.get(context).dartSwitch
-                      //         ? Colors.white
-                      //         : Colors.black,
-                      //     fontSize: 34),
-                      Theme.of(context).textTheme.headline4),
+                  style:TextStyle(
+                  color: CupitHome.get(context).dartSwitch
+                  ? Colors.white
+                  : Colors.black,fontSize: 34),),
               actions: [
                 IconButton(
                     onPressed: () {
@@ -56,6 +53,14 @@ class AddPost extends StatelessWidget {
                               child: ButtonTheme(
                                 alignedDropdown: true,
                                 child: DropdownButton<String>(
+                                  style: TextStyle(
+                                      color: CupitHome.get(context).dartSwitch
+                                          ? Colors.white
+                                          : Colors.black),
+                                  dropdownColor:
+                                  CupitHome.get(context).dartSwitch
+                                      ? Colors.black
+                                      : Colors.white,
                                   isExpanded: true,
                                   hint: Text(
                                     'Vente',
@@ -89,6 +94,14 @@ class AddPost extends StatelessWidget {
                               child: ButtonTheme(
                                 alignedDropdown: true,
                                 child: DropdownButton<String>(
+                                  style: TextStyle(
+                                      color: CupitHome.get(context).dartSwitch
+                                          ? Colors.white
+                                          : Colors.black),
+                                  dropdownColor:
+                                  CupitHome.get(context).dartSwitch
+                                      ? Colors.black
+                                      : Colors.white,
                                   isExpanded: true,
                                   hint: Text(
                                     'Appartement',

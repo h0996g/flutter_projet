@@ -189,7 +189,7 @@ class Offerdetailclient extends StatelessWidget {
                                 child: Icon(
                                   Icons.favorite_sharp,
                                   color: CubitDetail.get(context).colorfav
-                                      ? Colors.red
+                                      ? Colors.redAccent
                                       : Colors.white,
                                   // color: CupitHome.get(context).dartSwitch
                                   //     ? Colors.white
@@ -206,7 +206,7 @@ class Offerdetailclient extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   return const DecoratedBox(
                                       decoration: BoxDecoration(
-                                          color: Colors.amber,
+                                          color: Colors.lightBlueAccent,
                                           shape: BoxShape.circle));
                                 },
                               );
