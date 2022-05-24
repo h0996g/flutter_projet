@@ -58,6 +58,15 @@ class GoodGetInfoUserState extends HomeStates {}
 
 class BaadGetInfoUserState extends HomeStates {}
 
+// --------------------------
+class AwalLocationState extends HomeStates {}
+
+class AwelModelState extends HomeStates {}
+
+class Setstatet3MapState extends HomeStates {}
+
+class CurrentLocationSetStatState extends HomeStates {}
+
 // class LoadingExState extends HomeStates {}
 // class ExistFavState extends HomeStates {}
 // class DoNotExState extends HomeStates {}

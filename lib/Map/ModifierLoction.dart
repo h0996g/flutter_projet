@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+// import 'dart:collection';
 
 import 'package:agence/home/cubitHome/cupit_home.dart';
 import 'package:agence/home/cubitHome/homeStates.dart';
@@ -15,31 +16,30 @@ import 'location.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 
-class GetLocationAgence extends StatefulWidget {
-  final int position;
-  GetLocationAgence({Key? key, required this.position}) : super(key: key);
+class ModifierLocation extends StatefulWidget {
+  final position;
+  const ModifierLocation({Key? key, required this.position}) : super(key: key);
 
   @override
-  State<GetLocationAgence> createState() => _GetLocationAgenceState(position);
+  State<ModifierLocation> createState() => _ModifierLocationState(position);
 }
 
-class _GetLocationAgenceState extends State<GetLocationAgence> {
+class _ModifierLocationState extends State<ModifierLocation> {
   int position;
-  _GetLocationAgenceState(this.position);
-
+  _ModifierLocationState(this.position);
   Completer<GoogleMapController> _controller = Completer();
+
   Set<Marker> _markers = {};
   BitmapDescriptor? _locationIcon;
 
   @override
   void initState() {
-    CupitHome.get(context).awelModel(
-        CupitHome.get(context).allofferModel!.data!.offers[position].latitude,
-        CupitHome.get(context).allofferModel!.data!.offers[position].longitude);
-    CupitHome.get(context).currentLocationSetStat(
-        CupitHome.get(context).initialCameraPosition!.target);
+    CupitHome.get(context).awelModel(3.6, 6.433);
+    CupitHome.get(context).currentLocation =
+        CupitHome.get(context).initialCameraPosition!.target;
     _buildMarkerFromAssets();
     _setMarker(CupitHome.get(context).currentLocation!);
+
     super.initState();
   }
 
@@ -54,36 +54,44 @@ class _GetLocationAgenceState extends State<GetLocationAgence> {
                   onPressed: _showSearchDialog, icon: const Icon(Icons.search))
             ],
           ),
-          body: Stack(
-            alignment: Alignment.center,
-            children: [
-              GoogleMap(
-                markers: _markers,
-                initialCameraPosition:
-                    CupitHome.get(context).initialCameraPosition!,
-                mapType: MapType.normal,
-                onMapCreated: (GoogleMapController googleMapController) async {
-                  _controller.complete(googleMapController);
-                },
-                onCameraMove: (CameraPosition newpos) {
-                  // setState(() {
-                  //   CupitHome.get(context).currentLocation = newpos.target;
-                  // });
-                  CupitHome.get(context).setstatet3Map(newpos);
-                },
-              ),
-              SizedBox(
-                width: 40,
-                height: 40,
-                child: Image.asset('assets/images/location_icon.png'),
-              )
-            ],
+          body: GoogleMap(
+            markers: _markers,
+            initialCameraPosition:
+                CupitHome.get(context).initialCameraPosition!,
+            mapType: MapType.normal,
+            onMapCreated: (GoogleMapController googleMapController) {
+              _controller.complete(googleMapController);
+            },
+            onCameraMove: (CameraPosition newpos) {
+              setState(() {
+                CupitHome.get(context).currentLocation = newpos.target;
+              });
+            },
           ),
           floatingActionButton: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               FloatingActionButton(
-                heroTag: "mylocation",
+                heroTag: "delete marke",
+                onPressed: () {
+                  // print(CupitHome.get(context).currentLocation);
+                  setState(() {
+                    _markers = {};
+                    CupitHome.get(context).currentLocation = null;
+                  });
+                },
+                child: const Icon(Icons.delete),
+              ),
+              FloatingActionButton(
+                heroTag: "marke",
+                onPressed: () {
+                  _setMarker(CupitHome.get(context).currentLocation!);
+                  print(CupitHome.get(context).currentLocation);
+                },
+                child: const Icon(Icons.location_on),
+              ),
+              FloatingActionButton(
+                heroTag: "go to may location",
                 onPressed: () => _getMyLocation(),
                 child: const Icon(Icons.gps_fixed),
               ),

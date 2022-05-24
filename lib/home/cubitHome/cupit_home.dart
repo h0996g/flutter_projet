@@ -29,9 +29,15 @@ class CupitHome extends Cubit<HomeStates> {
 
   static CupitHome get(context) => BlocProvider.of(context);
   List<Widget> body = [const Offers(), AddPost(), const Setting()];
-
+// --------------------------------------------- Map-------------------------
   LatLng? currentLocation;
   CameraPosition? initialCameraPosition;
+
+  void setstatet3Map(CameraPosition newpos) {
+    currentLocation = newpos.target;
+    emit(Setstatet3MapState());
+  }
+
   void awalLocation(LatLng? currentLocation) {
     if (currentLocation == null) {
       initialCameraPosition = const CameraPosition(
@@ -46,6 +52,7 @@ class CupitHome extends Cubit<HomeStates> {
         zoom: 14.4746,
       );
     }
+    emit(AwalLocationState());
   }
 
   void awelModel(double? latitude, double? longitude) {
@@ -62,6 +69,12 @@ class CupitHome extends Cubit<HomeStates> {
         zoom: 14.4746,
       );
     }
+    emit(AwelModelState());
+  }
+
+  void currentLocationSetStat(LatLng kk) {
+    currentLocation = initialCameraPosition!.target;
+    emit(CurrentLocationSetStatState());
   }
 
   // int position = 0;
@@ -443,7 +456,9 @@ class CupitHome extends Cubit<HomeStates> {
 
       offerAgencModel = DataOffer.fromJson(jsonResponse);
       print('ook');
-      // print(dataOfferModel!.data!.offers[0].papiers);
+      // print(offerAgencModel!.data!.offers[0].address);
+      // print(offerAgencModel!.data!.offers[0].latitude);
+      // print(offerAgencModel!.data!.offers[0].longitude);
       emit(GoodGetOffersAgence());
     }).catchError((e) {
       print(e.toString());

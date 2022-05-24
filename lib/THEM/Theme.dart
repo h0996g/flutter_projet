@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 
 ThemeData light_theme() => ThemeData(
-      // visualDensity: VisualDensity.adaptivePlatformDensity,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: Colors.blue,
       ),
@@ -27,7 +27,7 @@ ThemeData light_theme() => ThemeData(
     );
 
 ThemeData dark_theme() => ThemeData(
-      // visualDensity: VisualDensity.adaptivePlatformDensity,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: Colors.black,
       ),

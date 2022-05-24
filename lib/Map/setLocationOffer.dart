@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+
 // import 'dart:collection';
 
 import 'package:agence/home/cubitHome/cupit_home.dart';
@@ -44,8 +45,11 @@ class _SetLocationOfferState extends State<SetLocationOffer> {
     //   zoom: 14.4746,
     // );
     CupitHome.get(context).awalLocation(CupitHome.get(context).currentLocation);
-    CupitHome.get(context).currentLocation =
-        CupitHome.get(context).initialCameraPosition!.target;
+    CupitHome.get(context).currentLocationSetStat(
+        CupitHome.get(context).initialCameraPosition!.target);
+
+    // CupitHome.get(context).currentLocation =
+    //     CupitHome.get(context).initialCameraPosition!.target;
     _buildMarkerFromAssets();
     super.initState();
   }
@@ -73,9 +77,10 @@ class _SetLocationOfferState extends State<SetLocationOffer> {
                   _controller.complete(googleMapController);
                 },
                 onCameraMove: (CameraPosition newpos) {
-                  setState(() {
-                    CupitHome.get(context).currentLocation = newpos.target;
-                  });
+                  // setState(() {
+                  //   CupitHome.get(context).currentLocation = newpos.target;
+                  // });
+                  CupitHome.get(context).setstatet3Map(newpos);
                 },
               ),
               SizedBox(
@@ -101,15 +106,6 @@ class _SetLocationOfferState extends State<SetLocationOffer> {
                 onPressed: () {
                   _setMarker(CupitHome.get(context).currentLocation!);
                   print(CupitHome.get(context).currentLocation);
-                  // var k;
-                  // k = CupitHome.get(context).currentLocation!.toJson();
-                  // print(k);
-                  // List<dynamic> ll = [];
-                  // ll[0] = CupitHome.get(context).currentLocation!.latitude;
-                  // ll[0] = CupitHome.get(context).currentLocation!.longitude;
-                  // print(ll);
-                  // ll[1] = k[1].toString();
-                  // print(k);
                 },
                 child: const Icon(Icons.location_on),
               ),
