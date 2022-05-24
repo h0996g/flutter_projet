@@ -30,6 +30,8 @@ class OffersModel {
   List? conditionDePaiment;
   List? specification;
   List? papiers;
+  double? longitude;
+  double? latitude;
   String? createdAt;
   String? updatedAt;
 
@@ -49,6 +51,8 @@ class OffersModel {
     conditionDePaiment = json['condition_de_paiment'];
     specification = json['specification'];
     papiers = json['papiers'];
+    longitude = json['longitude'];
+    latitude = json['latitude'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }

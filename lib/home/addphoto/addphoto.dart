@@ -217,7 +217,11 @@ class Addphoto extends StatelessWidget {
                             'specification': jsonEncode(
                                 CupitHome.get(context).specificationListhttp),
                             'papiers': jsonEncode(
-                                CupitHome.get(context).papiersListhttp)
+                                CupitHome.get(context).papiersListhttp),
+                            'latitude':
+                                '${CupitHome.get(context).currentLocation!.latitude}',
+                            'longitude':
+                                '${CupitHome.get(context).currentLocation!.longitude}'
                           };
                           CupitHome.get(context)
                               .savePhotoBd(data: sendinfoOffer)

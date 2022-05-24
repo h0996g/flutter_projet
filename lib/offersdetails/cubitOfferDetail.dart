@@ -5,6 +5,7 @@ import 'dart:convert' as convert;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 
@@ -16,6 +17,7 @@ import 'CubitOfferDetailState.dart';
 class CubitDetail extends Cubit<DetailStates> {
   CubitDetail() : super(InitialDetailState());
   static CubitDetail get(context) => BlocProvider.of(context);
+  LatLng? currentLocation;
 
   int indexAgence = 0;
   int indexClient = 0;

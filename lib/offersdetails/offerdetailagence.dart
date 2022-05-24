@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../Map/GetLocationAgence.dart';
 import '../home/cubitHome/cupit_home.dart';
 import '../home/home.dart';
 import '../shared/components/components.dart';
@@ -123,7 +124,20 @@ class Offerdetailagence extends StatelessWidget {
                   top: 45,
                   right: -5,
                   child: MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      // print('ook');
+                      print(CupitHome.get(context)
+                          .offerAgencModel!
+                          .data!
+                          .offers[position]
+                          .latitude);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => GetLocationAgence(
+                                    position: position,
+                                  )));
+                    },
                     shape: const CircleBorder(),
                     color: CupitHome.get(context).dartSwitch
                         ? Colors.black

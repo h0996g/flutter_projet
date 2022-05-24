@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.agence">
+
+   <uses-permission android:name="android.permission.INTERNET"/>      
+   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <application
         android:label="agence"
         android:name="${applicationName}"
@@ -8,6 +11,8 @@
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyC2PYwGhCT3WuXw7dzxHUAtQtGQYzZphgo"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

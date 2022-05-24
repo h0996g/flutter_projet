@@ -7,6 +7,7 @@ import 'package:agence/Model/AfficheOffer.dart';
 import 'package:agence/login/other/cachhelper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
@@ -28,6 +29,40 @@ class CupitHome extends Cubit<HomeStates> {
 
   static CupitHome get(context) => BlocProvider.of(context);
   List<Widget> body = [const Offers(), AddPost(), const Setting()];
+
+  LatLng? currentLocation;
+  CameraPosition? initialCameraPosition;
+  void awalLocation(LatLng? currentLocation) {
+    if (currentLocation == null) {
+      initialCameraPosition = const CameraPosition(
+        target: const LatLng(33.515343, 36.289590),
+        // target: LatLng(36.31789608941112, 6.615674905478954),
+        zoom: 14.4746,
+      );
+    } else {
+      initialCameraPosition = CameraPosition(
+        target: LatLng(currentLocation.latitude, currentLocation.longitude),
+        // target: LatLng(36.31789608941112, 6.615674905478954),
+        zoom: 14.4746,
+      );
+    }
+  }
+
+  void awelModel(double? latitude, double? longitude) {
+    if (latitude == null && longitude == null) {
+      initialCameraPosition = const CameraPosition(
+        target: const LatLng(33.515343, 36.289590),
+        // target: LatLng(36.31789608941112, 6.615674905478954),
+        zoom: 14.4746,
+      );
+    } else {
+      initialCameraPosition = CameraPosition(
+        target: LatLng(latitude!, longitude!),
+        // target: LatLng(36.31789608941112, 6.615674905478954),
+        zoom: 14.4746,
+      );
+    }
+  }
 
   // int position = 0;
 
