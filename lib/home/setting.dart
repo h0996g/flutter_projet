@@ -30,10 +30,11 @@ class Setting extends StatelessWidget {
             elevation: 10,
             title: Text(
               'Profile',
-              style:TextStyle(
+              style: TextStyle(
                   color: CupitHome.get(context).dartSwitch
                       ? Colors.white
-                      : Colors.black,fontSize: 34),
+                      : Colors.black,
+                  fontSize: 34),
             ),
             actions: [
               IconButton(
@@ -136,20 +137,18 @@ class Setting extends StatelessWidget {
                         child: Row(
                           children: [
                             const Icon(
-                              Icons.home,
+                              Icons.real_estate_agent_outlined,
                               color: Colors.white,
                             ),
                             const SizedBox(
                               width: 10,
                             ),
                             Text(
-                              "${CupitHome.get(context).getinfouserModel!.agence!.address}",
+                              "${CupitHome.get(context).getinfouserModel!.name}",
                               maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 16),
-                            ),
-                            // SizedBox(width: 10,)
+                            )
                           ],
                         ),
                         height: 50,
@@ -168,18 +167,20 @@ class Setting extends StatelessWidget {
                         child: Row(
                           children: [
                             const Icon(
-                              Icons.real_estate_agent_outlined,
+                              Icons.home,
                               color: Colors.white,
                             ),
                             const SizedBox(
                               width: 10,
                             ),
                             Text(
-                              "${CupitHome.get(context).getinfouserModel!.name}",
+                              "${CupitHome.get(context).getinfouserModel!.agence!.address}",
                               maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 16),
-                            )
+                            ),
+                            // SizedBox(width: 10,)
                           ],
                         ),
                         height: 50,

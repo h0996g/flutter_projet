@@ -340,6 +340,9 @@ class _ModifierprofileState extends State<Modifierprofile> {
                                 splashColor: Colors.transparent,
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
+                                    print(namemodController.text);
+                                    print(numbermodController.text);
+                                    print(addressemodController.text);
                                     sendinfoagencemodifier = {
                                       'name': namemodController.text,
 
