@@ -14,17 +14,17 @@ import 'location.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 
-class GetLocationAgence extends StatefulWidget {
+class GetLocationClient extends StatefulWidget {
   final int position;
-  GetLocationAgence({Key? key, required this.position}) : super(key: key);
+  GetLocationClient({Key? key, required this.position}) : super(key: key);
 
   @override
-  State<GetLocationAgence> createState() => _GetLocationAgenceState(position);
+  State<GetLocationClient> createState() => _GetLocationClientState(position);
 }
 
-class _GetLocationAgenceState extends State<GetLocationAgence> {
+class _GetLocationClientState extends State<GetLocationClient> {
   int position;
-  _GetLocationAgenceState(this.position);
+  _GetLocationClientState(this.position);
 
   Completer<GoogleMapController> _controller = Completer();
   Set<Marker> _markers = {};
@@ -45,12 +45,12 @@ class _GetLocationAgenceState extends State<GetLocationAgence> {
     initialCameraPosition = CameraPosition(
       target: LatLng(
           CupitHome.get(context)
-              .offerAgencModel!
+              .allofferModel!
               .data!
               .offers[position]
               .latitude!,
           CupitHome.get(context)
-              .offerAgencModel!
+              .allofferModel!
               .data!
               .offers[position]
               .longitude!),
@@ -62,13 +62,9 @@ class _GetLocationAgenceState extends State<GetLocationAgence> {
     //// //     CupitHome.get(context).initialCameraPosition!.target);
     _buildMarkerFromAssets();
     _setMarker(LatLng(
+        CupitHome.get(context).allofferModel!.data!.offers[position].latitude!,
         CupitHome.get(context)
-            .offerAgencModel!
-            .data!
-            .offers[position]
-            .latitude!,
-        CupitHome.get(context)
-            .offerAgencModel!
+            .allofferModel!
             .data!
             .offers[position]
             .longitude!));
@@ -193,7 +189,7 @@ class _GetLocationAgenceState extends State<GetLocationAgence> {
       infoWindow: InfoWindow(
           title: "Title",
           snippet:
-              "${CupitHome.get(context).offerAgencModel!.data!.offers[position].latitude!}, ${CupitHome.get(context).offerAgencModel!.data!.offers[position].latitude!}"),
+              "${CupitHome.get(context).allofferModel!.data!.offers[position].latitude!}, ${CupitHome.get(context).allofferModel!.data!.offers[position].latitude!}"),
     );
     _markers.add(newMarker);
 

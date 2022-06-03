@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:agence/Map/GetLocationAgence.dart';
+import 'package:agence/Map/GetLocationClient.dart';
 import 'package:agence/Model/AfficheOffer.dart';
 import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/offersdetails/CubitOfferDetailState.dart';
@@ -229,7 +231,13 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                           ),
                           MaterialButton(
                             minWidth: 0,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => GetLocationClient(
+                                          position: widget.position!)));
+                            },
                             shape: const CircleBorder(),
                             color: CupitHome.get(context).dartSwitch
                                 ? const Color(0xff8d8d8d)

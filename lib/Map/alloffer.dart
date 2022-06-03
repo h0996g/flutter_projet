@@ -14,20 +14,18 @@ import 'location.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 
-class GetLocationAgence extends StatefulWidget {
-  final int position;
-  GetLocationAgence({Key? key, required this.position}) : super(key: key);
+class AllOffersMap extends StatefulWidget {
+  AllOffersMap({Key? key}) : super(key: key);
 
   @override
-  State<GetLocationAgence> createState() => _GetLocationAgenceState(position);
+  State<AllOffersMap> createState() => _AllOffersMapState();
 }
 
-class _GetLocationAgenceState extends State<GetLocationAgence> {
-  int position;
-  _GetLocationAgenceState(this.position);
+class _AllOffersMapState extends State<AllOffersMap> {
+  _AllOffersMapState();
 
   Completer<GoogleMapController> _controller = Completer();
-  Set<Marker> _markers = {};
+  Set<Marker>? _markers;
   BitmapDescriptor? _locationIcon;
   LatLng? currentLocation;
 
@@ -42,36 +40,21 @@ class _GetLocationAgenceState extends State<GetLocationAgence> {
     // CupitHome.get(context).awelModel(
     //     CupitHome.get(context).allofferModel!.data!.offers[position].latitude,
     //     CupitHome.get(context).allofferModel!.data!.offers[position].longitude);
-    initialCameraPosition = CameraPosition(
-      target: LatLng(
-          CupitHome.get(context)
-              .offerAgencModel!
-              .data!
-              .offers[position]
-              .latitude!,
-          CupitHome.get(context)
-              .offerAgencModel!
-              .data!
-              .offers[position]
-              .longitude!),
-      // target: LatLng(36.31789608941112, 6.615674905478954),
-      zoom: initialCameraPosition.zoom,
-    );
+    // initialCameraPosition = CameraPosition(
+    //   target: LatLng(
+    //       CupitHome.get(context).allofferModel!.data!.offers[0].latitude!,
+    //       CupitHome.get(context).allofferModel!.data!.offers[0].longitude!),
+    //   // target: LatLng(36.31789608941112, 6.615674905478954),
+    //   zoom: initialCameraPosition.zoom,
+    // );
     currentLocation = initialCameraPosition.target;
     //// // CupitHome.get(context).currentLocationSetStat(
     //// //     CupitHome.get(context).initialCameraPosition!.target);
     _buildMarkerFromAssets();
-    _setMarker(LatLng(
-        CupitHome.get(context)
-            .offerAgencModel!
-            .data!
-            .offers[position]
-            .latitude!,
-        CupitHome.get(context)
-            .offerAgencModel!
-            .data!
-            .offers[position]
-            .longitude!));
+    _markers = CupitHome.get(context).mmap;
+    // _setMarker(LatLng(
+    //     CupitHome.get(context).allofferModel!.data!.offers[0].latitude!,
+    //     CupitHome.get(context).allofferModel!.data!.offers[0].longitude!));
     super.initState();
   }
 
@@ -90,7 +73,7 @@ class _GetLocationAgenceState extends State<GetLocationAgence> {
             alignment: Alignment.center,
             children: [
               GoogleMap(
-                markers: _markers,
+                markers: _markers!,
                 initialCameraPosition: initialCameraPosition,
                 mapType: MapType.normal,
                 onMapCreated: (GoogleMapController googleMapController) async {
@@ -182,21 +165,20 @@ class _GetLocationAgenceState extends State<GetLocationAgence> {
     }
   }
 
-  void _setMarker(LatLng _location) {
-    _markers = {};
+  // void _setMarker(LatLng _location) {
+  //   // _markers = CupitHome.get(context).mmap;
 
-    Marker newMarker = Marker(
-      markerId: MarkerId(_location.toString()),
-      icon: BitmapDescriptor.defaultMarker,
-      // icon: _locationIcon,
-      position: _location,
-      infoWindow: InfoWindow(
-          title: "Title",
-          snippet:
-              "${CupitHome.get(context).offerAgencModel!.data!.offers[position].latitude!}, ${CupitHome.get(context).offerAgencModel!.data!.offers[position].latitude!}"),
-    );
-    _markers.add(newMarker);
+  //   Marker newMarker = Marker(
+  //     markerId: MarkerId(_location.toString()),
+  //     icon: BitmapDescriptor.defaultMarker,
+  //     // icon: _locationIcon,
+  //     position: _location,
+  //     infoWindow: InfoWindow(
+  //       title: "Title",
+  //     ),
+  //   );
+  //   _markers.add(newMarker);
 
-    setState(() {});
-  }
+  //   setState(() {});
+  // }
 }

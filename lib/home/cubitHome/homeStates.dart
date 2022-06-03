@@ -54,6 +54,10 @@ class GoodGetAllOffers extends HomeStates {}
 
 class BadGetAlltOffers extends HomeStates {}
 
+class GoodGetAllOffersMap extends HomeStates {}
+
+class BadGetAlltOffersMap extends HomeStates {}
+
 class GoodGetInfoUserState extends HomeStates {}
 
 class BaadGetInfoUserState extends HomeStates {}

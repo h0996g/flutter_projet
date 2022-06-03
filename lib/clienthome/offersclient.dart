@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:agence/Map/alloffer.dart';
 import 'package:agence/Model/AfficheOffer.dart';
 import 'package:agence/clienthome/search.dart';
 import 'package:agence/offersdetails/cubitOfferDetail.dart';
@@ -52,8 +53,11 @@ class Offersclient extends StatelessWidget {
       builder: (BuildContext context, state) {
         return Scaffold(
           floatingActionButton: FloatingActionButton(
-            onPressed: () {
+            onPressed: () async {
+              await CupitHome.get(context).allmap();
               // Navigator.push(context, MaterialPageRoute(builder: (context) =>  Navbar()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AllOffersMap()));
             },
             child: Icon(
               Icons.place,
