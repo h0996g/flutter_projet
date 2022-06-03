@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-// import 'dart:collection';
 
 import 'package:agence/home/cubitHome/cupit_home.dart';
 import 'package:agence/home/cubitHome/homeStates.dart';
@@ -17,8 +16,8 @@ import 'package:google_maps_webservice/places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 
 class ModifierLocation extends StatefulWidget {
-  final position;
-  const ModifierLocation({Key? key, required this.position}) : super(key: key);
+  final int position;
+  ModifierLocation({Key? key, required this.position}) : super(key: key);
 
   @override
   State<ModifierLocation> createState() => _ModifierLocationState(position);
@@ -27,19 +26,53 @@ class ModifierLocation extends StatefulWidget {
 class _ModifierLocationState extends State<ModifierLocation> {
   int position;
   _ModifierLocationState(this.position);
-  Completer<GoogleMapController> _controller = Completer();
 
+  Completer<GoogleMapController> _controller = Completer();
   Set<Marker> _markers = {};
   BitmapDescriptor? _locationIcon;
+  LatLng? currentLocation;
+
+  CameraPosition initialCameraPosition = const CameraPosition(
+    // target: LatLng(latitude!, longitude!),
+    target: LatLng(36.31789608941112, 6.615674905478954),
+    zoom: 14.4746,
+  );
 
   @override
   void initState() {
-    // CupitHome.get(context).awelModel(3.6, 6.433);//
-    CupitHome.get(context).currentLocation =
-        CupitHome.get(context).initialCameraPosition!.target;
+    // CupitHome.get(context).awelModel(
+    //     CupitHome.get(context).allofferModel!.data!.offers[position].latitude,
+    //     CupitHome.get(context).allofferModel!.data!.offers[position].longitude);
+    initialCameraPosition = CameraPosition(
+      target: LatLng(
+          CupitHome.get(context)
+              .offerAgencModel!
+              .data!
+              .offers[position]
+              .latitude!,
+          CupitHome.get(context)
+              .offerAgencModel!
+              .data!
+              .offers[position]
+              .longitude!),
+      // target: LatLng(36.31789608941112, 6.615674905478954),
+      zoom: initialCameraPosition.zoom,
+    );
+    currentLocation = initialCameraPosition.target;
+    //// // CupitHome.get(context).currentLocationSetStat(
+    //// //     CupitHome.get(context).initialCameraPosition!.target);
     _buildMarkerFromAssets();
-    _setMarker(CupitHome.get(context).currentLocation!);
-
+    _setMarker(LatLng(
+        CupitHome.get(context)
+            .offerAgencModel!
+            .data!
+            .offers[position]
+            .latitude!,
+        CupitHome.get(context)
+            .offerAgencModel!
+            .data!
+            .offers[position]
+            .longitude!));
     super.initState();
   }
 
@@ -54,36 +87,46 @@ class _ModifierLocationState extends State<ModifierLocation> {
                   onPressed: _showSearchDialog, icon: const Icon(Icons.search))
             ],
           ),
-          body: GoogleMap(
-            markers: _markers,
-            initialCameraPosition:
-                CupitHome.get(context).initialCameraPosition!,
-            mapType: MapType.normal,
-            onMapCreated: (GoogleMapController googleMapController) {
-              _controller.complete(googleMapController);
-            },
-            onCameraMove: (CameraPosition newpos) {
-              setState(() {
-                CupitHome.get(context).currentLocation = newpos.target;
-              });
-            },
+          body: Stack(
+            alignment: Alignment.center,
+            children: [
+              GoogleMap(
+                markers: _markers,
+                initialCameraPosition: initialCameraPosition,
+                mapType: MapType.normal,
+                onMapCreated: (GoogleMapController googleMapController) async {
+                  _controller.complete(googleMapController);
+                },
+                onCameraMove: (CameraPosition newpos) {
+                  // setState(() {
+                  //   CupitHome.get(context).currentLocation = newpos.target;
+                  // });
+                  setState(() {
+                    CupitHome.get(context).currentLocation = newpos.target;
+                  });
+                  //// // CupitHome.get(context).setstatet3Map(newpos);
+                },
+              ),
+              SizedBox(
+                width: 40,
+                height: 40,
+                child: Image.asset('assets/images/location_icon.png'),
+              )
+            ],
           ),
           floatingActionButton: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               FloatingActionButton(
-                heroTag: "delete marke",
+                heroTag: "btn1",
                 onPressed: () {
-                  // print(CupitHome.get(context).currentLocation);
-                  setState(() {
-                    _markers = {};
-                    CupitHome.get(context).currentLocation = null;
-                  });
+                  print(CupitHome.get(context).currentLocation);
+                  // LatLng(38.52900208591146, -98.54919254779816), currentLocation);
                 },
-                child: const Icon(Icons.delete),
+                child: const Icon(Icons.settings_ethernet_rounded),
               ),
               FloatingActionButton(
-                heroTag: "marke",
+                heroTag: "btn2",
                 onPressed: () {
                   _setMarker(CupitHome.get(context).currentLocation!);
                   print(CupitHome.get(context).currentLocation);
@@ -91,7 +134,7 @@ class _ModifierLocationState extends State<ModifierLocation> {
                 child: const Icon(Icons.location_on),
               ),
               FloatingActionButton(
-                heroTag: "go to may location",
+                heroTag: "mylocation",
                 onPressed: () => _getMyLocation(),
                 child: const Icon(Icons.gps_fixed),
               ),
@@ -164,10 +207,11 @@ class _ModifierLocationState extends State<ModifierLocation> {
       icon: BitmapDescriptor.defaultMarker,
       // icon: _locationIcon,
       position: _location,
-      infoWindow: InfoWindow(
-          title: "Title",
-          snippet:
-              "${CupitHome.get(context).currentLocation!.latitude}, ${CupitHome.get(context).currentLocation!.longitude}"),
+      infoWindow: const InfoWindow(
+        title: "Title",
+        // snippet:
+        //     "${CupitHome.get(context).offerAgencModel!.data!.offers[position].latitude!}, ${CupitHome.get(context).offerAgencModel!.data!.offers[position].latitude!}"
+      ),
     );
     _markers.add(newMarker);
 

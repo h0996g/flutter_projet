@@ -1,3 +1,4 @@
+import 'package:agence/Map/ModifierLoction.dart';
 import 'package:agence/home/cubitHome/homeStates.dart';
 import 'package:agence/offersdetails/modifieroffrephoto.dart';
 import 'package:flutter/material.dart';
@@ -101,9 +102,9 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
                                           ? Colors.white
                                           : Colors.black),
                                   dropdownColor:
-                                  CupitHome.get(context).dartSwitch
-                                      ? Colors.black
-                                      : Colors.white,
+                                      CupitHome.get(context).dartSwitch
+                                          ? Colors.black
+                                          : Colors.white,
                                   isExpanded: true,
                                   hint: Text(
                                     'Vente',
@@ -142,9 +143,9 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
                                           ? Colors.white
                                           : Colors.black),
                                   dropdownColor:
-                                  CupitHome.get(context).dartSwitch
-                                      ? Colors.black
-                                      : Colors.white,
+                                      CupitHome.get(context).dartSwitch
+                                          ? Colors.black
+                                          : Colors.white,
                                   isExpanded: true,
                                   hint: Text(
                                     'Appartement',
@@ -478,7 +479,13 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
                               ),
                             ),
                             child: MaterialButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ModifierLocation(
+                                            position: position)));
+                              },
                               child: Row(
                                 children: [
                                   const SizedBox(

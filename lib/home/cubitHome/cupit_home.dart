@@ -31,7 +31,7 @@ class CupitHome extends Cubit<HomeStates> {
   List<Widget> body = [const Offers(), AddPost(), const Setting()];
 // --------------------------------------------- Map-------------------------
   LatLng? currentLocation;
-  CameraPosition? initialCameraPosition;
+  // CameraPosition? initialCameraPosition;
 
   // void setstatet3Map(CameraPosition newpos) {
   //   currentLocation = newpos.target;
@@ -410,6 +410,7 @@ class CupitHome extends Cubit<HomeStates> {
     descriptionController = TextEditingController();
     addressController = TextEditingController();
     priceController = TextEditingController();
+    currentLocation = null;
 
     paymentVar = paiment
         .map((payment) =>
