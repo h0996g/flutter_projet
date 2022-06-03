@@ -34,8 +34,12 @@ class _SetLocationOfferState extends State<SetLocationOffer> {
   // );
   Set<Marker> _markers = {};
   BitmapDescriptor? _locationIcon;
-  // LatLng? currentLocation;
-  // CameraPosition? initialCameraPosition;
+  LatLng? currentLocation;
+  CameraPosition initialCameraPosition = const CameraPosition(
+    // target: LatLng(currentLocation.latitude, currentLocation.longitude),
+    target: LatLng(36.31789608941112, 6.615674905478954),
+    zoom: 14.4746,
+  );
   // var myMarkers = HashSet<Marker>();
   @override
   void initState() {
@@ -44,9 +48,15 @@ class _SetLocationOfferState extends State<SetLocationOffer> {
     //   // target: LatLng(36.31789608941112, 6.615674905478954),
     //   zoom: 14.4746,
     // );
-    CupitHome.get(context).awalLocation(CupitHome.get(context).currentLocation);
-    CupitHome.get(context).currentLocationSetStat(
-        CupitHome.get(context).initialCameraPosition!.target);
+    // initialCameraPosition = CameraPosition(
+    //   target: LatLng(currentLocation!.latitude, currentLocation!.longitude),
+    //   // target: LatLng(36.31789608941112, 6.615674905478954),
+    //   zoom: 14.4746,
+    // );
+    // CupitHome.get(context).awalLocation(CupitHome.get(context).currentLocation);
+    // CupitHome.get(context).currentLocationSetStat(
+    //     CupitHome.get(context).initialCameraPosition!.target);
+    currentLocation = initialCameraPosition.target;
 
     // CupitHome.get(context).currentLocation =
     //     CupitHome.get(context).initialCameraPosition!.target;
@@ -70,8 +80,7 @@ class _SetLocationOfferState extends State<SetLocationOffer> {
             children: [
               GoogleMap(
                 markers: _markers,
-                initialCameraPosition:
-                    CupitHome.get(context).initialCameraPosition!,
+                initialCameraPosition: initialCameraPosition,
                 mapType: MapType.normal,
                 onMapCreated: (GoogleMapController googleMapController) async {
                   _controller.complete(googleMapController);
@@ -80,7 +89,10 @@ class _SetLocationOfferState extends State<SetLocationOffer> {
                   // setState(() {
                   //   CupitHome.get(context).currentLocation = newpos.target;
                   // });
-                  CupitHome.get(context).setstatet3Map(newpos);
+                  // CupitHome.get(context).setstatet3Map(newpos);
+                  setState(() {
+                    CupitHome.get(context).currentLocation = newpos.target;
+                  });
                 },
               ),
               SizedBox(

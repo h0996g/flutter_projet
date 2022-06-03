@@ -34,7 +34,7 @@ class _ModifierLocationState extends State<ModifierLocation> {
 
   @override
   void initState() {
-    CupitHome.get(context).awelModel(3.6, 6.433);
+    // CupitHome.get(context).awelModel(3.6, 6.433);//
     CupitHome.get(context).currentLocation =
         CupitHome.get(context).initialCameraPosition!.target;
     _buildMarkerFromAssets();

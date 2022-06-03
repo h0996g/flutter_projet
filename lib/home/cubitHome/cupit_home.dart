@@ -33,49 +33,49 @@ class CupitHome extends Cubit<HomeStates> {
   LatLng? currentLocation;
   CameraPosition? initialCameraPosition;
 
-  void setstatet3Map(CameraPosition newpos) {
-    currentLocation = newpos.target;
-    emit(Setstatet3MapState());
-  }
+  // void setstatet3Map(CameraPosition newpos) {
+  //   currentLocation = newpos.target;
+  //   emit(Setstatet3MapState());
+  // }
 
-  void awalLocation(LatLng? currentLocation) {
-    if (currentLocation == null) {
-      initialCameraPosition = const CameraPosition(
-        target: const LatLng(33.515343, 36.289590),
-        // target: LatLng(36.31789608941112, 6.615674905478954),
-        zoom: 14.4746,
-      );
-    } else {
-      initialCameraPosition = CameraPosition(
-        target: LatLng(currentLocation.latitude, currentLocation.longitude),
-        // target: LatLng(36.31789608941112, 6.615674905478954),
-        zoom: 14.4746,
-      );
-    }
-    emit(AwalLocationState());
-  }
+  // void awalLocation(LatLng? currentLocation) {
+  //   if (currentLocation == null) {
+  //     initialCameraPosition = const CameraPosition(
+  //       target: const LatLng(33.515343, 36.289590),
+  //       // target: LatLng(36.31789608941112, 6.615674905478954),
+  //       zoom: 14.4746,
+  //     );
+  //   } else {
+  //     initialCameraPosition = CameraPosition(
+  //       target: LatLng(currentLocation.latitude, currentLocation.longitude),
+  //       // target: LatLng(36.31789608941112, 6.615674905478954),
+  //       zoom: 14.4746,
+  //     );
+  //   }
+  //   emit(AwalLocationState());
+  // }
 
-  void awelModel(double? latitude, double? longitude) {
-    if (latitude == null && longitude == null) {
-      initialCameraPosition = const CameraPosition(
-        target: const LatLng(33.515343, 36.289590),
-        // target: LatLng(36.31789608941112, 6.615674905478954),
-        zoom: 14.4746,
-      );
-    } else {
-      initialCameraPosition = CameraPosition(
-        target: LatLng(latitude!, longitude!),
-        // target: LatLng(36.31789608941112, 6.615674905478954),
-        zoom: 14.4746,
-      );
-    }
-    emit(AwelModelState());
-  }
+  // void awelModel(double? latitude, double? longitude) {
+  //   if (latitude == null && longitude == null) {
+  //     initialCameraPosition = const CameraPosition(
+  //       target: const LatLng(33.515343, 36.289590),
+  //       // target: LatLng(36.31789608941112, 6.615674905478954),
+  //       zoom: 14.4746,
+  //     );
+  //   } else {
+  //     initialCameraPosition = CameraPosition(
+  //       target: LatLng(latitude!, longitude!),
+  //       // target: LatLng(36.31789608941112, 6.615674905478954),
+  //       zoom: 14.4746,
+  //     );
+  //   }
+  //   emit(AwelModelState());
+  // }
 
-  void currentLocationSetStat(LatLng kk) {
-    currentLocation = initialCameraPosition!.target;
-    emit(CurrentLocationSetStatState());
-  }
+  // void currentLocationSetStat(LatLng kk) {
+  //   currentLocation = initialCameraPosition!.target;
+  //   emit(CurrentLocationSetStatState());
+  // }
 
   // int position = 0;
 
