@@ -19,14 +19,18 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../home/cubitHome/cupit_home.dart';
 
 class Offerdetailclient extends StatefulWidget {
-  int? position;
-  Offerdetailclient({this.position});
+  final OffersModel model;
+  Offerdetailclient({required this.model});
 
   @override
-  State<Offerdetailclient> createState() => _OfferdetailclientState();
+  State<Offerdetailclient> createState() =>
+      _OfferdetailclientState(model: model);
 }
 
 class _OfferdetailclientState extends State<Offerdetailclient> {
+  OffersModel model;
+  _OfferdetailclientState({required this.model});
+
   var onbordingController = PageController();
 
   var msgController = TextEditingController();
@@ -78,12 +82,7 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                       // return Ala(models[index]);
 
                       List? k;
-                      k = CupitHome.get(context)
-                          .allofferModel!
-                          .data!
-                          .offers[widget.position!]
-                          .photo
-                          ?.map((e) {
+                      k = model.photo?.map((e) {
                         return base64Decode(e);
                       }).toList();
                       return Image(
@@ -92,12 +91,7 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                         fit: BoxFit.cover,
                       );
                     },
-                    itemCount: CupitHome.get(context)
-                        .allofferModel!
-                        .data!
-                        .offers[widget.position!]
-                        .photo!
-                        .length,
+                    itemCount: model.photo!.length,
                   ),
                 ),
                 Positioned(
@@ -127,12 +121,7 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                       alignment: Alignment.bottomCenter,
                       child: SmoothPageIndicator(
                           controller: onbordingController, // PageController
-                          count: CupitHome.get(context)
-                              .allofferModel!
-                              .data!
-                              .offers[widget.position!]
-                              .photo!
-                              .length,
+                          count: model.photo!.length,
                           effect: ScrollingDotsEffect(
                             dotColor: CupitHome.get(context).dartSwitch
                                 ? const Color(0xffb3b2b2)
@@ -180,7 +169,7 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                             width: 20,
                           ),
                           Text(
-                            "${CupitHome.get(context).allofferModel!.data!.offers[widget.position!].price} \$",
+                            "${model.price} \$",
                             style:
                                 Theme.of(context).textTheme.headline4?.copyWith(
                                       fontSize: 32,
@@ -193,8 +182,7 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                                 minWidth: 0,
                                 onPressed: () {
                                   sendfava = {
-                                    'offer_id':
-                                        '${CupitHome.get(context).allofferModel!.data!.offers[widget.position!].id}',
+                                    'offer_id': '${model.id}',
                                   };
                                   CubitDetail.get(context).changefav(
                                       data: sendfava,
@@ -237,7 +225,8 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => GetLocationClient(
-                                          position: widget.position!)));
+                                            model: model,
+                                          )));
                             },
                             shape: const CircleBorder(),
                             color: CupitHome.get(context).dartSwitch
@@ -262,7 +251,7 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                           ),
                           Expanded(
                             child: Text(
-                              '${CupitHome.get(context).allofferModel!.data!.offers[widget.position!].address}',
+                              '${model.address}',
                               style: Theme.of(context).textTheme.bodyText2,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
@@ -408,10 +397,8 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                                       .changeNavDetailClient(2);
                                   // CubitDetail.get(context)
                                   //     .changeNavDetailAgence(2);
-                                  CubitDetail.get(context).getAllMsg(data: {
-                                    'offer_id':
-                                        '${CupitHome.get(context).allofferModel!.data!.offers[widget.position!].id}'
-                                  });
+                                  CubitDetail.get(context).getAllMsg(
+                                      data: {'offer_id': '${model.id}'});
                                 },
                                 child: Column(
                                   children: [
@@ -500,20 +487,12 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                       flex: 43,
                       child: Container(
                         child: CubitDetail.get(context).indexClient == 0
-                            ? Information(
-                                context,
-                                CupitHome.get(context)
-                                    .allofferModel!
-                                    .data!
-                                    .offers[widget.position!])
+                            ? Information(context, model)
                             : (CubitDetail.get(context).indexClient == 1
                                 ? Details(
                                     context,
-                                    CupitHome.get(context)
-                                        .allofferModel!
-                                        .data!
-                                        .offers[widget.position!],
-                                    widget.position)
+                                    model,
+                                  )
                                 : ConditionalBuilder(
                                     builder: (BuildContext context) {
                                       return Commentaire(context);
@@ -571,17 +550,14 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                     onPressed: () {
                       sendinfomsg = {
                         'text': msgController.text,
-                        'offer_id':
-                            ' ${CupitHome.get(context).allofferModel!.data!.offers[widget.position!].id}'
+                        'offer_id': ' ${model.id}'
                       };
 
                       CubitDetail.get(context)
                           .sendMessage(data: sendinfomsg)
                           .then((value) {
-                        CubitDetail.get(context).getAllMsg(data: {
-                          'offer_id':
-                              '${CupitHome.get(context).allofferModel!.data!.offers[widget.position!].id}'
-                        });
+                        CubitDetail.get(context)
+                            .getAllMsg(data: {'offer_id': '${model.id}'});
                       });
                       msgController = TextEditingController();
                     },
@@ -701,7 +677,11 @@ Widget Information(context, OffersModel model) => Padding(
       ),
     );
 
-Widget Details(context, OffersModel model, position) => Padding(
+Widget Details(
+  context,
+  OffersModel model,
+) =>
+    Padding(
       padding: const EdgeInsets.all(18.0),
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -902,13 +882,7 @@ Widget Details(context, OffersModel model, position) => Padding(
                       const SizedBox(
                         width: 10,
                       ),
-                      Expanded(
-                          child: listSpecefication(
-                              context,
-                              CupitHome.get(context)
-                                  .allofferModel!
-                                  .data!
-                                  .offers[position!]))
+                      Expanded(child: listSpecefication(context, model))
                     ],
                   ),
                 ),
@@ -934,13 +908,7 @@ Widget Details(context, OffersModel model, position) => Padding(
                       const SizedBox(
                         width: 10,
                       ),
-                      Expanded(
-                          child: listPaiment(
-                              context,
-                              CupitHome.get(context)
-                                  .allofferModel!
-                                  .data!
-                                  .offers[position!]))
+                      Expanded(child: listPaiment(context, model))
                     ],
                   ),
                 ),

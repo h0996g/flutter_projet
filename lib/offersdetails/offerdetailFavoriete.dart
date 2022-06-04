@@ -19,15 +19,18 @@ import '../Map/GetLocationClientFav.dart';
 import '../home/cubitHome/cupit_home.dart';
 
 class OfferDetailFav extends StatefulWidget {
-  int? position;
+  final OffersModel model;
 
-  OfferDetailFav({this.position});
+  OfferDetailFav({required this.model});
 
   @override
-  State<OfferDetailFav> createState() => _OfferDetailFavState();
+  State<OfferDetailFav> createState() => _OfferDetailFavState(model: model);
 }
 
 class _OfferDetailFavState extends State<OfferDetailFav> {
+  OffersModel model;
+  _OfferDetailFavState({required this.model});
+
   bool ischangeFav = false;
 
   var onbordingController = PageController();
@@ -83,12 +86,7 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                       // return Ala(models[index]);
 
                       List? k;
-                      k = CubitDetail.get(context)
-                          .getFavoritesmodel!
-                          .data!
-                          .offers[widget.position!]
-                          .photo
-                          ?.map((e) {
+                      k = model.photo?.map((e) {
                         return base64Decode(e);
                       }).toList();
                       return Image(
@@ -97,12 +95,7 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                         fit: BoxFit.cover,
                       );
                     },
-                    itemCount: CubitDetail.get(context)
-                        .getFavoritesmodel!
-                        .data!
-                        .offers[widget.position!]
-                        .photo!
-                        .length,
+                    itemCount: model.photo!.length,
                   ),
                 ),
                 Positioned(
@@ -132,12 +125,7 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                       alignment: Alignment.bottomCenter,
                       child: SmoothPageIndicator(
                           controller: onbordingController, // PageController
-                          count: CubitDetail.get(context)
-                              .getFavoritesmodel!
-                              .data!
-                              .offers[widget.position!]
-                              .photo!
-                              .length,
+                          count: model.photo!.length,
                           effect: ScrollingDotsEffect(
                             dotColor: CupitHome.get(context).dartSwitch
                                 ? const Color(0xffb3b2b2)
@@ -185,7 +173,7 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                             width: 20,
                           ),
                           Text(
-                            "${CubitDetail.get(context).getFavoritesmodel!.data!.offers[widget.position!].price} \$",
+                            "${model.price} \$",
                             style:
                                 Theme.of(context).textTheme.headline4?.copyWith(
                                       fontSize: 32,
@@ -199,8 +187,7 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                                 onPressed: () {
                                   ischangeFav = true;
                                   sendfava = {
-                                    'offer_id':
-                                        '${CubitDetail.get(context).getFavoritesmodel!.data!.offers[widget.position!].id}',
+                                    'offer_id': '${model.id}',
                                   };
                                   CubitDetail.get(context)
                                       .changefav(
@@ -247,7 +234,7 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           GetLocationClientFav(
-                                            position: widget.position!,
+                                            model: model,
                                           )));
                             },
                             shape: const CircleBorder(),
@@ -273,7 +260,7 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                           ),
                           Expanded(
                             child: Text(
-                              '${CubitDetail.get(context).getFavoritesmodel!.data!.offers[widget.position!].address}',
+                              '${model.address}',
                               style: Theme.of(context).textTheme.bodyText2,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
@@ -417,10 +404,8 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                                   // });
                                   CubitDetail.get(context)
                                       .changeNavDetailClient(2);
-                                  CubitDetail.get(context).getAllMsg(data: {
-                                    'offer_id':
-                                        '${CubitDetail.get(context).getFavoritesmodel!.data!.offers[widget.position!].id}'
-                                  });
+                                  CubitDetail.get(context).getAllMsg(
+                                      data: {'offer_id': '${model.id}'});
                                 },
                                 child: Column(
                                   children: [
@@ -509,20 +494,12 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                       flex: 43,
                       child: Container(
                         child: CubitDetail.get(context).indexClient == 0
-                            ? Information(
-                                context,
-                                CubitDetail.get(context)
-                                    .getFavoritesmodel!
-                                    .data!
-                                    .offers[widget.position!])
+                            ? Information(context, model)
                             : (CubitDetail.get(context).indexClient == 1
                                 ? Details(
                                     context,
-                                    CubitDetail.get(context)
-                                        .getFavoritesmodel!
-                                        .data!
-                                        .offers[widget.position!],
-                                    widget.position)
+                                    model,
+                                  )
                                 : ConditionalBuilder(
                                     builder: (BuildContext context) {
                                       return Commentaire(context);
@@ -727,7 +704,11 @@ Widget Information(context, OffersModel model) => Padding(
       ),
     );
 
-Widget Details(context, OffersModel model, position) => Padding(
+Widget Details(
+  context,
+  OffersModel model,
+) =>
+    Padding(
       padding: const EdgeInsets.all(18.0),
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -928,13 +909,7 @@ Widget Details(context, OffersModel model, position) => Padding(
                       const SizedBox(
                         width: 10,
                       ),
-                      Expanded(
-                          child: listSpecefication(
-                              context,
-                              CubitDetail.get(context)
-                                  .getFavoritesmodel!
-                                  .data!
-                                  .offers[position!]))
+                      Expanded(child: listSpecefication(context, model))
                     ],
                   ),
                 ),
@@ -960,13 +935,7 @@ Widget Details(context, OffersModel model, position) => Padding(
                       const SizedBox(
                         width: 10,
                       ),
-                      Expanded(
-                          child: listPaiment(
-                              context,
-                              CubitDetail.get(context)
-                                  .getFavoritesmodel!
-                                  .data!
-                                  .offers[position!]))
+                      Expanded(child: listPaiment(context, model))
                     ],
                   ),
                 ),

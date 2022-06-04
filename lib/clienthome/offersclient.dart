@@ -92,10 +92,8 @@ class Offersclient extends StatelessWidget {
                   )),
               IconButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Search()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Search()));
                   },
                   icon: const Icon(
                     Icons.search,
@@ -188,14 +186,13 @@ class Offersclient extends StatelessWidget {
                       return ListView.separated(
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: ((context, index) {
-                          int positionClient = index;
                           return ListItembuilder(
-                              context,
-                              CupitHome.get(context)
-                                  .allofferModel!
-                                  .data!
-                                  .offers[index],
-                              positionClient);
+                            context,
+                            CupitHome.get(context)
+                                .allofferModel!
+                                .data!
+                                .offers[index],
+                          );
                         }),
                         itemCount: CupitHome.get(context)
                             .allofferModel!
@@ -258,7 +255,11 @@ class Offersclient extends StatelessWidget {
     );
   }
 
-  ListItembuilder(context, OffersModel model, int positionClient) {
+  ListItembuilder(
+    context,
+    OffersModel model,
+  ) {
+    final modelClient = model;
     final imageProvider = MemoryImage(base64Decode(model.photo![0]));
 
     return NeumorphicButton(
@@ -268,18 +269,12 @@ class Offersclient extends StatelessWidget {
           depth: 0),
       onPressed: () async {
         CubitDetail.get(context).indexClient = 0;
-        print(CupitHome.get(context)
-            .allofferModel!
-            .data!
-            .offers[positionClient]
-            .id);
+        print(modelClient.id);
         sendfav = {
-          'offer_id':
-              '${CupitHome.get(context).allofferModel!.data!.offers[positionClient].id}',
+          'offer_id': '${modelClient.id}',
         };
         await CubitDetail.get(context).getNameandPhone(data: {
-          'offer_id':
-              '${CupitHome.get(context).allofferModel!.data!.offers[positionClient].id}',
+          'offer_id': '${modelClient.id}',
         });
         CubitDetail.get(context).getexistfav(data: sendfav);
 
@@ -288,7 +283,7 @@ class Offersclient extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => Offerdetailclient(
-                      position: positionClient,
+                      model: modelClient,
                     )));
       },
       child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -402,7 +397,10 @@ Future<void> allmap(context) async {
                       context,
                       MaterialPageRoute(
                           builder: (context) => Offerdetailclient(
-                                position: i,
+                                model: CupitHome.get(context)
+                                    .allofferModel!
+                                    .data!
+                                    .offers[i],
                               )));
                 }),
           ),

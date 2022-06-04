@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:agence/Api/httplaravel.dart';
 import 'package:agence/clienthome/cupitSearch/cupitsearch_cubit.dart';
 import 'package:agence/clienthome/cupitSearch/cupitsearch_state.dart';
@@ -11,10 +13,12 @@ import '../Model/AfficheOffer.dart';
 import '../home/cubitHome/cupit_home.dart';
 import 'dart:convert' as convert;
 
+import '../offersdetails/cubitOfferDetail.dart';
 import '../offersdetails/offerdetailclient.dart';
 
 class Search extends StatelessWidget {
-  const Search({Key? key}) : super(key: key);
+  Search({Key? key}) : super(key: key);
+  Map<String, dynamic> sendfav = {};
 
   @override
   Widget build(BuildContext context) {
@@ -100,36 +104,45 @@ class Search extends StatelessWidget {
                       //     )),
                       TypeAheadFormField(
                     itemBuilder: (BuildContext context, OffersModel? model) {
-                      final offer = model!;
-                      return
-                          //  ListTile(
-                          //   title: Text(offer.address!),
+                      final imageProvider =
+                          MemoryImage(base64Decode(model!.photo![0]));
 
-                          // );
-                          NeumorphicButton(
+                      final modelClient = model;
+                      return NeumorphicButton(
                         style: NeumorphicStyle(
                             color: CupitHome.get(context).dartSwitch
                                 ? Colors.black
                                 : Colors.white,
                             depth: 0),
-                        onPressed: () {
+                        onPressed: () async {
+                          // CubitDetail.get(context).indexClient = 0;
+                          print(modelClient.id);
+                          sendfav = {
+                            'offer_id': '${modelClient.id}',
+                          };
+                          await CubitDetail.get(context).getNameandPhone(data: {
+                            'offer_id': '${modelClient.id}',
+                          });
+                          CubitDetail.get(context).getexistfav(data: sendfav);
+
+                          // print(positionClient);
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Offerdetailclient()));
+                                  builder: (context) => Offerdetailclient(
+                                        model: modelClient,
+                                      )));
                         },
                         child:
                             Column(mainAxisSize: MainAxisSize.min, children: [
                           Container(
                             height: 150,
                             width: double.infinity,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.vertical(
                                   top: Radius.circular(20)),
                               image: DecorationImage(
-                                  image:
-                                      AssetImage('assets/images/building.jpg'),
-                                  fit: BoxFit.cover),
+                                  image: imageProvider, fit: BoxFit.cover),
                             ),
                           ),
                           Container(
@@ -154,7 +167,7 @@ class Search extends StatelessWidget {
                                           const Color(0xffCFD9E2FF),
                                         ]),
                               borderRadius: const BorderRadius.vertical(
-                                  bottom: const Radius.circular(20)),
+                                  bottom: Radius.circular(20)),
                             ),
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,7 +180,7 @@ class Search extends StatelessWidget {
                                       width: 8,
                                     ),
                                     Text(
-                                      "${model.price}",
+                                      "${model.price} \$",
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline4
@@ -185,22 +198,20 @@ class Search extends StatelessWidget {
                                     ),
                                     Text(
                                       '${model.address}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText2
-                                          ?.copyWith(fontSize: 16),
+                                      style:
+                                          Theme.of(context).textTheme.bodyText2,
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     )
                                   ])
                                 ]),
-                            height: 100,
+                            height: 120,
                             width: double.infinity,
                           )
                         ]),
                       );
                     },
-                    suggestionsCallback: getOfferAgence,
+                    suggestionsCallback: getOfferAgencetoclient,
                     onSuggestionSelected: (OffersModel? k) {},
                   )),
               const SizedBox(
@@ -223,92 +234,6 @@ class Search extends StatelessWidget {
       listener: (BuildContext context, Object? state) {},
     );
   }
-
-  // Listoffers(context, OffersModel model) =>
-  // NeumorphicButton(
-  //       style: NeumorphicStyle(
-  //           color:
-  //               CupitHome.get(context).dartSwitch ? Colors.black : Colors.white,
-  //           depth: 0),
-  //       onPressed: () {
-  //         Navigator.push(context,
-  //             MaterialPageRoute(builder: (context) => Offerdetailclient()));
-  //       },
-  //       child: Column(mainAxisSize: MainAxisSize.min, children: [
-  //         Container(
-  //           height: 150,
-  //           width: double.infinity,
-  //           decoration: const BoxDecoration(
-  //             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-  //             image: DecorationImage(
-  //                 image: AssetImage('assets/images/building.jpg'),
-  //                 fit: BoxFit.cover),
-  //           ),
-  //         ),
-  //         Container(
-  //           decoration: BoxDecoration(
-  //             // color:  CupitHome.get(context).dartSwitch
-  //             //     ? Colors.blueGrey
-  //             //     : Colors.white,
-  //             gradient: CupitHome.get(context).dartSwitch
-  //                 ? const LinearGradient(
-  //                     begin: Alignment.topRight,
-  //                     end: Alignment.bottomLeft,
-  //                     colors: [
-  //                       Color(0xff131313),
-  //                       Color(0xff131313),
-  //                     ],
-  //                   )
-  //                 : const LinearGradient(
-  //                     begin: Alignment.topRight,
-  //                     end: Alignment.bottomLeft,
-  //                     colors: [
-  //                         Colors.blue,
-  //                         const Color(0xffCFD9E2FF),
-  //                       ]),
-  //             borderRadius: const BorderRadius.vertical(
-  //                 bottom: const Radius.circular(20)),
-  //           ),
-  //           child:
-  //               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-  //             const SizedBox(
-  //               height: 10,
-  //             ),
-  //             Row(children: [
-  //               const SizedBox(
-  //                 width: 8,
-  //               ),
-  //               Text(
-  //                 "${model.price}",
-  //                 style: Theme.of(context).textTheme.headline4?.copyWith(
-  //                       fontSize: 32,
-  //                     ),
-  //               )
-  //             ]),
-  //             const SizedBox(
-  //               height: 10,
-  //             ),
-  //             Row(children: [
-  //               const SizedBox(
-  //                 width: 8,
-  //               ),
-  //               Text(
-  //                 '${model.address}',
-  //                 style: Theme.of(context)
-  //                     .textTheme
-  //                     .bodyText2
-  //                     ?.copyWith(fontSize: 16),
-  //                 maxLines: 2,
-  //                 overflow: TextOverflow.ellipsis,
-  //               )
-  //             ])
-  //           ]),
-  //           height: 100,
-  //           width: double.infinity,
-  //         )
-  //       ]),
-  //     );
-
 }
 
 DataOffer? offerAgencModel;
@@ -316,7 +241,6 @@ var offers;
 Future<List<OffersModel>> getOfferAgence(String query) async {
   List<OffersModel> kk;
 
-  // offerAgencModel = null;
   kk = await Httplar.httpget(path: GETOFFERSAGENCE).then((value) {
     var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
 
@@ -341,7 +265,6 @@ DataOffer? allofferModel;
 Future<List<OffersModel>> getOfferAgencetoclient(String query) async {
   List<OffersModel> kk;
 
-  // offerAgencModel = null;
   kk = await Httplar.httpget(path: GETOFFERCATEGORIES + '/Tout').then((value) {
     var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
 
@@ -354,9 +277,6 @@ Future<List<OffersModel>> getOfferAgencetoclient(String query) async {
       final lowerQuery = query.toLowerCase();
       return wilaya.contains(lowerQuery);
     }).toList();
-    // print(offerAgencModel!.data!.offers[0].address);
-    // print(offerAgencModel!.data!.offers[0].latitude);
-    // print(offerAgencModel!.data!.offers[0].longitude);
   });
   return kk;
 }

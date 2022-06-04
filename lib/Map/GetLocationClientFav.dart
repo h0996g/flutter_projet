@@ -9,23 +9,24 @@ import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
+import '../Model/AfficheOffer.dart';
 import 'const.dart';
 import 'location.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 
 class GetLocationClientFav extends StatefulWidget {
-  final int position;
-  GetLocationClientFav({Key? key, required this.position}) : super(key: key);
+  final OffersModel model;
+  GetLocationClientFav({Key? key, required this.model}) : super(key: key);
 
   @override
   State<GetLocationClientFav> createState() =>
-      _GetLocationClientFavState(position);
+      _GetLocationClientFavState(model);
 }
 
 class _GetLocationClientFavState extends State<GetLocationClientFav> {
-  int position;
-  _GetLocationClientFavState(this.position);
+  OffersModel model;
+  _GetLocationClientFavState(this.model);
 
   Completer<GoogleMapController> _controller = Completer();
   Set<Marker> _markers = {};
@@ -44,17 +45,7 @@ class _GetLocationClientFavState extends State<GetLocationClientFav> {
     //     CupitHome.get(context).allofferModel!.data!.offers[position].latitude,
     //     CupitHome.get(context).allofferModel!.data!.offers[position].longitude);
     initialCameraPosition = CameraPosition(
-      target: LatLng(
-          CubitDetail.get(context)
-              .getFavoritesmodel!
-              .data!
-              .offers[position]
-              .latitude!,
-          CubitDetail.get(context)
-              .getFavoritesmodel!
-              .data!
-              .offers[position]
-              .longitude!),
+      target: LatLng(model.latitude!, model.longitude!),
       // target: LatLng(36.31789608941112, 6.615674905478954),
       zoom: initialCameraPosition.zoom,
     );
@@ -62,17 +53,7 @@ class _GetLocationClientFavState extends State<GetLocationClientFav> {
     //// // CupitHome.get(context).currentLocationSetStat(
     //// //     CupitHome.get(context).initialCameraPosition!.target);
     _buildMarkerFromAssets();
-    _setMarker(LatLng(
-        CubitDetail.get(context)
-            .getFavoritesmodel!
-            .data!
-            .offers[position]
-            .latitude!,
-        CubitDetail.get(context)
-            .getFavoritesmodel!
-            .data!
-            .offers[position]
-            .longitude!));
+    _setMarker(LatLng(model.latitude!, model.longitude!));
     super.initState();
   }
 
@@ -194,7 +175,6 @@ class _GetLocationClientFavState extends State<GetLocationClientFav> {
         infoWindow: InfoWindow(
             // title: "Title",
             // snippet:
-            //     "${CupitHome.get(context).allofferModel!.data!.offers[position].latitude!}, ${CupitHome.get(context).allofferModel!.data!.offers[position].latitude!}"
             ));
     _markers.add(newMarker);
 

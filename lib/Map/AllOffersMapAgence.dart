@@ -37,16 +37,6 @@ class _AllOffersMapAgenceState extends State<AllOffersMapAgence> {
 
   @override
   void initState() {
-    // CupitHome.get(context).awelModel(
-    //     CupitHome.get(context).allofferModel!.data!.offers[position].latitude,
-    //     CupitHome.get(context).allofferModel!.data!.offers[position].longitude);
-    // initialCameraPosition = CameraPosition(
-    //   target: LatLng(
-    //       CupitHome.get(context).allofferModel!.data!.offers[0].latitude!,
-    //       CupitHome.get(context).allofferModel!.data!.offers[0].longitude!),
-    //   // target: LatLng(36.31789608941112, 6.615674905478954),
-    //   zoom: initialCameraPosition.zoom,
-    // );
     currentLocation = initialCameraPosition.target;
     //// // CupitHome.get(context).currentLocationSetStat(
     //// //     CupitHome.get(context).initialCameraPosition!.target);

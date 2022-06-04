@@ -17,8 +17,8 @@ import '../home/home.dart';
 import '../shared/components/components.dart';
 
 class Offerdetailagence extends StatelessWidget {
-  final int position;
-  Offerdetailagence({required this.position}) : super();
+  final OffersModel model;
+  Offerdetailagence({required this.model}) : super();
 
   var onbordingController = PageController();
   var msgController = TextEditingController();
@@ -73,18 +73,8 @@ class Offerdetailagence extends StatelessWidget {
                     controller: onbordingController,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      // return Ala(CupitHome.get(context)
-                      //     .dataOfferModel!
-                      //     .data!
-                      //     .offers[position]);
-
                       List? k;
-                      k = CupitHome.get(context)
-                          .offerAgencModel!
-                          .data!
-                          .offers[position]
-                          .photo
-                          ?.map((e) {
+                      k = model.photo?.map((e) {
                         return base64Decode(e);
                       }).toList();
                       return Image(
@@ -93,12 +83,7 @@ class Offerdetailagence extends StatelessWidget {
                         fit: BoxFit.cover,
                       );
                     },
-                    itemCount: CupitHome.get(context)
-                        .offerAgencModel!
-                        .data!
-                        .offers[position]
-                        .photo!
-                        .length,
+                    itemCount: model.photo!.length,
                   ),
                 ),
                 Positioned(
@@ -106,7 +91,8 @@ class Offerdetailagence extends StatelessWidget {
                   left: -5,
                   child: MaterialButton(
                     onPressed: () {
-                      Changepage(context, const Home());
+                      // Changepage(context, const Home());
+                      Navigator.pop(context);
                     },
                     shape: const CircleBorder(),
                     color: CupitHome.get(context).dartSwitch
@@ -126,16 +112,12 @@ class Offerdetailagence extends StatelessWidget {
                   child: MaterialButton(
                     onPressed: () {
                       // print('ook');
-                      print(CupitHome.get(context)
-                          .offerAgencModel!
-                          .data!
-                          .offers[position]
-                          .latitude);
+                      print(model.latitude);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => GetLocationAgence(
-                                    position: position,
+                                    model: model,
                                   )));
                     },
                     shape: const CircleBorder(),
@@ -159,12 +141,7 @@ class Offerdetailagence extends StatelessWidget {
                       alignment: Alignment.bottomCenter,
                       child: SmoothPageIndicator(
                           controller: onbordingController, // PageController
-                          count: CupitHome.get(context)
-                              .offerAgencModel!
-                              .data!
-                              .offers[position]
-                              .photo!
-                              .length,
+                          count: model.photo!.length,
                           effect: ScrollingDotsEffect(
                             dotColor: CupitHome.get(context).dartSwitch
                                 ? const Color(0xffb3b2b2)
@@ -190,10 +167,6 @@ class Offerdetailagence extends StatelessWidget {
                 )
               ],
             ),
-            // child: Ala(CupitHome.get(context)
-            //     .dataOfferModel!
-            //     .data!
-            //     .offers[position]),
           ),
           Divider(
             color: CupitHome.get(context).dartSwitch
@@ -210,7 +183,7 @@ class Offerdetailagence extends StatelessWidget {
                   width: 20,
                 ),
                 Text(
-                  "${CupitHome.get(context).offerAgencModel!.data!.offers[position].price}",
+                  "${model.price}",
                   style: Theme.of(context).textTheme.headline4?.copyWith(
                         fontSize: 32,
                       ),
@@ -222,7 +195,7 @@ class Offerdetailagence extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => Formulairemodifier(
-                                  position: position,
+                                  model: model,
                                 )));
                   },
                   shape: const CircleBorder(),
@@ -256,7 +229,7 @@ class Offerdetailagence extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    '${CupitHome.get(context).offerAgencModel!.data!.offers[position].address}',
+                    '${model.address}',
                     style: Theme.of(context).textTheme.bodyText2,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -421,17 +394,14 @@ class Offerdetailagence extends StatelessWidget {
                               child: MaterialButton(
                                 padding: const EdgeInsets.all(0),
                                 onPressed: () {
-                                  print(
-                                      '${CupitHome.get(context).offerAgencModel!.data!.offers[position].id}');
+                                  print('${model.id}');
                                   // setState(() { -------hadi 3
                                   //   a = 2;
                                   // });
                                   CubitDetail.get(context)
                                       .changeNavDetailAgence(2);
-                                  CubitDetail.get(context).getAllMsg(data: {
-                                    'offer_id':
-                                        '${CupitHome.get(context).offerAgencModel!.data!.offers[position].id}'
-                                  });
+                                  CubitDetail.get(context).getAllMsg(
+                                      data: {'offer_id': '${model.id}'});
                                 },
                                 child: Column(
                                   children: [
@@ -497,15 +467,10 @@ class Offerdetailagence extends StatelessWidget {
                                           actions: [
                                             TextButton(
                                                 onPressed: () {
-                                                  print(CupitHome.get(context)
-                                                      .offerAgencModel!
-                                                      .data!
-                                                      .offers[position]
-                                                      .id);
+                                                  print(model.id);
                                                   CubitDetail.get(context)
                                                       .deletOffer(data: {
-                                                    'offer_id':
-                                                        '${CupitHome.get(context).offerAgencModel!.data!.offers[position].id}'
+                                                    'offer_id': '${model.id}'
                                                   });
                                                 },
                                                 child: const Text('yes')),
@@ -561,20 +526,12 @@ class Offerdetailagence extends StatelessWidget {
                       flex: 43,
                       child: Container(
                         child: CubitDetail.get(context).indexAgence == 0
-                            ? Information(
-                                context,
-                                CupitHome.get(context)
-                                    .offerAgencModel!
-                                    .data!
-                                    .offers[position])
+                            ? Information(context, model)
                             : (CubitDetail.get(context).indexAgence == 1
                                 ? Details(
                                     context,
-                                    CupitHome.get(context)
-                                        .offerAgencModel!
-                                        .data!
-                                        .offers[position],
-                                    position)
+                                    model,
+                                  )
                                 : ConditionalBuilder(
                                     builder: (BuildContext context) {
                                       return Commentaire(context);
@@ -603,10 +560,8 @@ class Offerdetailagence extends StatelessWidget {
                   });
                 }
                 if (state is GoodDeleteMsgState) {
-                  CubitDetail.get(context).getAllMsg(data: {
-                    'offer_id':
-                        '${CupitHome.get(context).offerAgencModel!.data!.offers[position].id}'
-                  });
+                  CubitDetail.get(context)
+                      .getAllMsg(data: {'offer_id': '${model.id}'});
                   Fluttertoast.showToast(
                       msg: 'Delete Success',
                       toastLength: Toast.LENGTH_SHORT,
@@ -659,17 +614,14 @@ class Offerdetailagence extends StatelessWidget {
                     onPressed: () {
                       sendinfomsg = {
                         'text': msgController.text,
-                        'offer_id':
-                            ' ${CupitHome.get(context).offerAgencModel!.data!.offers[position].id}'
+                        'offer_id': ' ${model.id}'
                       };
 
                       CubitDetail.get(context)
                           .sendMessage(data: sendinfomsg)
                           .then((value) {
-                        CubitDetail.get(context).getAllMsg(data: {
-                          'offer_id':
-                              '${CupitHome.get(context).offerAgencModel!.data!.offers[position].id}'
-                        });
+                        CubitDetail.get(context)
+                            .getAllMsg(data: {'offer_id': '${model.id}'});
                       });
                       msgController = TextEditingController();
                     },
@@ -844,7 +796,11 @@ Widget Information(context, OffersModel model) => Padding(
       ),
     );
 
-Widget Details(context, OffersModel model, position) => Padding(
+Widget Details(
+  context,
+  OffersModel model,
+) =>
+    Padding(
       padding: const EdgeInsets.all(18.0),
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -1046,12 +1002,7 @@ Widget Details(context, OffersModel model, position) => Padding(
                         width: 10,
                       ),
                       Expanded(
-                        child: listSpecefication(
-                            context,
-                            CupitHome.get(context)
-                                .offerAgencModel!
-                                .data!
-                                .offers[position]),
+                        child: listSpecefication(context, model),
                         // child: ListView.separated(
                         //   scrollDirection: Axis.horizontal,
                         //   itemCount: 3,
@@ -1091,12 +1042,7 @@ Widget Details(context, OffersModel model, position) => Padding(
                         width: 10,
                       ),
                       Expanded(
-                        child: listPaiment(
-                            context,
-                            CupitHome.get(context)
-                                .offerAgencModel!
-                                .data!
-                                .offers[position]),
+                        child: listPaiment(context, model),
                         // child: ListView.separated(
                         //   scrollDirection: Axis.horizontal,
                         //   itemCount: 3,

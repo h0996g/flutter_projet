@@ -1,4 +1,5 @@
 import 'package:agence/Map/ModifierLoction.dart';
+import 'package:agence/Model/AfficheOffer.dart';
 import 'package:agence/home/cubitHome/homeStates.dart';
 import 'package:agence/offersdetails/modifieroffrephoto.dart';
 import 'package:flutter/material.dart';
@@ -8,17 +9,17 @@ import '../home/cubitHome/cupit_home.dart';
 import '../shared/components/components.dart';
 
 class Formulairemodifier extends StatefulWidget {
-  final int position;
-  Formulairemodifier({required this.position}) : super();
+  final OffersModel model;
+  Formulairemodifier({required this.model}) : super();
 
   @override
   State<Formulairemodifier> createState() =>
-      _FormulairemodifierState(position: position);
+      _FormulairemodifierState(model: model);
 }
 
 class _FormulairemodifierState extends State<Formulairemodifier> {
-  int position;
-  _FormulairemodifierState({required this.position});
+  OffersModel model;
+  _FormulairemodifierState({required this.model});
   CupitHome? objHome;
   // var superficieController = TextEditingController();
   // var priceController = TextEditingController();
@@ -31,22 +32,19 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // superficieController = TextEditingController(text: objHome.offerAgencModel.data.offers[position].specification);
 
     objHome = BlocProvider.of(context);
-    objHome!.superficieControllerUpdate = TextEditingController(
-        text: '${objHome?.offerAgencModel!.data!.offers[position].space}');
-    objHome!.priceControllerUpdate = TextEditingController(
-        text: '${objHome?.offerAgencModel!.data!.offers[position].price}');
-    objHome!.nEtageControllerUpdate = TextEditingController(
-        text: '${objHome?.offerAgencModel!.data!.offers[position].nEtage}');
-    objHome!.nChambresUpdate = TextEditingController(
-        text: '${objHome?.offerAgencModel!.data!.offers[position].nChambre}');
-    objHome!.descriptionControllerUpdate = TextEditingController(
-        text:
-            ' ${objHome?.offerAgencModel!.data!.offers[position].description}');
-    objHome!.addressControllerUpdate = TextEditingController(
-        text: '${objHome?.offerAgencModel!.data!.offers[position].address}');
+    objHome!.superficieControllerUpdate =
+        TextEditingController(text: '${model.space}');
+    objHome!.priceControllerUpdate =
+        TextEditingController(text: '${model.price}');
+    objHome!.nEtageControllerUpdate =
+        TextEditingController(text: '${model.nEtage}');
+    objHome!.nChambresUpdate = TextEditingController(text: '${model.nChambre}');
+    objHome!.descriptionControllerUpdate =
+        TextEditingController(text: ' ${model.description}');
+    objHome!.addressControllerUpdate =
+        TextEditingController(text: '${model.address}');
   }
 
   @override
@@ -484,7 +482,8 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => ModifierLocation(
-                                            position: position)));
+                                              model: model,
+                                            )));
                               },
                               child: Row(
                                 children: [
@@ -527,7 +526,7 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 Modifieroffrephoto(
-                                                  position: position,
+                                                  model: model,
                                                 )));
                                   }
                                 },

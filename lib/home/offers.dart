@@ -67,10 +67,8 @@ class Offers extends StatelessWidget {
                   )),
               IconButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Search()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Search()));
                   },
                   icon: const Icon(
                     Icons.search,
@@ -89,10 +87,7 @@ class Offers extends StatelessWidget {
                     child: ListView.separated(
                       physics: BouncingScrollPhysics(),
                       itemBuilder: ((context, index) {
-                        int position = index;
-
                         return ListItembuilder(
-                            position,
                             context,
                             CupitHome.get(context)
                                 .offerAgencModel!
@@ -149,7 +144,8 @@ class Offers extends StatelessWidget {
   }
 }
 
-ListItembuilder(int position, context, OffersModel model) {
+ListItembuilder(context, OffersModel model) {
+  final modelAgence = model;
   // Uint8List bytes = base64Decode();
   // Image img = Image.memory(base64Decode(model.photo![0]));
   final imageProvider = MemoryImage(base64Decode(model.photo![0]));
@@ -159,19 +155,13 @@ ListItembuilder(int position, context, OffersModel model) {
         color: CupitHome.get(context).dartSwitch ? Colors.black : Colors.white,
         depth: 0),
     onPressed: () {
-      print(position);
       CubitDetail.get(context).indexAgence = 0;
-      // Map<String, dynamic> getallmsg = {
-      //   'offer_id':
-      //       '${CupitHome.get(context).offerAgencModel!.data!.offers[position].id}'
-      // };
-      // CubitDetail.get(context).getAllMsg(data: getallmsg);
 
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => Offerdetailagence(
-                    position: position,
+                    model: modelAgence,
                   )));
     },
     child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -311,7 +301,10 @@ Future<void> allmap(context) async {
                       context,
                       MaterialPageRoute(
                           builder: (context) => Offerdetailagence(
-                                position: i,
+                                model: CupitHome.get(context)
+                                    .offerAgencModel!
+                                    .data!
+                                    .offers[i],
                               )));
                 }),
           ),

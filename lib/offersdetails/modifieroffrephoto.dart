@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../Model/AfficheOffer.dart';
 import '../home/cubitHome/cupit_home.dart';
 
 import '../home/home.dart';
@@ -14,8 +15,8 @@ import 'formulairemodifieroffre.dart';
 import 'modifierediterphoto.dart';
 
 class Modifieroffrephoto extends StatelessWidget {
-  final int position;
-  Modifieroffrephoto({Key? key, required this.position}) : super(key: key);
+  final OffersModel model;
+  Modifieroffrephoto({Key? key, required this.model}) : super(key: key);
 
   Map<String, dynamic> sendinfoOffer = {};
 
@@ -193,7 +194,7 @@ class Modifieroffrephoto extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Formulairemodifier(
-                                        position: position,
+                                        model: model,
                                       )),
                               (route) => false);
                         },
@@ -202,8 +203,7 @@ class Modifieroffrephoto extends StatelessWidget {
                     ElevatedButton(
                         onPressed: () async {
                           sendinfoOffer = {
-                            'id':
-                                ' ${CupitHome.get(context).allofferModel!.data!.offers[position].id}',
+                            'id': ' ${model.id}',
                             'type_vente':
                                 CupitHome.get(context).appartementvalueDrop,
                             'address': CupitHome.get(context)
