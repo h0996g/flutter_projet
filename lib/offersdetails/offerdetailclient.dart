@@ -17,6 +17,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../home/cubitHome/cupit_home.dart';
+import '../offerAgenceClient.dart';
 
 class Offerdetailclient extends StatefulWidget {
   final OffersModel model;
@@ -260,10 +261,20 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                           const SizedBox(
                             width: 20,
                           ),
-                          Text(
-                            seLoger!,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => OfferAgenceClient(
+                                            model: model,
+                                          )));
+                            },
+                            child: Text(
+                              seLoger!,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
                           ),
                           const SizedBox(
                             width: 20,

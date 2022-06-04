@@ -480,13 +480,36 @@ class CupitHome extends Cubit<HomeStates> {
       var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
 
       offerAgencModel = DataOffer.fromJson(jsonResponse);
-      print('ook');
+      print('ook agence offer');
       // print(offerAgencModel!.data!.offers[0].address);
       // print(offerAgencModel!.data!.offers[0].latitude);
       // print(offerAgencModel!.data!.offers[0].longitude);
       emit(GoodGetOffersAgence());
     }).catchError((e) {
       print(e.toString());
+      print('baaad agence offer');
+
+      emit(BadGetOffersAgence());
+    });
+  }
+
+  Future<void> getOfferAgenceclient(id) async {
+    // offerAgencModel = null;
+    emit(ConditionalLodinOfferAgenceState());
+    Httplar.httpPost(path: '/api/getofferagenceclient', data: {'agence_id': id})
+        .then((value) {
+      var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
+
+      offerAgencModel = DataOffer.fromJson(jsonResponse);
+      print('ook agence offer');
+      // print(offerAgencModel!.data!.offers[0].address);
+      // print(offerAgencModel!.data!.offers[0].latitude);
+      // print(offerAgencModel!.data!.offers[0].longitude);
+      emit(GoodGetOffersAgence());
+    }).catchError((e) {
+      print(e.toString());
+      print('baaad agence offer');
+
       emit(BadGetOffersAgence());
     });
   }
@@ -499,6 +522,27 @@ class CupitHome extends Cubit<HomeStates> {
       var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
 
       getinfouserModel = GetInfoUser.fromJson(jsonResponse);
+      print('ook user info');
+      // print(getinfouserModel!.agence!.address);
+      print(value.body);
+      // print(getinfouserModel!.photo);
+
+      emit(GoodGetInfoUserState());
+    }).catchError((e) {
+      print(e.toString());
+      emit(BaadGetInfoUserState());
+    });
+  }
+
+  GetInfoUser? getinfoAgonceToClientModel;
+  Future<void> getinformationAgenceToClient(id) async {
+    emit(ConditionalLodinInfoState());
+    Httplar.httpPost(
+        path: '/api/getagenceProfiletoclient',
+        data: {'agence_id': id}).then((value) {
+      var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
+
+      getinfoAgonceToClientModel = GetInfoUser.fromJson(jsonResponse);
       print('ook user info');
       // print(getinfouserModel!.agence!.address);
       print(value.body);
