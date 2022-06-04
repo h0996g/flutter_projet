@@ -163,6 +163,7 @@ class _SetLocationOfferState extends State<SetLocationOffer> {
         types: [],
         strictbounds: false,
         components: [Component(Component.country, "ar")]);
+
     _getLocationFromPlaceId(p!.placeId!);
   }
 
