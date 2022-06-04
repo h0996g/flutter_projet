@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:agence/Map/AllOffersMapAgence.dart';
 import 'package:agence/Model/AfficheOffer.dart';
 import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/home/cubitHome/cupit_home.dart';
@@ -8,6 +9,7 @@ import 'package:agence/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../clienthome/search.dart';
 
@@ -25,8 +27,14 @@ class Offers extends StatelessWidget {
         return Scaffold(
           floatingActionButton: FloatingActionButton(
             onPressed: () {
+              allmap(context).then((value) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AllOffersMapAgence()));
+              });
               // Navigator.push(context, MaterialPageRoute(builder: (context) =>  Navbar()));
-              Changepage(context, const Navbar());
+              // Changepage(context, const Navbar());
             },
             child: Icon(
               Icons.place,
@@ -261,3 +269,55 @@ buildFoodShimmer(context) => Column(
             )),
       ],
     );
+
+Future<void> allmap(context) async {
+  CupitHome.get(context).mmap = {};
+  for (var i = 0;
+      i <= CupitHome.get(context).offerAgencModel!.data!.offers.length - 1;
+      i++) {
+    CupitHome.get(context).mmap.add(
+          Marker(
+            markerId: MarkerId(LatLng(
+                    CupitHome.get(context)
+                        .offerAgencModel!
+                        .data!
+                        .offers[i]
+                        .latitude!,
+                    CupitHome.get(context)
+                        .offerAgencModel!
+                        .data!
+                        .offers[i]
+                        .longitude!)
+                .toString()),
+            icon: BitmapDescriptor.defaultMarker,
+            position: LatLng(
+                CupitHome.get(context)
+                    .offerAgencModel!
+                    .data!
+                    .offers[i]
+                    .latitude!,
+                CupitHome.get(context)
+                    .offerAgencModel!
+                    .data!
+                    .offers[i]
+                    .longitude!),
+            infoWindow: InfoWindow(
+                title:
+                    "${CupitHome.get(context).offerAgencModel!.data!.offers[i].typeOffer}",
+                snippet:
+                    '${CupitHome.get(context).offerAgencModel!.data!.offers[i].description}',
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Offerdetailagence(
+                                position: i,
+                              )));
+                }),
+          ),
+        );
+  }
+  print('oooooooooooooooo');
+  // print(mmap);
+  // emit(GoodGetAllOffersMap());
+}

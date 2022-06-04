@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:agence/Map/alloffer.dart';
+import 'package:agence/Map/alloffersMapClient.dart';
 import 'package:agence/Model/AfficheOffer.dart';
 import 'package:agence/clienthome/search.dart';
 import 'package:agence/offersdetails/cubitOfferDetail.dart';
@@ -11,7 +11,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../Api/constApi.dart';
 import '../home/cubitHome/cupit_home.dart';
 import '../home/cubitHome/homeStates.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -57,8 +56,10 @@ class Offersclient extends StatelessWidget {
             onPressed: () {
               // await CupitHome.get(context).allmap();
               allmap(context).then((value) {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AllOffersMap()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AllOffersMapClient()));
               });
               // Navigator.push(context, MaterialPageRoute(builder: (context) =>  Navbar()));
             },

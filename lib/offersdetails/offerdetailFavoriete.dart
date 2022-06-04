@@ -15,6 +15,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../Map/GetLocationClientFav.dart';
 import '../home/cubitHome/cupit_home.dart';
 
 class OfferDetailFav extends StatefulWidget {
@@ -240,7 +241,15 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                           ),
                           MaterialButton(
                             minWidth: 0,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          GetLocationClientFav(
+                                            position: widget.position!,
+                                          )));
+                            },
                             shape: const CircleBorder(),
                             color: CupitHome.get(context).dartSwitch
                                 ? const Color(0xff8d8d8d)

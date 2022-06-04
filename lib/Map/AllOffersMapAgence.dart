@@ -14,15 +14,15 @@ import 'location.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 
-class AllOffersMap extends StatefulWidget {
-  AllOffersMap({Key? key}) : super(key: key);
+class AllOffersMapAgence extends StatefulWidget {
+  AllOffersMapAgence({Key? key}) : super(key: key);
 
   @override
-  State<AllOffersMap> createState() => _AllOffersMapState();
+  State<AllOffersMapAgence> createState() => _AllOffersMapAgenceState();
 }
 
-class _AllOffersMapState extends State<AllOffersMap> {
-  _AllOffersMapState();
+class _AllOffersMapAgenceState extends State<AllOffersMapAgence> {
+  _AllOffersMapAgenceState();
 
   Completer<GoogleMapController> _controller = Completer();
   Set<Marker>? _markers;
