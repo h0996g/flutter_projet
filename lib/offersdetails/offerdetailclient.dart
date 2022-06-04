@@ -33,11 +33,11 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
 
   Map<String, dynamic> sendinfomsg = {};
 
-  List<String> models = [
-    'assets/images/on2.png',
-    'assets/images/building.jpg',
-    'assets/images/design.png'
-  ];
+  // List<String> models = [
+  //   'assets/images/on2.png',
+  //   'assets/images/building.jpg',
+  //   'assets/images/design.png'
+  // ];
 
   int a = 0;
 
@@ -105,7 +105,8 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                   left: -5,
                   child: MaterialButton(
                     onPressed: () {
-                      Changepage(context, const Navbar());
+                      // Changepage(context, const Navbar());
+                      Navigator.pop(context);
                     },
                     shape: const CircleBorder(),
                     color: CupitHome.get(context).dartSwitch

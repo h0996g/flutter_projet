@@ -182,15 +182,15 @@ class _GetLocationClientState extends State<GetLocationClient> {
     _markers = {};
 
     Marker newMarker = Marker(
-      markerId: MarkerId(_location.toString()),
-      icon: BitmapDescriptor.defaultMarker,
-      // icon: _locationIcon,
-      position: _location,
-      infoWindow: InfoWindow(
-          title: "Title",
-          snippet:
-              "${CupitHome.get(context).allofferModel!.data!.offers[position].latitude!}, ${CupitHome.get(context).allofferModel!.data!.offers[position].latitude!}"),
-    );
+        markerId: MarkerId(_location.toString()),
+        icon: BitmapDescriptor.defaultMarker,
+        // icon: _locationIcon,
+        position: _location,
+        infoWindow: InfoWindow(
+            // title: "Title",
+            // snippet:
+            //     "${CupitHome.get(context).allofferModel!.data!.offers[position].latitude!}, ${CupitHome.get(context).allofferModel!.data!.offers[position].latitude!}"
+            ));
     _markers.add(newMarker);
 
     setState(() {});

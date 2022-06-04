@@ -9,6 +9,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../Api/constApi.dart';
 import '../home/cubitHome/cupit_home.dart';
@@ -53,11 +54,13 @@ class Offersclient extends StatelessWidget {
       builder: (BuildContext context, state) {
         return Scaffold(
           floatingActionButton: FloatingActionButton(
-            onPressed: () async {
-              await CupitHome.get(context).allmap();
+            onPressed: () {
+              // await CupitHome.get(context).allmap();
+              allmap(context).then((value) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AllOffersMap()));
+              });
               // Navigator.push(context, MaterialPageRoute(builder: (context) =>  Navbar()));
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AllOffersMap()));
             },
             child: Icon(
               Icons.place,
@@ -357,4 +360,54 @@ class Offersclient extends StatelessWidget {
       ]),
     );
   }
+}
+
+Future<void> allmap(context) async {
+  CupitHome.get(context).mmap = {};
+  for (var i = 0;
+      i <= CupitHome.get(context).allofferModel!.data!.offers.length - 1;
+      i++) {
+    await CubitDetail.get(context).getNameandPhone(data: {
+      'offer_id': '${CupitHome.get(context).allofferModel!.data!.offers[i].id}',
+    });
+    CupitHome.get(context).mmap.add(
+          Marker(
+            markerId: MarkerId(LatLng(
+                    CupitHome.get(context)
+                        .allofferModel!
+                        .data!
+                        .offers[i]
+                        .latitude!,
+                    CupitHome.get(context)
+                        .allofferModel!
+                        .data!
+                        .offers[i]
+                        .longitude!)
+                .toString()),
+            icon: BitmapDescriptor.defaultMarker,
+            position: LatLng(
+                CupitHome.get(context).allofferModel!.data!.offers[i].latitude!,
+                CupitHome.get(context)
+                    .allofferModel!
+                    .data!
+                    .offers[i]
+                    .longitude!),
+            infoWindow: InfoWindow(
+                title: "${CubitDetail.get(context).namAndphoen[0]['name']}",
+                snippet:
+                    '${CupitHome.get(context).allofferModel!.data!.offers[i].typeOffer},${CupitHome.get(context).allofferModel!.data!.offers[i].description}',
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Offerdetailclient(
+                                position: i,
+                              )));
+                }),
+          ),
+        );
+  }
+  print('oooooooooooooooo');
+  // print(mmap);
+  // emit(GoodGetAllOffersMap());
 }
