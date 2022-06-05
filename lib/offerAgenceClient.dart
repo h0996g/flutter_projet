@@ -15,6 +15,7 @@ import 'home/cubitHome/homeStates.dart';
 
 class OfferAgenceClient extends StatefulWidget {
   var model;
+
   OfferAgenceClient({Key? key, this.model}) : super(key: key);
 
   @override
@@ -24,6 +25,7 @@ class OfferAgenceClient extends StatefulWidget {
 
 class _OfferAgenceClientState extends State<OfferAgenceClient> {
   var model;
+
   _OfferAgenceClientState({this.model});
   // Map<String, dynamic> getallmsg = {};
   @override
@@ -170,8 +172,16 @@ ListItembuilder(context, OffersModel model) {
     style: NeumorphicStyle(
         color: CupitHome.get(context).dartSwitch ? Colors.black : Colors.white,
         depth: 0),
-    onPressed: () {
+    onPressed: () async {
+      Map<String, dynamic> sendfav = {};
       CubitDetail.get(context).indexAgence = 0;
+      sendfav = {
+        'offer_id': '${modelAgence.id}',
+      };
+      await CubitDetail.get(context).getNameandPhone(data: {
+        'offer_id': '${modelAgence.id}',
+      });
+      CubitDetail.get(context).getexistfav(data: sendfav);
 
       Navigator.push(
           context,

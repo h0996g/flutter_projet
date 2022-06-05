@@ -9,7 +9,7 @@ import 'home/cubitHome/cupit_home.dart';
 import 'home/cubitHome/homeStates.dart';
 
 class ProfilAgence extends StatefulWidget {
-  final OffersModel model;
+  var model;
   ProfilAgence({Key? key, required this.model}) : super(key: key);
 
   @override
@@ -17,7 +17,7 @@ class ProfilAgence extends StatefulWidget {
 }
 
 class _ProfilAgenceState extends State<ProfilAgence> {
-  OffersModel model;
+  var model;
   _ProfilAgenceState({required this.model});
   @override
   void initState() {

@@ -366,6 +366,7 @@ Future<void> allmap(context) async {
     await CubitDetail.get(context).getNameandPhone(data: {
       'offer_id': '${CupitHome.get(context).allofferModel!.data!.offers[i].id}',
     });
+
     CupitHome.get(context).mmap.add(
           Marker(
             markerId: MarkerId(LatLng(
@@ -389,10 +390,11 @@ Future<void> allmap(context) async {
                     .offers[i]
                     .longitude!),
             infoWindow: InfoWindow(
-                title: "${CubitDetail.get(context).namAndphoen[0]['name']}",
+                title: CubitDetail.get(context).namAndphoen[0]['name'],
                 snippet:
                     '${CupitHome.get(context).allofferModel!.data!.offers[i].typeOffer},${CupitHome.get(context).allofferModel!.data!.offers[i].description}',
                 onTap: () {
+                  print(CubitDetail.get(context).namAndphoen[0]['name']);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
