@@ -51,7 +51,9 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
   @override
   void initState() {
     // TODO: implement initState
+
     super.initState();
+
     number = CubitDetail.get(context).namAndphoen[0]['phone'];
     seLoger = CubitDetail.get(context).namAndphoen[0]['name'];
   }

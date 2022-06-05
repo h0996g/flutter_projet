@@ -107,6 +107,12 @@ class Search extends StatelessWidget {
                       //     )),
 
                       TypeAheadFormField(
+                          textFieldConfiguration: const TextFieldConfiguration(
+                              autofocus: true,
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder())),
+                          // animationDuration: Duration(seconds: 2),
+
                           itemBuilder: (BuildContext context, Name? model) {
                             // final modelClient = model;
                             // var imageProvider;
@@ -242,6 +248,10 @@ class Search extends StatelessWidget {
                           onSuggestionSelected: (Name? k) {},
                         )
                       : TypeAheadFormField(
+                          textFieldConfiguration: const TextFieldConfiguration(
+                              autofocus: true,
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder())),
                           itemBuilder:
                               (BuildContext context, OffersModel? model) {
                             final imageProvider =
@@ -255,6 +265,8 @@ class Search extends StatelessWidget {
                                       : Colors.white,
                                   depth: 0),
                               onPressed: () async {
+                                CubitDetail.get(context)
+                                    .changeNavDetailClient(0);
                                 // CubitDetail.get(context).indexClient = 0;
                                 print(modelClient.id);
                                 sendfav = {
@@ -266,7 +278,6 @@ class Search extends StatelessWidget {
                                 });
                                 CubitDetail.get(context)
                                     .getexistfav(data: sendfav);
-
                                 // print(positionClient);
                                 Navigator.push(
                                     context,
@@ -438,9 +449,9 @@ var agenceName;
 Future<List<Name>> getOfferAgencetoclientName(String query) async {
   List<Name> kk;
 
-  kk = await Httplar.httpget(path: '/api/getnamephonuser').then((value) {
+  kk = await Httplar.httpget(path: '/api/getnamephonuser').then((value) async {
     var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
-
+    // await Future.delayed(Duration(seconds: 2));
     agenceN = Dd.fromJson(jsonResponse);
     print('ook');
     agenceName = agenceN!.o;

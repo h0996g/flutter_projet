@@ -33,27 +33,27 @@ class CupitHome extends Cubit<HomeStates> {
   LatLng? currentLocation;
   Set<Marker> mmap = {};
   // Marker? newMarkerr;
-  Future<void> allmap() async {
-    for (var i = 0; i <= allofferModel!.data!.offers.length - 1; i++) {
-      mmap.add(
-        Marker(
-          markerId: MarkerId(LatLng(allofferModel!.data!.offers[i].latitude!,
-                  allofferModel!.data!.offers[i].longitude!)
-              .toString()),
-          icon: BitmapDescriptor.defaultMarker,
-          position: LatLng(allofferModel!.data!.offers[i].latitude!,
-              allofferModel!.data!.offers[i].longitude!),
-          infoWindow: InfoWindow(
-              title: "TypeOffer",
-              snippet:
-                  '${allofferModel!.data!.offers[i].typeOffer},${allofferModel!.data!.offers[i].description}'),
-        ),
-      );
-    }
-    print('oooooooooooooooo');
-    print(mmap);
-    emit(GoodGetAllOffersMap());
-  }
+  // Future<void> allmap() async {
+  //   for (var i = 0; i <= allofferModel!.data!.offers.length - 1; i++) {
+  //     mmap.add(
+  //       Marker(
+  //         markerId: MarkerId(LatLng(allofferModel!.data!.offers[i].latitude!,
+  //                 allofferModel!.data!.offers[i].longitude!)
+  //             .toString()),
+  //         icon: BitmapDescriptor.defaultMarker,
+  //         position: LatLng(allofferModel!.data!.offers[i].latitude!,
+  //             allofferModel!.data!.offers[i].longitude!),
+  //         infoWindow: InfoWindow(
+  //             title: "TypeOffer",
+  //             snippet:
+  //                 '${allofferModel!.data!.offers[i].typeOffer},${allofferModel!.data!.offers[i].description}'),
+  //       ),
+  //     );
+  //   }
+  //   print('oooooooooooooooo');
+  //   print(mmap);
+  //   emit(GoodGetAllOffersMap());
+  // }
 
   // CameraPosition? initialCameraPosition;
 

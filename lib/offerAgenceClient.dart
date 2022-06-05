@@ -173,6 +173,7 @@ ListItembuilder(context, OffersModel model) {
         color: CupitHome.get(context).dartSwitch ? Colors.black : Colors.white,
         depth: 0),
     onPressed: () async {
+      CubitDetail.get(context).changeNavDetailClient(0);
       Map<String, dynamic> sendfav = {};
       CubitDetail.get(context).indexAgence = 0;
       sendfav = {
@@ -182,7 +183,6 @@ ListItembuilder(context, OffersModel model) {
         'offer_id': '${modelAgence.id}',
       });
       CubitDetail.get(context).getexistfav(data: sendfav);
-
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -329,6 +329,7 @@ Future<void> allmap(context) async {
                 snippet:
                     '${CupitHome.get(context).getOfferAgenceclientmodel!.data!.offers[i].description}',
                 onTap: () {
+                  CubitDetail.get(context).changeNavDetailClient(0);
                   Navigator.push(
                       context,
                       MaterialPageRoute(

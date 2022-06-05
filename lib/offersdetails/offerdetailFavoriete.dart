@@ -17,6 +17,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../Map/GetLocationClientFav.dart';
 import '../home/cubitHome/cupit_home.dart';
+import '../offerAgenceClient.dart';
 
 class OfferDetailFav extends StatefulWidget {
   final OffersModel model;
@@ -64,7 +65,7 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           Expanded(
@@ -269,10 +270,20 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                           const SizedBox(
                             width: 20,
                           ),
-                          Text(
-                            seLoger!,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => OfferAgenceClient(
+                                            model: model,
+                                          )));
+                            },
+                            child: Text(
+                              seLoger!,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
                           ),
                           const SizedBox(
                             width: 20,
@@ -649,19 +660,7 @@ Widget Listemessage(context, msg) => Container(
                 const SizedBox(
                   width: 7,
                 ),
-                MaterialButton(
-                  onPressed: () {},
-                  shape: const CircleBorder(),
-                  color: CupitHome.get(context).dartSwitch
-                      ? const Color(0xff8d8d8d)
-                      : Colors.blue,
-                  child: Icon(
-                    Icons.delete,
-                    color: CupitHome.get(context).dartSwitch
-                        ? Colors.white
-                        : Colors.white,
-                  ),
-                ),
+
                 const SizedBox(
                   width: 0,
                 ),

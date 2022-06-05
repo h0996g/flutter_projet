@@ -268,6 +268,7 @@ class Offersclient extends StatelessWidget {
               CupitHome.get(context).dartSwitch ? Colors.black : Colors.white,
           depth: 0),
       onPressed: () async {
+        CubitDetail.get(context).changeNavDetailClient(0);
         CubitDetail.get(context).indexClient = 0;
         print(modelClient.id);
         sendfav = {
@@ -277,7 +278,6 @@ class Offersclient extends StatelessWidget {
           'offer_id': '${modelClient.id}',
         });
         CubitDetail.get(context).getexistfav(data: sendfav);
-
         // print(positionClient);
         Navigator.push(
             context,
@@ -390,21 +390,27 @@ Future<void> allmap(context) async {
                     .offers[i]
                     .longitude!),
             infoWindow: InfoWindow(
-                title: CubitDetail.get(context).namAndphoen[0]['name'],
-                snippet:
-                    '${CupitHome.get(context).allofferModel!.data!.offers[i].typeOffer},${CupitHome.get(context).allofferModel!.data!.offers[i].description}',
-                onTap: () {
-                  print(CubitDetail.get(context).namAndphoen[0]['name']);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Offerdetailclient(
-                                model: CupitHome.get(context)
-                                    .allofferModel!
-                                    .data!
-                                    .offers[i],
-                              )));
-                }),
+              title: CubitDetail.get(context).namAndphoen[0]['name'],
+              snippet:
+                  '${CupitHome.get(context).allofferModel!.data!.offers[i].typeOffer},${CupitHome.get(context).allofferModel!.data!.offers[i].description}',
+              onTap: () async {
+                await CubitDetail.get(context).getNameandPhone(data: {
+                  'offer_id':
+                      '${CupitHome.get(context).allofferModel!.data!.offers[i].id}',
+                });
+                print(CubitDetail.get(context).namAndphoen[0]['name']);
+                CubitDetail.get(context).changeNavDetailClient(0);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Offerdetailclient(
+                              model: CupitHome.get(context)
+                                  .allofferModel!
+                                  .data!
+                                  .offers[i],
+                            )));
+              },
+            ),
           ),
         );
   }
