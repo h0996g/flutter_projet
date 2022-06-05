@@ -1,24 +1,38 @@
 import 'dart:convert';
 import 'package:agence/Map/AllOffersMapAgence.dart';
 import 'package:agence/Model/AfficheOffer.dart';
-import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/home/cubitHome/cupit_home.dart';
 import 'package:agence/offersdetails/cubitOfferDetail.dart';
-import 'package:agence/offersdetails/offerdetailagence.dart';
-import 'package:agence/shared/components/components.dart';
+import 'package:agence/offersdetails/offerdetailclient.dart';
+import 'package:agence/profileAgenceClient.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../clienthome/search.dart';
-
 import '../shimmer_widget.dart';
-import 'cubitHome/homeStates.dart';
+import 'home/cubitHome/homeStates.dart';
 
-class Offers extends StatelessWidget {
-  const Offers({Key? key}) : super(key: key);
+class OfferAgenceClient extends StatefulWidget {
+  var model;
+  OfferAgenceClient({Key? key, this.model}) : super(key: key);
+
+  @override
+  State<OfferAgenceClient> createState() =>
+      _OfferAgenceClientState(model: model);
+}
+
+class _OfferAgenceClientState extends State<OfferAgenceClient> {
+  var model;
+  _OfferAgenceClientState({this.model});
   // Map<String, dynamic> getallmsg = {};
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    CupitHome.get(context).getOfferAgenceclient(model!.agenceId.toString());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +68,16 @@ class Offers extends StatelessWidget {
                   fontSize: 34),
             ),
             actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfilAgence(
+                                  model: model!,
+                                )));
+                  },
+                  child: Text('profile')),
               IconButton(
                   onPressed: () {
                     // String k = '\\"' + 'ggg' + '\\"';
@@ -65,15 +89,6 @@ class Offers extends StatelessWidget {
                     Icons.dark_mode_outlined,
                     size: 30,
                   )),
-              IconButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Search()));
-                  },
-                  icon: const Icon(
-                    Icons.search,
-                    size: 30,
-                  ))
             ],
           ),
           body: ConditionalBuilder(
@@ -90,12 +105,12 @@ class Offers extends StatelessWidget {
                         return ListItembuilder(
                             context,
                             CupitHome.get(context)
-                                .offerAgencModel!
+                                .getOfferAgenceclientmodel!
                                 .data!
                                 .offers[index]);
                       }),
                       itemCount: CupitHome.get(context)
-                          .offerAgencModel!
+                          .getOfferAgenceclientmodel!
                           .data!
                           .offers
                           .length,
@@ -107,8 +122,9 @@ class Offers extends StatelessWidget {
                     ),
                   ));
             },
-            condition: CupitHome.get(context).offerAgencModel != null &&
-                state is! ConditionalLodinOfferAgenceState,
+            condition:
+                CupitHome.get(context).getOfferAgenceclientmodel != null &&
+                    state is! ConditionalLodinOfferAgenceState,
             fallback: (BuildContext context) {
               return Padding(
                 padding:
@@ -160,7 +176,7 @@ ListItembuilder(context, OffersModel model) {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => Offerdetailagence(
+              builder: (context) => Offerdetailclient(
                     model: modelAgence,
                   )));
     },
@@ -263,18 +279,24 @@ buildFoodShimmer(context) => Column(
 Future<void> allmap(context) async {
   CupitHome.get(context).mmap = {};
   for (var i = 0;
-      i <= CupitHome.get(context).offerAgencModel!.data!.offers.length - 1;
+      i <=
+          CupitHome.get(context)
+                  .getOfferAgenceclientmodel!
+                  .data!
+                  .offers
+                  .length -
+              1;
       i++) {
     CupitHome.get(context).mmap.add(
           Marker(
             markerId: MarkerId(LatLng(
                     CupitHome.get(context)
-                        .offerAgencModel!
+                        .getOfferAgenceclientmodel!
                         .data!
                         .offers[i]
                         .latitude!,
                     CupitHome.get(context)
-                        .offerAgencModel!
+                        .getOfferAgenceclientmodel!
                         .data!
                         .offers[i]
                         .longitude!)
@@ -282,27 +304,27 @@ Future<void> allmap(context) async {
             icon: BitmapDescriptor.defaultMarker,
             position: LatLng(
                 CupitHome.get(context)
-                    .offerAgencModel!
+                    .getOfferAgenceclientmodel!
                     .data!
                     .offers[i]
                     .latitude!,
                 CupitHome.get(context)
-                    .offerAgencModel!
+                    .getOfferAgenceclientmodel!
                     .data!
                     .offers[i]
                     .longitude!),
             infoWindow: InfoWindow(
                 title:
-                    "${CupitHome.get(context).offerAgencModel!.data!.offers[i].typeOffer}",
+                    "${CupitHome.get(context).getOfferAgenceclientmodel!.data!.offers[i].typeOffer}",
                 snippet:
-                    '${CupitHome.get(context).offerAgencModel!.data!.offers[i].description}',
+                    '${CupitHome.get(context).getOfferAgenceclientmodel!.data!.offers[i].description}',
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Offerdetailagence(
+                          builder: (context) => Offerdetailclient(
                                 model: CupitHome.get(context)
-                                    .offerAgencModel!
+                                    .getOfferAgenceclientmodel!
                                     .data!
                                     .offers[i],
                               )));

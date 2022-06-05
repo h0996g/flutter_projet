@@ -7,6 +7,7 @@ import 'package:agence/Model/AfficheOffer.dart';
 import 'package:agence/login/other/cachhelper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
@@ -28,6 +29,77 @@ class CupitHome extends Cubit<HomeStates> {
 
   static CupitHome get(context) => BlocProvider.of(context);
   List<Widget> body = [const Offers(), AddPost(), const Setting()];
+// --------------------------------------------- Map-------------------------
+  LatLng? currentLocation;
+  Set<Marker> mmap = {};
+  // Marker? newMarkerr;
+  Future<void> allmap() async {
+    for (var i = 0; i <= allofferModel!.data!.offers.length - 1; i++) {
+      mmap.add(
+        Marker(
+          markerId: MarkerId(LatLng(allofferModel!.data!.offers[i].latitude!,
+                  allofferModel!.data!.offers[i].longitude!)
+              .toString()),
+          icon: BitmapDescriptor.defaultMarker,
+          position: LatLng(allofferModel!.data!.offers[i].latitude!,
+              allofferModel!.data!.offers[i].longitude!),
+          infoWindow: InfoWindow(
+              title: "TypeOffer",
+              snippet:
+                  '${allofferModel!.data!.offers[i].typeOffer},${allofferModel!.data!.offers[i].description}'),
+        ),
+      );
+    }
+    print('oooooooooooooooo');
+    print(mmap);
+    emit(GoodGetAllOffersMap());
+  }
+
+  // CameraPosition? initialCameraPosition;
+
+  // void setstatet3Map(CameraPosition newpos) {
+  //   currentLocation = newpos.target;
+  //   emit(Setstatet3MapState());
+  // }
+
+  // void awalLocation(LatLng? currentLocation) {
+  //   if (currentLocation == null) {
+  //     initialCameraPosition = const CameraPosition(
+  //       target: const LatLng(33.515343, 36.289590),
+  //       // target: LatLng(36.31789608941112, 6.615674905478954),
+  //       zoom: 14.4746,
+  //     );
+  //   } else {
+  //     initialCameraPosition = CameraPosition(
+  //       target: LatLng(currentLocation.latitude, currentLocation.longitude),
+  //       // target: LatLng(36.31789608941112, 6.615674905478954),
+  //       zoom: 14.4746,
+  //     );
+  //   }
+  //   emit(AwalLocationState());
+  // }
+
+  // void awelModel(double? latitude, double? longitude) {
+  //   if (latitude == null && longitude == null) {
+  //     initialCameraPosition = const CameraPosition(
+  //       target: const LatLng(33.515343, 36.289590),
+  //       // target: LatLng(36.31789608941112, 6.615674905478954),
+  //       zoom: 14.4746,
+  //     );
+  //   } else {
+  //     initialCameraPosition = CameraPosition(
+  //       target: LatLng(latitude!, longitude!),
+  //       // target: LatLng(36.31789608941112, 6.615674905478954),
+  //       zoom: 14.4746,
+  //     );
+  //   }
+  //   emit(AwelModelState());
+  // }
+
+  // void currentLocationSetStat(LatLng kk) {
+  //   currentLocation = initialCameraPosition!.target;
+  //   emit(CurrentLocationSetStatState());
+  // }
 
   // int position = 0;
 
@@ -362,6 +434,7 @@ class CupitHome extends Cubit<HomeStates> {
     descriptionController = TextEditingController();
     addressController = TextEditingController();
     priceController = TextEditingController();
+    currentLocation = null;
 
     paymentVar = paiment
         .map((payment) =>
@@ -407,11 +480,37 @@ class CupitHome extends Cubit<HomeStates> {
       var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
 
       offerAgencModel = DataOffer.fromJson(jsonResponse);
-      print('ook');
-      // print(dataOfferModel!.data!.offers[0].papiers);
+      print('ook agence offer');
+      // print(offerAgencModel!.data!.offers[0].address);
+      // print(offerAgencModel!.data!.offers[0].latitude);
+      // print(offerAgencModel!.data!.offers[0].longitude);
       emit(GoodGetOffersAgence());
     }).catchError((e) {
       print(e.toString());
+      print('baaad agence offer');
+
+      emit(BadGetOffersAgence());
+    });
+  }
+
+  DataOffer? getOfferAgenceclientmodel;
+  Future<void> getOfferAgenceclient(id) async {
+    // offerAgencModel = null;
+    emit(ConditionalLodinOfferAgenceState());
+    Httplar.httpPost(path: GETOFFERAGENCETOCLIENT, data: {'agence_id': id})
+        .then((value) {
+      var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
+
+      getOfferAgenceclientmodel = DataOffer.fromJson(jsonResponse);
+      print('ook agence offer');
+      // print(offerAgencModel!.data!.offers[0].address);
+      // print(offerAgencModel!.data!.offers[0].latitude);
+      // print(offerAgencModel!.data!.offers[0].longitude);
+      emit(GoodGetOffersAgence());
+    }).catchError((e) {
+      print(e.toString());
+      print('baaad agence offer');
+
       emit(BadGetOffersAgence());
     });
   }
@@ -424,6 +523,27 @@ class CupitHome extends Cubit<HomeStates> {
       var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
 
       getinfouserModel = GetInfoUser.fromJson(jsonResponse);
+      print('ook user info');
+      // print(getinfouserModel!.agence!.address);
+      print(value.body);
+      // print(getinfouserModel!.photo);
+
+      emit(GoodGetInfoUserState());
+    }).catchError((e) {
+      print(e.toString());
+      emit(BaadGetInfoUserState());
+    });
+  }
+
+  GetInfoUser? getinfoAgonceToClientModel;
+  Future<void> getinformationAgenceToClient(id) async {
+    emit(ConditionalLodinInfoState());
+    Httplar.httpPost(
+        path: '/api/getagenceProfiletoclient',
+        data: {'agence_id': id}).then((value) {
+      var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
+
+      getinfoAgonceToClientModel = GetInfoUser.fromJson(jsonResponse);
       print('ook user info');
       // print(getinfouserModel!.agence!.address);
       print(value.body);

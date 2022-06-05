@@ -8,7 +8,7 @@ const ADDOFFER = '/api/createoffer';
 const UPDATEOFFER = '/api/updateoffer';
 
 const DELETEOFFER = '/api/deleteoffer';
-const URLHTTP = '172.20.10.2:8000';
+const URLHTTP = '192.168.225.68:8000';
 
 const GETOFFERSAGENCE = '/api/getofferagence';
 // const GETALLOFFER = '/api/getofferall';
@@ -34,3 +34,6 @@ var USERTYPE = LOGINCLIENT;
 const SENDMESSAGE = '/api/addmessage';
 const GETALLMSG = '/api/getmessage';
 const DELETEMSGOFFER = '/api/deletemessage';
+
+//--
+const GETOFFERAGENCETOCLIENT = '/api/getofferagenceclient';

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:agence/Map/alloffersMapClient.dart';
 import 'package:agence/Model/AfficheOffer.dart';
 import 'package:agence/clienthome/search.dart';
 import 'package:agence/offersdetails/cubitOfferDetail.dart';
@@ -8,8 +9,8 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../Api/constApi.dart';
 import '../home/cubitHome/cupit_home.dart';
 import '../home/cubitHome/homeStates.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -53,6 +54,13 @@ class Offersclient extends StatelessWidget {
         return Scaffold(
           floatingActionButton: FloatingActionButton(
             onPressed: () {
+              // await CupitHome.get(context).allmap();
+              allmap(context).then((value) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AllOffersMapClient()));
+              });
               // Navigator.push(context, MaterialPageRoute(builder: (context) =>  Navbar()));
             },
             child: Icon(
@@ -84,10 +92,8 @@ class Offersclient extends StatelessWidget {
                   )),
               IconButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Search()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Search()));
                   },
                   icon: const Icon(
                     Icons.search,
@@ -180,14 +186,13 @@ class Offersclient extends StatelessWidget {
                       return ListView.separated(
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: ((context, index) {
-                          int positionClient = index;
                           return ListItembuilder(
-                              context,
-                              CupitHome.get(context)
-                                  .allofferModel!
-                                  .data!
-                                  .offers[index],
-                              positionClient);
+                            context,
+                            CupitHome.get(context)
+                                .allofferModel!
+                                .data!
+                                .offers[index],
+                          );
                         }),
                         itemCount: CupitHome.get(context)
                             .allofferModel!
@@ -250,7 +255,11 @@ class Offersclient extends StatelessWidget {
     );
   }
 
-  ListItembuilder(context, OffersModel model, int positionClient) {
+  ListItembuilder(
+    context,
+    OffersModel model,
+  ) {
+    final modelClient = model;
     final imageProvider = MemoryImage(base64Decode(model.photo![0]));
 
     return NeumorphicButton(
@@ -260,18 +269,12 @@ class Offersclient extends StatelessWidget {
           depth: 0),
       onPressed: () async {
         CubitDetail.get(context).indexClient = 0;
-        print(CupitHome.get(context)
-            .allofferModel!
-            .data!
-            .offers[positionClient]
-            .id);
+        print(modelClient.id);
         sendfav = {
-          'offer_id':
-              '${CupitHome.get(context).allofferModel!.data!.offers[positionClient].id}',
+          'offer_id': '${modelClient.id}',
         };
         await CubitDetail.get(context).getNameandPhone(data: {
-          'offer_id':
-              '${CupitHome.get(context).allofferModel!.data!.offers[positionClient].id}',
+          'offer_id': '${modelClient.id}',
         });
         CubitDetail.get(context).getexistfav(data: sendfav);
 
@@ -280,7 +283,7 @@ class Offersclient extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => Offerdetailclient(
-                      position: positionClient,
+                      model: modelClient,
                     )));
       },
       child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -353,4 +356,57 @@ class Offersclient extends StatelessWidget {
       ]),
     );
   }
+}
+
+Future<void> allmap(context) async {
+  CupitHome.get(context).mmap = {};
+  for (var i = 0;
+      i <= CupitHome.get(context).allofferModel!.data!.offers.length - 1;
+      i++) {
+    await CubitDetail.get(context).getNameandPhone(data: {
+      'offer_id': '${CupitHome.get(context).allofferModel!.data!.offers[i].id}',
+    });
+    CupitHome.get(context).mmap.add(
+          Marker(
+            markerId: MarkerId(LatLng(
+                    CupitHome.get(context)
+                        .allofferModel!
+                        .data!
+                        .offers[i]
+                        .latitude!,
+                    CupitHome.get(context)
+                        .allofferModel!
+                        .data!
+                        .offers[i]
+                        .longitude!)
+                .toString()),
+            icon: BitmapDescriptor.defaultMarker,
+            position: LatLng(
+                CupitHome.get(context).allofferModel!.data!.offers[i].latitude!,
+                CupitHome.get(context)
+                    .allofferModel!
+                    .data!
+                    .offers[i]
+                    .longitude!),
+            infoWindow: InfoWindow(
+                title: "${CubitDetail.get(context).namAndphoen[0]['name']}",
+                snippet:
+                    '${CupitHome.get(context).allofferModel!.data!.offers[i].typeOffer},${CupitHome.get(context).allofferModel!.data!.offers[i].description}',
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Offerdetailclient(
+                                model: CupitHome.get(context)
+                                    .allofferModel!
+                                    .data!
+                                    .offers[i],
+                              )));
+                }),
+          ),
+        );
+  }
+  print('oooooooooooooooo');
+  // print(mmap);
+  // emit(GoodGetAllOffersMap());
 }

@@ -1,3 +1,4 @@
+import 'package:agence/Map/setLocationOffer.dart';
 import 'package:agence/home/addphoto/addphoto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,21 +17,24 @@ class AddPost extends StatelessWidget {
         return Scaffold(
             appBar: AppBar(
               elevation: 15,
-              title: Text('Add Offer',
-                  style:TextStyle(
-                  color: CupitHome.get(context).dartSwitch
-                  ? Colors.white
-                  : Colors.black,fontSize: 34),),
+              title: Text(
+                'Add Offer',
+                style: TextStyle(
+                    color: CupitHome.get(context).dartSwitch
+                        ? Colors.white
+                        : Colors.black,
+                    fontSize: 34),
+              ),
               actions: [
                 IconButton(
                     onPressed: () {
-                      CupitHome.get(context).changeSwitch(value: !CupitHome.get(context).dartSwitch);
+                      CupitHome.get(context).changeSwitch(
+                          value: !CupitHome.get(context).dartSwitch);
                     },
                     icon: const Icon(
                       Icons.dark_mode_outlined,
                       size: 30,
                     )),
-
               ],
             ),
             body: Center(
@@ -58,9 +62,9 @@ class AddPost extends StatelessWidget {
                                           ? Colors.white
                                           : Colors.black),
                                   dropdownColor:
-                                  CupitHome.get(context).dartSwitch
-                                      ? Colors.black
-                                      : Colors.white,
+                                      CupitHome.get(context).dartSwitch
+                                          ? Colors.black
+                                          : Colors.white,
                                   isExpanded: true,
                                   hint: Text(
                                     'Vente',
@@ -99,9 +103,9 @@ class AddPost extends StatelessWidget {
                                           ? Colors.white
                                           : Colors.black),
                                   dropdownColor:
-                                  CupitHome.get(context).dartSwitch
-                                      ? Colors.black
-                                      : Colors.white,
+                                      CupitHome.get(context).dartSwitch
+                                          ? Colors.black
+                                          : Colors.white,
                                   isExpanded: true,
                                   hint: Text(
                                     'Appartement',
@@ -420,39 +424,54 @@ class AddPost extends StatelessWidget {
                           const SizedBox(
                             height: 26,
                           ),
-                          Container(height: 60,width: double.infinity,
-
-                            decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(15)),
+                          Container(
+                            height: 60,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(
+                                  const Radius.circular(15)),
                               border: Border.all(
                                 width: 1,
                                 color: CupitHome.get(context).dartSwitch
                                     ? Colors.white
                                     : Colors.black,
-                              ),),
-
-                            child: MaterialButton(onPressed: (){},
-                              child: Row(children: [
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Icon(Icons.gps_fixed_rounded,
-                                    size: 40,
-                                    color: CupitHome.get(context).dartSwitch
-                                        ? Colors.white
-                                        : Colors.black
-                                ),
-                                const SizedBox(
-                                  width: 25,
-                                ),
-                                Text('Ajouter Location',style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold,color:CupitHome.get(context).dartSwitch
-                                    ? Colors.white
-                                    : Colors.black),)
-
-                              ],),),
-
+                              ),
+                            ),
+                            child: MaterialButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SetLocationOffer()));
+                              },
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Icon(Icons.gps_fixed_rounded,
+                                      size: 40,
+                                      color: CupitHome.get(context).dartSwitch
+                                          ? Colors.white
+                                          : Colors.black),
+                                  const SizedBox(
+                                    width: 25,
+                                  ),
+                                  Text(
+                                    'Ajouter Location',
+                                    style: TextStyle(
+                                        fontSize: 28,
+                                        fontWeight: FontWeight.bold,
+                                        color: CupitHome.get(context).dartSwitch
+                                            ? Colors.white
+                                            : Colors.black),
+                                  )
+                                ],
+                              ),
+                            ),
                           ),
 
-                          
                           const SizedBox(
                             height: 26,
                           ),

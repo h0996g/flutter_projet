@@ -61,7 +61,7 @@ class CubitModifier extends Cubit<ModifierStates> {
 //---------------------------image profile agence--------------------------------
   final ImagePicker imagePicker = ImagePicker();
   // List<XFile>? imageFileList = [];
-  String? base64Agence;
+  String base64Agence = '';
 // File? picturefinale ;
   File? selectedImages;
 

@@ -64,14 +64,13 @@ class _FavoriteState extends State<Favorite> {
                   child: ListView.separated(
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: ((context, index) {
-                      int position = index;
                       return ListItembuilder(
-                          context,
-                          CubitDetail.get(context)
-                              .getFavoritesmodel!
-                              .data!
-                              .offers[index],
-                          position);
+                        context,
+                        CubitDetail.get(context)
+                            .getFavoritesmodel!
+                            .data!
+                            .offers[index],
+                      );
                     }),
                     itemCount: CubitDetail.get(context)
                         .getFavoritesmodel!
@@ -104,7 +103,11 @@ class _FavoriteState extends State<Favorite> {
     );
   }
 
-  ListItembuilder(context, OffersModel model, int position) {
+  ListItembuilder(
+    context,
+    OffersModel model,
+  ) {
+    final OffersModel modelfav = model;
     final imageProvider = MemoryImage(base64Decode(model.photo![0]));
 
     return NeumorphicButton(
@@ -115,19 +118,17 @@ class _FavoriteState extends State<Favorite> {
       onPressed: () async {
         CubitDetail.get(context).indexClient = 0;
         sendfav = {
-          'offer_id':
-              '${CubitDetail.get(context).getFavoritesmodel!.data!.offers[position].id}',
+          'offer_id': '${modelfav.id}',
         };
         await CubitDetail.get(context).getNameandPhone(data: {
-          'offer_id':
-              '${CubitDetail.get(context).getFavoritesmodel!.data!.offers[position].id}',
+          'offer_id': '${modelfav.id}',
         });
         CubitDetail.get(context).getexistfav(data: sendfav);
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => OfferDetailFav(
-                      position: position,
+                      model: modelfav,
                     )));
       },
       child: Column(mainAxisSize: MainAxisSize.min, children: [
