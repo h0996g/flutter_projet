@@ -10,13 +10,13 @@ class Dd {
 class Name {
   String? name;
   String? phone;
-  int? id;
+  int? agenceId;
   String? photo;
 
   Name.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     phone = json['phone'];
-    id = json['id'];
+    agenceId = json['id'];
     photo = json['photo'];
   }
 }

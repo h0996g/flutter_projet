@@ -14,6 +14,7 @@ import '../Model/AgencenameandphoneModel.dart';
 import '../home/cubitHome/cupit_home.dart';
 import 'dart:convert' as convert;
 
+import '../offerAgenceClient.dart';
 import '../offersdetails/cubitOfferDetail.dart';
 import '../offersdetails/offerdetailclient.dart';
 
@@ -107,115 +108,135 @@ class Search extends StatelessWidget {
 
                       TypeAheadFormField(
                           itemBuilder: (BuildContext context, Name? model) {
-                            // final imageProvider =
-                            //     MemoryImage(base64Decode(model!.photo![0]));
-
                             // final modelClient = model;
-                            // return NeumorphicButton(
-                            //   style: NeumorphicStyle(
-                            //       color: CupitHome.get(context).dartSwitch
-                            //           ? Colors.black
-                            //           : Colors.white,
-                            //       depth: 0),
-                            //   onPressed: () async {
-                            //     // CubitDetail.get(context).indexClient = 0;
-                            //     print(modelClient.id);
-                            //     sendfav = {
-                            //       'offer_id': '${modelClient.id}',
-                            //     };
-                            //     await CubitDetail.get(context).getNameandPhone(data: {
-                            //       'offer_id': '${modelClient.id}',
-                            //     });
-                            //     CubitDetail.get(context).getexistfav(data: sendfav);
+                            // var imageProvider;
 
-                            //     // print(positionClient);
-                            //     Navigator.push(
-                            //         context,
-                            //         MaterialPageRoute(
-                            //             builder: (context) => Offerdetailclient(
-                            //                   model: modelClient,
-                            //                 )));
-                            //   },
-                            //   child:
-                            //       Column(mainAxisSize: MainAxisSize.min, children: [
-                            //     Container(
-                            //       height: 150,
-                            //       width: double.infinity,
-                            //       decoration: BoxDecoration(
-                            //         borderRadius: BorderRadius.vertical(
-                            //             top: Radius.circular(20)),
-                            //         image: DecorationImage(
-                            //             image: imageProvider, fit: BoxFit.cover),
-                            //       ),
-                            //     ),
-                            //     Container(
-                            //       decoration: BoxDecoration(
-                            //         // color:  CupitHome.get(context).dartSwitch
-                            //         //     ? Colors.blueGrey
-                            //         //     : Colors.white,
-                            //         gradient: CupitHome.get(context).dartSwitch
-                            //             ? const LinearGradient(
-                            //                 begin: Alignment.topRight,
-                            //                 end: Alignment.bottomLeft,
-                            //                 colors: [
-                            //                   Color(0xff131313),
-                            //                   Color(0xff131313),
-                            //                 ],
-                            //               )
-                            //             : const LinearGradient(
-                            //                 begin: Alignment.topRight,
-                            //                 end: Alignment.bottomLeft,
-                            //                 colors: [
-                            //                     Colors.blue,
-                            //                     const Color(0xffCFD9E2FF),
-                            //                   ]),
-                            //         borderRadius: const BorderRadius.vertical(
-                            //             bottom: Radius.circular(20)),
-                            //       ),
-                            //       child: Column(
-                            //           crossAxisAlignment: CrossAxisAlignment.start,
-                            //           children: [
-                            //             const SizedBox(
-                            //               height: 10,
-                            //             ),
-                            //             Row(children: [
-                            //               const SizedBox(
-                            //                 width: 8,
-                            //               ),
-                            //               Text(
-                            //                 "${model.price} \$",
-                            //                 style: Theme.of(context)
-                            //                     .textTheme
-                            //                     .headline4
-                            //                     ?.copyWith(
-                            //                       fontSize: 32,
-                            //                     ),
-                            //               )
-                            //             ]),
-                            //             const SizedBox(
-                            //               height: 10,
-                            //             ),
-                            //             Row(children: [
-                            //               const SizedBox(
-                            //                 width: 8,
-                            //               ),
-                            //               Text(
-                            //                 '${model.address}',
-                            //                 style:
-                            //                     Theme.of(context).textTheme.bodyText2,
-                            //                 maxLines: 2,
-                            //                 overflow: TextOverflow.ellipsis,
-                            //               )
-                            //             ])
-                            //           ]),
-                            //       height: 120,
-                            //       width: double.infinity,
-                            //     )
-                            //   ]),
-                            // );
-                            return ListTile(
-                              title: Text('${model!.name}'),
+                            // modelClient != null
+                            //     ? imageProvider = MemoryImage(
+                            //         base64Decode(modelClient.photo!))
+                            //     : imageProvider = AssetImage(
+                            //         'assets/images/profile_avatar.jpg');
+
+                            return NeumorphicButton(
+                              style: NeumorphicStyle(
+                                  color: CupitHome.get(context).dartSwitch
+                                      ? Colors.black
+                                      : Colors.white,
+                                  depth: 0),
+                              onPressed: () async {
+                                // CubitDetail.get(context).indexClient = 0;
+                                // print(modelClient.id);
+                                // sendfav = {
+                                //   'offer_id': '${modelClient.id}',
+                                // };
+                                // await CubitDetail.get(context)
+                                //     .getNameandPhone(data: {
+                                //   'offer_id': '${modelClient.id}',
+                                // });
+                                // CubitDetail.get(context)
+                                //     .getexistfav(data: sendfav);
+
+                                // print(positionClient);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => OfferAgenceClient(
+                                              model: model,
+                                            )));
+                              },
+                              child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      height: 150,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            const BorderRadius.vertical(
+                                                top: Radius.circular(20)),
+                                        image: DecorationImage(
+                                            image: model!.photo == null
+                                                ? const AssetImage(
+                                                    'assets/images/profile_avatar.jpg')
+                                                : Image.memory(
+                                                    base64Decode(model.photo!),
+                                                    fit: BoxFit.cover,
+                                                  ).image,
+                                            fit: BoxFit.cover),
+                                      ),
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        // color:  CupitHome.get(context).dartSwitch
+                                        //     ? Colors.blueGrey
+                                        //     : Colors.white,
+                                        gradient: CupitHome.get(context)
+                                                .dartSwitch
+                                            ? const LinearGradient(
+                                                begin: Alignment.topRight,
+                                                end: Alignment.bottomLeft,
+                                                colors: [
+                                                  Color(0xff131313),
+                                                  Color(0xff131313),
+                                                ],
+                                              )
+                                            : const LinearGradient(
+                                                begin: Alignment.topRight,
+                                                end: Alignment.bottomLeft,
+                                                colors: [
+                                                    Colors.blue,
+                                                    const Color(0xffCFD9E2FF),
+                                                  ]),
+                                        borderRadius:
+                                            const BorderRadius.vertical(
+                                                bottom: Radius.circular(20)),
+                                      ),
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Row(children: [
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                "${model.name} \$",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline4
+                                                    ?.copyWith(
+                                                      fontSize: 32,
+                                                    ),
+                                              )
+                                            ]),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Row(children: [
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                '${model.phone}',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText2,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                              )
+                                            ])
+                                          ]),
+                                      height: 120,
+                                      width: double.infinity,
+                                    )
+                                  ]),
                             );
+                            // return ListTile(
+                            //   title: Text('${model!.name}'),
+                            // );
                           },
                           suggestionsCallback: getOfferAgencetoclientName,
                           onSuggestionSelected: (Name? k) {},

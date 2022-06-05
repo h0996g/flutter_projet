@@ -14,7 +14,7 @@ import '../shimmer_widget.dart';
 import 'home/cubitHome/homeStates.dart';
 
 class OfferAgenceClient extends StatefulWidget {
-  OffersModel? model;
+  var model;
   OfferAgenceClient({Key? key, this.model}) : super(key: key);
 
   @override
@@ -23,7 +23,7 @@ class OfferAgenceClient extends StatefulWidget {
 }
 
 class _OfferAgenceClientState extends State<OfferAgenceClient> {
-  OffersModel? model;
+  var model;
   _OfferAgenceClientState({this.model});
   // Map<String, dynamic> getallmsg = {};
   @override
