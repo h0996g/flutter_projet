@@ -3,7 +3,6 @@ import 'package:agence/Map/AllOffersMapAgence.dart';
 import 'package:agence/Model/AfficheOffer.dart';
 import 'package:agence/home/cubitHome/cupit_home.dart';
 import 'package:agence/offersdetails/cubitOfferDetail.dart';
-import 'package:agence/offersdetails/offerdetailagence.dart';
 import 'package:agence/offersdetails/offerdetailclient.dart';
 import 'package:agence/profileAgenceClient.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -11,14 +10,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../clienthome/search.dart';
-
 import '../shimmer_widget.dart';
 import 'home/cubitHome/homeStates.dart';
 
 class OfferAgenceClient extends StatefulWidget {
-  final OffersModel model;
-  OfferAgenceClient({Key? key, required this.model}) : super(key: key);
+  OffersModel? model;
+  OfferAgenceClient({Key? key, this.model}) : super(key: key);
 
   @override
   State<OfferAgenceClient> createState() =>
@@ -26,15 +23,14 @@ class OfferAgenceClient extends StatefulWidget {
 }
 
 class _OfferAgenceClientState extends State<OfferAgenceClient> {
-  OffersModel model;
-  _OfferAgenceClientState({required this.model});
+  OffersModel? model;
+  _OfferAgenceClientState({this.model});
   // Map<String, dynamic> getallmsg = {};
   @override
   void initState() {
     // TODO: implement initState
 
-    CupitHome.get(context).getOfferAgenceclient(model.agenceId.toString());
-    //nfs var t3 agence 3adi fl cupitHome
+    CupitHome.get(context).getOfferAgenceclient(model!.agenceId.toString());
     super.initState();
   }
 
@@ -78,7 +74,7 @@ class _OfferAgenceClientState extends State<OfferAgenceClient> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => ProfilAgence(
-                                  model: model,
+                                  model: model!,
                                 )));
                   },
                   child: Text('profile')),
@@ -109,12 +105,12 @@ class _OfferAgenceClientState extends State<OfferAgenceClient> {
                         return ListItembuilder(
                             context,
                             CupitHome.get(context)
-                                .offerAgencModel!
+                                .getOfferAgenceclientmodel!
                                 .data!
                                 .offers[index]);
                       }),
                       itemCount: CupitHome.get(context)
-                          .offerAgencModel!
+                          .getOfferAgenceclientmodel!
                           .data!
                           .offers
                           .length,
@@ -126,8 +122,9 @@ class _OfferAgenceClientState extends State<OfferAgenceClient> {
                     ),
                   ));
             },
-            condition: CupitHome.get(context).offerAgencModel != null &&
-                state is! ConditionalLodinOfferAgenceState,
+            condition:
+                CupitHome.get(context).getOfferAgenceclientmodel != null &&
+                    state is! ConditionalLodinOfferAgenceState,
             fallback: (BuildContext context) {
               return Padding(
                 padding:
@@ -282,18 +279,24 @@ buildFoodShimmer(context) => Column(
 Future<void> allmap(context) async {
   CupitHome.get(context).mmap = {};
   for (var i = 0;
-      i <= CupitHome.get(context).offerAgencModel!.data!.offers.length - 1;
+      i <=
+          CupitHome.get(context)
+                  .getOfferAgenceclientmodel!
+                  .data!
+                  .offers
+                  .length -
+              1;
       i++) {
     CupitHome.get(context).mmap.add(
           Marker(
             markerId: MarkerId(LatLng(
                     CupitHome.get(context)
-                        .offerAgencModel!
+                        .getOfferAgenceclientmodel!
                         .data!
                         .offers[i]
                         .latitude!,
                     CupitHome.get(context)
-                        .offerAgencModel!
+                        .getOfferAgenceclientmodel!
                         .data!
                         .offers[i]
                         .longitude!)
@@ -301,27 +304,27 @@ Future<void> allmap(context) async {
             icon: BitmapDescriptor.defaultMarker,
             position: LatLng(
                 CupitHome.get(context)
-                    .offerAgencModel!
+                    .getOfferAgenceclientmodel!
                     .data!
                     .offers[i]
                     .latitude!,
                 CupitHome.get(context)
-                    .offerAgencModel!
+                    .getOfferAgenceclientmodel!
                     .data!
                     .offers[i]
                     .longitude!),
             infoWindow: InfoWindow(
                 title:
-                    "${CupitHome.get(context).offerAgencModel!.data!.offers[i].typeOffer}",
+                    "${CupitHome.get(context).getOfferAgenceclientmodel!.data!.offers[i].typeOffer}",
                 snippet:
-                    '${CupitHome.get(context).offerAgencModel!.data!.offers[i].description}',
+                    '${CupitHome.get(context).getOfferAgenceclientmodel!.data!.offers[i].description}',
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => Offerdetailclient(
                                 model: CupitHome.get(context)
-                                    .offerAgencModel!
+                                    .getOfferAgenceclientmodel!
                                     .data!
                                     .offers[i],
                               )));

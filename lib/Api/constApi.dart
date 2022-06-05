@@ -34,3 +34,6 @@ var USERTYPE = LOGINCLIENT;
 const SENDMESSAGE = '/api/addmessage';
 const GETALLMSG = '/api/getmessage';
 const DELETEMSGOFFER = '/api/deletemessage';
+
+//--
+const GETOFFERAGENCETOCLIENT = '/api/getofferagenceclient';

@@ -10,6 +10,7 @@ import 'package:toggle_switch/toggle_switch.dart';
 
 import '../Api/constApi.dart';
 import '../Model/AfficheOffer.dart';
+import '../Model/AgencenameandphoneModel.dart';
 import '../home/cubitHome/cupit_home.dart';
 import 'dart:convert' as convert;
 
@@ -83,7 +84,8 @@ class Search extends StatelessWidget {
               ),
               Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child:
+                  child: CupitsearchCubit.get(context).toggelindexshearch == 0
+                      ?
                       //  defaultForm(
                       //     context: context,
                       //     controller: shearchcontroller,
@@ -102,118 +104,247 @@ class Search extends StatelessWidget {
                       //           ? Colors.white
                       //           : Colors.grey,
                       //     )),
+
                       TypeAheadFormField(
-                    itemBuilder: (BuildContext context, OffersModel? model) {
-                      final imageProvider =
-                          MemoryImage(base64Decode(model!.photo![0]));
+                          itemBuilder: (BuildContext context, Name? model) {
+                            // final imageProvider =
+                            //     MemoryImage(base64Decode(model!.photo![0]));
 
-                      final modelClient = model;
-                      return NeumorphicButton(
-                        style: NeumorphicStyle(
-                            color: CupitHome.get(context).dartSwitch
-                                ? Colors.black
-                                : Colors.white,
-                            depth: 0),
-                        onPressed: () async {
-                          // CubitDetail.get(context).indexClient = 0;
-                          print(modelClient.id);
-                          sendfav = {
-                            'offer_id': '${modelClient.id}',
-                          };
-                          await CubitDetail.get(context).getNameandPhone(data: {
-                            'offer_id': '${modelClient.id}',
-                          });
-                          CubitDetail.get(context).getexistfav(data: sendfav);
+                            // final modelClient = model;
+                            // return NeumorphicButton(
+                            //   style: NeumorphicStyle(
+                            //       color: CupitHome.get(context).dartSwitch
+                            //           ? Colors.black
+                            //           : Colors.white,
+                            //       depth: 0),
+                            //   onPressed: () async {
+                            //     // CubitDetail.get(context).indexClient = 0;
+                            //     print(modelClient.id);
+                            //     sendfav = {
+                            //       'offer_id': '${modelClient.id}',
+                            //     };
+                            //     await CubitDetail.get(context).getNameandPhone(data: {
+                            //       'offer_id': '${modelClient.id}',
+                            //     });
+                            //     CubitDetail.get(context).getexistfav(data: sendfav);
 
-                          // print(positionClient);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Offerdetailclient(
-                                        model: modelClient,
-                                      )));
-                        },
-                        child:
-                            Column(mainAxisSize: MainAxisSize.min, children: [
-                          Container(
-                            height: 150,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(20)),
-                              image: DecorationImage(
-                                  image: imageProvider, fit: BoxFit.cover),
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              // color:  CupitHome.get(context).dartSwitch
-                              //     ? Colors.blueGrey
-                              //     : Colors.white,
-                              gradient: CupitHome.get(context).dartSwitch
-                                  ? const LinearGradient(
-                                      begin: Alignment.topRight,
-                                      end: Alignment.bottomLeft,
-                                      colors: [
-                                        Color(0xff131313),
-                                        Color(0xff131313),
-                                      ],
-                                    )
-                                  : const LinearGradient(
-                                      begin: Alignment.topRight,
-                                      end: Alignment.bottomLeft,
-                                      colors: [
-                                          Colors.blue,
-                                          const Color(0xffCFD9E2FF),
-                                        ]),
-                              borderRadius: const BorderRadius.vertical(
-                                  bottom: Radius.circular(20)),
-                            ),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Row(children: [
-                                    const SizedBox(
-                                      width: 8,
+                            //     // print(positionClient);
+                            //     Navigator.push(
+                            //         context,
+                            //         MaterialPageRoute(
+                            //             builder: (context) => Offerdetailclient(
+                            //                   model: modelClient,
+                            //                 )));
+                            //   },
+                            //   child:
+                            //       Column(mainAxisSize: MainAxisSize.min, children: [
+                            //     Container(
+                            //       height: 150,
+                            //       width: double.infinity,
+                            //       decoration: BoxDecoration(
+                            //         borderRadius: BorderRadius.vertical(
+                            //             top: Radius.circular(20)),
+                            //         image: DecorationImage(
+                            //             image: imageProvider, fit: BoxFit.cover),
+                            //       ),
+                            //     ),
+                            //     Container(
+                            //       decoration: BoxDecoration(
+                            //         // color:  CupitHome.get(context).dartSwitch
+                            //         //     ? Colors.blueGrey
+                            //         //     : Colors.white,
+                            //         gradient: CupitHome.get(context).dartSwitch
+                            //             ? const LinearGradient(
+                            //                 begin: Alignment.topRight,
+                            //                 end: Alignment.bottomLeft,
+                            //                 colors: [
+                            //                   Color(0xff131313),
+                            //                   Color(0xff131313),
+                            //                 ],
+                            //               )
+                            //             : const LinearGradient(
+                            //                 begin: Alignment.topRight,
+                            //                 end: Alignment.bottomLeft,
+                            //                 colors: [
+                            //                     Colors.blue,
+                            //                     const Color(0xffCFD9E2FF),
+                            //                   ]),
+                            //         borderRadius: const BorderRadius.vertical(
+                            //             bottom: Radius.circular(20)),
+                            //       ),
+                            //       child: Column(
+                            //           crossAxisAlignment: CrossAxisAlignment.start,
+                            //           children: [
+                            //             const SizedBox(
+                            //               height: 10,
+                            //             ),
+                            //             Row(children: [
+                            //               const SizedBox(
+                            //                 width: 8,
+                            //               ),
+                            //               Text(
+                            //                 "${model.price} \$",
+                            //                 style: Theme.of(context)
+                            //                     .textTheme
+                            //                     .headline4
+                            //                     ?.copyWith(
+                            //                       fontSize: 32,
+                            //                     ),
+                            //               )
+                            //             ]),
+                            //             const SizedBox(
+                            //               height: 10,
+                            //             ),
+                            //             Row(children: [
+                            //               const SizedBox(
+                            //                 width: 8,
+                            //               ),
+                            //               Text(
+                            //                 '${model.address}',
+                            //                 style:
+                            //                     Theme.of(context).textTheme.bodyText2,
+                            //                 maxLines: 2,
+                            //                 overflow: TextOverflow.ellipsis,
+                            //               )
+                            //             ])
+                            //           ]),
+                            //       height: 120,
+                            //       width: double.infinity,
+                            //     )
+                            //   ]),
+                            // );
+                            return ListTile(
+                              title: Text('${model!.name}'),
+                            );
+                          },
+                          suggestionsCallback: getOfferAgencetoclientName,
+                          onSuggestionSelected: (Name? k) {},
+                        )
+                      : TypeAheadFormField(
+                          itemBuilder:
+                              (BuildContext context, OffersModel? model) {
+                            final imageProvider =
+                                MemoryImage(base64Decode(model!.photo![0]));
+
+                            final modelClient = model;
+                            return NeumorphicButton(
+                              style: NeumorphicStyle(
+                                  color: CupitHome.get(context).dartSwitch
+                                      ? Colors.black
+                                      : Colors.white,
+                                  depth: 0),
+                              onPressed: () async {
+                                // CubitDetail.get(context).indexClient = 0;
+                                print(modelClient.id);
+                                sendfav = {
+                                  'offer_id': '${modelClient.id}',
+                                };
+                                await CubitDetail.get(context)
+                                    .getNameandPhone(data: {
+                                  'offer_id': '${modelClient.id}',
+                                });
+                                CubitDetail.get(context)
+                                    .getexistfav(data: sendfav);
+
+                                // print(positionClient);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Offerdetailclient(
+                                              model: modelClient,
+                                            )));
+                              },
+                              child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      height: 150,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(20)),
+                                        image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.cover),
+                                      ),
                                     ),
-                                    Text(
-                                      "${model.price} \$",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline4
-                                          ?.copyWith(
-                                            fontSize: 32,
-                                          ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        // color:  CupitHome.get(context).dartSwitch
+                                        //     ? Colors.blueGrey
+                                        //     : Colors.white,
+                                        gradient: CupitHome.get(context)
+                                                .dartSwitch
+                                            ? const LinearGradient(
+                                                begin: Alignment.topRight,
+                                                end: Alignment.bottomLeft,
+                                                colors: [
+                                                  Color(0xff131313),
+                                                  Color(0xff131313),
+                                                ],
+                                              )
+                                            : const LinearGradient(
+                                                begin: Alignment.topRight,
+                                                end: Alignment.bottomLeft,
+                                                colors: [
+                                                    Colors.blue,
+                                                    const Color(0xffCFD9E2FF),
+                                                  ]),
+                                        borderRadius:
+                                            const BorderRadius.vertical(
+                                                bottom: Radius.circular(20)),
+                                      ),
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Row(children: [
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                "${model.price} \$",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline4
+                                                    ?.copyWith(
+                                                      fontSize: 32,
+                                                    ),
+                                              )
+                                            ]),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Row(children: [
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                '${model.address}',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText2,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                              )
+                                            ])
+                                          ]),
+                                      height: 120,
+                                      width: double.infinity,
                                     )
                                   ]),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Row(children: [
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                      '${model.address}',
-                                      style:
-                                          Theme.of(context).textTheme.bodyText2,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    )
-                                  ])
-                                ]),
-                            height: 120,
-                            width: double.infinity,
-                          )
-                        ]),
-                      );
-                    },
-                    suggestionsCallback: getOfferAgencetoclient,
-                    onSuggestionSelected: (OffersModel? k) {},
-                  )),
+                            );
+                            // return ListTile(
+                            //   title: Text('${model!.name}'),
+                            // );
+                          },
+                          suggestionsCallback: getOfferAgencetoclient,
+                          onSuggestionSelected: (OffersModel? k) {},
+                        )),
+
               const SizedBox(
                 height: 10,
               ),
@@ -236,29 +367,29 @@ class Search extends StatelessWidget {
   }
 }
 
-DataOffer? offerAgencModel;
-var offers;
-Future<List<OffersModel>> getOfferAgence(String query) async {
-  List<OffersModel> kk;
+// DataOffer? offerAgencModel;
+// var offers;
+// Future<List<OffersModel>> getOfferAgence(String query) async {
+//   List<OffersModel> kk;
 
-  kk = await Httplar.httpget(path: GETOFFERSAGENCE).then((value) {
-    var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
+//   kk = await Httplar.httpget(path: GETOFFERSAGENCE).then((value) {
+//     var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
 
-    offerAgencModel = DataOffer.fromJson(jsonResponse);
-    print('ook');
-    offers = offerAgencModel!.data!.offers;
-    print(offerAgencModel!.data!.offers.runtimeType);
-    return offers.where((offer) {
-      final String wilaya = offer.wilaya.toLowerCase();
-      final lowerQuery = query.toLowerCase();
-      return wilaya.contains(lowerQuery);
-    }).toList();
-    // print(offerAgencModel!.data!.offers[0].address);
-    // print(offerAgencModel!.data!.offers[0].latitude);
-    // print(offerAgencModel!.data!.offers[0].longitude);
-  });
-  return kk;
-}
+//     offerAgencModel = DataOffer.fromJson(jsonResponse);
+//     print('ook');
+//     offers = offerAgencModel!.data!.offers;
+//     print(offerAgencModel!.data!.offers.runtimeType);
+//     return offers.where((offer) {
+//       final String wilaya = offer.wilaya.toLowerCase();
+//       final lowerQuery = query.toLowerCase();
+//       return wilaya.contains(lowerQuery);
+//     }).toList();
+//     // print(offerAgencModel!.data!.offers[0].address);
+//     // print(offerAgencModel!.data!.offers[0].latitude);
+//     // print(offerAgencModel!.data!.offers[0].longitude);
+//   });
+//   return kk;
+// }
 
 var offersclient;
 DataOffer? allofferModel;
@@ -270,9 +401,9 @@ Future<List<OffersModel>> getOfferAgencetoclient(String query) async {
 
     allofferModel = DataOffer.fromJson(jsonResponse);
     print('ook');
-    offers = allofferModel!.data!.offers;
+    offersclient = allofferModel!.data!.offers;
     print(allofferModel!.data!.offers.runtimeType);
-    return offers.where((offer) {
+    return offersclient.where((offer) {
       final String wilaya = offer.wilaya.toLowerCase();
       final lowerQuery = query.toLowerCase();
       return wilaya.contains(lowerQuery);
@@ -280,3 +411,34 @@ Future<List<OffersModel>> getOfferAgencetoclient(String query) async {
   });
   return kk;
 }
+
+Dd? agenceN;
+var agenceName;
+Future<List<Name>> getOfferAgencetoclientName(String query) async {
+  List<Name> kk;
+
+  kk = await Httplar.httpget(path: '/api/getnamephonuser').then((value) {
+    var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
+
+    agenceN = Dd.fromJson(jsonResponse);
+    print('ook');
+    agenceName = agenceN!.o;
+    print(agenceN!.o.runtimeType);
+    return agenceName.where((offer) {
+      final String name = offer.name.toLowerCase();
+      final lowerQuery = query.toLowerCase();
+      return name.contains(lowerQuery);
+    }).toList();
+  });
+  return kk;
+}
+
+// Dd? agencemodel;
+// Future<void> kk() async {
+//   await Httplar.httpget(path: '/api/getnamephonuser').then((value) {
+//     print(value.body);
+//     var jsonResponse = jsonDecode(value.body);
+//     agencemodel = Dd.fromJson(jsonResponse);
+//     print(agencemodel!.o[0].name);
+//   });
+// }

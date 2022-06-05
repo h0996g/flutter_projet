@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:agence/Map/GetLocationAgence.dart';
 import 'package:agence/Map/GetLocationClient.dart';
 import 'package:agence/Model/AfficheOffer.dart';
-import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/offersdetails/CubitOfferDetailState.dart';
 import 'package:agence/offersdetails/cubitOfferDetail.dart';
 

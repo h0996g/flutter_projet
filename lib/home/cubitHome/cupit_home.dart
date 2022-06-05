@@ -493,14 +493,15 @@ class CupitHome extends Cubit<HomeStates> {
     });
   }
 
+  DataOffer? getOfferAgenceclientmodel;
   Future<void> getOfferAgenceclient(id) async {
     // offerAgencModel = null;
     emit(ConditionalLodinOfferAgenceState());
-    Httplar.httpPost(path: '/api/getofferagenceclient', data: {'agence_id': id})
+    Httplar.httpPost(path: GETOFFERAGENCETOCLIENT, data: {'agence_id': id})
         .then((value) {
       var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
 
-      offerAgencModel = DataOffer.fromJson(jsonResponse);
+      getOfferAgenceclientmodel = DataOffer.fromJson(jsonResponse);
       print('ook agence offer');
       // print(offerAgencModel!.data!.offers[0].address);
       // print(offerAgencModel!.data!.offers[0].latitude);
