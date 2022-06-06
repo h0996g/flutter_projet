@@ -156,7 +156,7 @@ ListItembuilder(context, OffersModel model) {
         depth: 0),
     onPressed: () {
       CubitDetail.get(context).indexAgence = 0;
-
+      CubitDetail.get(context).changeNavDetailAgence(0);
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -297,6 +297,7 @@ Future<void> allmap(context) async {
                 snippet:
                     '${CupitHome.get(context).offerAgencModel!.data!.offers[i].description}',
                 onTap: () {
+                  CubitDetail.get(context).changeNavDetailAgence(0);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
