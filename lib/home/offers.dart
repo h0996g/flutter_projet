@@ -59,15 +59,6 @@ class Offers extends StatelessWidget {
                     Icons.dark_mode_outlined,
                     size: 30,
                   )),
-              IconButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Search()));
-                  },
-                  icon: const Icon(
-                    Icons.search,
-                    size: 30,
-                  ))
             ],
           ),
           body: ConditionalBuilder(

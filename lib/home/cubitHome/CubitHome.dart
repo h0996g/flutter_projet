@@ -129,6 +129,9 @@ class CupitHome extends Cubit<HomeStates> {
   List papiersListhttp = [];
   List specificationListhttp = [];
   List conditionsListhttp = [];
+  List papiersListhttpUpdate = [];
+  List specificationListhttpUpdate = [];
+  List conditionsListhttpUpdate = [];
   var superficieController = TextEditingController();
   var nEtageController = TextEditingController();
   var nChambres = TextEditingController();
@@ -201,7 +204,7 @@ class CupitHome extends Cubit<HomeStates> {
 
   appartementDropDown(value) {
     appartementvalueDrop = value;
-    // print(appartement.indexOf(value));
+
     if (appartementvalueDrop == 'Appartement') {
       isvisibility['N-champre'] = true;
       isvisibility['etages'] = true;
@@ -223,8 +226,6 @@ class CupitHome extends Cubit<HomeStates> {
   vendeDropDown(value) {
     vendevalueDrop = value;
     print(vendevalueDrop);
-
-    // print(vende.indexOf(value));
 
     emit(ChangevalueDropdownState());
   }
@@ -249,6 +250,15 @@ class CupitHome extends Cubit<HomeStates> {
       .map((payment) =>
           MultiSelectItem<Conditions_paiment>(payment, payment.name))
       .toList();
+  static List<Conditions_paiment> paimentUpdate = [
+    Conditions_paiment(id: 1, name: "Promesse de vente possible"),
+    Conditions_paiment(id: 2, name: "Paiment par tranches possible"),
+    Conditions_paiment(id: 3, name: "Credit bancaire possible"),
+  ];
+  var paymentVarUpdate = paimentUpdate
+      .map((paymentUpdate) => MultiSelectItem<Conditions_paiment>(
+          paymentUpdate, paymentUpdate.name))
+      .toList();
 
   static List<Specefication> specefication = [
     Specefication(id: 1, name: "Jardin"),
@@ -262,6 +272,18 @@ class CupitHome extends Cubit<HomeStates> {
       .map((specefication) =>
           MultiSelectItem<Specefication>(specefication, specefication.name))
       .toList();
+  static List<Specefication> speceficationUpdate = [
+    Specefication(id: 1, name: "Jardin"),
+    Specefication(id: 2, name: "Electricite"),
+    Specefication(id: 3, name: "Gaz"),
+    Specefication(id: 4, name: "Eau"),
+    Specefication(id: 5, name: "Meuble"),
+    Specefication(id: 6, name: "Garage"),
+  ];
+  var speceficationVarUpdate = speceficationUpdate
+      .map((speceficationUpdate) => MultiSelectItem<Specefication>(
+          speceficationUpdate, speceficationUpdate.name))
+      .toList();
 
   static List<Papiers> papiers = [
     Papiers(id: 1, name: "Promotion immobiliere"),
@@ -274,6 +296,20 @@ class CupitHome extends Cubit<HomeStates> {
   ];
   var papiersVar = papiers
       .map((papiers) => MultiSelectItem<Papiers>(papiers, papiers.name))
+      .toList();
+
+  static List<Papiers> papiersUpdate = [
+    Papiers(id: 1, name: "Promotion immobiliere"),
+    Papiers(id: 2, name: "Acte notarie"),
+    Papiers(id: 3, name: "Acte dans l'indivision"),
+    Papiers(id: 4, name: "Papier timbre"),
+    Papiers(id: 5, name: "Decision"),
+    Papiers(id: 6, name: "Livret foncier"),
+    Papiers(id: 7, name: "Parmis de construire"),
+  ];
+  var papiersVarUpdate = papiersUpdate
+      .map((papiersUpdate) =>
+          MultiSelectItem<Papiers>(papiersUpdate, papiersUpdate.name))
       .toList();
 
 // --------------------hadi  rahi t3 MultiDropDown    END  ---------------------
@@ -334,6 +370,9 @@ class CupitHome extends Cubit<HomeStates> {
     papiersListhttp = [];
     specificationListhttp = [];
     conditionsListhttp = [];
+    papiersListhttpUpdate = [];
+    specificationListhttpUpdate = [];
+    conditionsListhttpUpdate = [];
     superficieController = TextEditingController();
     nEtageController = TextEditingController();
     nChambres = TextEditingController();
@@ -352,6 +391,10 @@ class CupitHome extends Cubit<HomeStates> {
         .toList();
     papiersVar = papiers
         .map((papiers) => MultiSelectItem<Papiers>(papiers, papiers.name))
+        .toList();
+    paymentVarUpdate = paimentUpdate
+        .map((paymentUpdate) => MultiSelectItem<Conditions_paiment>(
+            paymentUpdate, paymentUpdate.name))
         .toList();
 
     emit(InitialHomeState());
