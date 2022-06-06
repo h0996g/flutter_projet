@@ -3,10 +3,8 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-
-import 'Model/AfficheOffer.dart';
-import 'home/cubitHome/cupit_home.dart';
-import 'home/cubitHome/homeStates.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/homeStates.dart';
 
 class ProfilAgence extends StatefulWidget {
   var model;
@@ -32,7 +30,6 @@ class _ProfilAgenceState extends State<ProfilAgence> {
     return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
-          // resizeToAvoidBottomInset: false,
           appBar: AppBar(
             elevation: 10,
             title: Text(
@@ -79,7 +76,6 @@ class _ProfilAgenceState extends State<ProfilAgence> {
                                     .photo!),
                                 fit: BoxFit.cover,
                               ).image,
-                        // AssetImage('assets/images/profile_avatar.jpg'),
                       ),
                       const SizedBox(
                         height: 9,
@@ -135,7 +131,6 @@ class _ProfilAgenceState extends State<ProfilAgence> {
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 16),
                             ),
-                            // SizedBox(width: 10,)
                           ],
                         ),
                         height: 50,

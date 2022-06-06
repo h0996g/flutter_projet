@@ -60,9 +60,7 @@ class CubitModifier extends Cubit<ModifierStates> {
 
 //---------------------------image profile agence--------------------------------
   final ImagePicker imagePicker = ImagePicker();
-  // List<XFile>? imageFileList = [];
   String base64Agence = '';
-// File? picturefinale ;
   File? selectedImages;
 
   Future<void> selectImagesGalerymodifier() async {
@@ -71,20 +69,12 @@ class CubitModifier extends Cubit<ModifierStates> {
     if (selectedImages == null) return;
     final imagetemporaire = File(selectedImages.path);
     this.selectedImages = imagetemporaire;
-    // picturefinale= selectedImages as File? ;
 
-    // imageFileList!.add(selectedImages);
-
-    // selectedImages.forEach((element) async {
     Uint8List aa = await selectedImages.readAsBytes();
     base64Agence = base64.encode(aa);
 
-    // print("Image List Length:" + imageFileList!.length.toString());
-
     emit(AjouterImageProfileState());
   }
-
-  // File? imagecamera;
 
   Future<void> selectimagecameramodifier() async {
     final selectedImages =
@@ -92,26 +82,15 @@ class CubitModifier extends Cubit<ModifierStates> {
     if (selectedImages == null) return;
     final imageTemporary = File(selectedImages.path);
     this.selectedImages = imageTemporary;
-    // picturefinale=imagecamera as File?;
     Uint8List imageBytes =
         await selectedImages.readAsBytes(); //convert to bytes
     base64Agence = base64.encode(imageBytes);
 
-    // imageFileList!.add(imagecamera);
     emit(AjouterImageProfilecameraState());
   }
 
-  // void removephoto(int index) {
-  //   imageFileList?.removeAt(index);
-  //   base64List.removeAt(index);
-  //   emit(RemovePhotoprofilState());
-  // }
-
 //==========================image profile client=============================================
 
-  // List<XFile>? imageFileList = [];
-  // List<String> base64List = [];
-// File? picturefinale ;
   File? selectedImageclient;
   String base64Client = '';
 
@@ -121,15 +100,10 @@ class CubitModifier extends Cubit<ModifierStates> {
     if (selectedImageclient == null) return;
     final imagetemporaire = File(selectedImageclient.path);
     this.selectedImageclient = imagetemporaire;
-    // picturefinale= selectedImages as File? ;
 
-    // imageFileList!.add(selectedImages);
-
-    // selectedImages.forEach((element) async {
     Uint8List aa = await selectedImageclient.readAsBytes();
     base64Client = base64.encode(aa);
 
-    // print("Image List Length:" + imageFileList!.length.toString());
     emit(AjouterImageProfileClientState());
   }
 
@@ -139,19 +113,11 @@ class CubitModifier extends Cubit<ModifierStates> {
     if (selectedImageclient == null) return;
     final imageTemporary = File(selectedImageclient.path);
     this.selectedImageclient = imageTemporary;
-    // picturefinale=imagecamera as File?;
     Uint8List imageBytes =
         await selectedImageclient.readAsBytes(); //convert to bytes
     base64Client = base64.encode(imageBytes);
-    // imageFileList!.add(imagecamera);
     emit(AjouterImageProfilecameraClientState());
   }
-
-  // void removephotoclient(int index) {
-  //   imageFileList?.removeAt(index);
-  //   base64List.removeAt(index);
-  //   emit(RemovePhotoprofilClientState());
-  // }
 
   //----------------------------HTTP REQUESTE-----------------------------------------------//
   void updateAgence(Map<String, dynamic> data) {
@@ -187,10 +153,6 @@ class CubitModifier extends Cubit<ModifierStates> {
     emit(ModifierConditionalLodinState());
     Httplar.httpPost(path: UPDATEAGENCEPASSWORD, data: data).then((value) {
       if (value.statusCode == 200) {
-        // var jsonResponse =
-        //     convert.jsonDecode(value.body) as Map<String, dynamic>;
-        // errorUpdatePasswordModel =
-        //     ErrorRegisterAndLoginModel.fromJson(jsonResponse);
         emit(GoodUpdatePasswordAgenceState());
       } else if (value.statusCode == 422) {
         var jsonResponse =

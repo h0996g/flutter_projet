@@ -1,14 +1,13 @@
 import 'dart:async';
 
-import 'package:agence/home/cubitHome/cupit_home.dart';
-import 'package:agence/home/cubitHome/homeStates.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-
+import 'package:agence/home/cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/homeStates.dart';
 import 'const.dart';
 import 'location.dart';
 import 'package:google_maps_webservice/places.dart';
@@ -30,31 +29,17 @@ class _AllOffersMapClientState extends State<AllOffersMapClient> {
   LatLng? currentLocation;
 
   CameraPosition initialCameraPosition = CameraPosition(
-    // target: LatLng(latitude!, longitude!),
     target: LatLng(36.31789608941112, 6.615674905478954),
     zoom: 14.4746,
   );
 
   @override
   void initState() {
-    // CupitHome.get(context).awelModel(
-    //     CupitHome.get(context).allofferModel!.data!.offers[position].latitude,
-    //     CupitHome.get(context).allofferModel!.data!.offers[position].longitude);
-    // initialCameraPosition = CameraPosition(
-    //   target: LatLng(
-    //       CupitHome.get(context).allofferModel!.data!.offers[0].latitude!,
-    //       CupitHome.get(context).allofferModel!.data!.offers[0].longitude!),
-    //   // target: LatLng(36.31789608941112, 6.615674905478954),
-    //   zoom: initialCameraPosition.zoom,
-    // );
     currentLocation = initialCameraPosition.target;
-    //// // CupitHome.get(context).currentLocationSetStat(
-    //// //     CupitHome.get(context).initialCameraPosition!.target);
+
     _buildMarkerFromAssets();
     _markers = CupitHome.get(context).mmap;
-    // _setMarker(LatLng(
-    //     CupitHome.get(context).allofferModel!.data!.offers[0].latitude!,
-    //     CupitHome.get(context).allofferModel!.data!.offers[0].longitude!));
+
     super.initState();
   }
 
@@ -73,6 +58,7 @@ class _AllOffersMapClientState extends State<AllOffersMapClient> {
             alignment: Alignment.center,
             children: [
               GoogleMap(
+                zoomControlsEnabled: false,
                 markers: _markers!,
                 initialCameraPosition: initialCameraPosition,
                 mapType: MapType.normal,
@@ -80,13 +66,9 @@ class _AllOffersMapClientState extends State<AllOffersMapClient> {
                   _controller.complete(googleMapController);
                 },
                 onCameraMove: (CameraPosition newpos) {
-                  // setState(() {
-                  //   CupitHome.get(context).currentLocation = newpos.target;
-                  // });
                   setState(() {
                     currentLocation = initialCameraPosition.target;
                   });
-                  //// // CupitHome.get(context).setstatet3Map(newpos);
                 },
               ),
               SizedBox(
@@ -164,21 +146,4 @@ class _AllOffersMapClientState extends State<AllOffersMapClient> {
       setState(() {});
     }
   }
-
-  // void _setMarker(LatLng _location) {
-  //   // _markers = CupitHome.get(context).mmap;
-
-  //   Marker newMarker = Marker(
-  //     markerId: MarkerId(_location.toString()),
-  //     icon: BitmapDescriptor.defaultMarker,
-  //     // icon: _locationIcon,
-  //     position: _location,
-  //     infoWindow: InfoWindow(
-  //       title: "Title",
-  //     ),
-  //   );
-  //   _markers.add(newMarker);
-
-  //   setState(() {});
-  // }
 }

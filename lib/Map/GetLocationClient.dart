@@ -1,10 +1,9 @@
 import 'dart:async';
 
-import 'package:agence/home/cubitHome/cupit_home.dart';
-import 'package:agence/home/cubitHome/homeStates.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:agence/home/cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/homeStates.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -33,7 +32,6 @@ class _GetLocationClientState extends State<GetLocationClient> {
   LatLng? currentLocation;
 
   CameraPosition initialCameraPosition = CameraPosition(
-    // target: LatLng(latitude!, longitude!),
     target: LatLng(36.31789608941112, 6.615674905478954),
     zoom: 14.4746,
   );
@@ -42,7 +40,6 @@ class _GetLocationClientState extends State<GetLocationClient> {
   void initState() {
     initialCameraPosition = CameraPosition(
       target: LatLng(model.latitude!, model.longitude!),
-      // target: LatLng(36.31789608941112, 6.615674905478954),
       zoom: initialCameraPosition.zoom,
     );
     currentLocation = initialCameraPosition.target;
@@ -68,6 +65,7 @@ class _GetLocationClientState extends State<GetLocationClient> {
             alignment: Alignment.center,
             children: [
               GoogleMap(
+                zoomControlsEnabled: false,
                 markers: _markers,
                 initialCameraPosition: initialCameraPosition,
                 mapType: MapType.normal,
@@ -75,9 +73,6 @@ class _GetLocationClientState extends State<GetLocationClient> {
                   _controller.complete(googleMapController);
                 },
                 onCameraMove: (CameraPosition newpos) {
-                  // setState(() {
-                  //   CupitHome.get(context).currentLocation = newpos.target;
-                  // });
                   setState(() {
                     currentLocation = initialCameraPosition.target;
                   });

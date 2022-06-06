@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../Model/ErrorRegisterAndLoginModel.dart';
 import '../../shared/components/components.dart';
-import '../cubitHome/cupit_home.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
 
 import '../home.dart';
 import 'cubitmodifier.dart';
@@ -26,8 +26,6 @@ class Modifierpassword extends StatelessWidget {
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
-              //  FocusScope.of(context).unfocus();
-              // CupitHome.get(context).currentindex = 2;
               Changepage(context, const Home());
             },
             icon: const Icon(Icons.arrow_back),
@@ -230,7 +228,7 @@ class Modifierpassword extends StatelessWidget {
               MaterialPageRoute(builder: (context) => const Home()),
               (route) => false);
           Fluttertoast.showToast(
-              msg: 'Password changed Successfuly',
+              msg: '  Updated password Successfully',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
@@ -240,7 +238,7 @@ class Modifierpassword extends StatelessWidget {
         }
       } else if (state is BadUpdatePasswordAgenceState) {
         Fluttertoast.showToast(
-            msg: 'Some Error',
+            msg: 'unable to update',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,

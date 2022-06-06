@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'cubitHome/cupit_home.dart';
-import 'cubitHome/homeStates.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/homeStates.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
-  // commmmmmm
   Widget build(BuildContext context) {
     CupitHome obj = BlocProvider.of(context);
     return BlocConsumer<CupitHome, HomeStates>(

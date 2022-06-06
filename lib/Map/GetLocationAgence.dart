@@ -1,10 +1,11 @@
 import 'dart:async';
 
 import 'package:agence/Model/AfficheOffer.dart';
-import 'package:agence/home/cubitHome/cupit_home.dart';
-import 'package:agence/home/cubitHome/homeStates.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/homeStates.dart';
 
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -42,12 +43,9 @@ class _GetLocationAgenceState extends State<GetLocationAgence> {
   void initState() {
     initialCameraPosition = CameraPosition(
       target: LatLng(model.latitude!, model.longitude!),
-      // target: LatLng(36.31789608941112, 6.615674905478954),
       zoom: initialCameraPosition.zoom,
     );
     currentLocation = initialCameraPosition.target;
-    //// // CupitHome.get(context).currentLocationSetStat(
-    //// //     CupitHome.get(context).initialCameraPosition!.target);
     _buildMarkerFromAssets();
     _setMarker(LatLng(model.latitude!, model.longitude!));
     super.initState();
@@ -68,6 +66,7 @@ class _GetLocationAgenceState extends State<GetLocationAgence> {
             alignment: Alignment.center,
             children: [
               GoogleMap(
+                zoomControlsEnabled: false,
                 markers: _markers,
                 initialCameraPosition: initialCameraPosition,
                 mapType: MapType.normal,
@@ -75,9 +74,6 @@ class _GetLocationAgenceState extends State<GetLocationAgence> {
                   _controller.complete(googleMapController);
                 },
                 onCameraMove: (CameraPosition newpos) {
-                  // setState(() {
-                  //   CupitHome.get(context).currentLocation = newpos.target;
-                  // });
                   setState(() {
                     currentLocation = initialCameraPosition.target;
                   });

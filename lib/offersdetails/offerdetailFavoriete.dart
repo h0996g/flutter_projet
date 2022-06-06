@@ -4,7 +4,7 @@ import 'package:agence/Model/AfficheOffer.dart';
 import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/offersdetails/CubitOfferDetailState.dart';
 import 'package:agence/offersdetails/cubitOfferDetail.dart';
-
+import 'package:agence/home/cubitHome/CubitHome.dart';
 import 'package:agence/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 
@@ -16,7 +16,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../Map/GetLocationClientFav.dart';
-import '../home/cubitHome/cupit_home.dart';
+
 import '../offerAgenceClient.dart';
 
 class OfferDetailFav extends StatefulWidget {
@@ -39,13 +39,6 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
   var msgController = TextEditingController();
 
   Map<String, dynamic> sendinfomsg = {};
-
-  // var alaController = TextEditingController();
-  List<String> models = [
-    'assets/images/on2.png',
-    'assets/images/building.jpg',
-    'assets/images/design.png'
-  ];
 
   int a = 0;
 
@@ -74,18 +67,13 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
               children: [
                 Container(
                   width: double.infinity,
-                  // height: 295,
                   height: double.infinity,
-
                   color: Colors.white54,
-                  // child: Image(image:AssetImage('assets/images/building.jpg'),fit: BoxFit.cover,),
                   child: PageView.builder(
                     onPageChanged: (int index) {},
                     controller: onbordingController,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      // return Ala(models[index]);
-
                       List? k;
                       k = model.photo?.map((e) {
                         return base64Decode(e);
@@ -104,7 +92,6 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                   left: -5,
                   child: MaterialButton(
                     onPressed: () {
-                      // Changepage(context, const Navbar());
                       Navigator.pop(context);
                     },
                     shape: const CircleBorder(),
@@ -125,7 +112,7 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: SmoothPageIndicator(
-                          controller: onbordingController, // PageController
+                          controller: onbordingController,
                           count: model.photo!.length,
                           effect: ScrollingDotsEffect(
                             dotColor: CupitHome.get(context).dartSwitch
@@ -135,14 +122,6 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                                 ? const Color(0xff131313)
                                 : Colors.blue,
                           ),
-
-                          // effect: const ExpandingDotsEffect(
-                          //
-                          //     dotWidth: 20,
-                          //     dotHeight: 15,
-                          //     dotColor: Colors.black26,
-                          //     activeDotColor:
-                          //     Colors.deepOrange), // your preferred effect
                           onDotClicked: (index) {}),
                     ),
                   ),
@@ -174,7 +153,7 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                             width: 20,
                           ),
                           Text(
-                            "${model.price} \$",
+                            "${model.price} DA",
                             style:
                                 Theme.of(context).textTheme.headline4?.copyWith(
                                       fontSize: 32,
@@ -205,19 +184,15 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                                   color: CubitDetail.get(context).colorfav
                                       ? Colors.redAccent
                                       : Colors.white,
-                                  // color: CupitHome.get(context).dartSwitch
-                                  //     ? Colors.white
-                                  //     : Colors.white,
                                 ),
                               );
                             },
                             condition: state is! LoadingExFavState &&
-                                state is! LoadingChangeFavState,
-                            //  &&  CubitDetail.get(context).getFavoritesmodel !=     null,
+                                state is! LoadingChangeFavState &&
+                                CubitDetail.get(context).existfav != null,
                             fallback: (BuildContext context) {
                               return SpinKitRipple(
                                 duration: Duration(seconds: 1),
-                                // size: 80,
                                 itemBuilder: (context, index) {
                                   return const DecoratedBox(
                                       decoration: BoxDecoration(
@@ -352,16 +327,10 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                           ),
                           Expanded(
                             child: Container(
-                              // color: CupitHome.get(context).dartSwitch
-                              //     ? const Color(0xff131313)
-                              //     : Colors.white,
                               height: 54,
                               child: MaterialButton(
                                 padding: const EdgeInsets.all(0),
                                 onPressed: () {
-                                  // setState(() {
-                                  //   a = 1;
-                                  // });
                                   CubitDetail.get(context)
                                       .changeNavDetailClient(1);
                                 },
@@ -410,9 +379,6 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                               child: MaterialButton(
                                 padding: const EdgeInsets.all(0),
                                 onPressed: () {
-                                  // setState(() {
-                                  //   a = 2;
-                                  // });
                                   CubitDetail.get(context)
                                       .changeNavDetailClient(2);
                                   CubitDetail.get(context).getAllMsg(
@@ -615,10 +581,14 @@ Widget Listemessage(context, msg) => Container(
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 16,
-                  backgroundImage:
-                      const AssetImage('assets/images/profile_avatar.jpg'),
+                  backgroundImage: msg['photo'] == null
+                      ? const AssetImage('assets/images/profile_avatar.jpg')
+                      : Image.memory(
+                          base64Decode(msg['photo']),
+                          fit: BoxFit.cover,
+                        ).image,
                 ),
                 const SizedBox(
                   width: 6,
@@ -670,11 +640,6 @@ Widget Listemessage(context, msg) => Container(
         ),
       ),
     );
-
-// Widget Ala(String k) => Image(
-//       image: AssetImage('${k}'),
-//       fit: BoxFit.cover,
-//     );
 
 Widget Information(context, OffersModel model) => Padding(
       padding: const EdgeInsets.all(16.0),
@@ -944,28 +909,6 @@ Widget Details(
         ),
       ),
     );
-
-// listoption(context) => Container(
-//       decoration: BoxDecoration(
-//         borderRadius: BorderRadius.circular(15),
-//         color: CupitHome.get(context).dartSwitch
-//             ? Colors.blueGrey
-//             : Colors.blueAccent,
-//       ),
-//       child: Center(
-//           child: Row(children: const [
-//         SizedBox(
-//           width: 6,
-//         ),
-//         Text(
-//           '5 chambre',
-//           style: TextStyle(fontSize: 18, color: Colors.white),
-//         ),
-//         SizedBox(
-//           width: 6,
-//         )
-//       ])),
-//     );
 
 listSpecefication(context, OffersModel model) => ListView(
       scrollDirection: Axis.horizontal,

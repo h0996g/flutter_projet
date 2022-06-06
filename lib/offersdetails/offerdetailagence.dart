@@ -10,9 +10,10 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../Map/GetLocationAgence.dart';
-import '../home/cubitHome/cupit_home.dart';
+
 import '../home/home.dart';
 import '../shared/components/components.dart';
 
@@ -23,19 +24,6 @@ class Offerdetailagence extends StatelessWidget {
   var onbordingController = PageController();
   var msgController = TextEditingController();
   Map<String, dynamic> sendinfomsg = {};
-
-  List<String> models = [
-    'assets/images/on2.png',
-    'assets/images/building.jpg',
-    'assets/images/design.png'
-  ];
-
-  // int a = 0;
-  // String number='07666666';
-  // void initState() {
-  //   super.initState();
-  //   number='06666554';
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -49,27 +37,10 @@ class Offerdetailagence extends StatelessWidget {
               children: [
                 Container(
                   width: double.infinity,
-                  // height: 295,
                   height: double.infinity,
-
                   color: Colors.white54,
-                  // child: Image(image:AssetImage('assets/images/building.jpg'),fit: BoxFit.cover,),
                   child: PageView.builder(
-                    onPageChanged: (int index) {
-                      // if (index == models.length - 1) {
-                      //   islast = true;
-                      //
-                      //   setState(() {
-                      //     nextIcon = const Icon(Icons.done);
-                      //   });
-                      // } else {
-                      //   islast = false;
-                      //
-                      //   setState(() {
-                      //     nextIcon = const Icon(Icons.arrow_forward_ios);
-                      //   });
-                      // }
-                    },
+                    onPageChanged: (int index) {},
                     controller: onbordingController,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
@@ -91,7 +62,6 @@ class Offerdetailagence extends StatelessWidget {
                   left: -5,
                   child: MaterialButton(
                     onPressed: () {
-                      // Changepage(context, const Home());
                       Navigator.pop(context);
                     },
                     shape: const CircleBorder(),
@@ -111,7 +81,6 @@ class Offerdetailagence extends StatelessWidget {
                   right: -5,
                   child: MaterialButton(
                     onPressed: () {
-                      // print('ook');
                       print(model.latitude);
                       Navigator.push(
                           context,
@@ -133,14 +102,12 @@ class Offerdetailagence extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  // bottom: 20,
-                  // left: 140,
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 10),
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: SmoothPageIndicator(
-                          controller: onbordingController, // PageController
+                          controller: onbordingController,
                           count: model.photo!.length,
                           effect: ScrollingDotsEffect(
                             dotColor: CupitHome.get(context).dartSwitch
@@ -150,14 +117,6 @@ class Offerdetailagence extends StatelessWidget {
                                 ? const Color(0xff131313)
                                 : Colors.blue,
                           ),
-
-                          // effect: const ExpandingDotsEffect(
-                          //
-                          //     dotWidth: 20,
-                          //     dotHeight: 15,
-                          //     dotColor: Colors.black26,
-                          //     activeDotColor:
-                          //     Colors.deepOrange), // your preferred effect
                           onDotClicked: (index) {}),
                     ),
                   ),
@@ -183,7 +142,7 @@ class Offerdetailagence extends StatelessWidget {
                   width: 20,
                 ),
                 Text(
-                  "${model.price}",
+                  "${model.price} DA",
                   style: Theme.of(context).textTheme.headline4?.copyWith(
                         fontSize: 32,
                       ),
@@ -209,14 +168,6 @@ class Offerdetailagence extends StatelessWidget {
                         : Colors.white,
                   ),
                 ),
-
-                // MaterialButton(
-                //   onPressed: () {},
-                //   shape: const CircleBorder(),
-                //   color: CupitHome.get(context).dartSwitch ? Color(0xff8d8d8d): Colors.blue,
-                //   child: Icon(Icons.favorite_sharp,color:CupitHome.get(context).dartSwitch ? Colors.white : Colors.white, ),
-                //
-                // )
               ],
             ),
           ),
@@ -238,12 +189,6 @@ class Offerdetailagence extends StatelessWidget {
                 const SizedBox(
                   width: 20,
                 ),
-                // TextButton(
-                //     onPressed: () {},
-                //     child: const Text(
-                //       'Se Loger',
-                //       style: TextStyle(fontWeight: FontWeight.bold),
-                //     )),
                 const SizedBox(
                   width: 20,
                 ),
@@ -273,9 +218,6 @@ class Offerdetailagence extends StatelessWidget {
                               child: MaterialButton(
                                 padding: const EdgeInsets.all(0),
                                 onPressed: () {
-                                  // setState(() {   -------- hadi lawla
-                                  //   a = 0;
-                                  // });
                                   CubitDetail.get(context)
                                       .changeNavDetailAgence(0);
                                 },
@@ -318,15 +260,6 @@ class Offerdetailagence extends StatelessWidget {
                               ),
                             ),
                           ),
-
-                          //         VerticalDivider(
-                          //           thickness: 2,
-                          //            width: 2,
-                          //            color: CupitHome.get(context).dartSwitch
-                          // ? Color(0xff131313)
-                          //     : Color(0xffF3F3F3FF),
-                          //         ),
-
                           Expanded(
                             child: Container(
                               color: CupitHome.get(context).dartSwitch
@@ -336,9 +269,6 @@ class Offerdetailagence extends StatelessWidget {
                               child: MaterialButton(
                                 padding: const EdgeInsets.all(0),
                                 onPressed: () {
-                                  // setState(() {      -- hadi tnya
-                                  //   a = 1;
-                                  // });
                                   CubitDetail.get(context)
                                       .changeNavDetailAgence(1);
                                 },
@@ -381,13 +311,6 @@ class Offerdetailagence extends StatelessWidget {
                               ),
                             ),
                           ),
-                          // VerticalDivider(
-                          //     thickness: 2,
-                          //   width: 2,
-                          //     color: CupitHome.get(context).dartSwitch
-                          //         ? Color(0xff131313)
-                          //         : Color(0xffF3F3F3FF),
-                          // ),
                           Expanded(
                             child: SizedBox(
                               height: 54,
@@ -395,9 +318,7 @@ class Offerdetailagence extends StatelessWidget {
                                 padding: const EdgeInsets.all(0),
                                 onPressed: () {
                                   print('${model.id}');
-                                  // setState(() { -------hadi 3
-                                  //   a = 2;
-                                  // });
+
                                   CubitDetail.get(context)
                                       .changeNavDetailAgence(2);
                                   CubitDetail.get(context).getAllMsg(
@@ -442,13 +363,6 @@ class Offerdetailagence extends StatelessWidget {
                               ),
                             ),
                           ),
-                          // VerticalDivider(
-                          //     thickness: 2,
-                          //   width: 2,
-                          //     color: CupitHome.get(context).dartSwitch
-                          //         ? Color(0xff131313)
-                          //         : Color(0xffF3F3F3FF),
-                          // ),
                           Expanded(
                             child: SizedBox(
                               height: 54,
@@ -476,15 +390,12 @@ class Offerdetailagence extends StatelessWidget {
                                                 child: const Text('yes')),
                                             TextButton(
                                                 onPressed: () {
-                                                  // setState(() { ----- hadi mt7tajch setstate
                                                   Navigator.of(context).pop();
-                                                  // });
                                                 },
                                                 child: const Text('no'))
                                           ],
                                         );
                                       });
-                                  // FlutterPhoneDirectCaller.callNumber(number);
                                 },
                                 child: Column(
                                   children: [
@@ -656,10 +567,14 @@ Widget Listemessage(context, msg, positionmsg) => Container(
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 16,
-                  backgroundImage:
-                      AssetImage('assets/images/profile_avatar.jpg'),
+                  backgroundImage: msg['photo'] == null
+                      ? const AssetImage('assets/images/profile_avatar.jpg')
+                      : Image.memory(
+                          base64Decode(msg['photo']),
+                          fit: BoxFit.cover,
+                        ).image,
                 ),
                 const SizedBox(
                   width: 6,
@@ -709,9 +624,6 @@ Widget Listemessage(context, msg, positionmsg) => Container(
                       'id':
                           '${CubitDetail.get(context).allmsgmodel[positionmsg]['id']}'
                     });
-
-                    // print( CubitDetail.get(context).allmsgmodel[index]);
-                    // print(object)
                   },
                   shape: const CircleBorder(),
                   color: CupitHome.get(context).dartSwitch
@@ -741,10 +653,7 @@ Widget Ala(OffersModel model) => Image(
 
 Widget Ala2(OffersModel model) {
   var carouselController = CarouselController();
-  // return Image(
-  //   image: AssetImage('${k}'),
-  //   fit: BoxFit.cover,
-  // );
+
   return Column(
     children: [
       Expanded(
@@ -764,7 +673,6 @@ Widget Ala2(OffersModel model) {
               viewportFraction: 1.0,
             )),
       ),
-      // AnimatedSmoothIndicator(activeIndex: activeIndex, count: count)
     ],
   );
 }
@@ -1003,18 +911,6 @@ Widget Details(
                       ),
                       Expanded(
                         child: listSpecefication(context, model),
-                        // child: ListView.separated(
-                        //   scrollDirection: Axis.horizontal,
-                        //   itemCount: 3,
-                        //   itemBuilder: ((context, index) =>
-                        //       listoption(context)),
-                        //   physics: const BouncingScrollPhysics(),
-                        //   separatorBuilder: (BuildContext context, int index) {
-                        //     return const SizedBox(
-                        //       width: 5,
-                        //     );
-                        //   },
-                        // ),
                       )
                     ],
                   ),
@@ -1043,18 +939,6 @@ Widget Details(
                       ),
                       Expanded(
                         child: listPaiment(context, model),
-                        // child: ListView.separated(
-                        //   scrollDirection: Axis.horizontal,
-                        //   itemCount: 3,
-                        //   itemBuilder: ((context, index) =>
-                        //       listoption(context)),
-                        //   physics: const BouncingScrollPhysics(),
-                        //   separatorBuilder: (BuildContext context, int index) {
-                        //     return const SizedBox(
-                        //       width: 5,
-                        //     );
-                        //   },
-                        // ),
                       )
                     ],
                   ),
@@ -1065,26 +949,6 @@ Widget Details(
         ),
       ),
     );
-
-// listoption(context) => Container(
-//       decoration: BoxDecoration(
-//         borderRadius: BorderRadius.circular(15),
-//         color: Colors.blueAccent,
-//       ),
-//       child: Center(
-//           child: Row(children: const [
-//         SizedBox(
-//           width: 6,
-//         ),
-//         Text(
-//           '5 chambre',
-//           style: TextStyle(fontSize: 18, color: Colors.white),
-//         ),
-//         SizedBox(
-//           width: 6,
-//         )
-//       ])),
-//     );
 
 listSpecefication(context, OffersModel model) => ListView(
       scrollDirection: Axis.horizontal,

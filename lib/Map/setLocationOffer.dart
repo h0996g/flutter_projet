@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 
-// import 'dart:collection';
-
-import 'package:agence/home/cubitHome/cupit_home.dart';
-import 'package:agence/home/cubitHome/homeStates.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/homeStates.dart';
 
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -27,39 +25,18 @@ class SetLocationOffer extends StatefulWidget {
 class _SetLocationOfferState extends State<SetLocationOffer> {
   Completer<GoogleMapController> _controller = Completer();
 
-  // static CameraPosition _initialCameraPosition = const CameraPosition(
-  //   target: const LatLng(33.515343, 36.289590),
-  //   // target: LatLng(36.31789608941112, 6.615674905478954),
-  //   zoom: 14.4746,
-  // );
   Set<Marker> _markers = {};
   BitmapDescriptor? _locationIcon;
   LatLng? currentLocation;
   CameraPosition initialCameraPosition = const CameraPosition(
-    // target: LatLng(currentLocation.latitude, currentLocation.longitude),
     target: LatLng(36.31789608941112, 6.615674905478954),
     zoom: 14.4746,
   );
-  // var myMarkers = HashSet<Marker>();
+
   @override
   void initState() {
-    // initialCameraPosition = const CameraPosition(
-    //   target: const LatLng(33.515343, 36.289590),
-    //   // target: LatLng(36.31789608941112, 6.615674905478954),
-    //   zoom: 14.4746,
-    // );
-    // initialCameraPosition = CameraPosition(
-    //   target: LatLng(currentLocation!.latitude, currentLocation!.longitude),
-    //   // target: LatLng(36.31789608941112, 6.615674905478954),
-    //   zoom: 14.4746,
-    // );
-    // CupitHome.get(context).awalLocation(CupitHome.get(context).currentLocation);
-    // CupitHome.get(context).currentLocationSetStat(
-    //     CupitHome.get(context).initialCameraPosition!.target);
     currentLocation = initialCameraPosition.target;
 
-    // CupitHome.get(context).currentLocation =
-    //     CupitHome.get(context).initialCameraPosition!.target;
     _buildMarkerFromAssets();
     super.initState();
   }
@@ -79,6 +56,7 @@ class _SetLocationOfferState extends State<SetLocationOffer> {
             alignment: Alignment.center,
             children: [
               GoogleMap(
+                zoomControlsEnabled: false,
                 markers: _markers,
                 initialCameraPosition: initialCameraPosition,
                 mapType: MapType.normal,
@@ -86,10 +64,6 @@ class _SetLocationOfferState extends State<SetLocationOffer> {
                   _controller.complete(googleMapController);
                 },
                 onCameraMove: (CameraPosition newpos) {
-                  // setState(() {
-                  //   CupitHome.get(context).currentLocation = newpos.target;
-                  // });
-                  // CupitHome.get(context).setstatet3Map(newpos);
                   setState(() {
                     CupitHome.get(context).currentLocation = newpos.target;
                   });
@@ -106,23 +80,18 @@ class _SetLocationOfferState extends State<SetLocationOffer> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               FloatingActionButton(
-                heroTag: "btn1",
-                onPressed: () {
-                  print(CupitHome.get(context).currentLocation);
-                  // LatLng(38.52900208591146, -98.54919254779816), currentLocation);
-                },
-                child: const Icon(Icons.settings_ethernet_rounded),
-              ),
-              FloatingActionButton(
-                heroTag: "btn2",
+                heroTag: "Marklocation",
                 onPressed: () {
                   _setMarker(CupitHome.get(context).currentLocation!);
                   print(CupitHome.get(context).currentLocation);
                 },
                 child: const Icon(Icons.location_on),
               ),
+              const SizedBox(
+                height: 8,
+              ),
               FloatingActionButton(
-                heroTag: "btn3",
+                heroTag: "Mylocation",
                 onPressed: () => _getMyLocation(),
                 child: const Icon(Icons.gps_fixed),
               ),

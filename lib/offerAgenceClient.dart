@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'package:agence/Map/AllOffersMapAgence.dart';
 import 'package:agence/Model/AfficheOffer.dart';
-import 'package:agence/home/cubitHome/cupit_home.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/homeStates.dart';
 import 'package:agence/offersdetails/cubitOfferDetail.dart';
 import 'package:agence/offersdetails/offerdetailclient.dart';
 import 'package:agence/profileAgenceClient.dart';
@@ -11,7 +12,6 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../shimmer_widget.dart';
-import 'home/cubitHome/homeStates.dart';
 
 class OfferAgenceClient extends StatefulWidget {
   var model;
@@ -27,7 +27,7 @@ class _OfferAgenceClientState extends State<OfferAgenceClient> {
   var model;
 
   _OfferAgenceClientState({this.model});
-  // Map<String, dynamic> getallmsg = {};
+
   @override
   void initState() {
     // TODO: implement initState
@@ -49,8 +49,6 @@ class _OfferAgenceClientState extends State<OfferAgenceClient> {
                     MaterialPageRoute(
                         builder: (context) => AllOffersMapAgence()));
               });
-              // Navigator.push(context, MaterialPageRoute(builder: (context) =>  Navbar()));
-              // Changepage(context, const Navbar());
             },
             child: Icon(
               Icons.place,
@@ -79,11 +77,17 @@ class _OfferAgenceClientState extends State<OfferAgenceClient> {
                                   model: model!,
                                 )));
                   },
-                  child: Text('profile')),
+                  child: Text(
+                    'profile',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: CupitHome.get(context).dartSwitch
+                          ? Colors.white
+                          : Colors.black,
+                    ),
+                  )),
               IconButton(
                   onPressed: () {
-                    // String k = '\\"' + 'ggg' + '\\"';
-                    // print(k);
                     CupitHome.get(context).changeSwitch(
                         value: !CupitHome.get(context).dartSwitch);
                   },
@@ -145,17 +149,6 @@ class _OfferAgenceClientState extends State<OfferAgenceClient> {
             },
           ),
         );
-
-        // return ConditionalBuilder(
-        //   builder: (BuildContext context) {
-        //     return
-
-        //   },
-        //   condition: CupitHome.get(context).dataOfferModel != null,
-        //   fallback: (BuildContext context) {
-        //     return const Center(child: CircularProgressIndicator());
-        //   },
-        // );
       },
       listener: (BuildContext context, Object? state) {},
     );
@@ -201,9 +194,6 @@ ListItembuilder(context, OffersModel model) {
       ),
       Container(
         decoration: BoxDecoration(
-          // color:  CupitHome.get(context).dartSwitch
-          //     ? Colors.blueGrey
-          //     : Colors.white,
           gradient: CupitHome.get(context).dartSwitch
               ? const LinearGradient(
                   begin: Alignment.topRight,
@@ -232,7 +222,7 @@ ListItembuilder(context, OffersModel model) {
               width: 8,
             ),
             Text(
-              "${model.price} \$",
+              "${model.price} DA",
               style: Theme.of(context).textTheme.headline4?.copyWith(
                     fontSize: 32,
                   ),
@@ -354,7 +344,4 @@ Future<void> allmap(context) async {
           ),
         );
   }
-  print('oooooooooooooooo');
-  // print(mmap);
-  // emit(GoodGetAllOffersMap());
 }

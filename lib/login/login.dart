@@ -1,20 +1,21 @@
 import 'package:agence/Model/ErrorRegisterAndLoginModel.dart';
 import 'package:agence/Model/LoginModel.dart';
 import 'package:agence/clienthome/navbar.dart';
-import 'package:agence/login/cupitlogin/cupitl.dart';
-import 'package:agence/login/cupitlogin/loginStates.dart';
+
 import 'package:agence/login/ChooseRegister.dart';
 import 'package:agence/login/other/cachhelper.dart';
-import 'package:agence/offersdetails/cubitOfferDetail.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
 
 import '../Api/constApi.dart';
-import '../home/cubitHome/cupit_home.dart';
+
 import '../home/home.dart';
 import '../shared/components/components.dart';
+import 'cupitlogin/CubitLogin.dart';
+import 'cupitlogin/loginStates.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -28,8 +29,6 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginStates>(
       builder: (BuildContext context, state) {
-        // String path =
-        //     LoginCubit.get(context).typenumber ? LOGINCLIENT : LOGINAGENCE;
         return Scaffold(
           body: Center(
             child: SingleChildScrollView(
@@ -38,7 +37,6 @@ class LoginScreen extends StatelessWidget {
                 child: Form(
                   key: formKey,
                   child: Column(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
                         'LOGIN',
@@ -59,7 +57,6 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(
                         height: 26,
                       ),
-
                       Center(
                         child: Container(
                           decoration: const BoxDecoration(
@@ -85,7 +82,6 @@ class LoginScreen extends StatelessWidget {
                                     borderRadius: const BorderRadius.only(
                                         topLeft: Radius.circular(30),
                                         bottomLeft: Radius.circular(30)),
-                                    // color: Colors.blue,
                                     color: LoginCubit.get(context).typenumber
                                         ? CupitHome.get(context).dartSwitch
                                             ? const Color(0xff131313)
@@ -115,7 +111,6 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                     onPressed: () {
                                       LoginCubit.get(context).changetype(true);
-                                      // path = LOGINCLIENT;
                                       print(LoginCubit.get(context).path);
                                     },
                                   ),
@@ -162,7 +157,6 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                     onPressed: () {
                                       LoginCubit.get(context).changetype(false);
-                                      // path = LOGINAGENCE;
                                       print(LoginCubit.get(context).path);
                                     },
                                   ),
@@ -175,34 +169,6 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(
                         height: 22,
                       ),
-
-                      //----------------------------------------- hada wch bdlt f design----------------
-
-                      // Row(
-                      //   children: [
-                      //     Expanded(
-                      //       child: CheckboxListTile(
-                      //           title: const Text('Client'),
-                      //           value: LoginCubit.get(context).ischeckclient,
-                      //           onChanged: (value) {
-                      //             LoginCubit.get(context).checkList(value);
-                      //             path = LOGINCLIENT;
-                      //             print(path);
-                      //           }),
-                      //     ),
-                      //     Expanded(
-                      //       child: CheckboxListTile(
-                      //           title: const Text('Agence'),
-                      //           value: !LoginCubit.get(context).ischeckclient,
-                      //           onChanged: (value) {
-                      //             LoginCubit.get(context).checkList(value);
-                      //             path = LOGINAGENCE;
-                      //             print(path);
-                      //           }),
-                      //     ),
-                      //   ],
-                      // ),
-//--------------------------------------------------------------------------------------------------
                       defaultForm(
                           context: context,
                           controller: emailController,
@@ -219,9 +185,6 @@ class LoginScreen extends StatelessWidget {
                               return 'Email Must Not Be Empty';
                             }
                           },
-                          // valid: () {
-                          //   return null;
-                          // },
                           onFieldSubmitted: () {},
                           prefixIcon: Icon(
                             Icons.email,
@@ -379,8 +342,6 @@ class LoginScreen extends StatelessWidget {
                 textColor: Colors.white,
                 fontSize: 16.0);
           } else if (state.model is LoginModel) {
-            // zedt hedi brk
-            // FocusScope.of(context).unfocus();
             CachHelper.putcache(key: 'token', value: state.model!.token)
                 .then((value) async {
               await CachHelper.putcache(
@@ -388,6 +349,7 @@ class LoginScreen extends StatelessWidget {
               await CupitHome.get(context).getinformationAgenceOrClient();
 
               if (LoginCubit.get(context).path == LOGINCLIENT) {
+                CupitHome.get(context).currentindexa = 0;
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => const Navbar()),
@@ -398,6 +360,7 @@ class LoginScreen extends StatelessWidget {
                             .type_vente[CupitHome.get(context).toggelindex]);
                 // await CubitDetail.get(context).getFavorites();
               } else if (LoginCubit.get(context).path == LOGINAGENCE) {
+                CupitHome.get(context).currentindex = 0;
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => const Home()),
@@ -406,7 +369,7 @@ class LoginScreen extends StatelessWidget {
               }
             });
             Fluttertoast.showToast(
-                msg: 'Welcom ${state.model!.name}',
+                msg: 'Welcome ${state.model!.name}',
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIosWeb: 1,
@@ -416,7 +379,7 @@ class LoginScreen extends StatelessWidget {
           }
         } else if (state is BadLoginState) {
           Fluttertoast.showToast(
-              msg: 'Some Error',
+              msg: 'unable to connect',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,

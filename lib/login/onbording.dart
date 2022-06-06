@@ -34,9 +34,12 @@ class _OnbordingState extends State<Onbording> {
   bool islast = false;
   var onbordingController = PageController();
   List<OnbordingModel> models = [
-    OnbordingModel('assets/images/on2.png', 'Acheter ou louer ', 'Acheter ou louez votre maison attendue depuis chez vous'),
-    OnbordingModel('assets/images/on2.png', 'Trouver la maison idéale', 'Trouver votre maison depuis carte géographique'),
-    OnbordingModel('assets/images/on2.png', 'Inscrivez-vous', 'Connectez-vous pour voir nos offres exceptionnelles'),
+    OnbordingModel('assets/images/on2.png', 'Acheter ou louer ',
+        'Acheter ou louez votre maison attendue depuis chez vous'),
+    OnbordingModel('assets/images/on2.png', 'Trouver la maison idéale',
+        'Trouver votre maison depuis carte géographique'),
+    OnbordingModel('assets/images/on2.png', 'Inscrivez-vous',
+        'Connectez-vous pour voir nos offres exceptionnelles'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -87,14 +90,13 @@ class _OnbordingState extends State<Onbording> {
               Row(
                 children: [
                   SmoothPageIndicator(
-                      controller: onbordingController, // PageController
+                      controller: onbordingController,
                       count: models.length,
                       effect: const ExpandingDotsEffect(
                           dotWidth: 20,
                           dotHeight: 15,
                           dotColor: Colors.black26,
-                          activeDotColor:
-                              Colors.deepOrange), // your preferred effect
+                          activeDotColor: Colors.deepOrange),
                       onDotClicked: (index) {}),
                   const Spacer(),
                   FloatingActionButton(

@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:agence/home/cubitHome/homeStates.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../Model/AfficheOffer.dart';
-import '../home/cubitHome/cupit_home.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/homeStates.dart';
 
 import '../home/home.dart';
 import 'formulairemodifieroffre.dart';
@@ -92,7 +91,6 @@ class Modifieroffrephoto extends StatelessWidget {
                             ),
                           );
                         });
-                    // CupitHome.get(context).selectimagecamera();
                   },
                   child: Ink(
                     decoration: BoxDecoration(
@@ -231,13 +229,6 @@ class Modifieroffrephoto extends StatelessWidget {
                                 '${CupitHome.get(context).currentLocation!.latitude}',
                             'longitude':
                                 '${CupitHome.get(context).currentLocation!.longitude}'
-                            // 'type_offer': CupitHome.get(context).vendevalueDrop,
-                            // 'condition_de_paiment': jsonEncode(
-                            //     "${CupitHome.get(context).conditionsListhttp}"),
-                            // 'specification': jsonEncode(
-                            //     "${CupitHome.get(context).specificationListhttp}"),
-                            // 'papiers': jsonEncode(
-                            //     "${CupitHome.get(context).papiersListhttp}")
                           };
                           CupitHome.get(context)
                               .updateOffer(data: sendinfoOffer)
@@ -263,7 +254,7 @@ class Modifieroffrephoto extends StatelessWidget {
                 (route) => false);
           });
           Fluttertoast.showToast(
-              msg: 'Update offer success',
+              msg: 'offer updated successfully',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
@@ -272,7 +263,7 @@ class Modifieroffrephoto extends StatelessWidget {
               fontSize: 16.0);
         } else if (state is BadUpdateOfferState) {
           Fluttertoast.showToast(
-              msg: 'error',
+              msg: 'unable to update the offer',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,

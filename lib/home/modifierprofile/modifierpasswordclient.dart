@@ -1,14 +1,13 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../Model/ErrorRegisterAndLoginModel.dart';
 import '../../clienthome/navbar.dart';
-import '../../login/cupitlogin/loginStates.dart';
 import '../../shared/components/components.dart';
-import '../cubitHome/cupit_home.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
+
 import 'cubitmodifier.dart';
 import 'modifierstate.dart';
 
@@ -233,7 +232,7 @@ class Modifierpasswordclient extends StatelessWidget {
               MaterialPageRoute(builder: (context) => const Navbar()),
               (route) => false);
           Fluttertoast.showToast(
-              msg: 'Password changed Successfuly',
+              msg: 'Password updated Successfuly',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
@@ -243,7 +242,7 @@ class Modifierpasswordclient extends StatelessWidget {
         }
       } else if (state is BadUpdatePasswordAgenceState) {
         Fluttertoast.showToast(
-            msg: 'Some Error',
+            msg: 'unable to update',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,

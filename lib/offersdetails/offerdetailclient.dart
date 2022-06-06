@@ -7,14 +7,13 @@ import 'package:agence/offersdetails/cubitOfferDetail.dart';
 
 import 'package:agence/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-
+import 'package:agence/home/cubitHome/CubitHome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../home/cubitHome/cupit_home.dart';
 import '../offerAgenceClient.dart';
 
 class Offerdetailclient extends StatefulWidget {
@@ -35,12 +34,6 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
   var msgController = TextEditingController();
 
   Map<String, dynamic> sendinfomsg = {};
-
-  // List<String> models = [
-  //   'assets/images/on2.png',
-  //   'assets/images/building.jpg',
-  //   'assets/images/design.png'
-  // ];
 
   int a = 0;
 
@@ -70,18 +63,13 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
               children: [
                 Container(
                   width: double.infinity,
-                  // height: 295,
                   height: double.infinity,
-
                   color: Colors.white54,
-                  // child: Image(image:AssetImage('assets/images/building.jpg'),fit: BoxFit.cover,),
                   child: PageView.builder(
                     onPageChanged: (int index) {},
                     controller: onbordingController,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      // return Ala(models[index]);
-
                       List? k;
                       k = model.photo?.map((e) {
                         return base64Decode(e);
@@ -100,7 +88,6 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                   left: -5,
                   child: MaterialButton(
                     onPressed: () {
-                      // Changepage(context, const Navbar());
                       Navigator.pop(context);
                     },
                     shape: const CircleBorder(),
@@ -131,14 +118,6 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                                 ? const Color(0xff131313)
                                 : Colors.blue,
                           ),
-
-                          // effect: const ExpandingDotsEffect(
-                          //
-                          //     dotWidth: 20,
-                          //     dotHeight: 15,
-                          //     dotColor: Colors.black26,
-                          //     activeDotColor:
-                          //     Colors.deepOrange), // your preferred effect
                           onDotClicked: (index) {}),
                     ),
                   ),
@@ -170,7 +149,7 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                             width: 20,
                           ),
                           Text(
-                            "${model.price} \$",
+                            "${model.price} DA",
                             style:
                                 Theme.of(context).textTheme.headline4?.copyWith(
                                       fontSize: 32,
@@ -198,14 +177,12 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                                   color: CubitDetail.get(context).colorfav
                                       ? Colors.redAccent
                                       : Colors.white,
-                                  // color: CupitHome.get(context).dartSwitch
-                                  //     ? Colors.white
-                                  //     : Colors.white,
                                 ),
                               );
                             },
                             condition: state is! LoadingExFavState &&
-                                state is! LoadingChangeFavState,
+                                state is! LoadingChangeFavState &&
+                                CubitDetail.get(context).existfav != null,
                             fallback: (BuildContext context) {
                               return SpinKitRipple(
                                 duration: const Duration(seconds: 1),
@@ -343,16 +320,10 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                           ),
                           Expanded(
                             child: Container(
-                              // color: CupitHome.get(context).dartSwitch
-                              //     ? const Color(0xff131313)
-                              //     : Colors.white,
                               height: 54,
                               child: MaterialButton(
                                 padding: const EdgeInsets.all(0),
                                 onPressed: () {
-                                  // setState(() {
-                                  //   a = 1;
-                                  // });
                                   CubitDetail.get(context)
                                       .changeNavDetailClient(1);
                                 },
@@ -401,13 +372,9 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                               child: MaterialButton(
                                 padding: const EdgeInsets.all(0),
                                 onPressed: () {
-                                  // setState(() {
-                                  //   a = 2;
-                                  // });
                                   CubitDetail.get(context)
                                       .changeNavDetailClient(2);
-                                  // CubitDetail.get(context)
-                                  //     .changeNavDetailAgence(2);
+
                                   CubitDetail.get(context).getAllMsg(
                                       data: {'offer_id': '${model.id}'});
                                 },
@@ -603,10 +570,14 @@ Widget Listemessage(context, msg) => Container(
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 16,
-                  backgroundImage:
-                      const AssetImage('assets/images/profile_avatar.jpg'),
+                  backgroundImage: msg['photo'] == null
+                      ? const AssetImage('assets/images/profile_avatar.jpg')
+                      : Image.memory(
+                          base64Decode(msg['photo']),
+                          fit: BoxFit.cover,
+                        ).image,
                 ),
                 const SizedBox(
                   width: 6,
@@ -644,8 +615,6 @@ Widget Listemessage(context, msg) => Container(
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 )),
-                // Spacer(),
-
                 const SizedBox(
                   width: 0,
                 ),
@@ -655,11 +624,6 @@ Widget Listemessage(context, msg) => Container(
         ),
       ),
     );
-
-// Widget Ala(String k) => Image(
-//       image: AssetImage('${k}'),
-//       fit: BoxFit.cover,
-//     );
 
 Widget Information(context, OffersModel model) => Padding(
       padding: const EdgeInsets.all(16.0),
@@ -929,28 +893,6 @@ Widget Details(
         ),
       ),
     );
-
-// listoption(context) => Container(
-//       decoration: BoxDecoration(
-//         borderRadius: BorderRadius.circular(15),
-//         color: CupitHome.get(context).dartSwitch
-//             ? Colors.blueGrey
-//             : Colors.blueAccent,
-//       ),
-//       child: Center(
-//           child: Row(children: const [
-//         SizedBox(
-//           width: 6,
-//         ),
-//         Text(
-//           '5 chambre',
-//           style: TextStyle(fontSize: 18, color: Colors.white),
-//         ),
-//         SizedBox(
-//           width: 6,
-//         )
-//       ])),
-//     );
 
 listSpecefication(context, OffersModel model) => ListView(
       scrollDirection: Axis.horizontal,

@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import '../Model/AfficheOffer.dart';
-import '../home/cubitHome/cupit_home.dart';
 
+import '../home/cubitHome/CubitHome.dart';
 import '../offersdetails/offerdetailFavoriete.dart';
 
 class Favorite extends StatefulWidget {
@@ -89,13 +89,6 @@ class _FavoriteState extends State<Favorite> {
             fallback: (BuildContext context) {
               return const Center(child: CircularProgressIndicator());
             },
-            // child: const Center(
-            //   child: Icon(
-            //     Icons.favorite_sharp,
-            //     size: 100,
-            //     color: Colors.grey,
-            //   ),
-            // ),
           ),
         );
       },
@@ -142,9 +135,6 @@ class _FavoriteState extends State<Favorite> {
         ),
         Container(
           decoration: BoxDecoration(
-            // color:  CupitHome.get(context).dartSwitch
-            //     ? Colors.blueGrey
-            //     : Colors.white,
             gradient: CupitHome.get(context).dartSwitch
                 ? const LinearGradient(
                     begin: Alignment.topRight,
@@ -174,7 +164,7 @@ class _FavoriteState extends State<Favorite> {
                 width: 8,
               ),
               Text(
-                "${model.price} \$",
+                "${model.price} DA",
                 style: Theme.of(context).textTheme.headline4?.copyWith(
                       fontSize: 32,
                     ),
@@ -202,14 +192,3 @@ class _FavoriteState extends State<Favorite> {
     );
   }
 }
-
-
-
-
-// const Center(
-// child: Icon(
-// Icons.favorite_sharp,
-// size: 100,
-// color: Colors.grey,
-// ),
-// ),

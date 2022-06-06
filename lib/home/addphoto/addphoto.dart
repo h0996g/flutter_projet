@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:agence/home/addphoto/editphoto.dart';
-import 'package:agence/home/cubitHome/cupit_home.dart';
-import 'package:agence/home/cubitHome/homeStates.dart';
+
 import 'package:agence/home/home.dart';
-import 'package:agence/home/offers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../cubitHome/CubitHome.dart';
+import '../cubitHome/homeStates.dart';
 
 class Addphoto extends StatelessWidget {
   Addphoto({Key? key}) : super(key: key);
@@ -19,6 +19,7 @@ class Addphoto extends StatelessWidget {
     return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
+          // resizeToAvoidBottomInset: false,
           body: Column(children: [
             const SizedBox(
               height: 100,
@@ -86,7 +87,6 @@ class Addphoto extends StatelessWidget {
                             ),
                           );
                         });
-                    // CupitHome.get(context).selectimagecamera();
                   },
                   child: Ink(
                     decoration: BoxDecoration(
@@ -224,7 +224,7 @@ class Addphoto extends StatelessWidget {
                                 '${CupitHome.get(context).currentLocation!.longitude}'
                           };
                           CupitHome.get(context)
-                              .savePhotoBd(data: sendinfoOffer)
+                              .ajouteroffre(data: sendinfoOffer)
                               .then((value) {
                             CupitHome.get(context).resetValueoffer();
                             CupitHome.get(context).resetValuePhoto();
@@ -248,7 +248,7 @@ class Addphoto extends StatelessWidget {
                 (route) => false);
           });
           Fluttertoast.showToast(
-              msg: 'add offer success',
+              msg: 'offer added successfully',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
@@ -257,7 +257,7 @@ class Addphoto extends StatelessWidget {
               fontSize: 16.0);
         } else if (state is CreateOfferBadState) {
           Fluttertoast.showToast(
-              msg: 'error',
+              msg: 'unable to add the offer',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
