@@ -1,6 +1,5 @@
 import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/login/login.dart';
-import 'package:agence/offersdetails/cubitOfferDetail.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 
 import 'package:flutter/material.dart';
@@ -10,10 +9,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../Api/constApi.dart';
 import '../Model/ErrorRegisterAndLoginModel.dart';
 import '../Model/RegisterModel.dart';
-import '../home/cubitHome/cupit_home.dart';
-import '../home/home.dart';
+import '../home/cubitHome/CuBitHome.dart';
 import '../shared/components/components.dart';
-import 'cupitlogin/cupitl.dart';
+
+import 'cupitlogin/CubitLogin.dart';
 import 'cupitlogin/loginStates.dart';
 import 'other/cachhelper.dart';
 
@@ -41,24 +40,12 @@ class Clientregister extends StatelessWidget {
                   child: Form(
                     key: formKeyy,
                     child: Column(
-                      // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
                           'REGISTER',
                           style: TextStyle(
                               fontSize: 40, fontWeight: FontWeight.bold),
                         ),
-                        // SizedBox(
-                        //   height: 16,
-                        // ),
-                        // Text(
-                        //   'login now to browse our hot offers',
-                        //   style: TextStyle(
-                        //     color: Colors.blueGrey,
-                        //     fontSize: 18,
-                        //     fontWeight: FontWeight.w600,
-                        //   ),
-                        // ),
                         const SizedBox(
                           height: 26,
                         ),
@@ -89,7 +76,6 @@ class Clientregister extends StatelessWidget {
                         const SizedBox(
                           height: 18,
                         ),
-
                         defaultForm(
                             context: context,
                             controller: prenomController,
@@ -149,13 +135,7 @@ class Clientregister extends StatelessWidget {
                             textInputAction: TextInputAction.done,
                             controller: passController,
                             type: TextInputType.visiblePassword,
-                            onFieldSubmitted: () {
-                              // if (formKeyy.currentState!.validate()) {
-                              //   LoginCubit.get(context).login(
-                              //       pass: passController.text,
-                              //       email: emailController.text);
-                              // }
-                            },
+                            onFieldSubmitted: () {},
                             obscureText: LoginCubit.get(context).ishidden,
                             valid: (value) {
                               if (value.isEmpty) {
@@ -210,7 +190,6 @@ class Clientregister extends StatelessWidget {
                                 ? Colors.white
                                 : Colors.grey,
                           ),
-                          //      textInputAction: TextInputAction.next,
                         ),
                         const SizedBox(
                           height: 18,
@@ -243,10 +222,6 @@ class Clientregister extends StatelessWidget {
                                     splashColor: Colors.transparent,
                                     onPressed: () {
                                       if (formKeyy.currentState!.validate()) {
-                                        // LoginCubit.get(context).login(
-                                        //     pass: passController.text,
-                                        //     email: emailController.text);
-                                        // Changepage(context, const Home());
                                         sendinfoclient = {
                                           'name': nameController.text,
                                           'prenom': prenomController.text,
@@ -316,7 +291,6 @@ class Clientregister extends StatelessWidget {
                       CupitHome.get(context)
                           .type_vente[CupitHome.get(context).toggelindex]);
               CupitHome.get(context).getinformationAgenceOrClient();
-              // CubitDetail.get(context).getFavorites();
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const Navbar()),
@@ -324,7 +298,7 @@ class Clientregister extends StatelessWidget {
             }).then((value) {
               Fluttertoast.showToast(
                   msg:
-                      'Successfully Registered \n hellow ${state.model.user!.name}',
+                      'Successfully Registered \n welcome ${state.model.user!.name}',
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.BOTTOM,
                   timeInSecForIosWeb: 1,

@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'package:agence/Map/AllOffersMapAgence.dart';
 import 'package:agence/Model/AfficheOffer.dart';
-import 'package:agence/clienthome/navbar.dart';
-import 'package:agence/home/cubitHome/cupit_home.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
 import 'package:agence/offersdetails/cubitOfferDetail.dart';
 import 'package:agence/offersdetails/offerdetailagence.dart';
-import 'package:agence/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -18,7 +16,6 @@ import 'cubitHome/homeStates.dart';
 
 class Offers extends StatelessWidget {
   const Offers({Key? key}) : super(key: key);
-  // Map<String, dynamic> getallmsg = {};
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +30,6 @@ class Offers extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => AllOffersMapAgence()));
               });
-              // Navigator.push(context, MaterialPageRoute(builder: (context) =>  Navbar()));
-              // Changepage(context, const Navbar());
             },
             child: Icon(
               Icons.place,
@@ -56,8 +51,6 @@ class Offers extends StatelessWidget {
             actions: [
               IconButton(
                   onPressed: () {
-                    // String k = '\\"' + 'ggg' + '\\"';
-                    // print(k);
                     CupitHome.get(context).changeSwitch(
                         value: !CupitHome.get(context).dartSwitch);
                   },
@@ -127,17 +120,6 @@ class Offers extends StatelessWidget {
             },
           ),
         );
-
-        // return ConditionalBuilder(
-        //   builder: (BuildContext context) {
-        //     return
-
-        //   },
-        //   condition: CupitHome.get(context).dataOfferModel != null,
-        //   fallback: (BuildContext context) {
-        //     return const Center(child: CircularProgressIndicator());
-        //   },
-        // );
       },
       listener: (BuildContext context, Object? state) {},
     );
@@ -206,7 +188,7 @@ ListItembuilder(context, OffersModel model) {
               width: 8,
             ),
             Text(
-              "${model.price} \$",
+              "${model.price} DA",
               style: Theme.of(context).textTheme.headline4?.copyWith(
                     fontSize: 32,
                   ),
@@ -311,7 +293,4 @@ Future<void> allmap(context) async {
           ),
         );
   }
-  print('oooooooooooooooo');
-  // print(mmap);
-  // emit(GoodGetAllOffersMap());
 }

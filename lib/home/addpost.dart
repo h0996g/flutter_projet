@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
 
 import '../shared/components/components.dart';
-import 'cubitHome/cupit_home.dart';
+import 'cubitHome/CubitHome.dart';
 import 'cubitHome/homeStates.dart';
 
 class AddPost extends StatelessWidget {
@@ -197,9 +197,6 @@ class AddPost extends StatelessWidget {
                               ),
                             ),
                           ),
-                          // const SizedBox(
-                          //   height: 26,
-                          // ),
                           Visibility(
                             visible: CupitHome.get(context)
                                 .isvisibility['N-champre']!,
@@ -224,13 +221,9 @@ class AddPost extends StatelessWidget {
                               ),
                             ),
                           ),
-                          // const SizedBox(
-                          //   height: 26,
-                          // ),
                           MultiSelectDialogField(
                             dialogHeight: 150,
                             items: CupitHome.get(context).paymentVar,
-                            // title: Text("Conditions de paiment"),
                             selectedColor: Colors.blue,
                             decoration: BoxDecoration(
                               borderRadius:
@@ -264,7 +257,6 @@ class AddPost extends StatelessWidget {
                           MultiSelectDialogField(
                             dialogHeight: 150,
                             items: CupitHome.get(context).speceficationVar,
-                            // title: Text("Conditions de paiment"),
                             selectedColor: Colors.blue,
                             decoration: BoxDecoration(
                               borderRadius:
@@ -420,7 +412,6 @@ class AddPost extends StatelessWidget {
                             controller:
                                 CupitHome.get(context).addressController,
                           ),
-
                           const SizedBox(
                             height: 26,
                           ),
@@ -456,12 +447,12 @@ class AddPost extends StatelessWidget {
                                           ? Colors.white
                                           : Colors.black),
                                   const SizedBox(
-                                    width: 25,
+                                    width: 20,
                                   ),
                                   Text(
-                                    'Ajouter Location',
+                                    'Ajouter localisation',
                                     style: TextStyle(
-                                        fontSize: 28,
+                                        fontSize: 24,
                                         fontWeight: FontWeight.bold,
                                         color: CupitHome.get(context).dartSwitch
                                             ? Colors.white
@@ -471,11 +462,9 @@ class AddPost extends StatelessWidget {
                               ),
                             ),
                           ),
-
                           const SizedBox(
                             height: 26,
                           ),
-
                           Row(
                             children: [
                               const Spacer(),

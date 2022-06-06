@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:agence/home/cubitHome/cupit_home.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
 import 'package:agence/home/cubitHome/homeStates.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,19 +34,14 @@ class _ModifierLocationState extends State<ModifierLocation> {
   LatLng? currentLocation;
 
   CameraPosition initialCameraPosition = const CameraPosition(
-    // target: LatLng(latitude!, longitude!),
     target: LatLng(36.31789608941112, 6.615674905478954),
     zoom: 14.4746,
   );
 
   @override
   void initState() {
-    // CupitHome.get(context).awelModel(
-    //     CupitHome.get(context).allofferModel!.data!.offers[position].latitude,
-    //     CupitHome.get(context).allofferModel!.data!.offers[position].longitude);
     initialCameraPosition = CameraPosition(
       target: LatLng(model.latitude!, model.longitude!),
-      // target: LatLng(36.31789608941112, 6.615674905478954),
       zoom: initialCameraPosition.zoom,
     );
     currentLocation = initialCameraPosition.target;
@@ -72,6 +67,7 @@ class _ModifierLocationState extends State<ModifierLocation> {
             alignment: Alignment.center,
             children: [
               GoogleMap(
+                zoomControlsEnabled: false,
                 markers: _markers,
                 initialCameraPosition: initialCameraPosition,
                 mapType: MapType.normal,
@@ -79,9 +75,6 @@ class _ModifierLocationState extends State<ModifierLocation> {
                   _controller.complete(googleMapController);
                 },
                 onCameraMove: (CameraPosition newpos) {
-                  // setState(() {
-                  //   CupitHome.get(context).currentLocation = newpos.target;
-                  // });
                   setState(() {
                     CupitHome.get(context).currentLocation = newpos.target;
                   });
@@ -99,20 +92,15 @@ class _ModifierLocationState extends State<ModifierLocation> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               FloatingActionButton(
-                heroTag: "btn1",
-                onPressed: () {
-                  print(CupitHome.get(context).currentLocation);
-                  // LatLng(38.52900208591146, -98.54919254779816), currentLocation);
-                },
-                child: const Icon(Icons.settings_ethernet_rounded),
-              ),
-              FloatingActionButton(
-                heroTag: "btn2",
+                heroTag: "MarkLocation",
                 onPressed: () {
                   _setMarker(CupitHome.get(context).currentLocation!);
                   print(CupitHome.get(context).currentLocation);
                 },
                 child: const Icon(Icons.location_on),
+              ),
+              const SizedBox(
+                height: 8,
               ),
               FloatingActionButton(
                 heroTag: "mylocation",

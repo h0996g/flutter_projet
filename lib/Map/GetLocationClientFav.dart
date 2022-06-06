@@ -41,12 +41,8 @@ class _GetLocationClientFavState extends State<GetLocationClientFav> {
 
   @override
   void initState() {
-    // CupitHome.get(context).awelModel(
-    //     CupitHome.get(context).allofferModel!.data!.offers[position].latitude,
-    //     CupitHome.get(context).allofferModel!.data!.offers[position].longitude);
     initialCameraPosition = CameraPosition(
       target: LatLng(model.latitude!, model.longitude!),
-      // target: LatLng(36.31789608941112, 6.615674905478954),
       zoom: initialCameraPosition.zoom,
     );
     currentLocation = initialCameraPosition.target;
@@ -72,6 +68,7 @@ class _GetLocationClientFavState extends State<GetLocationClientFav> {
             alignment: Alignment.center,
             children: [
               GoogleMap(
+                zoomControlsEnabled: false,
                 markers: _markers,
                 initialCameraPosition: initialCameraPosition,
                 mapType: MapType.normal,
@@ -79,9 +76,6 @@ class _GetLocationClientFavState extends State<GetLocationClientFav> {
                   _controller.complete(googleMapController);
                 },
                 onCameraMove: (CameraPosition newpos) {
-                  // setState(() {
-                  //   CupitHome.get(context).currentLocation = newpos.target;
-                  // });
                   setState(() {
                     currentLocation = initialCameraPosition.target;
                   });

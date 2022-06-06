@@ -11,7 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../home/cubitHome/cupit_home.dart';
+import '../home/cubitHome/CubitHome.dart';
 import '../home/cubitHome/homeStates.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -54,14 +54,12 @@ class Offersclient extends StatelessWidget {
         return Scaffold(
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              // await CupitHome.get(context).allmap();
               allmap(context).then((value) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => AllOffersMapClient()));
               });
-              // Navigator.push(context, MaterialPageRoute(builder: (context) =>  Navbar()));
             },
             child: Icon(
               Icons.place,
@@ -129,8 +127,6 @@ class Offersclient extends StatelessWidget {
                                   CupitHome.get(context).type_vente[
                                       CupitHome.get(context).toggelindex]);
                         }
-
-                        // Builder(builder: (context) =>CupitHome.get(context).getTypeOffer ,);
                       },
                       labels: CupitHome.get(context).type_vente,
                       radiusStyle: true,
@@ -231,24 +227,6 @@ class Offersclient extends StatelessWidget {
               ],
             ),
           ),
-
-          // condition: CupitHome.get(context).allofferModel != null,
-          // fallback: (BuildContext context) {
-          //   return Padding(
-          //     padding:
-          //         const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-          //     child: ListView.separated(
-          //       physics: const BouncingScrollPhysics(),
-          //       itemBuilder: (context, index) => buildFoodShimmer(context),
-          //       itemCount: 6,
-          //       separatorBuilder: (BuildContext context, int index) {
-          //         return const SizedBox(
-          //           height: 10,
-          //         );
-          //       },
-          //     ),
-          //   );
-          // },
         );
       },
       listener: (BuildContext context, Object? state) {},
@@ -278,7 +256,7 @@ class Offersclient extends StatelessWidget {
           'offer_id': '${modelClient.id}',
         });
         CubitDetail.get(context).getexistfav(data: sendfav);
-        // print(positionClient);
+
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -297,9 +275,6 @@ class Offersclient extends StatelessWidget {
         ),
         Container(
           decoration: BoxDecoration(
-            // color:  CupitHome.get(context).dartSwitch
-            //     ? Colors.blueGrey
-            //     : Colors.white,
             gradient: CupitHome.get(context).dartSwitch
                 ? const LinearGradient(
                     begin: Alignment.topRight,
@@ -329,7 +304,7 @@ class Offersclient extends StatelessWidget {
                 width: 8,
               ),
               Text(
-                "${model.price} \$",
+                "${model.price} DA",
                 style: Theme.of(context).textTheme.headline4?.copyWith(
                       fontSize: 32,
                     ),
@@ -402,7 +377,7 @@ Future<void> allmap(context) async {
 
                 CubitDetail.get(context).changeNavDetailClient(0);
                 CubitDetail.get(context).indexClient = 0;
-                // print(modelClient.id);
+
                 sendfav = {
                   'offer_id':
                       '${CupitHome.get(context).allofferModel!.data!.offers[i].id}',
@@ -425,7 +400,4 @@ Future<void> allmap(context) async {
           ),
         );
   }
-  print('oooooooooooooooo');
-  // print(mmap);
-  // emit(GoodGetAllOffersMap());
 }

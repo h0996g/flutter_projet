@@ -11,7 +11,7 @@ import 'package:toggle_switch/toggle_switch.dart';
 import '../Api/constApi.dart';
 import '../Model/AfficheOffer.dart';
 import '../Model/AgencenameandphoneModel.dart';
-import '../home/cubitHome/cupit_home.dart';
+import '../home/cubitHome/CubitHome.dart';
 import 'dart:convert' as convert;
 
 import '../offerAgenceClient.dart';
@@ -86,43 +86,12 @@ class Search extends StatelessWidget {
               Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: CupitsearchCubit.get(context).toggelindexshearch == 0
-                      ?
-                      //  defaultForm(
-                      //     context: context,
-                      //     controller: shearchcontroller,
-                      //     type: TextInputType.text,
-                      //     valid: () {},
-                      //     lable: Text(
-                      //       'Search',
-                      //       style: TextStyle(
-                      //           color: CupitHome.get(context).dartSwitch
-                      //               ? Colors.white
-                      //               : Colors.grey),
-                      //     ),
-                      //     prefixIcon: Icon(
-                      //       Icons.search,
-                      //       color: CupitHome.get(context).dartSwitch
-                      //           ? Colors.white
-                      //           : Colors.grey,
-                      //     )),
-
-                      TypeAheadFormField(
+                      ? TypeAheadFormField(
                           textFieldConfiguration: const TextFieldConfiguration(
                               autofocus: true,
                               decoration: InputDecoration(
                                   border: OutlineInputBorder())),
-                          // animationDuration: Duration(seconds: 2),
-
                           itemBuilder: (BuildContext context, Name? model) {
-                            // final modelClient = model;
-                            // var imageProvider;
-
-                            // modelClient != null
-                            //     ? imageProvider = MemoryImage(
-                            //         base64Decode(modelClient.photo!))
-                            //     : imageProvider = AssetImage(
-                            //         'assets/images/profile_avatar.jpg');
-
                             return NeumorphicButton(
                               style: NeumorphicStyle(
                                   color: CupitHome.get(context).dartSwitch
@@ -130,19 +99,6 @@ class Search extends StatelessWidget {
                                       : Colors.white,
                                   depth: 0),
                               onPressed: () async {
-                                // CubitDetail.get(context).indexClient = 0;
-                                // print(modelClient.id);
-                                // sendfav = {
-                                //   'offer_id': '${modelClient.id}',
-                                // };
-                                // await CubitDetail.get(context)
-                                //     .getNameandPhone(data: {
-                                //   'offer_id': '${modelClient.id}',
-                                // });
-                                // CubitDetail.get(context)
-                                //     .getexistfav(data: sendfav);
-
-                                // print(positionClient);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -173,9 +129,6 @@ class Search extends StatelessWidget {
                                     ),
                                     Container(
                                       decoration: BoxDecoration(
-                                        // color:  CupitHome.get(context).dartSwitch
-                                        //     ? Colors.blueGrey
-                                        //     : Colors.white,
                                         gradient: CupitHome.get(context)
                                                 .dartSwitch
                                             ? const LinearGradient(
@@ -209,7 +162,7 @@ class Search extends StatelessWidget {
                                                 width: 8,
                                               ),
                                               Text(
-                                                "${model.name} \$",
+                                                "${model.name}",
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .headline4
@@ -240,9 +193,6 @@ class Search extends StatelessWidget {
                                     )
                                   ]),
                             );
-                            // return ListTile(
-                            //   title: Text('${model!.name}'),
-                            // );
                           },
                           suggestionsCallback: getOfferAgencetoclientName,
                           onSuggestionSelected: (Name? k) {},
@@ -267,7 +217,6 @@ class Search extends StatelessWidget {
                               onPressed: () async {
                                 CubitDetail.get(context)
                                     .changeNavDetailClient(0);
-                                // CubitDetail.get(context).indexClient = 0;
                                 print(modelClient.id);
                                 sendfav = {
                                   'offer_id': '${modelClient.id}',
@@ -278,7 +227,6 @@ class Search extends StatelessWidget {
                                 });
                                 CubitDetail.get(context)
                                     .getexistfav(data: sendfav);
-                                // print(positionClient);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -302,9 +250,6 @@ class Search extends StatelessWidget {
                                     ),
                                     Container(
                                       decoration: BoxDecoration(
-                                        // color:  CupitHome.get(context).dartSwitch
-                                        //     ? Colors.blueGrey
-                                        //     : Colors.white,
                                         gradient: CupitHome.get(context)
                                                 .dartSwitch
                                             ? const LinearGradient(
@@ -338,7 +283,7 @@ class Search extends StatelessWidget {
                                                 width: 8,
                                               ),
                                               Text(
-                                                "${model.price} \$",
+                                                "${model.price} DA",
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .headline4
@@ -369,27 +314,13 @@ class Search extends StatelessWidget {
                                     )
                                   ]),
                             );
-                            // return ListTile(
-                            //   title: Text('${model!.name}'),
-                            // );
                           },
                           suggestionsCallback: getOfferAgencetoclient,
                           onSuggestionSelected: (OffersModel? k) {},
                         )),
-
               const SizedBox(
                 height: 10,
               ),
-              // Expanded(
-              //     child: ListView.separated(
-              //         physics: const BouncingScrollPhysics(),
-              //         itemBuilder: ((context, index) => Listoffers(context,)),
-              //         separatorBuilder: (BuildContext context, int index) {
-              //           return const SizedBox(
-              //             height: 0,
-              //           );
-              //         },
-              //         itemCount: 6))
             ]),
           ),
         );
@@ -398,30 +329,6 @@ class Search extends StatelessWidget {
     );
   }
 }
-
-// DataOffer? offerAgencModel;
-// var offers;
-// Future<List<OffersModel>> getOfferAgence(String query) async {
-//   List<OffersModel> kk;
-
-//   kk = await Httplar.httpget(path: GETOFFERSAGENCE).then((value) {
-//     var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
-
-//     offerAgencModel = DataOffer.fromJson(jsonResponse);
-//     print('ook');
-//     offers = offerAgencModel!.data!.offers;
-//     print(offerAgencModel!.data!.offers.runtimeType);
-//     return offers.where((offer) {
-//       final String wilaya = offer.wilaya.toLowerCase();
-//       final lowerQuery = query.toLowerCase();
-//       return wilaya.contains(lowerQuery);
-//     }).toList();
-//     // print(offerAgencModel!.data!.offers[0].address);
-//     // print(offerAgencModel!.data!.offers[0].latitude);
-//     // print(offerAgencModel!.data!.offers[0].longitude);
-//   });
-//   return kk;
-// }
 
 var offersclient;
 DataOffer? allofferModel;
@@ -464,13 +371,3 @@ Future<List<Name>> getOfferAgencetoclientName(String query) async {
   });
   return kk;
 }
-
-// Dd? agencemodel;
-// Future<void> kk() async {
-//   await Httplar.httpget(path: '/api/getnamephonuser').then((value) {
-//     print(value.body);
-//     var jsonResponse = jsonDecode(value.body);
-//     agencemodel = Dd.fromJson(jsonResponse);
-//     print(agencemodel!.o[0].name);
-//   });
-// }

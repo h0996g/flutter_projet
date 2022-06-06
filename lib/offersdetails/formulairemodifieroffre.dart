@@ -5,7 +5,7 @@ import 'package:agence/offersdetails/modifieroffrephoto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
-import '../home/cubitHome/cupit_home.dart';
+import '../home/cubitHome/CubitHome.dart';
 import '../shared/components/components.dart';
 
 class Formulairemodifier extends StatefulWidget {
@@ -21,13 +21,7 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
   OffersModel model;
   _FormulairemodifierState({required this.model});
   CupitHome? objHome;
-  // var superficieController = TextEditingController();
-  // var priceController = TextEditingController();
-  // var nEtageController = TextEditingController();
-  // var nChambres = TextEditingController();
-  // var descriptionController = TextEditingController();
-  // var addressController = TextEditingController();
-  // var nChambres=TextEditingController();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -56,13 +50,7 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
             appBar: AppBar(
               elevation: 15,
               title: Text('Modifier offer',
-                  style:
-                      //  TextStyle(
-                      //     color: CupitHome.get(context).dartSwitch
-                      //         ? Colors.white
-                      //         : Colors.black,
-                      //     fontSize: 34),
-                      Theme.of(context).textTheme.headline4),
+                  style: Theme.of(context).textTheme.headline4),
               actions: [
                 IconButton(
                     onPressed: () {
@@ -236,9 +224,7 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
                               ),
                             ),
                           ),
-                          // const SizedBox(
-                          //   height: 26,
-                          // ),
+
                           Visibility(
                             visible: CupitHome.get(context)
                                 .isvisibility['N-champre']!,
@@ -496,12 +482,12 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
                                           ? Colors.white
                                           : Colors.black),
                                   const SizedBox(
-                                    width: 25,
+                                    width: 20,
                                   ),
                                   Text(
-                                    'Ajouter Location',
+                                    'Ajouter localisation',
                                     style: TextStyle(
-                                        fontSize: 28,
+                                        fontSize: 24,
                                         fontWeight: FontWeight.bold,
                                         color: CupitHome.get(context).dartSwitch
                                             ? Colors.white

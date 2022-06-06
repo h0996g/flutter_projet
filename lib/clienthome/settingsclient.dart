@@ -3,13 +3,12 @@ import 'dart:convert';
 import 'package:agence/home/modifierprofile/modifierpasswordclient.dart';
 import 'package:agence/home/modifierprofile/modifierprofileclient.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../Api/constApi.dart';
-import '../home/cubitHome/cupit_home.dart';
+import '../home/cubitHome/CubitHome.dart';
 import '../home/cubitHome/homeStates.dart';
 
 import '../home/modifierprofile/cubitmodifier.dart';
@@ -57,7 +56,6 @@ class Settingsclient extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-
                       Stack(
                           alignment: AlignmentDirectional.bottomEnd,
                           children: [
@@ -77,7 +75,6 @@ class Settingsclient extends StatelessWidget {
                                     ).image,
                             ),
                           ]),
-
                       const SizedBox(
                         height: 9,
                       ),
@@ -138,8 +135,6 @@ class Settingsclient extends StatelessWidget {
                       const SizedBox(
                         height: 6,
                       ),
-
-
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Row(
@@ -160,7 +155,6 @@ class Settingsclient extends StatelessWidget {
                                     color: Colors.white, fontSize: 16),
                               ),
                             ),
-                            // SizedBox(width: 10,)
                           ],
                         ),
                         height: 50,
@@ -174,7 +168,6 @@ class Settingsclient extends StatelessWidget {
                       const SizedBox(
                         height: 15,
                       ),
-
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Row(
@@ -190,7 +183,7 @@ class Settingsclient extends StatelessWidget {
                               child: Text(
                                 "${CupitHome.get(context).getinfouserModel!.client!.prenom}",
                                 maxLines: 1,
-                             overflow: TextOverflow.ellipsis   ,
+                                overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                     color: Colors.white, fontSize: 16),
                               ),
@@ -208,7 +201,6 @@ class Settingsclient extends StatelessWidget {
                       const SizedBox(
                         height: 15,
                       ),
-
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Row(
@@ -239,24 +231,6 @@ class Settingsclient extends StatelessWidget {
                       const SizedBox(
                         height: 15,
                       ),
-                      // Row(
-                      //   children: [
-                      //     const Text(
-                      //       'Dark Mode',
-                      //       style: TextStyle(color: Colors.grey, fontSize: 18),
-                      //     ),
-                      //     const Spacer(),
-                      //     Expanded(
-                      //       child: SwitchListTile.adaptive(
-                      //         onChanged: (value) {
-                      //           CupitHome.get(context).changeSwitch(value: value);
-                      //         },
-                      //         value: CupitHome.get(context).dartSwitch,
-                      //         activeColor: Colors.black26,
-                      //       ),
-                      //     )
-                      //   ],
-                      // ),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Row(
@@ -384,43 +358,3 @@ class Settingsclient extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Center(
-// child: TextButton(
-// onPressed: () {
-// CachHelper.removdata(key: 'islogin').then((value) {
-// Navigator.pushAndRemoveUntil(
-// context,
-// MaterialPageRoute(
-// builder: (context) => LoginScreen()),
-// (route) => false);
-// });
-// },
-// style: TextButton.styleFrom(),
-// child: Text(
-// 'SING OUT',
-// style: Theme.of(context).textTheme.headline4,
-// ),
-// ),
-// ),

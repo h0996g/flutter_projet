@@ -67,6 +67,3 @@ class LodinNamAndPhoneState extends DetailStates {}
 class GoodNamAndPhoneState extends DetailStates {}
 
 class BadNamAndPhoneState extends DetailStates {}
-// class CreateOfferBadState extends DetailStates {}
-// class CreateOfferBadState extends DetailStates {}
-// class CreateOfferBadState extends DetailStates {}

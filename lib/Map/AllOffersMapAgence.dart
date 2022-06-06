@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:agence/home/cubitHome/cupit_home.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
 import 'package:agence/home/cubitHome/homeStates.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +30,6 @@ class _AllOffersMapAgenceState extends State<AllOffersMapAgence> {
   LatLng? currentLocation;
 
   CameraPosition initialCameraPosition = CameraPosition(
-    // target: LatLng(latitude!, longitude!),
     target: LatLng(36.31789608941112, 6.615674905478954),
     zoom: 14.4746,
   );
@@ -42,9 +41,7 @@ class _AllOffersMapAgenceState extends State<AllOffersMapAgence> {
     //// //     CupitHome.get(context).initialCameraPosition!.target);
     _buildMarkerFromAssets();
     _markers = CupitHome.get(context).mmap;
-    // _setMarker(LatLng(
-    //     CupitHome.get(context).allofferModel!.data!.offers[0].latitude!,
-    //     CupitHome.get(context).allofferModel!.data!.offers[0].longitude!));
+
     super.initState();
   }
 
@@ -63,6 +60,7 @@ class _AllOffersMapAgenceState extends State<AllOffersMapAgence> {
             alignment: Alignment.center,
             children: [
               GoogleMap(
+                zoomControlsEnabled: false,
                 markers: _markers!,
                 initialCameraPosition: initialCameraPosition,
                 mapType: MapType.normal,
@@ -70,9 +68,6 @@ class _AllOffersMapAgenceState extends State<AllOffersMapAgence> {
                   _controller.complete(googleMapController);
                 },
                 onCameraMove: (CameraPosition newpos) {
-                  // setState(() {
-                  //   CupitHome.get(context).currentLocation = newpos.target;
-                  // });
                   setState(() {
                     currentLocation = initialCameraPosition.target;
                   });
@@ -154,21 +149,4 @@ class _AllOffersMapAgenceState extends State<AllOffersMapAgence> {
       setState(() {});
     }
   }
-
-  // void _setMarker(LatLng _location) {
-  //   // _markers = CupitHome.get(context).mmap;
-
-  //   Marker newMarker = Marker(
-  //     markerId: MarkerId(_location.toString()),
-  //     icon: BitmapDescriptor.defaultMarker,
-  //     // icon: _locationIcon,
-  //     position: _location,
-  //     infoWindow: InfoWindow(
-  //       title: "Title",
-  //     ),
-  //   );
-  //   _markers.add(newMarker);
-
-  //   setState(() {});
-  // }
 }

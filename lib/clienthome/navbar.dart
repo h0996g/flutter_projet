@@ -3,7 +3,7 @@ import 'package:agence/home/cubitHome/homeStates.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../home/cubitHome/cupit_home.dart';
+import '../home/cubitHome/CubitHome.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({Key? key}) : super(key: key);
@@ -13,16 +13,6 @@ class Navbar extends StatefulWidget {
 }
 
 class _NavbarState extends State<Navbar> {
-  // List<Widget> screens= [
-  //   Offersclient(),
-  //   Favorite(),
-  //   Settingsclient(),
-  // ];
-  // int currentindex=0;
-  // List<String> text =['offers',
-  //   'add offer',
-  //   'profile',
-  // ];
   @override
   Widget build(BuildContext context) {
     CupitHome obj = BlocProvider.of(context);

@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../shared/components/components.dart';
-import 'cupit_home.dart';
+import 'CubitHome.dart';
 
 class Modifierprofile extends StatefulWidget {
   Modifierprofile({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class _ModifierprofileState extends State<Modifierprofile> {
   CubitModifier? objModifier;
   var namemodController = TextEditingController();
   var addressemodController = TextEditingController();
-  // var passmodController = TextEditingController();
+
   var numbermodController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   Map<String, dynamic> sendinfoagencemodifier = {};
@@ -39,7 +39,7 @@ class _ModifierprofileState extends State<Modifierprofile> {
         TextEditingController(text: objHome?.getinfouserModel!.name);
     addressemodController =
         TextEditingController(text: objHome!.getinfouserModel!.agence!.address);
-    //  passmodController = TextEditingController();
+
     numbermodController =
         TextEditingController(text: objHome!.getinfouserModel!.phone);
   }
@@ -58,10 +58,8 @@ class _ModifierprofileState extends State<Modifierprofile> {
           appBar: AppBar(
             leading: IconButton(
               onPressed: () {
-                // FocusScope.of(context).unfocus();
                 CupitHome.get(context).currentindex = 2;
                 Navigator.pop(context, true);
-                // Changepage(context, const Home());
               },
               icon: const Icon(Icons.arrow_back),
             ),
@@ -102,14 +100,6 @@ class _ModifierprofileState extends State<Modifierprofile> {
                                   .selectedImages!
                                   .path))
                               .image,
-                      // backgroundImage: CubitModifier.get(context)
-                      //             .selectedImages ==
-                      //         null
-                      //     ? const AssetImage('assets/images/profile_avatar.jpg')
-                      //     : Image.file(File(CubitModifier.get(context)
-                      //             .selectedImages!
-                      //             .path))
-                      //         .image,
                     ),
                     const SizedBox(
                       height: 9,
@@ -184,7 +174,6 @@ class _ModifierprofileState extends State<Modifierprofile> {
                             decoration: TextDecoration.underline,
                           ),
                         )),
-
                     const SizedBox(
                       height: 14,
                     ),
@@ -215,7 +204,6 @@ class _ModifierprofileState extends State<Modifierprofile> {
                     const SizedBox(
                       height: 22,
                     ),
-
                     defaultForm(
                         context: context,
                         // valeurinitial: ala,
@@ -241,50 +229,9 @@ class _ModifierprofileState extends State<Modifierprofile> {
                               : Colors.grey,
                         ),
                         textInputAction: TextInputAction.next),
-
                     const SizedBox(
                       height: 22,
                     ),
-                    // defaultForm(
-                    //
-                    //     context: context,
-                    //     textInputAction: TextInputAction.done,
-                    //     controller: passmodController,
-                    //     type: TextInputType.visiblePassword,
-                    //     onFieldSubmitted: () {
-                    //
-                    //     },
-                    //     obscureText: CubitModifier.get(context).ishiddens,
-                    //     valid: (value) {
-                    //       if (value.isEmpty) {
-                    //         return 'Password Must Be Not Empty';
-                    //       }
-                    //     },
-                    //     lable: Text(
-                    //       'Password',
-                    //       style: TextStyle(
-                    //           color: CupitHome.get(context).dartSwitch
-                    //               ? Colors.white
-                    //               : Colors.grey),
-                    //     ),
-                    //     prefixIcon: Icon(
-                    //       Icons.password,
-                    //       color: CupitHome.get(context).dartSwitch
-                    //           ? Colors.white
-                    //           : Colors.grey,
-                    //     ),
-                    //     sufixIcon: IconButton(
-                    //       onPressed: () {
-                    //         CubitModifier.get(context).showpasse();
-                    //       },
-                    //       icon: CubitModifier.get(context).iconhiddens,
-                    //       color: CupitHome.get(context).dartSwitch
-                    //           ? Colors.white
-                    //           : Colors.grey,
-                    //     )),
-                    // const SizedBox(
-                    //   height: 20,
-                    // ),
                     defaultForm(
                       context: context,
                       controller: numbermodController,
@@ -308,7 +255,6 @@ class _ModifierprofileState extends State<Modifierprofile> {
                             ? Colors.white
                             : Colors.grey,
                       ),
-                      //      textInputAction: TextInputAction.next,
                     ),
                     const SizedBox(
                       height: 26,
@@ -345,8 +291,6 @@ class _ModifierprofileState extends State<Modifierprofile> {
                                     print(addressemodController.text);
                                     sendinfoagencemodifier = {
                                       'name': namemodController.text,
-
-                                      // 'password': passmodController.text,
                                       'phone': numbermodController.text,
                                       'address': addressemodController.text,
                                       'photo': CubitModifier.get(context)
@@ -380,7 +324,6 @@ class _ModifierprofileState extends State<Modifierprofile> {
       );
     }, listener: (BuildContext context, Object? state) {
       if (state is GoodUpdateAgenceInfoState) {
-        // CupitHome.get(context).getinfouserModel = null;
         CupitHome.get(context).getinformationAgenceOrClient().then((value) {
           CubitModifier.get(context).selectimageAgencenull();
           Navigator.pushAndRemoveUntil(
@@ -396,35 +339,9 @@ class _ModifierprofileState extends State<Modifierprofile> {
               textColor: Colors.white,
               fontSize: 16.0);
         });
-        //   var then = CachHelper.removdata(key: 'token').then((value) {
-        //     print(TOKEN);
-        //     TOKEN = '';
-        //     Navigator.pushAndRemoveUntil(
-        //         context,
-        //         MaterialPageRoute(builder: (context) => LoginScreen()),
-        //             (route) => false);
-        //   });
-        //   Fluttertoast.showToast(
-        //       msg: 'déconnexion réussie',
-        //       toastLength: Toast.LENGTH_SHORT,
-        //       gravity: ToastGravity.BOTTOM,
-        //       timeInSecForIosWeb: 1,
-        //       backgroundColor: Colors.green,
-        //       textColor: Colors.white,
-        //       fontSize: 16.0);
-        // } else if (state is LougOutBadState) {
-        //   Fluttertoast.showToast(
-        //       msg: 'There\'s a problem',
-        //       toastLength: Toast.LENGTH_SHORT,
-        //       gravity: ToastGravity.BOTTOM,
-        //       timeInSecForIosWeb: 1,
-        //       backgroundColor: Colors.red,
-        //       textColor: Colors.white,
-        //       fontSize: 16.0);
-        // }
       } else if (state is BadUpdateAgenceInfoState) {
         Fluttertoast.showToast(
-            msg: 'There\'s a problem',
+            msg: 'unable to update',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,

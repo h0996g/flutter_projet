@@ -22,7 +22,6 @@ import '../addpost.dart';
 import '../offers.dart';
 import '../setting.dart';
 import 'homeStates.dart';
-//aaa
 
 class CupitHome extends Cubit<HomeStates> {
   CupitHome() : super(InitialHomeState());
@@ -32,76 +31,6 @@ class CupitHome extends Cubit<HomeStates> {
 // --------------------------------------------- Map-------------------------
   LatLng? currentLocation;
   Set<Marker> mmap = {};
-  // Marker? newMarkerr;
-  // Future<void> allmap() async {
-  //   for (var i = 0; i <= allofferModel!.data!.offers.length - 1; i++) {
-  //     mmap.add(
-  //       Marker(
-  //         markerId: MarkerId(LatLng(allofferModel!.data!.offers[i].latitude!,
-  //                 allofferModel!.data!.offers[i].longitude!)
-  //             .toString()),
-  //         icon: BitmapDescriptor.defaultMarker,
-  //         position: LatLng(allofferModel!.data!.offers[i].latitude!,
-  //             allofferModel!.data!.offers[i].longitude!),
-  //         infoWindow: InfoWindow(
-  //             title: "TypeOffer",
-  //             snippet:
-  //                 '${allofferModel!.data!.offers[i].typeOffer},${allofferModel!.data!.offers[i].description}'),
-  //       ),
-  //     );
-  //   }
-  //   print('oooooooooooooooo');
-  //   print(mmap);
-  //   emit(GoodGetAllOffersMap());
-  // }
-
-  // CameraPosition? initialCameraPosition;
-
-  // void setstatet3Map(CameraPosition newpos) {
-  //   currentLocation = newpos.target;
-  //   emit(Setstatet3MapState());
-  // }
-
-  // void awalLocation(LatLng? currentLocation) {
-  //   if (currentLocation == null) {
-  //     initialCameraPosition = const CameraPosition(
-  //       target: const LatLng(33.515343, 36.289590),
-  //       // target: LatLng(36.31789608941112, 6.615674905478954),
-  //       zoom: 14.4746,
-  //     );
-  //   } else {
-  //     initialCameraPosition = CameraPosition(
-  //       target: LatLng(currentLocation.latitude, currentLocation.longitude),
-  //       // target: LatLng(36.31789608941112, 6.615674905478954),
-  //       zoom: 14.4746,
-  //     );
-  //   }
-  //   emit(AwalLocationState());
-  // }
-
-  // void awelModel(double? latitude, double? longitude) {
-  //   if (latitude == null && longitude == null) {
-  //     initialCameraPosition = const CameraPosition(
-  //       target: const LatLng(33.515343, 36.289590),
-  //       // target: LatLng(36.31789608941112, 6.615674905478954),
-  //       zoom: 14.4746,
-  //     );
-  //   } else {
-  //     initialCameraPosition = CameraPosition(
-  //       target: LatLng(latitude!, longitude!),
-  //       // target: LatLng(36.31789608941112, 6.615674905478954),
-  //       zoom: 14.4746,
-  //     );
-  //   }
-  //   emit(AwelModelState());
-  // }
-
-  // void currentLocationSetStat(LatLng kk) {
-  //   currentLocation = initialCameraPosition!.target;
-  //   emit(CurrentLocationSetStatState());
-  // }
-
-  // int position = 0;
 
 //------------------- T3 Client :::-------------------------------------------
   List<Widget> bodyy = [Offersclient(), Favorite(), Settingsclient()];
@@ -380,19 +309,8 @@ class CupitHome extends Cubit<HomeStates> {
     });
   }
 
-  Future<void> savePhotoBd({required Map<String, dynamic> data}) async {
-    // var jsonphoto = jsonEncode(base64List);
-    // var conditionsjson = jsonEncode(conditionsListhttp);
-    // var specificationjson = jsonEncode(specificationListhttp);
-    // var papiersjson = jsonEncode(papiersListhttp);
-    // var l = jsonEncode(test);
+  Future<void> ajouteroffre({required Map<String, dynamic> data}) async {
     await Httplar.httpPost(data: data, path: ADDOFFER).then((value) {
-      // var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
-      // photoModels = PhotoModels.fromJson(jsonResponse);
-      // print(jsonResponse);
-
-      // print(jsonDecode(photoModels!.url)[1]);
-      // jsondecodephoto = jsonDecode(photoModels!.url);
       print('succes send');
       print(value.body);
       emit(CreateOfferSuccessState());
@@ -403,20 +321,8 @@ class CupitHome extends Cubit<HomeStates> {
   }
 
   Future<void> updateOffer({required Map<String, dynamic> data}) async {
-    // var jsonphoto = jsonEncode(base64List);
-    // var conditionsjson = jsonEncode(conditionsListhttp);
-    // var specificationjson = jsonEncode(specificationListhttp);
-    // var papiersjson = jsonEncode(papiersListhttp);
-    // var l = jsonEncode(test);
     await Httplar.httpPost(data: data, path: UPDATEOFFER).then((value) {
-      // var jsonResponse = convert.jsonDecode(value.body) as Map<String, dynamic>;
-      // photoModels = PhotoModels.fromJson(jsonResponse);
-      // print(jsonResponse);
-
-      // print(jsonDecode(photoModels!.url)[1]);
-      // jsondecodephoto = jsonDecode(photoModels!.url);
       print('update good');
-      // print(value.body);
       emit(GoodUpdateOfferState());
     }).catchError((e) {
       print(e.toString());
@@ -481,9 +387,6 @@ class CupitHome extends Cubit<HomeStates> {
 
       offerAgencModel = DataOffer.fromJson(jsonResponse);
       print('ook agence offer');
-      // print(offerAgencModel!.data!.offers[0].address);
-      // print(offerAgencModel!.data!.offers[0].latitude);
-      // print(offerAgencModel!.data!.offers[0].longitude);
       emit(GoodGetOffersAgence());
     }).catchError((e) {
       print(e.toString());
@@ -495,7 +398,6 @@ class CupitHome extends Cubit<HomeStates> {
 
   DataOffer? getOfferAgenceclientmodel;
   Future<void> getOfferAgenceclient(id) async {
-    // offerAgencModel = null;
     emit(ConditionalLodinOfferAgenceState());
     Httplar.httpPost(path: GETOFFERAGENCETOCLIENT, data: {'agence_id': id})
         .then((value) {
@@ -503,9 +405,6 @@ class CupitHome extends Cubit<HomeStates> {
 
       getOfferAgenceclientmodel = DataOffer.fromJson(jsonResponse);
       print('ook agence offer');
-      // print(offerAgencModel!.data!.offers[0].address);
-      // print(offerAgencModel!.data!.offers[0].latitude);
-      // print(offerAgencModel!.data!.offers[0].longitude);
       emit(GoodGetOffersAgence());
     }).catchError((e) {
       print(e.toString());
@@ -524,10 +423,7 @@ class CupitHome extends Cubit<HomeStates> {
 
       getinfouserModel = GetInfoUser.fromJson(jsonResponse);
       print('ook user info');
-      // print(getinfouserModel!.agence!.address);
       print(value.body);
-      // print(getinfouserModel!.photo);
-
       emit(GoodGetInfoUserState());
     }).catchError((e) {
       print(e.toString());

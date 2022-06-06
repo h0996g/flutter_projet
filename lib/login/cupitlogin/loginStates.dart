@@ -10,11 +10,7 @@ class GoodLoginState extends LoginStates {
   GoodLoginState(this.model);
 }
 
-class BadLoginState extends LoginStates {
-  // final error;
-
-  // BadLoginState(this.error);
-}
+class BadLoginState extends LoginStates {}
 
 class HiddenPasswordState extends LoginStates {}
 
@@ -30,5 +26,4 @@ class RegisterSuccesState extends LoginStates {
 
 class RegisterBadState extends LoginStates {}
 
-// class ChangeChackState extends LoginStates {}
 class ChangetypeState extends LoginStates {}

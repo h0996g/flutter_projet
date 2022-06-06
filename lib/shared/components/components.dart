@@ -1,8 +1,8 @@
-import 'package:agence/home/cubitHome/cupit_home.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
 import 'package:flutter/material.dart';
 
 Widget defaultForm(
-        { controller,
+        {controller,
         int maxline = 1,
         Widget? suffix,
         required context,
@@ -14,7 +14,7 @@ Widget defaultForm(
         IconButton? sufixIcon,
         TextInputAction? textInputAction,
         bool obscureText = false,
-            String? valeurinitial,
+        String? valeurinitial,
         Function? onFieldSubmitted}) =>
     TextFormField(
       initialValue: valeurinitial,
@@ -36,15 +36,7 @@ Widget defaultForm(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(50),
           ),
-          // disabledBorder:  OutlineInputBorder(
-          //     borderRadius: BorderRadius.circular(50),
-          //     ),
-          //   enabledBorder:  OutlineInputBorder(
-          //     borderRadius: BorderRadius.circular(50),
-          //     borderSide: BorderSide(color: Colors.grey),
-          //   ),
           label: lable,
-          // border: const OutlineInputBorder(borderSide: BorderSide()),
           prefixIcon: prefixIcon,
           suffixIcon: sufixIcon,
           suffix: suffix,

@@ -3,15 +3,12 @@ import 'dart:io';
 
 import 'package:agence/clienthome/navbar.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../login/cupitlogin/loginStates.dart';
 import '../../shared/components/components.dart';
-import '../cubitHome/cupit_home.dart';
-import '../cubitHome/homeStates.dart';
+import '../cubitHome/CubitHome.dart';
 import 'cubitmodifier.dart';
 import 'modifierstate.dart';
 
@@ -45,7 +42,6 @@ class _ModifierprofileclientState extends State<Modifierprofileclient> {
         TextEditingController(text: objHome?.getinfouserModel!.name);
     prenommodController =
         TextEditingController(text: objHome!.getinfouserModel!.client!.prenom);
-    //  passmodController = TextEditingController();
     numbermodController =
         TextEditingController(text: objHome!.getinfouserModel!.phone);
   }
@@ -60,13 +56,10 @@ class _ModifierprofileclientState extends State<Modifierprofileclient> {
             return false;
           },
           child: Scaffold(
-            // resizeToAvoidBottomInset: true,
             appBar: AppBar(
               leading: IconButton(
                 onPressed: () {
-                  // FocusScope.of(context).unfocus();
                   CupitHome.get(context).currentindex = 2;
-                  // Changepage(context, const Navbar());
                   Navigator.pop(context, true);
                 },
                 icon: Icon(Icons.arrow_back),
@@ -91,8 +84,6 @@ class _ModifierprofileclientState extends State<Modifierprofileclient> {
                       ),
                       CircleAvatar(
                         radius: 70,
-                        // child: Image.memory(base64Decode(
-                        //     CupitHome.get(context).getinfouserModel!.photo!)),
                         backgroundImage: CubitModifier.get(context)
                                     .selectedImageclient ==
                                 null
@@ -110,26 +101,6 @@ class _ModifierprofileclientState extends State<Modifierprofileclient> {
                                     .selectedImageclient!
                                     .path))
                                 .image,
-
-                        // CupitHome.get(context)
-                        //             .getinfouserModel!
-                        //             .photo ==
-                        //         null
-                        //     ? const AssetImage('assets/images/profile_avatar.jpg')
-                        //     : Image.memory(
-                        //         base64Decode(CupitHome.get(context)
-                        //             .getinfouserModel!
-                        //             .photo!),
-                        //         fit: BoxFit.cover,
-                        //       ).image,
-
-                        // backgroundImage:
-                        //     CupitHome.get(context).getinfouserModel!.photo == null
-                        //         ? AssetImage('assets/images/profile_avatar.jpg')
-                        //         : Image.file(File(CubitModifier.get(context)
-                        //                 .selectedImageclient!
-                        //                 .path))
-                        //             .image,
                       ),
                       const SizedBox(
                         height: 9,
@@ -198,7 +169,7 @@ class _ModifierprofileclientState extends State<Modifierprofileclient> {
                                   );
                                 });
                           },
-                          child: Text(
+                          child: const Text(
                             'Ajouter photo',
                             style: TextStyle(
                               decoration: TextDecoration.underline,
@@ -236,7 +207,6 @@ class _ModifierprofileclientState extends State<Modifierprofileclient> {
                       ),
                       defaultForm(
                           context: context,
-                          // valeurinitial: ala,
                           controller: prenommodController,
                           type: TextInputType.text,
                           lable: Text(
@@ -285,7 +255,6 @@ class _ModifierprofileclientState extends State<Modifierprofileclient> {
                               ? Colors.white
                               : Colors.grey,
                         ),
-                        //      textInputAction: TextInputAction.next,
                       ),
                       const SizedBox(
                         height: 26,
@@ -320,8 +289,6 @@ class _ModifierprofileclientState extends State<Modifierprofileclient> {
                                     if (formKey.currentState!.validate()) {
                                       sendinfoclientmodifier = {
                                         'name': namemodController.text,
-
-                                        // 'password': passmodController.text,
                                         'phone': numbermodController.text,
                                         'prenom': prenommodController.text,
                                         'photo': CubitModifier.get(context)
@@ -356,7 +323,6 @@ class _ModifierprofileclientState extends State<Modifierprofileclient> {
       },
       listener: (BuildContext context, Object? state) {
         if (state is GoodUpdateClientInfoState) {
-          // CupitHome.get(context).getinfouserModel = null;
           CupitHome.get(context).getinformationAgenceOrClient().then((value) {
             CubitModifier.get(context).selectimageClientnull();
             Navigator.pushAndRemoveUntil(
@@ -364,7 +330,7 @@ class _ModifierprofileclientState extends State<Modifierprofileclient> {
                 MaterialPageRoute(builder: (context) => const Navbar()),
                 (route) => false);
             Fluttertoast.showToast(
-                msg: 'Updates Successfully',
+                msg: 'Updated Successfully',
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIosWeb: 1,
@@ -374,7 +340,7 @@ class _ModifierprofileclientState extends State<Modifierprofileclient> {
           });
         } else if (state is BadUpdateClientInfoState) {
           Fluttertoast.showToast(
-              msg: 'There\'s a problem',
+              msg: 'unable to update',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,

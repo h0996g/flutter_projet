@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:agence/home/cubitHome/cupit_home.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
 import 'package:agence/home/cubitHome/homeStates.dart';
 
 import 'package:flutter/material.dart';
