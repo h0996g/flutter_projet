@@ -1,4 +1,5 @@
 import 'dart:convert' as convert;
+import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -56,19 +57,22 @@ class CubitDetail extends Cubit<DetailStates> {
 
 //-----------------------------------------favorite--------------------------------------------
   bool colorfav = false;
+  var existfav;
   getexistfav({
     required Map<String, dynamic> data,
   }) {
     emit(LoadingExFavState());
 
     Httplar.httpPost(path: CHECKFAVORITE, data: data).then((value) async {
+      existfav = null;
       print('dkholt l verifier favoris');
       if (value.statusCode == 200) {
-        var jsonResponse =
-            convert.jsonDecode(value.body) as Map<String, dynamic>;
+        var jsonResponse = jsonDecode(value.body);
         print(jsonResponse);
+
         print('ryh nrodu true');
         await Future.delayed(Duration(seconds: 1));
+        existfav = jsonResponse;
         colorfav = true;
 
         emit(GoodGetFavState());
@@ -78,6 +82,7 @@ class CubitDetail extends Cubit<DetailStates> {
         print(jsonResponse);
         print('ryh nrodu false');
         await Future.delayed(Duration(seconds: 1));
+        existfav = jsonResponse;
         colorfav = false;
 
         emit(GoodGetFavState());

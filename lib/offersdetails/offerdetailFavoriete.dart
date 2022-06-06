@@ -188,7 +188,8 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                               );
                             },
                             condition: state is! LoadingExFavState &&
-                                state is! LoadingChangeFavState,
+                                state is! LoadingChangeFavState &&
+                                CubitDetail.get(context).existfav != null,
                             fallback: (BuildContext context) {
                               return SpinKitRipple(
                                 duration: Duration(seconds: 1),
