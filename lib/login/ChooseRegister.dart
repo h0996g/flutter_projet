@@ -1,7 +1,7 @@
 import 'package:agence/login/ClientRegister.dart';
 import 'package:flutter/material.dart';
 
-import '../home/cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
 import 'AgenceRegister.dart';
 
 class Chooseregister extends StatelessWidget {

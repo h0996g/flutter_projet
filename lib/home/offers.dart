@@ -1,18 +1,19 @@
 import 'dart:convert';
 import 'package:agence/Map/AllOffersMapAgence.dart';
 import 'package:agence/Model/AfficheOffer.dart';
-import 'package:agence/home/cubitHome/CubitHome.dart';
+
 import 'package:agence/offersdetails/cubitOfferDetail.dart';
 import 'package:agence/offersdetails/offerdetailagence.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/homeStates.dart';
 
 import '../clienthome/search.dart';
 
 import '../shimmer_widget.dart';
-import 'cubitHome/homeStates.dart';
 
 class Offers extends StatelessWidget {
   const Offers({Key? key}) : super(key: key);

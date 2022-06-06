@@ -8,9 +8,9 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
 
 import '../../shared/components/components.dart';
-import 'CubitHome.dart';
 
 class Modifierprofile extends StatefulWidget {
   Modifierprofile({Key? key}) : super(key: key);

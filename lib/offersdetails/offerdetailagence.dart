@@ -10,9 +10,10 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../Map/GetLocationAgence.dart';
-import '../home/cubitHome/CubitHome.dart';
+
 import '../home/home.dart';
 import '../shared/components/components.dart';
 

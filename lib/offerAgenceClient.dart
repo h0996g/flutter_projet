@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:agence/Map/AllOffersMapAgence.dart';
 import 'package:agence/Model/AfficheOffer.dart';
 import 'package:agence/home/cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/homeStates.dart';
 import 'package:agence/offersdetails/cubitOfferDetail.dart';
 import 'package:agence/offersdetails/offerdetailclient.dart';
 import 'package:agence/profileAgenceClient.dart';
@@ -11,7 +12,6 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../shimmer_widget.dart';
-import 'home/cubitHome/homeStates.dart';
 
 class OfferAgenceClient extends StatefulWidget {
   var model;

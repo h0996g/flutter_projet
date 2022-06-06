@@ -3,7 +3,8 @@ import 'package:agence/clienthome/cupitSearch/cupitsearch_cubit.dart';
 import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/home/home.dart';
 import 'package:agence/home/modifierprofile/cubitmodifier.dart';
-import 'package:agence/login/cupitlogin/CubitLogin.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/homeStates.dart';
 import 'package:agence/login/cupitlogin/observer.dart';
 import 'package:agence/login/login.dart';
 import 'package:agence/login/onbording.dart';
@@ -12,8 +13,7 @@ import 'package:agence/offersdetails/cubitOfferDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'THEM/Theme.dart';
-import 'home/cubitHome/CubitHome.dart';
-import 'home/cubitHome/homeStates.dart';
+import 'login/cupitlogin/CubitLogin.dart';
 
 main() {
   BlocOverrides.runZoned(

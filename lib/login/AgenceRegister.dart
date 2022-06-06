@@ -2,17 +2,17 @@ import 'package:agence/Api/constApi.dart';
 import 'package:agence/Model/ErrorRegisterAndLoginModel.dart';
 import 'package:agence/Model/RegisterModel.dart';
 import 'package:agence/home/home.dart';
+import 'package:agence/login/cupitlogin/loginStates.dart';
 import 'package:agence/login/login.dart';
 import 'package:agence/login/other/cachhelper.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
 
-import '../home/cubitHome/CubitHome.dart';
 import '../shared/components/components.dart';
 import 'cupitlogin/CubitLogin.dart';
-import 'cupitlogin/loginStates.dart';
 
 class Agenceregister extends StatelessWidget {
   Agenceregister({Key? key}) : super(key: key);

@@ -1,11 +1,13 @@
 import 'package:agence/Map/ModifierLoction.dart';
 import 'package:agence/Model/AfficheOffer.dart';
-import 'package:agence/home/cubitHome/homeStates.dart';
+
 import 'package:agence/offersdetails/modifieroffrephoto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
-import '../home/cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/homeStates.dart';
+
 import '../shared/components/components.dart';
 
 class Formulairemodifier extends StatefulWidget {

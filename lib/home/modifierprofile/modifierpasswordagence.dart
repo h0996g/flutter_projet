@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../Model/ErrorRegisterAndLoginModel.dart';
 import '../../shared/components/components.dart';
-import '../cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
 
 import '../home.dart';
 import 'cubitmodifier.dart';

@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import '../Model/AfficheOffer.dart';
-import '../home/cubitHome/CubitHome.dart';
 
+import '../home/cubitHome/CubitHome.dart';
 import '../offersdetails/offerdetailFavoriete.dart';
 
 class Favorite extends StatefulWidget {

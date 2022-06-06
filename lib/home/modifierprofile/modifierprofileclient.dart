@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../shared/components/components.dart';
-import '../cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
 import 'cubitmodifier.dart';
 import 'modifierstate.dart';
 

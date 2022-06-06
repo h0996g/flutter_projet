@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:agence/home/addphoto/editphoto.dart';
-import 'package:agence/home/cubitHome/CubitHome.dart';
-import 'package:agence/home/cubitHome/homeStates.dart';
+
 import 'package:agence/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../cubitHome/CubitHome.dart';
+import '../cubitHome/homeStates.dart';
 
 class Addphoto extends StatelessWidget {
   Addphoto({Key? key}) : super(key: key);

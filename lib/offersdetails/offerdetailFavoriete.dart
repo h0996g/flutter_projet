@@ -4,7 +4,7 @@ import 'package:agence/Model/AfficheOffer.dart';
 import 'package:agence/clienthome/navbar.dart';
 import 'package:agence/offersdetails/CubitOfferDetailState.dart';
 import 'package:agence/offersdetails/cubitOfferDetail.dart';
-
+import 'package:agence/home/cubitHome/CubitHome.dart';
 import 'package:agence/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 
@@ -16,7 +16,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../Map/GetLocationClientFav.dart';
-import '../home/cubitHome/CubitHome.dart';
+
 import '../offerAgenceClient.dart';
 
 class OfferDetailFav extends StatefulWidget {

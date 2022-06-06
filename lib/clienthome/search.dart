@@ -7,11 +7,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-
+import '../home/cubitHome/CubitHome.dart';
+import '../home/cubitHome/homeStates.dart';
 import '../Api/constApi.dart';
 import '../Model/AfficheOffer.dart';
 import '../Model/AgencenameandphoneModel.dart';
-import '../home/cubitHome/CubitHome.dart';
+
 import 'dart:convert' as convert;
 
 import '../offerAgenceClient.dart';

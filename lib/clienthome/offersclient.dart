@@ -6,13 +6,12 @@ import 'package:agence/clienthome/search.dart';
 import 'package:agence/offersdetails/cubitOfferDetail.dart';
 import 'package:agence/offersdetails/offerdetailclient.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-
+import '../home/cubitHome/CubitHome.dart';
+import '../home/cubitHome/homeStates.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../home/cubitHome/CubitHome.dart';
-import '../home/cubitHome/homeStates.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 import '../home/offers.dart';

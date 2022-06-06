@@ -7,14 +7,13 @@ import 'package:agence/offersdetails/cubitOfferDetail.dart';
 
 import 'package:agence/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-
+import 'package:agence/home/cubitHome/CubitHome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../home/cubitHome/CubitHome.dart';
 import '../offerAgenceClient.dart';
 
 class Offerdetailclient extends StatefulWidget {

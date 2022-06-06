@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
 
 import '../shared/components/components.dart';
-import 'cubitHome/CubitHome.dart';
-import 'cubitHome/homeStates.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/homeStates.dart';
 
 class AddPost extends StatelessWidget {
   @override

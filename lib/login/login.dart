@@ -1,19 +1,21 @@
 import 'package:agence/Model/ErrorRegisterAndLoginModel.dart';
 import 'package:agence/Model/LoginModel.dart';
 import 'package:agence/clienthome/navbar.dart';
-import 'package:agence/login/cupitlogin/CubitLogin.dart';
-import 'package:agence/login/cupitlogin/loginStates.dart';
+
 import 'package:agence/login/ChooseRegister.dart';
 import 'package:agence/login/other/cachhelper.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
 
 import '../Api/constApi.dart';
-import '../home/cubitHome/CubitHome.dart';
+
 import '../home/home.dart';
 import '../shared/components/components.dart';
+import 'cupitlogin/CubitLogin.dart';
+import 'cupitlogin/loginStates.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);

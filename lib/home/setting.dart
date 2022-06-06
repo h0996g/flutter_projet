@@ -12,8 +12,9 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../login/login.dart';
-import 'cubitHome/CubitHome.dart';
-import 'cubitHome/homeStates.dart';
+
+import 'package:agence/home/cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/homeStates.dart';
 import 'modifierprofile/cubitmodifier.dart';
 import 'modifierprofile/modifierpasswordagence.dart';
 

@@ -1,4 +1,5 @@
 import 'package:agence/clienthome/navbar.dart';
+import 'package:agence/login/cupitlogin/CubitLogin.dart';
 import 'package:agence/login/login.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 
@@ -9,10 +10,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../Api/constApi.dart';
 import '../Model/ErrorRegisterAndLoginModel.dart';
 import '../Model/RegisterModel.dart';
-import '../home/cubitHome/CuBitHome.dart';
-import '../shared/components/components.dart';
 
-import 'cupitlogin/CubitLogin.dart';
+import '../shared/components/components.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
+
 import 'cupitlogin/loginStates.dart';
 import 'other/cachhelper.dart';
 

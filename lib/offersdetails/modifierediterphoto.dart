@@ -1,10 +1,9 @@
 import 'dart:io';
 
-import 'package:agence/home/cubitHome/CubitHome.dart';
-import 'package:agence/home/cubitHome/homeStates.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:agence/home/cubitHome/CubitHome.dart';
+import 'package:agence/home/cubitHome/homeStates.dart';
 
 class Modifierediterphoto extends StatelessWidget {
   Modifierediterphoto({Key? key}) : super(key: key);
