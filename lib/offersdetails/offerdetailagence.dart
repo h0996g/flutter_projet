@@ -150,6 +150,7 @@ class Offerdetailagence extends StatelessWidget {
                 const Spacer(),
                 MaterialButton(
                   onPressed: () {
+                    CupitHome.get(context).resetValueoffer();
                     Navigator.push(
                         context,
                         MaterialPageRoute(

@@ -257,7 +257,7 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
                           // ),
                           MultiSelectDialogField(
                             dialogHeight: 150,
-                            items: CupitHome.get(context).paymentVar,
+                            items: CupitHome.get(context).paymentVarUpdate,
                             // title: Text("Conditions de paiment"),
                             selectedColor: Colors.blue,
                             decoration: BoxDecoration(
@@ -277,13 +277,15 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
                               ),
                             ),
                             onConfirm: (List results) {
-                              CupitHome.get(context).conditionsListhttp = [];
+                              CupitHome.get(context).conditionsListhttpUpdate =
+                                  [];
                               results.forEach((element) {
                                 CupitHome.get(context)
-                                    .conditionsListhttp
-                                    .add(element.name);
+                                    .conditionsListhttpUpdate
+                                    .add('\"' + element.name + '\"');
                               });
-                              print(CupitHome.get(context).conditionsListhttp);
+                              print(CupitHome.get(context)
+                                  .conditionsListhttpUpdate);
                             },
                           ),
                           const SizedBox(
@@ -309,14 +311,15 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
                               ),
                             ),
                             onConfirm: (List results) {
-                              CupitHome.get(context).specificationListhttp = [];
+                              CupitHome.get(context)
+                                  .specificationListhttpUpdate = [];
                               results.forEach((element) {
                                 CupitHome.get(context)
-                                    .specificationListhttp
-                                    .add(element.name);
+                                    .specificationListhttpUpdate
+                                    .add('\"' + element.name + '\"');
                               });
-                              print(
-                                  CupitHome.get(context).specificationListhttp);
+                              print(CupitHome.get(context)
+                                  .specificationListhttpUpdate);
                             },
                           ),
                           const SizedBox(
@@ -342,13 +345,14 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
                               ),
                             ),
                             onConfirm: (List results) {
-                              CupitHome.get(context).papiersListhttp = [];
+                              CupitHome.get(context).papiersListhttpUpdate = [];
                               results.forEach((element) {
                                 CupitHome.get(context)
-                                    .papiersListhttp
-                                    .add(element.name);
+                                    .papiersListhttpUpdate
+                                    .add('\"' + element.name + '\"');
                               });
-                              print(CupitHome.get(context).papiersListhttp);
+                              print(
+                                  CupitHome.get(context).papiersListhttpUpdate);
                             },
                           ),
                           const SizedBox(

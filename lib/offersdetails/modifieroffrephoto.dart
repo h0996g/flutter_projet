@@ -225,6 +225,12 @@ class Modifieroffrephoto extends StatelessWidget {
                                 CupitHome.get(context).wilayavalueDropdown,
                             'photo': jsonEncode(
                                 "${CupitHome.get(context).base64ListUpdate}"),
+                            'condition_de_paiment': jsonEncode(
+                                "${CupitHome.get(context).conditionsListhttpUpdate}"),
+                            'specification': jsonEncode(
+                                "${CupitHome.get(context).specificationListhttpUpdate}"),
+                            'papiers': jsonEncode(
+                                "${CupitHome.get(context).papiersListhttpUpdate}"),
                             'latitude':
                                 '${CupitHome.get(context).currentLocation!.latitude}',
                             'longitude':
