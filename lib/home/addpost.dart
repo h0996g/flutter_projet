@@ -471,6 +471,8 @@ class AddPost extends StatelessWidget {
                               IconButton(
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
+                                    FocusScope.of(context)
+                                        .requestFocus(FocusNode());
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(

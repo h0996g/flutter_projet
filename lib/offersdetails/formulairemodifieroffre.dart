@@ -509,6 +509,8 @@ class _FormulairemodifierState extends State<Formulairemodifier> {
                               IconButton(
                                 onPressed: () {
                                   if (formKez.currentState!.validate()) {
+                                    FocusScope.of(context)
+                                        .requestFocus(FocusNode());
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(

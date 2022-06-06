@@ -349,6 +349,7 @@ class LoginScreen extends StatelessWidget {
               await CupitHome.get(context).getinformationAgenceOrClient();
 
               if (LoginCubit.get(context).path == LOGINCLIENT) {
+                CupitHome.get(context).currentindexa = 0;
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => const Navbar()),
@@ -359,6 +360,7 @@ class LoginScreen extends StatelessWidget {
                             .type_vente[CupitHome.get(context).toggelindex]);
                 // await CubitDetail.get(context).getFavorites();
               } else if (LoginCubit.get(context).path == LOGINAGENCE) {
+                CupitHome.get(context).currentindex = 0;
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => const Home()),

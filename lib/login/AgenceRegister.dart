@@ -287,6 +287,8 @@ class Agenceregister extends StatelessWidget {
             CachHelper.putcache(key: 'token', value: state.model!.token)
                 .then((value) async {
               await CachHelper.putcache(key: 'userType', value: LOGINAGENCE);
+              CupitHome.get(context).currentindex = 0;
+
               CupitHome.get(context).getOfferAgence();
               CupitHome.get(context).getinformationAgenceOrClient();
               Navigator.pushAndRemoveUntil(

@@ -19,6 +19,7 @@ class Addphoto extends StatelessWidget {
     return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
+          // resizeToAvoidBottomInset: false,
           body: Column(children: [
             const SizedBox(
               height: 100,

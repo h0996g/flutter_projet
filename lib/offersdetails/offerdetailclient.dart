@@ -570,10 +570,14 @@ Widget Listemessage(context, msg) => Container(
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 16,
-                  backgroundImage:
-                      const AssetImage('assets/images/profile_avatar.jpg'),
+                  backgroundImage: msg['photo'] == null
+                      ? const AssetImage('assets/images/profile_avatar.jpg')
+                      : Image.memory(
+                          base64Decode(msg['photo']),
+                          fit: BoxFit.cover,
+                        ).image,
                 ),
                 const SizedBox(
                   width: 6,
