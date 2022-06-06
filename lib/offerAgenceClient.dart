@@ -328,8 +328,19 @@ Future<void> allmap(context) async {
                     "${CupitHome.get(context).getOfferAgenceclientmodel!.data!.offers[i].typeOffer}",
                 snippet:
                     '${CupitHome.get(context).getOfferAgenceclientmodel!.data!.offers[i].description}',
-                onTap: () {
+                onTap: () async {
+                  Map<String, dynamic> sendfav = {};
+                  await CubitDetail.get(context).getNameandPhone(data: {
+                    'offer_id':
+                        '${CupitHome.get(context).getOfferAgenceclientmodel!.data!.offers[i].id}',
+                  });
                   CubitDetail.get(context).changeNavDetailClient(0);
+                  sendfav = {
+                    'offer_id':
+                        '${CupitHome.get(context).getOfferAgenceclientmodel!.data!.offers[i].id}',
+                  };
+                  //
+                  CubitDetail.get(context).getexistfav(data: sendfav);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
