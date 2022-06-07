@@ -29,9 +29,6 @@ class Search extends StatelessWidget {
         var shearchcontroller = TextEditingController();
 
         return Scaffold(
-          floatingActionButton: FloatingActionButton(onPressed: () {
-            // getOfferAgence('a');
-          }),
           appBar: AppBar(),
           body: Padding(
             padding: const EdgeInsets.all(5),

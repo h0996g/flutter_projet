@@ -264,7 +264,7 @@ class Offerdetailagence extends StatelessWidget {
                           Expanded(
                             child: Container(
                               color: CupitHome.get(context).dartSwitch
-                                  ? const Color(0xff131313)
+                                  ? Colors.black
                                   : Colors.white,
                               height: 54,
                               child: MaterialButton(

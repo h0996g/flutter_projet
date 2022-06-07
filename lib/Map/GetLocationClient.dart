@@ -55,12 +55,7 @@ class _GetLocationClientState extends State<GetLocationClient> {
     return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
-          appBar: AppBar(
-            actions: [
-              IconButton(
-                  onPressed: _showSearchDialog, icon: const Icon(Icons.search))
-            ],
-          ),
+          appBar: AppBar(),
           body: Stack(
             alignment: Alignment.center,
             children: [
