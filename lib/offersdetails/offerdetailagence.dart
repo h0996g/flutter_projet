@@ -537,7 +537,10 @@ class Offerdetailagence extends StatelessWidget {
                       });
                       msgController = TextEditingController();
                     },
-                    icon: const Icon(Icons.send_sharp)),
+                    icon: Icon(Icons.send_sharp,
+                        color: CupitHome.get(context).dartSwitch
+                            ? Colors.white
+                            : Colors.grey)),
                 textInputAction: TextInputAction.done,
                 controller: msgController,
                 context: context,
