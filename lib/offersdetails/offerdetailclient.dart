@@ -501,19 +501,6 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
-            Expanded(
-                child: ListView.separated(
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: ((context, index) => Listemessage(
-                  context, CubitDetail.get(context).allmsgmodel[index])),
-              itemCount: CubitDetail.get(context).allmsgmodel.length,
-              separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(
-                  height: 1,
-                );
-              },
-            )),
-            const SizedBox(height: 8),
             Container(
               height: 58,
               child: defaultForm(
@@ -555,7 +542,19 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                   }
                 },
               ),
-            )
+            ),
+            Expanded(
+                child: ListView.separated(
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: ((context, index) => Listemessage(
+                  context, CubitDetail.get(context).allmsgmodel[index])),
+              itemCount: CubitDetail.get(context).allmsgmodel.length,
+              separatorBuilder: (BuildContext context, int index) {
+                return const SizedBox(
+                  height: 1,
+                );
+              },
+            )),
           ],
         ),
       );
