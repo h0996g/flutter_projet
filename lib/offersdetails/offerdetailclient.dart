@@ -539,7 +539,12 @@ class _OfferdetailclientState extends State<Offerdetailclient> {
                       });
                       msgController = TextEditingController();
                     },
-                    icon: const Icon(Icons.send_sharp)),
+                    icon: Icon(
+                      Icons.send_sharp,
+                      color: CupitHome.get(context).dartSwitch
+                          ? Colors.white
+                          : Colors.blue,
+                    )),
                 // textInputAction: TextInputAction.done,
                 controller: msgController,
                 context: context,

@@ -550,7 +550,11 @@ class _OfferDetailFavState extends State<OfferDetailFav> {
                           : Colors.grey),
                 ),
                 sufixIcon: IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.send_sharp)),
+                    onPressed: () {},
+                    icon: Icon(Icons.send_sharp,
+                        color: CupitHome.get(context).dartSwitch
+                            ? Colors.white
+                            : Colors.grey)),
                 textInputAction: TextInputAction.done,
                 controller: msgController,
                 context: context,

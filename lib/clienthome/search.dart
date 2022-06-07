@@ -8,7 +8,6 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../home/cubitHome/CubitHome.dart';
-import '../home/cubitHome/homeStates.dart';
 import '../Api/constApi.dart';
 import '../Model/AfficheOffer.dart';
 import '../Model/AgencenameandphoneModel.dart';
@@ -88,9 +87,13 @@ class Search extends StatelessWidget {
                   padding: const EdgeInsets.all(12.0),
                   child: CupitsearchCubit.get(context).toggelindexshearch == 0
                       ? TypeAheadFormField(
-                          textFieldConfiguration: const TextFieldConfiguration(
+                          textFieldConfiguration: TextFieldConfiguration(
+                              style: TextStyle(
+                                  color: CupitHome.get(context).dartSwitch
+                                      ? Colors.white
+                                      : Colors.black),
                               autofocus: true,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   border: OutlineInputBorder())),
                           itemBuilder: (BuildContext context, Name? model) {
                             return NeumorphicButton(
@@ -199,9 +202,13 @@ class Search extends StatelessWidget {
                           onSuggestionSelected: (Name? k) {},
                         )
                       : TypeAheadFormField(
-                          textFieldConfiguration: const TextFieldConfiguration(
+                          textFieldConfiguration: TextFieldConfiguration(
+                              style: TextStyle(
+                                  color: CupitHome.get(context).dartSwitch
+                                      ? Colors.white
+                                      : Colors.black),
                               autofocus: true,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   border: OutlineInputBorder())),
                           itemBuilder:
                               (BuildContext context, OffersModel? model) {

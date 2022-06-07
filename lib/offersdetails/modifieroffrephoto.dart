@@ -188,60 +188,67 @@ class Modifieroffrephoto extends StatelessWidget {
                           print(CupitHome.get(context)
                               .addressControllerUpdate
                               .text);
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Formulairemodifier(
-                                        model: model,
-                                      )),
-                              (route) => false);
+                          Navigator.pop(context);
                         },
                         child: const Text('RETOUR')),
                     const Spacer(),
                     ElevatedButton(
                         onPressed: () async {
-                          sendinfoOffer = {
-                            'id': ' ${model.id}',
-                            'type_vente':
-                                CupitHome.get(context).appartementvalueDrop,
-                            'address': CupitHome.get(context)
-                                .addressControllerUpdate
-                                .text,
-                            'description': CupitHome.get(context)
-                                .descriptionControllerUpdate
-                                .text,
-                            'price': CupitHome.get(context)
-                                .priceControllerUpdate
-                                .text,
-                            'space': CupitHome.get(context)
-                                .superficieControllerUpdate
-                                .text,
-                            'n_etage': CupitHome.get(context)
-                                .nEtageControllerUpdate
-                                .text,
-                            'n_chambre':
-                                CupitHome.get(context).nChambresUpdate.text,
-                            'wilaya':
-                                CupitHome.get(context).wilayavalueDropdown,
-                            'photo': jsonEncode(
-                                "${CupitHome.get(context).base64ListUpdate}"),
-                            'condition_de_paiment': jsonEncode(
-                                "${CupitHome.get(context).conditionsListhttpUpdate}"),
-                            'specification': jsonEncode(
-                                "${CupitHome.get(context).specificationListhttpUpdate}"),
-                            'papiers': jsonEncode(
-                                "${CupitHome.get(context).papiersListhttpUpdate}"),
-                            'latitude':
-                                '${CupitHome.get(context).currentLocation!.latitude}',
-                            'longitude':
-                                '${CupitHome.get(context).currentLocation!.longitude}'
-                          };
-                          CupitHome.get(context)
-                              .updateOffer(data: sendinfoOffer)
-                              .then((value) {
-                            CupitHome.get(context).resetValueoffer();
-                            CupitHome.get(context).resetValuePhoto();
-                          });
+                          if (CupitHome.get(context)
+                              .base64ListUpdate
+                              .isNotEmpty) {
+                            sendinfoOffer = {
+                              'id': ' ${model.id}',
+                              'type_vente':
+                                  CupitHome.get(context).appartementvalueDrop,
+                              'address': CupitHome.get(context)
+                                  .addressControllerUpdate
+                                  .text,
+                              'description': CupitHome.get(context)
+                                  .descriptionControllerUpdate
+                                  .text,
+                              'price': CupitHome.get(context)
+                                  .priceControllerUpdate
+                                  .text,
+                              'space': CupitHome.get(context)
+                                  .superficieControllerUpdate
+                                  .text,
+                              'n_etage': CupitHome.get(context)
+                                  .nEtageControllerUpdate
+                                  .text,
+                              'n_chambre':
+                                  CupitHome.get(context).nChambresUpdate.text,
+                              'wilaya':
+                                  CupitHome.get(context).wilayavalueDropdown,
+                              'photo': jsonEncode(
+                                  "${CupitHome.get(context).base64ListUpdate}"),
+                              'condition_de_paiment': jsonEncode(
+                                  "${CupitHome.get(context).conditionsListhttpUpdate}"),
+                              'specification': jsonEncode(
+                                  "${CupitHome.get(context).specificationListhttpUpdate}"),
+                              'papiers': jsonEncode(
+                                  "${CupitHome.get(context).papiersListhttpUpdate}"),
+                              'latitude':
+                                  '${CupitHome.get(context).currentLocation!.latitude}',
+                              'longitude':
+                                  '${CupitHome.get(context).currentLocation!.longitude}'
+                            };
+                            CupitHome.get(context)
+                                .updateOffer(data: sendinfoOffer)
+                                .then((value) {
+                              CupitHome.get(context).resetValueoffer();
+                              CupitHome.get(context).resetValuePhoto();
+                            });
+                          } else {
+                            Fluttertoast.showToast(
+                                msg: 'The offer\'s image is required',
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          }
                         },
                         child: const Text('CONFIRMER'))
                   ],

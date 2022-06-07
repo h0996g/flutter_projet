@@ -191,44 +191,57 @@ class Addphoto extends StatelessWidget {
                     const Spacer(),
                     ElevatedButton(
                         onPressed: () async {
-                          sendinfoOffer = {
-                            'type_vente':
-                                CupitHome.get(context).appartementvalueDrop,
-                            'address':
-                                CupitHome.get(context).addressController.text,
-                            'description': CupitHome.get(context)
-                                .descriptionController
-                                .text,
-                            'price':
-                                CupitHome.get(context).priceController.text,
-                            'space': CupitHome.get(context)
-                                .superficieController
-                                .text,
-                            'n_etage':
-                                CupitHome.get(context).nEtageController.text,
-                            'n_chambre': CupitHome.get(context).nChambres.text,
-                            'wilaya':
-                                CupitHome.get(context).wilayavalueDropdown,
-                            'photo':
-                                jsonEncode(CupitHome.get(context).base64List),
-                            'type_offer': CupitHome.get(context).vendevalueDrop,
-                            'condition_de_paiment': jsonEncode(
-                                CupitHome.get(context).conditionsListhttp),
-                            'specification': jsonEncode(
-                                CupitHome.get(context).specificationListhttp),
-                            'papiers': jsonEncode(
-                                CupitHome.get(context).papiersListhttp),
-                            'latitude':
-                                '${CupitHome.get(context).currentLocation!.latitude}',
-                            'longitude':
-                                '${CupitHome.get(context).currentLocation!.longitude}'
-                          };
-                          CupitHome.get(context)
-                              .ajouteroffre(data: sendinfoOffer)
-                              .then((value) {
-                            CupitHome.get(context).resetValueoffer();
-                            CupitHome.get(context).resetValuePhoto();
-                          });
+                          if (CupitHome.get(context).base64List.isNotEmpty) {
+                            sendinfoOffer = {
+                              'type_vente':
+                                  CupitHome.get(context).appartementvalueDrop,
+                              'address':
+                                  CupitHome.get(context).addressController.text,
+                              'description': CupitHome.get(context)
+                                  .descriptionController
+                                  .text,
+                              'price':
+                                  CupitHome.get(context).priceController.text,
+                              'space': CupitHome.get(context)
+                                  .superficieController
+                                  .text,
+                              'n_etage':
+                                  CupitHome.get(context).nEtageController.text,
+                              'n_chambre':
+                                  CupitHome.get(context).nChambres.text,
+                              'wilaya':
+                                  CupitHome.get(context).wilayavalueDropdown,
+                              'photo':
+                                  jsonEncode(CupitHome.get(context).base64List),
+                              'type_offer':
+                                  CupitHome.get(context).vendevalueDrop,
+                              'condition_de_paiment': jsonEncode(
+                                  CupitHome.get(context).conditionsListhttp),
+                              'specification': jsonEncode(
+                                  CupitHome.get(context).specificationListhttp),
+                              'papiers': jsonEncode(
+                                  CupitHome.get(context).papiersListhttp),
+                              'latitude':
+                                  '${CupitHome.get(context).currentLocation!.latitude}',
+                              'longitude':
+                                  '${CupitHome.get(context).currentLocation!.longitude}'
+                            };
+                            CupitHome.get(context)
+                                .ajouteroffre(data: sendinfoOffer)
+                                .then((value) {
+                              CupitHome.get(context).resetValueoffer();
+                              CupitHome.get(context).resetValuePhoto();
+                            });
+                          } else {
+                            Fluttertoast.showToast(
+                                msg: 'The offer\'s image is required',
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          }
                         },
                         child: const Text('CONFIRMER'))
                   ],
