@@ -495,23 +495,6 @@ class Offerdetailagence extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
-            Expanded(
-                child: ListView.separated(
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: ((context, index) {
-                // var ind = index;
-                int positionmsg = index;
-                return Listemessage(context,
-                    CubitDetail.get(context).allmsgmodel[index], positionmsg);
-              }),
-              itemCount: CubitDetail.get(context).allmsgmodel.length,
-              separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(
-                  height: 1,
-                );
-              },
-            )),
-            const SizedBox(height: 8),
             Container(
               height: 58,
               child: defaultForm(
@@ -551,7 +534,23 @@ class Offerdetailagence extends StatelessWidget {
                   }
                 },
               ),
-            )
+            ),
+            Expanded(
+                child: ListView.separated(
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: ((context, index) {
+                // var ind = index;
+                int positionmsg = index;
+                return Listemessage(context,
+                    CubitDetail.get(context).allmsgmodel[index], positionmsg);
+              }),
+              itemCount: CubitDetail.get(context).allmsgmodel.length,
+              separatorBuilder: (BuildContext context, int index) {
+                return const SizedBox(
+                  height: 1,
+                );
+              },
+            )),
           ],
         ),
       );
