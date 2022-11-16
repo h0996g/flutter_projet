@@ -24,6 +24,7 @@ class Settingsclient extends StatelessWidget {
     return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             elevation: 5,
             title: Text(

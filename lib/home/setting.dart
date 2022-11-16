@@ -26,7 +26,7 @@ class Setting extends StatelessWidget {
     return BlocConsumer<CupitHome, HomeStates>(
       builder: (BuildContext context, state) {
         return Scaffold(
-          // resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             elevation: 10,
             title: Text(
